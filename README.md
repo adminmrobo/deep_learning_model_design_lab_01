@@ -35,7 +35,8 @@ index.html, 01_fnn.html … 10_review.html, practice/index.html   만든 페이�
 build/src/NN.html        도면 본문 원본
 build/pages.py           페이지 머리 정보 · 지식 색인 원본 · 참고문헌
 build/build.py           조립 (머리 틀 + 본문 + 지식 색인·꾸러미)
-build/covers.py          대체 표지 만들기 (Galmuri11 글꼴 필요)
+build/import_covers.py   받은 표지 반영 (python3 build/import_covers.py 받은폴더)
+build/covers.py          대체 표지 만들기 (받은 표지가 있으면 건너뜀)
 assets/css, assets/js    공용 스타일·동작 (외부 라이브러리 없음)
 assets/img/chars         캐릭터 팩 픽셀아트 (fruitfly-lab-expressions)
 assets/img/covers        표지 · 목차 썸네일 · 공유 미리보기

@@ -82,6 +82,10 @@ def make(n, code, abbr, ko, who, title_line):
 
 
 def save(im, n):
+    import json
+    mf = os.path.join(ROOT, 'cover_manifest.json')
+    if os.path.exists(mf) and any(i['id'] == f'cover_{n}' and i.get('status') == 'ok' for i in json.load(open(mf, encoding='utf-8'))['items']):
+        return  # 받은 표지가 있으면 대체 표지로 덮어쓰지 않는다
     out = os.path.join(OUT, f'cover_{n}.webp')
     im.save(out, 'WEBP', lossless=True, method=6)          # 픽셀 표지는 무손실이 더 작고 선명하다
     if os.path.getsize(out) > 150 * 1024:                   # 넘치면 손실 압축으로

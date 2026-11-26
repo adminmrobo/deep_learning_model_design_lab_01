@@ -181,44 +181,50 @@ def ko_head(n):
             "각 장은 아래 영어 프롬프트를 그대로 써 줘.\n")
 
 
-out = ["# 딥러닝 설계도면 연구실 01 — Genspark 표지 요청문", "",
-       "연구실 스킬 18-14-4 틀. **요청문 하나 = Genspark 대화 하나**로 붙여 넣습니다. 같은 비율(16:9)끼리 3장 이하로 묶었어요.", "",
-       "## 진행 순서", "",
-       "1. **대화 1(목차 표지)을 먼저** 받아 그림체·캐릭터 외형을 확인합니다.",
-       "2. 마음에 들면 그 목차 표지를 **참고 그림으로 함께 올려** 대화 2~5를 진행합니다 (첨부 목록에 `cover_00`이라고 적어 둔 곳).",
-       "3. 받은 그림은 아래 저장 이름으로 저장해 보내 주시면, 1600×900 WebP(220 KB 이하)로 바꿔 넣고 목차 썸네일·공유 미리보기도 다시 자릅니다.", "",
-       "## 참고 이미지 (꾸러미 `refs/` 폴더)", "",
-       "| 파일 | 캐릭터 |", "|---|---|"]
-for w, f in REFS.items():
-    out.append(f"| `refs/{f}` | {NM[w]} |")
-out += ["", "## 저장 이름 체크리스트", "", "| 대화 | 저장 이름 | 도면 | 받음 |", "|---|---|---|---|"]
-for t, ks in ORDER:
-    for k in ks:
-        out.append(f"| {t.split(' ·')[0]} | `cover_{k}.png` | {BY[k]['title']} | ☐ |")
-out.append("")
-for t, ks in ORDER:
-    need = []
-    for k in ks:
-        for w in BY[k]['who']:
-            if REFS[w] not in need: need.append(REFS[w])
-    out += [f"---", "", f"## {t}", "", "**첨부:** " + ", ".join(f"`{x}`" for x in need) + ("" if ks == ['00'] else ", `cover_00` (받은 목차 표지)"), ""]
-    for k in ks:
-        c = BY[k]
-        out += [f"### cover_{k} — {c['title']}", "",
-                "| 항목 | 내용 |", "|---|---|",
-                f"| 키 · 판 | cover_{k} · L (16:9, 1920 이상) |",
-                "| 그림체 | 16비트 RPG풍 픽셀아트 (필수, 고정) |",
-                "| 장소 | 흰 제도실, 옅은 하늘색 모눈 |",
-                f"| 주제 은유 | {c['meta']} |",
-                f"| 캐릭터 포즈 | {c['ko_pose']} |",
-                f"| 대체 글 (alt) | {c['alt']} |",
-                f"| 앞 표지와 다른 점 | {c['diff']} |", ""]
-    out += ["**Genspark에 붙여 넣기 ↓**", "", "```", ko_head(len(ks))]
-    for i, k in enumerate(ks, 1):
-        out += [f"[{i}장] cover_{k} — {BY[k]['title']}", en(BY[k]), ""]
-    out += ["```", ""]
-out += ["---", "", "## 고칠 때 (같은 대화에서)", "", "```",
-        "Same characters, same 16-bit pixel-art style and composition. Change only: {고칠 점}. Still pixel art, still no text.", "```", "",
-        "자주 쓰는 고칠 점: `make the pixels smaller and denser, more detail on faces and hands` · `remove all writing from the blueprint sheets` · `Haru must have pink hair with two round buns and a navy streak` · `the robot must keep the beige CRT box body and tank treads`", ""]
-open(os.path.join(ROOT, 'GENSPARK_covers.md'), 'w', encoding='utf-8').write("\n".join(out))
-print('GENSPARK_covers.md', len(out))
+
+def main():
+    out = ["# 딥러닝 설계도면 연구실 01 — Genspark 표지 요청문", "",
+           "연구실 스킬 18-14-4 틀. **요청문 하나 = Genspark 대화 하나**로 붙여 넣습니다. 같은 비율(16:9)끼리 3장 이하로 묶었어요.", "",
+           "## 진행 순서", "",
+           "1. **대화 1(목차 표지)을 먼저** 받아 그림체·캐릭터 외형을 확인합니다.",
+           "2. 마음에 들면 그 목차 표지를 **참고 그림으로 함께 올려** 대화 2~5를 진행합니다 (첨부 목록에 `cover_00`이라고 적어 둔 곳).",
+           "3. 받은 그림은 아래 저장 이름으로 저장해 보내 주시면, 1600×900 WebP(220 KB 이하)로 바꿔 넣고 목차 썸네일·공유 미리보기도 다시 자릅니다.", "",
+           "## 참고 이미지 (꾸러미 `refs/` 폴더)", "",
+           "| 파일 | 캐릭터 |", "|---|---|"]
+    for w, f in REFS.items():
+        out.append(f"| `refs/{f}` | {NM[w]} |")
+    out += ["", "## 저장 이름 체크리스트", "", "| 대화 | 저장 이름 | 도면 | 받음 |", "|---|---|---|---|"]
+    for t, ks in ORDER:
+        for k in ks:
+            out.append(f"| {t.split(' ·')[0]} | `cover_{k}.png` | {BY[k]['title']} | ☐ |")
+    out.append("")
+    for t, ks in ORDER:
+        need = []
+        for k in ks:
+            for w in BY[k]['who']:
+                if REFS[w] not in need: need.append(REFS[w])
+        out += [f"---", "", f"## {t}", "", "**첨부:** " + ", ".join(f"`{x}`" for x in need) + ("" if ks == ['00'] else ", `cover_00` (받은 목차 표지)"), ""]
+        for k in ks:
+            c = BY[k]
+            out += [f"### cover_{k} — {c['title']}", "",
+                    "| 항목 | 내용 |", "|---|---|",
+                    f"| 키 · 판 | cover_{k} · L (16:9, 1920 이상) |",
+                    "| 그림체 | 16비트 RPG풍 픽셀아트 (필수, 고정) |",
+                    "| 장소 | 흰 제도실, 옅은 하늘색 모눈 |",
+                    f"| 주제 은유 | {c['meta']} |",
+                    f"| 캐릭터 포즈 | {c['ko_pose']} |",
+                    f"| 대체 글 (alt) | {c['alt']} |",
+                    f"| 앞 표지와 다른 점 | {c['diff']} |", ""]
+        out += ["**Genspark에 붙여 넣기 ↓**", "", "```", ko_head(len(ks))]
+        for i, k in enumerate(ks, 1):
+            out += [f"[{i}장] cover_{k} — {BY[k]['title']}", en(BY[k]), ""]
+        out += ["```", ""]
+    out += ["---", "", "## 고칠 때 (같은 대화에서)", "", "```",
+            "Same characters, same 16-bit pixel-art style and composition. Change only: {고칠 점}. Still pixel art, still no text.", "```", "",
+            "자주 쓰는 고칠 점: `make the pixels smaller and denser, more detail on faces and hands` · `remove all writing from the blueprint sheets` · `Haru must have pink hair with two round buns and a navy streak` · `the robot must keep the beige CRT box body and tank treads`", ""]
+    open(os.path.join(ROOT, 'GENSPARK_covers.md'), 'w', encoding='utf-8').write("\n".join(out))
+    print('GENSPARK_covers.md', len(out))
+
+
+if __name__ == '__main__':
+    main()

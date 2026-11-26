@@ -97,7 +97,7 @@
       "robot": "jupanbot-v2",
       "prompt_en": "see GENSPARK_covers.md",
       "source_of": null,
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "cover_01",
@@ -113,7 +113,7 @@
       "robot": null,
       "prompt_en": "see GENSPARK_covers.md",
       "source_of": null,
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "cover_02",
@@ -129,7 +129,7 @@
       "robot": null,
       "prompt_en": "see GENSPARK_covers.md",
       "source_of": null,
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "cover_03",
@@ -145,7 +145,7 @@
       "robot": null,
       "prompt_en": "see GENSPARK_covers.md",
       "source_of": null,
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "cover_04",
@@ -161,7 +161,7 @@
       "robot": null,
       "prompt_en": "see GENSPARK_covers.md",
       "source_of": null,
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "cover_05",
@@ -177,7 +177,7 @@
       "robot": null,
       "prompt_en": "see GENSPARK_covers.md",
       "source_of": null,
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "cover_06",
@@ -193,7 +193,7 @@
       "robot": null,
       "prompt_en": "see GENSPARK_covers.md",
       "source_of": null,
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "cover_07",
@@ -209,7 +209,7 @@
       "robot": null,
       "prompt_en": "see GENSPARK_covers.md",
       "source_of": null,
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "cover_08",
@@ -225,7 +225,7 @@
       "robot": null,
       "prompt_en": "see GENSPARK_covers.md",
       "source_of": null,
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "cover_09",
@@ -241,7 +241,7 @@
       "robot": null,
       "prompt_en": "see GENSPARK_covers.md",
       "source_of": null,
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "cover_10",
@@ -258,7 +258,7 @@
       "robot": "jupanbot-v2",
       "prompt_en": "see GENSPARK_covers.md",
       "source_of": null,
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "thumb_00",
@@ -269,7 +269,7 @@
         400
       ],
       "source_of": "cover_00",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "og_00",
@@ -280,7 +280,7 @@
         630
       ],
       "source_of": "cover_00",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "thumb_01",
@@ -291,7 +291,7 @@
         400
       ],
       "source_of": "cover_01",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "og_01",
@@ -302,7 +302,7 @@
         630
       ],
       "source_of": "cover_01",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "thumb_02",
@@ -313,7 +313,7 @@
         400
       ],
       "source_of": "cover_02",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "og_02",
@@ -324,7 +324,7 @@
         630
       ],
       "source_of": "cover_02",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "thumb_03",
@@ -335,7 +335,7 @@
         400
       ],
       "source_of": "cover_03",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "og_03",
@@ -346,7 +346,7 @@
         630
       ],
       "source_of": "cover_03",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "thumb_04",
@@ -357,7 +357,7 @@
         400
       ],
       "source_of": "cover_04",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "og_04",
@@ -368,7 +368,7 @@
         630
       ],
       "source_of": "cover_04",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "thumb_05",
@@ -379,7 +379,7 @@
         400
       ],
       "source_of": "cover_05",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "og_05",
@@ -390,7 +390,7 @@
         630
       ],
       "source_of": "cover_05",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "thumb_06",
@@ -401,7 +401,7 @@
         400
       ],
       "source_of": "cover_06",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "og_06",
@@ -412,7 +412,7 @@
         630
       ],
       "source_of": "cover_06",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "thumb_07",
@@ -423,7 +423,7 @@
         400
       ],
       "source_of": "cover_07",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "og_07",
@@ -434,7 +434,7 @@
         630
       ],
       "source_of": "cover_07",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "thumb_08",
@@ -445,7 +445,7 @@
         400
       ],
       "source_of": "cover_08",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "og_08",
@@ -456,7 +456,7 @@
         630
       ],
       "source_of": "cover_08",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "thumb_09",
@@ -467,7 +467,7 @@
         400
       ],
       "source_of": "cover_09",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "og_09",
@@ -478,7 +478,7 @@
         630
       ],
       "source_of": "cover_09",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "thumb_10",
@@ -489,7 +489,7 @@
         400
       ],
       "source_of": "cover_10",
-      "status": "placeholder"
+      "status": "ok"
     },
     {
       "id": "og_10",
@@ -500,7 +500,7 @@
         630
       ],
       "source_of": "cover_10",
-      "status": "placeholder"
+      "status": "ok"
     }
   ]
 }

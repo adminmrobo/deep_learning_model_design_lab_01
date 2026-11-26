@@ -11,6 +11,7 @@ import html, json, os, subprocess, sys, tempfile
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
+from genspark import BY as GS  # noqa
 from pages import P, BY_N, WHO, NAME, FAMILY, SERIES, SITE, REPO, DATE, VERSION, KG, REFS, REFS_COMMON  # noqa
 
 PXFIX = ('<!-- px-fix v1 --><style id="px-fix">img{image-rendering:auto!important}</style><script id="px-fix-js">(function(){var R=window.ResizeObserver;function f(i){var n=i.naturalWidth,w=i.getBoundingClientRect().width;if(!n||!w)return;var s=w*(window.devicePixelRatio||1)/n;i.style.setProperty("image-rendering",s>=1.95?"pixelated":"auto","important")}var ro=R?new R(function(es){es.forEach(function(e){f(e.target)})}):null;function a(i){if(i.__px)return;i.__px=1;i.addEventListener("load",function(){f(i)});if(ro)ro.observe(i);f(i)}function all(r){(r||document).querySelectorAll&&(r||document).querySelectorAll("img").forEach(a)}function go(){all();if(window.MutationObserver)new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType!==1)return;if(n.tagName==="IMG")a(n);else all(n)})})}).observe(document.documentElement,{childList:true,subtree:true});window.addEventListener("resize",function(){document.querySelectorAll("img").forEach(f)})}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go()})();</script><!-- /px-fix -->')
@@ -120,7 +121,7 @@ def build_part(p):
     w = WHO[p['who']]
     title = f'{p["code"]} {p["abbr"] if p["abbr"]!="REVIEW" else "감수"} — {p["ko"]} 설계도면 | {SERIES}'
     cover = (f'<header class="cover" id="cover" data-img="cover_{p["n"]}"><picture><img src="assets/img/covers/cover_{p["n"]}.webp" width="1600" height="900" '
-             f'alt="{E(p["code"])} {E(p["abbr"])} 설계도면 표지: 모눈 바탕 위의 {E(w["full"])} 픽셀아트" fetchpriority="high" decoding="async"></picture>'
+             f'alt="{E(GS[p["n"]]["alt"])}" fetchpriority="high" decoding="async"></picture>'
              f'<span class="cover-chip">{SERIES} · {p["code"]}</span></header>\n')
     out = (head(title, p['desc'], f'assets/img/covers/og_{p["n"]}.jpg') +
            f'<body class="{w["cls"]}">\n<a class="skip" href="#main">본문으로 건너뛰기</a>\n' + topnav(p['n']) + cover + hero(p) +
@@ -176,10 +177,10 @@ def make_cards():
             au = ('<img src="assets/img/chars/fly_e10.webp" alt="" width="28" height="28"><img src="assets/img/chars/robo_e10.webp" alt="" width="28" height="28">감수 · 초파리 연구원 &amp; 주판봇'
                   if p['who'] == 'review' else f'<img src="assets/img/chars/{p["who"]}_e13.webp" alt="" width="28" height="28">작성 · {w["full"]}')
             name = p['abbr'] if p['abbr'] != 'REVIEW' else '감수 도면'
-            out.append(f'  <a class="card fam-{cls}" href="{p["file"]}"><img class="th" src="assets/img/covers/thumb_{n}.webp" alt="{p["code"]} 표지" width="600" height="400" loading="lazy">'
+            out.append(f'  <a class="card fam-{cls}" href="{p["file"]}"><img class="th" src="assets/img/covers/thumb_{n}.webp" alt="{p["code"]} 표지" width="420" height="280" loading="lazy">'
                        f'<span class="no">{p["code"]}</span><b>{name} · {E(p["ko"])}</b><span class="d">{E(p["desc"])}</span><span class="au">{au}</span></a>')
         if f == 'rev':
-            out.append('  <a class="card fam-review" href="practice/index.html"><img class="th" src="assets/img/covers/thumb_00.webp" alt="실전 연습장 표지" width="600" height="400" loading="lazy">'
+            out.append('  <a class="card fam-review" href="practice/index.html"><img class="th" src="assets/img/covers/thumb_00.webp" alt="실전 연습장 표지" width="420" height="280" loading="lazy">'
                        '<span class="no">마지막 장</span><b>실전 연습장 · 설계 의뢰 접수처</b><span class="d">현장 의뢰서 네 장을 받아 아홉 설계도 중 하나를 고르고 조건을 바꿔 보며, 감수자의 판정을 받는 연습장.</span>'
                        '<span class="au"><img src="assets/img/chars/doc_e08.webp" alt="" width="28" height="28">판정 · 박사</span></a>')
         out.append('</div>')
