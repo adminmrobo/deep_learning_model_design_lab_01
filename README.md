@@ -40,7 +40,7 @@ assets/css, assets/js    공용 스타일·동작 (외부 라이브러리 없음
 assets/img/chars         캐릭터 팩 픽셀아트 (fruitfly-lab-expressions)
 assets/img/covers        표지 · 목차 썸네일 · 공유 미리보기
 kg/                      지식 색인·꾸러미 모듈 (kgx.js, retrofit.py)
-IMG_00_index.md          Genspark 표지 지시문 (지금 표지는 대체 표지)
+GENSPARK_covers.md       Genspark 표지 요청문 (대화 5개, 저장 이름 체크리스트) · build/genspark.py로 생성
 cover_manifest.json      표지 현황판용 목록
 ```
 
