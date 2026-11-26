@@ -1,0 +1,242 @@
+<section id="three"><div class="wrap">
+  <h2><span class="no">01</span>처음 오신 분께 — 이 도면을 3줄로</h2>
+  <p class="lead">하루의 세 번째이자 마지막 도면입니다. 모아의 순서·기억 도면(03~05)이 한 단어씩 차례로 읽었다면, 이 도면은 문장 전체를 한꺼번에 펼쳐 놓고 봅니다.</p>
+  <div class="three">
+    <div><b>무엇을</b>문장 속 모든 단어가 서로에게 "얼마나 주목할지" 점수를 매기고, 그 비율대로 정보를 섞습니다(셀프 어텐션).</div>
+    <div><b>왜 중요한가</b>멀리 떨어진 단어 사이의 관계도 한 번에 보고, 모든 단어를 동시에 계산해 학습이 빠릅니다. 요즘 대형 언어 모델(GPT 등)의 기본 설계예요.</div>
+    <div><b>업무에서는</b>번역, 요약, 문서 질의응답, 고객 문의 분류, 코드 작성 보조처럼 글을 다루는 거의 모든 일에 씁니다.</div>
+  </div>
+  <p class="nocode">코드나 수식을 몰라도 됩니다. 점수 → 비율 → 섞기, 세 동작만 따라가면 돼요.</p>
+  <details><summary>이 도면에 나오는 영어 약어 풀이</summary>
+    <dl class="abbr">
+      <dt>Q · K · V</dt><dd>Query(질문) · Key(꼬리표) · Value(내용). 도서관에서 질문으로 꼬리표를 찾고 내용을 꺼내는 그림</dd>
+      <dt>Softmax</dt><dd>소프트맥스. 점수 여러 개를 합이 1인 비율로 바꾸는 함수</dd>
+      <dt>FFN</dt><dd>Feed-Forward Network. 01 FNN 도면의 층. 단어마다 따로 한 번씩 통과</dd>
+      <dt>Add &amp; Norm</dt><dd>지름길로 원래 값을 더하고(잔차 연결), 크기를 고르게 맞추는(층 정규화) 부품</dd>
+      <dt>GPT · BERT</dt><dd>트랜스포머로 만든 대표 언어 모델. GPT는 디코더만, BERT는 인코더만 쓴다</dd>
+    </dl>
+  </details>
+</div></section>
+
+<section id="cast"><div class="wrap">
+  <h2><span class="no">02</span>도면을 전달하는 사람들</h2>
+  <div class="cast">
+    <div class="me"><img src="assets/img/chars/asst_e13.webp" alt="조수 하루" width="84" height="84"><b>조수 하루</b>이 도면 작성자<br><span class="tag">설계 · 숫자 발표</span></div>
+    <div><img src="assets/img/chars/moa_e09.webp" alt="인턴 모아" width="84" height="84"><b>인턴 모아</b>수식을 대신 물어봄<br><span class="tag">질문 담당</span></div>
+    <div><img src="assets/img/chars/doc_e07.webp" alt="박사" width="84" height="84"><b>박사</b>현장 질문과 해석<br><span class="tag">교육 · 판정</span></div>
+    <div><img src="assets/img/chars/fly_e09.webp" alt="초파리 연구원" width="84" height="84"><b>초파리 연구원</b>크고 복잡한 것을 의심<br><span class="tag">감수</span></div>
+    <div><img src="assets/img/chars/robo_e16.webp" alt="주판봇" width="84" height="84"><b>주판봇</b>큰 숫자를 좋아함<br><span class="tag">감수</span></div>
+  </div>
+  <div class="say-row"><img src="assets/img/chars/asst_e01.webp" alt="" width="64" height="64">
+    <div class="bubble"><b class="nm">하루</b>제 마지막 도면은 요즘 제일 많이 쓰이는 설계예요. 겉보기엔 상자가 많아 복잡하지만, 새로운 부품은 사실 하나뿐이에요. <b>"누구를 얼마나 볼지 점수로 정한다"</b>. 나머지는 01 도면에서 본 부품들이에요.</div></div>
+</div></section>
+
+<section id="dwg"><div class="wrap">
+  <h2><span class="no">03</span>전체 구조도 — SHEET 9</h2>
+  <p class="lead">왼쪽 탑(인코더)이 입력 문장을 읽고, 오른쪽 탑(디코더)이 답을 한 단어씩 씁니다. 두 탑 모두 같은 층을 N번 쌓은 것이에요.</p>
+  <div class="dwg scroll-x"><span class="stamp">작성 · 하루</span>
+    <svg viewBox="0 0 900 520" role="img" aria-labelledby="d9t">
+      <title id="d9t">트랜스포머 전체 구조: 입력 토큰과 위치 정보를 더해 인코더(셀프 어텐션, FFN)를 N번 통과하고, 디코더(가린 셀프 어텐션, 교차 어텐션, FFN)를 N번 통과한 뒤 소프트맥스로 다음 단어 확률을 낸다</title>
+      <defs><marker id="ar9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1E2F5C"/></marker></defs>
+      <!-- 입력 -->
+      <g stroke="#1E2F5C" stroke-width="2" fill="#d8efd9"><rect x="80" y="460" width="60" height="30"/><rect x="146" y="460" width="60" height="30"/><rect x="212" y="460" width="60" height="30"/><rect x="278" y="460" width="60" height="30"/></g>
+      <g font-size="14" fill="#1E2F5C"><text x="98" y="481">x₁</text><text x="164" y="481">x₂</text><text x="230" y="481">x₃</text><text x="296" y="481">…</text><text x="12" y="470">① 입력</text><text x="12" y="486">토큰</text></g>
+      <g stroke="#1E2F5C" stroke-width="2" fill="#fff"><circle cx="210" cy="424" r="16"/></g><text x="203" y="430" font-size="18" fill="#1E2F5C">+</text>
+      <text x="236" y="430" font-size="13" fill="#2f5fa8">② 위치 정보를 더함</text>
+      <path d="M210 458 V442" stroke="#1E2F5C" stroke-width="2" marker-end="url(#ar9)"/>
+      <!-- 인코더 -->
+      <rect x="100" y="150" width="220" height="250" rx="10" fill="#eef8ef" stroke="#2e8b57" stroke-width="3"/>
+      <text x="112" y="140" font-size="15" fill="#2e8b57">인코더 × N</text>
+      <g stroke="#1E2F5C" stroke-width="2"><rect x="120" y="330" width="180" height="50" fill="#f6c6cf"/><rect x="120" y="290" width="180" height="28" fill="#fbecc0"/><rect x="120" y="220" width="180" height="50" fill="#dbe7fb"/><rect x="120" y="180" width="180" height="28" fill="#fbecc0"/></g>
+      <g font-size="14" fill="#1E2F5C" text-anchor="middle"><text x="210" y="352">③ 셀프 어텐션</text><text x="210" y="370" font-size="12">(여러 머리)</text><text x="210" y="309">더하기 &amp; 정규화</text><text x="210" y="250">④ FFN</text><text x="210" y="199">더하기 &amp; 정규화</text></g>
+      <path d="M210 408 V384" stroke="#1E2F5C" stroke-width="2" marker-end="url(#ar9)"/>
+      <!-- 디코더 -->
+      <rect x="520" y="100" width="240" height="320" rx="10" fill="#fff4f5" stroke="#D9707E" stroke-width="3"/>
+      <text x="532" y="90" font-size="15" fill="#D9707E">디코더 × N</text>
+      <g stroke="#1E2F5C" stroke-width="2"><rect x="540" y="350" width="200" height="48" fill="#f6c6cf"/><rect x="540" y="314" width="200" height="26" fill="#fbecc0"/><rect x="540" y="250" width="200" height="48" fill="#e6dcf5"/><rect x="540" y="214" width="200" height="26" fill="#fbecc0"/><rect x="540" y="160" width="200" height="40" fill="#dbe7fb"/><rect x="540" y="124" width="200" height="26" fill="#fbecc0"/></g>
+      <g font-size="13" fill="#1E2F5C" text-anchor="middle"><text x="640" y="371">⑤ 가린 셀프 어텐션</text><text x="640" y="388" font-size="11">(뒤 단어는 못 봄)</text><text x="640" y="332">더하기 &amp; 정규화</text><text x="640" y="272">⑥ 교차 어텐션</text><text x="640" y="289" font-size="11">(인코더 결과를 참고)</text><text x="640" y="232">더하기 &amp; 정규화</text><text x="640" y="185">FFN</text><text x="640" y="142">더하기 &amp; 정규화</text></g>
+      <path d="M320 260 H500 V274 H536" fill="none" stroke="#2e8b57" stroke-width="2.5" marker-end="url(#ar9)"/>
+      <text x="360" y="252" font-size="13" fill="#2e8b57">읽은 내용을 넘김</text>
+      <!-- 디코더 입력 -->
+      <g stroke="#1E2F5C" stroke-width="2" fill="#f6c6cf"><rect x="540" y="450" width="56" height="30"/><rect x="600" y="450" width="56" height="30"/><rect x="660" y="450" width="56" height="30"/></g>
+      <g font-size="13" fill="#1E2F5C"><text x="552" y="470">&lt;s&gt;</text><text x="616" y="470">y₁</text><text x="676" y="470">y₂</text><text x="726" y="470">…</text><text x="560" y="506">이미 쓴 단어</text></g>
+      <path d="M640 448 V402" stroke="#1E2F5C" stroke-width="2" marker-end="url(#ar9)"/>
+      <!-- 출력 -->
+      <g stroke="#1E2F5C" stroke-width="2"><rect x="580" y="40" width="120" height="30" fill="#fff"/></g>
+      <text x="598" y="60" font-size="14" fill="#1E2F5C">⑦ 소프트맥스</text>
+      <path d="M640 98 V74" stroke="#1E2F5C" stroke-width="2" marker-end="url(#ar9)"/>
+      <path d="M700 55 H780" stroke="#1E2F5C" stroke-width="2" marker-end="url(#ar9)"/>
+      <text x="788" y="52" font-size="13" fill="#1E2F5C">다음 단어</text><text x="788" y="68" font-size="13" fill="#1E2F5C">확률</text>
+      <!-- 지름길 표시 -->
+      <path d="M110 384 C 96 360, 96 320, 116 304" fill="none" stroke="#2f5fa8" stroke-dasharray="4 3" stroke-width="1.5"/>
+      <text x="22" y="330" font-size="12" fill="#2f5fa8">지름길</text>
+    </svg>
+  </div>
+  <p class="dwg-cap">점선 "지름길"은 어텐션을 거치기 전 값을 그대로 더해 주는 길(잔차 연결)입니다. 층을 깊게 쌓아도 학습이 무너지지 않게 해 줘요. 요즘 GPT 계열은 오른쪽 탑(디코더)만 쓰고 ⑥ 교차 어텐션도 뺍니다.</p>
+  <div class="review30"><b>30초 복습 · 비율</b> 점수 2, 1, 1이 있을 때 "합이 1이 되게" 바꾸면 0.5, 0.25, 0.25죠. 소프트맥스는 같은 일을 하되, 점수에 e(약 2.718)의 거듭제곱을 먼저 씌워서 큰 점수를 더 크게 키운 뒤 비율을 냅니다.</div>
+  <p><b>도면의 위치</b> · <a href="03_rnn.html">03 RNN</a>·<a href="04_lstm.html">04 LSTM</a>(차례로 읽으며 메모) → 이 도면(한꺼번에 보고 점수로 섞기). 부품은 <a href="01_fnn.html">01 FNN</a>의 층을 그대로 씁니다.</p>
+</div></section>
+
+<section id="spec"><div class="wrap">
+  <h2><span class="no">04</span>부품 명세 — 문장 하나가 지나가는 길</h2>
+  <p class="lead">도면의 번호 ①~⑦ 순서입니다. 회색 줄은 하루가 고객 문의 요약 현장에서 건넬 말이에요.</p>
+  <div class="steps">
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="6" width="4" height="4" fill="#d8efd9" stroke="#1E2F5C"/><rect x="6" y="6" width="4" height="4" fill="#d8efd9" stroke="#1E2F5C"/><rect x="11" y="6" width="4" height="4" fill="#d8efd9" stroke="#1E2F5C"/></svg></div>
+      <div><h3><span>①</span>토큰 → 숫자 묶음</h3><p>문장을 단어 조각(토큰)으로 자르고, 조각마다 숫자 묶음(임베딩)으로 바꿉니다. 뜻이 비슷한 조각은 비슷한 숫자 묶음이 돼요.</p>
+      <p class="say">"'배송'과 '택배'는 숫자 묶음이 서로 가까워요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="7" y="2" width="2" height="12" fill="#2f5fa8"/><rect x="2" y="7" width="12" height="2" fill="#2f5fa8"/></svg></div>
+      <div><h3><span>②</span>위치 정보 더하기</h3><p>한꺼번에 보면 "몇 번째 단어인지"를 모르게 됩니다. 그래서 자리마다 다른 숫자 묶음을 더해 순서를 새겨 둬요.</p>
+      <p class="say">"이걸 빼면 '환불 후 재주문'과 '재주문 후 환불'이 같아 보여요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="2" width="4" height="4" fill="#6E5BA8"/><rect x="6" y="2" width="4" height="4" fill="#c9bfe6"/><rect x="10" y="2" width="4" height="4" fill="#efeaf8"/><rect x="2" y="6" width="4" height="4" fill="#c9bfe6"/><rect x="6" y="6" width="4" height="4" fill="#6E5BA8"/><rect x="10" y="6" width="4" height="4" fill="#c9bfe6"/><rect x="2" y="10" width="4" height="4" fill="#efeaf8"/><rect x="6" y="10" width="4" height="4" fill="#c9bfe6"/><rect x="10" y="10" width="4" height="4" fill="#6E5BA8"/></svg></div>
+      <div><h3><span>③</span>셀프 어텐션 — 점수 → 비율 → 섞기</h3><p>단어마다 질문(Q)·꼬리표(K)·내용(V) 세 묶음을 만듭니다. 내 질문과 다른 단어의 꼬리표를 곱해 <b>점수</b>를 내고, 소프트맥스로 <b>비율</b>을 만든 뒤, 그 비율대로 내용을 <b>섞어</b> 새 숫자 묶음을 만들어요. 이 계산을 여러 벌(머리) 동시에 돌리면 멀티헤드 어텐션입니다.</p>
+      <p class="say">"'그것을 고쳤다'의 '그것'은 앞의 '컨베이어'에 높은 점수를 줘요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="4" width="12" height="8" fill="#dbe7fb" stroke="#1E2F5C"/><rect x="5" y="7" width="6" height="2" fill="#1E2F5C"/></svg></div>
+      <div><h3><span>④</span>FFN — 단어마다 한 번씩 생각하기</h3><p>섞인 결과를 단어마다 따로 01 FNN 도면의 층에 통과시킵니다. 어텐션이 "누구와 이야기할지"였다면, FFN은 "들은 걸 혼자 정리하기"예요.</p>
+      <p class="say">"같은 FFN을 모든 단어 자리에 똑같이 써요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="3" width="12" height="10" fill="#fff4f5" stroke="#D9707E"/><rect x="9" y="3" width="5" height="10" fill="#1E2F5C"/></svg></div>
+      <div><h3><span>⑤</span>가린 셀프 어텐션 — 뒤는 못 본다</h3><p>답을 쓸 때는 아직 쓰지 않은 뒤쪽 단어를 볼 수 없게 가립니다(마스크). 그래야 시험 볼 때 정답을 미리 보는 일이 없어요.</p>
+      <p class="say">"세 번째 단어를 쓸 땐 첫째·둘째 단어만 볼 수 있어요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="5" width="5" height="6" fill="#eef8ef" stroke="#2e8b57"/><rect x="10" y="5" width="5" height="6" fill="#fff4f5" stroke="#D9707E"/><rect x="6" y="7" width="4" height="2" fill="#2e8b57"/></svg></div>
+      <div><h3><span>⑥</span>교차 어텐션 — 원문을 참고하며 쓰기</h3><p>디코더의 질문(Q)으로 인코더가 읽은 원문의 꼬리표(K)·내용(V)을 찾아 섞습니다. 번역할 때 원문의 어느 단어를 보며 쓸지 정하는 부품이에요.</p>
+      <p class="say">"요약문의 '환불'을 쓸 때 원문의 '돈을 돌려받고 싶어요'를 크게 봐요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="10" width="2" height="4" fill="#1E2F5C"/><rect x="5" y="4" width="2" height="10" fill="#D9707E"/><rect x="8" y="8" width="2" height="6" fill="#1E2F5C"/><rect x="11" y="11" width="2" height="3" fill="#1E2F5C"/></svg></div>
+      <div><h3><span>⑦</span>소프트맥스 — 다음 단어 확률</h3><p>마지막에 사전의 모든 단어에 점수를 매기고 확률로 바꿔, 다음 단어를 고릅니다. 고른 단어를 다시 입력 끝에 붙이고 되풀이해요.</p>
+      <p class="say">"'환불' 0.61, '교환' 0.22… 가장 높은 걸 고르거나, 조금 섞어서 골라요."</p></div></div>
+  </div>
+</div></section>
+
+<section id="why"><div class="wrap">
+  <h2><span class="no">05</span>왜 이 설계를 쓰나 · 수식은 동료가 대신 물어봅니다</h2>
+  <div class="say-row neutral"><img src="assets/img/chars/doc_e07.webp" alt="" width="64" height="64">
+    <div class="bubble"><b class="nm">박사</b>고객 문의가 다섯 문단이고, 마지막 문단의 "그 제품"이 첫 문단의 모델명을 가리킨다고 합시다. 한 단어씩 차례로 메모를 넘기는 장치라면, 그 사이에 메모가 얼마나 남아 있을까요?</div></div>
+  <div class="pair">
+    <div class="why" id="whybox">
+      <h3>왜 이 설계를 쓰나</h3>
+      <ol>
+        <li><b>문제 상황</b> · 긴 글에서 멀리 떨어진 단어끼리의 관계가 뜻을 정합니다.</li>
+        <li><b>앞 방법의 한계</b> · <a href="03_rnn.html">RNN</a>·<a href="04_lstm.html">LSTM</a>은 한 단어씩 차례로 읽어서 ① 먼 단어의 영향이 메모를 여러 번 거치며 흐려지고 ② 앞 단어를 다 읽어야 다음을 계산하니 동시에 계산하기 어렵습니다.</li>
+        <li><b>해법</b> · 모든 단어 쌍의 점수를 한 번에 계산합니다. 첫 단어와 마지막 단어도 바로 이어지고, 행렬 곱 한 번에 동시에 계산돼요.</li>
+      </ol>
+      <p class="easy"><b>쉽게 말하면</b> · 귓속말 전달 놀이(RNN) 대신, 모두가 한 회의실에 모여 필요한 사람을 바로 쳐다보며 듣는 방식이에요.</p>
+      <p class="calm">Q·K·V가 한꺼번에 나와서 낯설 수 있어요. 처음엔 "점수 → 비율 → 섞기" 세 단어만 기억해도 충분합니다.</p>
+    </div>
+    <div class="mathq" id="math">
+      <div class="q"><img src="assets/img/chars/moa_e04.webp" alt="" width="56" height="56"><p><b>모아</b> · "Q 곱하기 K의 T 나누기 루트 d… 기호가 한 줄에 다섯 개예요. 하나씩 읽어 주세요!"</p></div>
+      <p class="school">학교 수학으로 보면 · 두 벡터의 내적(같은 자리끼리 곱해 더하기) + 지수함수 + 비율</p>
+      <div class="formula">어텐션 = softmax( Q·Kᵀ ÷ √d<sub>k</sub> ) × V</div>
+      <table class="pieces"><tr><th>조각</th><th>읽는 법 · 뜻</th></tr>
+        <tr><td>Q·Kᵀ</td><td>"큐 케이 전치". 내 질문과 각 단어 꼬리표를 같은 자리끼리 곱해 더한 점수. 방향이 비슷할수록 크다</td></tr>
+        <tr><td>√d<sub>k</sub></td><td>"루트 디 케이". 꼬리표 숫자 개수의 제곱근. 점수가 너무 커져 한 단어에 쏠리는 걸 막으려고 나눈다</td></tr>
+        <tr><td>softmax</td><td>점수를 합이 1인 비율로 바꾼다</td></tr>
+        <tr><td>× V</td><td>그 비율대로 각 단어의 내용을 섞는다</td></tr>
+      </table>
+      <div class="calc"><b class="t">숫자로 한 번 해 보기 (단어 셋, 숫자 2개짜리 묶음)</b>
+        <ol><li>질문 q = (1, 0). 꼬리표 k₁ = (1, 0), k₂ = (0, 1), k₃ = (1, 1). d<sub>k</sub> = 2</li>
+          <li>점수 = q·k ÷ √2 → 1÷1.414 = <b>0.707</b>, 0÷1.414 = <b>0</b>, 1÷1.414 = <b>0.707</b></li>
+          <li>e<sup>0.707</sup> ≈ 2.028, e<sup>0</sup> = 1 → 합 2.028 + 1 + 2.028 = 5.056</li>
+          <li>비율 = 2.028÷5.056 ≈ <b>0.401</b>, 1÷5.056 ≈ <b>0.198</b>, <b>0.401</b> (합 1.000)</li>
+          <li>내용 V = 꼬리표와 같다고 두면 섞은 결과 = 0.401×(1,0) + 0.198×(0,1) + 0.401×(1,1) ≈ <b>(0.802, 0.599)</b></li></ol></div>
+      <div class="after"><img src="assets/img/chars/moa_e16.webp" alt="" width="48" height="48"><p><b>모아</b> · "질문과 방향이 같은 1번·3번이 40%씩, 다른 2번은 20%. 점수 → 비율 → 섞기 맞네요!"</p></div>
+    </div>
+  </div>
+  <div class="daily" style="margin-top:22px">
+    <div><b>일상으로 치면</b>회의록을 정리할 때 "그건"이라는 말이 나오면, 회의 내용 전체를 훑어 "그건"이 가리킬 만한 말에 형광펜을 진하게, 상관없는 말에 연하게 칠하는 것과 같아요. 형광펜 진하기가 비율이에요.</div>
+    <div><b>현장에서는</b>고객 문의 요약·분류, 사내 문서 검색 뒤 답 쓰기, 번역, 회의록 정리, 코드 보조에 씁니다. 그림을 조각으로 잘라 넣으면(비전 트랜스포머) 사진 판정에도, 소리를 넣으면 음성 인식에도 써요.</div>
+  </div>
+</div></section>
+
+<section id="lab"><div class="wrap">
+  <h2><span class="no">06</span>실험 — 어텐션 점수판</h2>
+  <div class="talk">
+    <div class="line"><img src="assets/img/chars/doc_e09.webp" alt="박사" width="56" height="56"><p><b>박사</b>점수를 √d로 나누지 않으면 비율이 어떻게 달라질까요? 숫자가 그럴듯한지 확인해 봅시다.</p></div>
+    <div class="line"><img src="assets/img/chars/robo_e16.webp" alt="주판봇" width="56" height="56"><p><b>주판봇</b>나누기는 손해입니다! 점수는 클수록 좋습니다! 질문 벡터를 최대로, 최대로!</p></div>
+    <div class="line"><img src="assets/img/chars/fly_e09.webp" alt="초파리" width="56" height="56"><p><b>초파리</b>최대로? 의심스럽네. 질문 크기를 키워 봐. 비율이 한 단어로 몰려 버리지 않나.</p></div>
+    <div class="line me"><img src="assets/img/chars/asst_e07.webp" alt="하루" width="56" height="56"><p><b>하루</b>막대 길이가 비율이에요. 세 막대를 더하면 항상 1이 되는지도 제가 확인해 드릴게요.</p></div>
+  </div>
+  <div class="lab">
+    <div class="bar"><span class="dot" style="background:var(--pink)"></span><span class="dot" style="background:var(--lav)"></span><span class="dot" style="background:var(--navy)"></span><span class="t">attention_board.sim</span></div>
+    <div class="lab-body">
+      <div class="ctrl">
+        <label for="q1">질문 q의 첫째 숫자 <span class="val" data-for="q1" data-d="1"></span></label><input type="range" id="q1" min="-4" max="4" step="0.1" value="1">
+        <label for="q2">질문 q의 둘째 숫자 <span class="val" data-for="q2" data-d="1"></span></label><input type="range" id="q2" min="-4" max="4" step="0.1" value="0">
+        <label><input type="checkbox" id="sc9" checked> √d<sub>k</sub>(=√2)로 나누기</label>
+        <label><input type="checkbox" id="mk9"> 가리기(마스크): 2번째 단어 자리에서 질문, 3번은 못 봄</label>
+        <button class="btn ghost" id="reset9" type="button">처음 값으로</button>
+        <p style="font-size:14px;color:var(--mute);margin-top:10px">꼬리표: ① 온도 (1, 0) · ② 라인 (0, 1) · ③ 과열 (1, 1)</p>
+      </div>
+      <div>
+        <svg id="plot9" viewBox="0 0 520 250" role="img" aria-label="세 단어에 대한 어텐션 비율 막대"></svg>
+        <div class="readout" id="out9" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+  <div class="sol">
+    <p><b>하루의 보고</b> · 처음 값 q = (1, 0)에서 비율은 0.401 · 0.198 · 0.401로 손계산과 같아요. q를 (4, 0)으로 키우고 나누기를 끄면 점수가 4, 0, 4가 되어 비율이 0.495 · 0.009 · 0.495로 바뀌어요. ②번 단어가 거의 0이 됩니다.</p>
+    <p><b>박사의 해석</b> · 점수가 커질수록 소프트맥스는 가장 큰 점수 쪽으로 쏠립니다. 쏠리면 다른 단어의 정보가 거의 섞이지 않고, 학습할 때 고칠 신호(기울기)도 작아져요. 그래서 √d로 나눠 점수 크기를 맞춥니다. 마스크를 켜면 ③번 비율이 정확히 0이 되는 것도 확인해 보세요. 답을 쓰는 쪽이 뒤를 훔쳐보지 못하게 하는 장치예요.</p>
+  </div>
+</div></section>
+
+<section id="judge-sec"><div class="wrap">
+  <h2><span class="no">07</span>AI 판단 코너 — 이 답, 믿어도 될까?</h2>
+  <div class="judge">
+    <h3>AI 도우미가 이렇게 답했습니다</h3>
+    <div class="ai-out">Q. 트랜스포머에서 위치 정보(위치 인코딩)를 빼면 무엇이 달라지나요?
+A. 거의 달라지지 않습니다. 셀프 어텐션은 모든 단어를 한꺼번에 보기 때문에 순서를 자연스럽게 알 수 있습니다. "개가 사람을 물었다"와 "사람이 개를 물었다"도 구분합니다.</div>
+    <p>어디가 이상할까요?</p>
+    <div class="choices" data-answer="a">
+      <button data-k="a">한꺼번에 본다는 것은 순서를 '모른다'는 뜻이다. 위치 정보가 없으면 단어 자리를 바꿔도 점수가 똑같이 나와 두 문장을 구분하기 어렵다</button>
+      <button data-k="b" data-why="단어가 많고 적음은 이 문제와 상관이 없어요. 단어 세 개짜리 문장에서도 순서를 잃어요.">단어 수가 적을 때만 순서를 구분한다</button>
+      <button data-k="c" data-why="FFN은 단어마다 따로 계산하므로 순서 정보를 만들어 주지 못해요.">FFN이 순서를 알려 주므로 위치 정보는 필요 없다</button>
+    </div>
+    <p class="feedback" data-ok="맞아요. 점수는 '어떤 단어끼리'만 보고 '몇 번째인지'는 보지 않아요. 그래서 ② 위치 정보를 더하는 부품이 꼭 필요해요. AI가 '자연스럽게'라고 말할 때는 근거가 무엇인지 되묻는 습관을 들이세요."></p>
+  </div>
+</div></section>
+
+<section id="limit"><div class="wrap">
+  <h2><span class="no">08</span>이 설계의 한계 → 감수 도면으로</h2>
+  <div class="limit"><b>한계 1 · 길이의 제곱만큼 계산</b> — 단어가 n개면 점수가 n×n개입니다. 글이 2배 길어지면 점수 계산은 4배가 돼요. 아주 긴 문서는 나눠 넣거나 계산을 줄이는 변형을 씁니다.<br>
+    <b>한계 2 · 데이터와 계산이 많이 든다</b> — 작은 데이터만으로 처음부터 학습하면 오히려 작은 모델보다 못할 수 있어요. 보통은 크게 미리 배운 모델을 가져와 다듬어(파인튜닝) 씁니다.<br>
+    <b>한계 3 · 그럴듯한 틀린 답</b> — 다음 단어 확률을 이어 쓰는 장치라, 사실이 아닌 문장도 자연스럽게 씁니다. 결과를 원문과 대조하는 확인이 필요해요.</div>
+  <div class="recap"><b>정리</b> · 트랜스포머는 위치 정보를 더한 단어들이 셀프 어텐션(점수 → 비율 → 섞기)으로 서로를 보고, FFN으로 각자 정리하는 층을 N번 쌓은 설계입니다. 아홉 도면을 한 장에 모은 감수는 <a href="10_review.html">10 감수 도면</a>에서 이어집니다.</div>
+</div></section>
+
+<section id="quiz"><div class="wrap">
+  <h2><span class="no">09</span>확인 퀴즈</h2>
+  <div class="quiz"><p class="qq">Q1. 셀프 어텐션의 세 동작을 순서대로 고르면?</p>
+    <div class="choices" data-answer="b"><button data-k="a" data-why="섞는 것은 비율을 구한 다음이에요.">섞기 → 점수 → 비율</button><button data-k="b">점수 → 비율 → 섞기</button><button data-k="c" data-why="점수가 있어야 비율을 낼 수 있어요.">비율 → 점수 → 섞기</button></div>
+    <p class="feedback" data-ok="맞아요. Q·K로 점수, 소프트맥스로 비율, V를 섞기."></p></div>
+  <div class="quiz"><p class="qq">Q2. 답을 쓰는 디코더에서 뒤쪽 단어를 가리는(마스크) 이유는?</p>
+    <div class="choices" data-answer="c"><button data-k="a" data-why="가리면 계산은 거의 줄지 않아요. 목적은 다른 데 있어요.">계산을 줄이려고</button><button data-k="b" data-why="위치 정보는 ② 부품이 맡아요.">순서를 알려 주려고</button><button data-k="c">아직 쓰지 않은 정답 단어를 미리 보지 못하게 하려고</button></div>
+    <p class="feedback" data-ok="맞아요. 학습 때 정답을 훔쳐보면 실제로 쓸 때는 못 쓰는 모델이 돼요."></p></div>
+</div></section>
+
+<section id="memo"><div class="wrap">
+  <h2><span class="no">10</span>감수 메모 — 참고 자료와 다른 곳</h2>
+  <div class="memo">참고 인포그래픽의 트랜스포머 장에서 고칠 값은 찾지 못했습니다. 보충한 곳이 하나 있어요. 원자료의 구조도는 2017년 원 논문의 인코더-디코더 꼴입니다. <b>이 페이지에서는 "요즘 GPT 계열은 디코더만 쓰고 교차 어텐션을 뺀다"를 덧붙였습니다.</b> 원자료의 변형 목록(BERT = 인코더만, GPT = 디코더만)과 맞추기 위해서예요.</div>
+</div></section>
+
+<script>
+(function(){
+  var $=BP.$, K=[[1,0],[0,1],[1,1]], NM=['① 온도','② 라인','③ 과열'];
+  function draw(){
+    var q=[+$('#q1').value,+$('#q2').value], sc=$('#sc9').checked, mk=$('#mk9').checked;
+    var s=K.map(function(k){return (q[0]*k[0]+q[1]*k[1])/(sc?Math.SQRT2:1)});
+    var e=s.map(function(v,i){return (mk&&i===2)?0:Math.exp(v)}), S=e.reduce(function(a,b){return a+b},0), w=e.map(function(v){return v/S});
+    var out=[0,0];w.forEach(function(a,i){out[0]+=a*K[i][0];out[1]+=a*K[i][1]});
+    var g=$('#plot9');while(g.firstChild)g.removeChild(g.firstChild);
+    w.forEach(function(a,i){var y=30+i*70;
+      g.appendChild(BP.svg('text',{x:6,y:y+24,'font-size':15,fill:'#1E2F5C'},NM[i]));
+      g.appendChild(BP.svg('rect',{x:100,y:y,width:360,height:36,fill:'#f6f8fc',stroke:'#d3e1f4'}));
+      g.appendChild(BP.svg('rect',{x:100,y:y,width:Math.max(0,360*a),height:36,fill:(mk&&i===2)?'#ccc':'#D9707E'}));
+      g.appendChild(BP.svg('text',{x:468,y:y+24,'font-size':15,fill:'#1E2F5C'},BP.fmt(a,3)));
+      g.appendChild(BP.svg('text',{x:104,y:y+52,'font-size':12,fill:'#6b6b7a'},'점수 '+BP.fmt(s[i],3)+((mk&&i===2)?' · 가려짐':'')));
+    });
+    var sum=w.reduce(function(a,b){return a+b},0);
+    $('#out9').innerHTML='<b>비율</b> '+w.map(function(a){return BP.fmt(a,3)}).join(' · ')+' (합 '+BP.fmt(sum,3)+')<br><b>섞은 결과</b> ('+BP.fmt(out[0],3)+', '+BP.fmt(out[1],3)+')'+
+      (Math.max.apply(null,w)>0.9?'<br>⚠ 한 단어에 90% 넘게 쏠렸어요. 다른 단어 정보가 거의 섞이지 않아요.':'');
+  }
+  ['q1','q2','sc9','mk9'].forEach(function(i){$('#'+i).addEventListener('input',draw);$('#'+i).addEventListener('change',draw)});
+  $('#reset9').addEventListener('click',function(){$('#q1').value=1;$('#q2').value=0;$('#sc9').checked=true;$('#mk9').checked=false;BP.$$('input[type=range]').forEach(function(x){x.dispatchEvent(new Event('input'))});draw()});
+  draw();
+})();
+</script>

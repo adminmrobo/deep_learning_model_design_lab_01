@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DL-08 GAN — 적대적 생성 신경망 설계도면 | 딥러닝 설계도면 연구실 01</title>
+<meta name="description" content="만드는 쪽(생성자)과 가려내는 쪽(판별자)이 겨루며 둘 다 실력이 는다. 진짜 같은 데이터를 만든다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DL-08 GAN — 적대적 생성 신경망 설계도면 | 딥러닝 설계도면 연구실 01">
+<meta property="og:description" content="만드는 쪽(생성자)과 가려내는 쪽(판별자)이 겨루며 둘 다 실력이 는다. 진짜 같은 데이터를 만든다.">
+<meta property="og:image" content="https://adminmrobo.github.io/deep_learning_model_design_lab_01/assets/img/covers/og_08.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/chars/asst_e13.webp">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css">
+<link rel="stylesheet" href="assets/css/blueprint.css">
+<script src="assets/js/blueprint.js"></script>
+<!-- px-fix v1 --><style id="px-fix">img{image-rendering:auto!important}</style><script id="px-fix-js">(function(){var R=window.ResizeObserver;function f(i){var n=i.naturalWidth,w=i.getBoundingClientRect().width;if(!n||!w)return;var s=w*(window.devicePixelRatio||1)/n;i.style.setProperty("image-rendering",s>=1.95?"pixelated":"auto","important")}var ro=R?new R(function(es){es.forEach(function(e){f(e.target)})}):null;function a(i){if(i.__px)return;i.__px=1;i.addEventListener("load",function(){f(i)});if(ro)ro.observe(i);f(i)}function all(r){(r||document).querySelectorAll&&(r||document).querySelectorAll("img").forEach(a)}function go(){all();if(window.MutationObserver)new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType!==1)return;if(n.tagName==="IMG")a(n);else all(n)})})}).observe(document.documentElement,{childList:true,subtree:true});window.addEventListener("resize",function(){document.querySelectorAll("img").forEach(f)})}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go()})();</script><!-- /px-fix -->
+<!-- lab-kg:head -->
+<meta name="citation_title" content="DL-08 적대적 생성 신경망 설계도면">
+<meta name="dc.title" content="DL-08 적대적 생성 신경망 설계도면">
+<meta name="dc.date" content="2026-11-26">
+<meta name="dc.language" content="ko">
+<meta name="dc.type" content="InteractiveResource">
+<meta name="citation_author" content="안상선">
+<meta name="dcterms.isPartOf" content="딥러닝 설계도면 연구실 01">
+<!-- /lab-kg:head -->
+</head>
+<body class="by-sia">
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<nav class="topnav" aria-label="도면 목록"><div class="wrap"><a class="home" href="index.html">DL 설계도면 연구실</a><a href="01_fnn.html">01 FNN</a><a href="02_cnn.html">02 CNN</a><a href="03_rnn.html">03 RNN</a><a href="04_lstm.html">04 LSTM</a><a href="05_gru.html">05 GRU</a><a href="06_autoencoder.html">06 AE</a><a href="07_dbn.html">07 DBN</a><a href="08_gan.html" class="here" aria-current="page">08 GAN</a><a href="09_transformer.html">09 Transformer</a><a href="10_review.html">10 감수</a><a href="practice/index.html">실전 연습장</a></div></nav>
+<header class="cover" id="cover" data-img="cover_08"><picture><img src="assets/img/covers/cover_08.webp" width="1600" height="900" alt="DL-08 GAN 설계도면 표지: 모눈 바탕 위의 인턴 시아 픽셀아트" fetchpriority="high" decoding="async"></picture><span class="cover-chip">딥러닝 설계도면 연구실 01 · DL-08</span></header>
+<div class="wrap">
+  <div class="term">
+    <div class="bar"><span class="dot" style="background:var(--pink)"></span><span class="dot" style="background:var(--lav)"></span><span class="dot" style="background:var(--navy)"></span><span class="t mono">blueprint · DL-08_GAN.dwg</span></div>
+    <div class="term-body">
+      <p class="prompt mono"><b>sia@lab</b>:~$ open DL-08_GAN.blueprint</p>
+      <div class="hero">
+        <div class="who"><img src="assets/img/chars/sia_e07.webp" alt="인턴 시아 픽셀아트 초상, 검지를 세워 설명하는 모습" width="192" height="192"></div>
+        <div>
+          <h1>GAN</h1>
+          <div class="sub">위조범과 감정사가 겨루는 설계도</div>
+          <p class="by">DL-08 · 적대적 생성 신경망 (Generative Adversarial Network) · 인턴 시아 작성</p>
+          <span class="motto pix">속이려는 쪽이 있어야 보는 눈이 는다.</span>
+        </div>
+      </div>
+      <table class="titleblock" aria-label="도면 표제란">
+        <tr><th>도면 번호</th><td>DL-08</td><th>계열</th><td>압축·생성 계열 (시아 담당)</td></tr>
+        <tr><th>작성</th><td>인턴 시아</td><th>감수</th><td>초파리 연구원 · 주판봇 (<a href="10_review.html">10 감수 도면</a>)</td></tr>
+        <tr><th>모델</th><td>GAN · 적대적 생성 신경망</td><th>날짜 · 판</th><td>2026-11-26 · v1.0</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+<main id="main">
+<section id="three"><div class="wrap">
+  <h2><span class="no">01</span>처음 오신 분께 — 이 도면을 3줄로</h2>
+  <p class="lead">시아의 세 번째이자 마지막 도면입니다. 지금까지는 신경망 하나를 그렸지만, 이번 도면에는 서로 겨루는 신경망 둘이 들어 있어요.</p>
+  <div class="three">
+    <div><b>무엇을</b>생성자(위조범)는 무작위 숫자로 진짜 같은 데이터를 만들고, 판별자(감정사)는 진짜와 가짜를 가려냅니다. 서로 이기려고 겨루는 동안 둘 다 실력이 늡니다.</div>
+    <div><b>왜 중요한가</b>"진짜 데이터가 어떤 확률 분포인지"를 식으로 적지 않고도, 그 분포를 따라 하는 데이터를 만들어 낼 수 있습니다.</div>
+    <div><b>업무에서는</b>부족한 불량 사진을 합성해 학습 자료 늘리기, 사진 해상도 높이기, 스타일 바꾸기에 씁니다. 요즘 그림 생성은 확산 모델이 주로 맡지만, 빠른 생성이 필요한 곳에서 여전히 씁니다.</div>
+  </div>
+  <p class="nocode">코드나 수식을 몰라도 됩니다. 두 산(진짜·가짜 분포)이 겹쳐 가는 모습만 보면 돼요.</p>
+  <details><summary>이 도면에 나오는 영어 약어 풀이</summary>
+    <dl class="abbr">
+      <dt>GAN</dt><dd>Generative Adversarial Network, 적대적 생성 신경망. 서로 맞서며(adversarial) 만든다(generative)</dd>
+      <dt>G · D</dt><dd>Generator(생성자) · Discriminator(판별자)</dd>
+      <dt>z ~ N(0, I)</dt><dd>"제트는 정규분포를 따른다". 생성자에 넣는 무작위 숫자 묶음</dd>
+      <dt>Mode collapse</dt><dd>모드 붕괴. 생성자가 몇 가지 결과만 되풀이해 다양성이 사라지는 현상</dd>
+      <dt>DCGAN · StyleGAN</dt><dd>합성곱을 쓴 GAN, 고화질 얼굴 생성으로 유명한 GAN 등 변형 이름</dd>
+    </dl>
+  </details>
+</div></section>
+
+<section id="cast"><div class="wrap">
+  <h2><span class="no">02</span>도면을 전달하는 사람들</h2>
+  <div class="cast">
+    <div class="me"><img src="assets/img/chars/sia_e13.webp" alt="인턴 시아" width="84" height="84"><b>인턴 시아</b>이 도면 작성자<br><span class="tag">설계 · 숫자 발표</span></div>
+    <div><img src="assets/img/chars/asst_e09.webp" alt="조수 하루" width="84" height="84"><b>조수 하루</b>수식을 대신 물어봄<br><span class="tag">질문 담당</span></div>
+    <div><img src="assets/img/chars/doc_e07.webp" alt="박사" width="84" height="84"><b>박사</b>현장 질문과 해석<br><span class="tag">교육 · 판정</span></div>
+    <div><img src="assets/img/chars/fly_e09.webp" alt="초파리 연구원" width="84" height="84"><b>초파리 연구원</b>크고 복잡한 것을 의심<br><span class="tag">감수</span></div>
+    <div><img src="assets/img/chars/robo_e16.webp" alt="주판봇" width="84" height="84"><b>주판봇</b>큰 숫자를 좋아함<br><span class="tag">감수</span></div>
+  </div>
+  <div class="say-row"><img src="assets/img/chars/sia_e16.webp" alt="" width="64" height="64">
+    <div class="bubble"><b class="nm">시아</b>제 이름은 '시야', 지켜보는 눈에서 왔대요. 그래서 이 도면에서는 판별자 쪽에 마음이 가요. 위조범이 실력이 늘면 감정사도 더 꼼꼼히 봐야 하고, 감정사가 꼼꼼해지면 위조범도 더 정교해지죠. 그 겨루기가 이 설계의 전부예요.</div></div>
+</div></section>
+
+<section id="dwg"><div class="wrap">
+  <h2><span class="no">03</span>전체 구조도 — SHEET 8</h2>
+  <p class="lead">왼쪽 아래 무작위 숫자에서 출발한 가짜와, 위쪽 진짜 데이터가 오른쪽 판별자에서 만납니다. 판별자의 판정이 양쪽 신경망을 고치는 신호가 돼요.</p>
+  <div class="dwg scroll-x"><span class="stamp" style="color:#6E5BA8;border-color:#6E5BA8">작성 · 시아</span>
+    <svg viewBox="0 0 900 400" role="img" aria-labelledby="d8t">
+      <title id="d8t">GAN 구조: 무작위 잡음 z가 생성자 G를 거쳐 가짜 데이터 G(z)가 되고, 진짜 데이터 x와 함께 판별자 D에 들어가 진짜일 확률(진짜 1, 가짜 0)을 낸다. 판정 결과로 D는 더 잘 가려내도록, G는 더 잘 속이도록 고친다</title>
+      <defs><marker id="ar8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1E2F5C"/></marker></defs>
+      <!-- 잡음 -->
+      <g stroke="#1E2F5C" stroke-width="2.5"><rect x="50" y="200" width="44" height="150" rx="10" fill="#fff"/></g>
+      <g fill="#c9bfe6" stroke="#1E2F5C" stroke-width="1.5"><circle cx="72" cy="222" r="9"/><circle cx="72" cy="252" r="9"/><circle cx="72" cy="282" r="9"/><circle cx="72" cy="312" r="9"/></g>
+      <text x="30" y="186" font-size="14" fill="#1E2F5C">① 잡음 z</text>
+      <!-- G -->
+      <path d="M150 210 L290 240 L290 310 L150 340 Z" fill="#dbe7fb" stroke="#1E2F5C" stroke-width="2.5"/>
+      <text x="170" y="282" font-size="15" fill="#1E2F5C">② 생성자 G</text>
+      <!-- 가짜 -->
+      <g stroke="#6E5BA8" stroke-width="2.5" fill="#fff"><rect x="340" y="245" width="110" height="60" rx="6"/></g>
+      <g shape-rendering="crispEdges" fill="#c9bfe6"><rect x="352" y="255" width="14" height="14"/><rect x="370" y="255" width="14" height="14"/><rect x="388" y="273" width="14" height="14"/><rect x="406" y="273" width="14" height="14"/><rect x="424" y="255" width="14" height="14"/><rect x="352" y="282" width="14" height="14"/></g>
+      <text x="346" y="330" font-size="14" fill="#6E5BA8">③ 가짜 G(z)</text>
+      <!-- 진짜 -->
+      <g stroke="#2e8b57" stroke-width="2.5" fill="#fff"><rect x="340" y="60" width="110" height="60" rx="6"/></g>
+      <g shape-rendering="crispEdges" fill="#9fd3ae"><rect x="352" y="70" width="14" height="14"/><rect x="370" y="88" width="14" height="14"/><rect x="388" y="70" width="14" height="14"/><rect x="406" y="88" width="14" height="14"/><rect x="424" y="70" width="14" height="14"/><rect x="352" y="97" width="14" height="14"/></g>
+      <text x="340" y="48" font-size="14" fill="#2e8b57">④ 진짜 데이터 x</text>
+      <!-- D -->
+      <path d="M560 120 L700 150 L700 250 L560 280 Z" fill="#f6c6cf" stroke="#1E2F5C" stroke-width="2.5"/>
+      <text x="580" y="206" font-size="15" fill="#1E2F5C">⑤ 판별자 D</text>
+      <g stroke="#1E2F5C" stroke-width="2.5" fill="#fff"><rect x="740" y="160" width="120" height="80" rx="8"/></g>
+      <g font-size="14"><text x="754" y="190" fill="#2e8b57">진짜 → 1</text><text x="754" y="220" fill="#d9443a">가짜 → 0</text></g>
+      <text x="740" y="150" font-size="13" fill="#1E2F5C">진짜일 확률</text>
+      <g stroke="#1E2F5C" stroke-width="2" fill="none"><path d="M98 275 H146" marker-end="url(#ar8)"/><path d="M290 275 H336" marker-end="url(#ar8)"/><path d="M450 90 C 510 90, 520 150, 556 170" marker-end="url(#ar8)"/><path d="M450 275 C 510 275, 520 240, 556 232" marker-end="url(#ar8)"/><path d="M700 200 H736" marker-end="url(#ar8)"/></g>
+      <!-- 되먹임 -->
+      <g stroke="#d9443a" stroke-width="2" fill="none" stroke-dasharray="6 4"><path d="M800 244 C 800 380, 220 390, 220 344" marker-end="url(#ar8)"/><path d="M800 156 C 800 100, 630 90, 630 116" marker-end="url(#ar8)"/></g>
+      <g font-size="13" fill="#d9443a"><text x="420" y="384">⑥ G는 "진짜(1)"라는 판정을 받도록 고침</text><text x="680" y="84">⑥ D는 더 잘 가려내도록 고침</text></g>
+    </svg>
+  </div>
+  <p class="dwg-cap">빨간 점선 두 줄이 학습입니다. 같은 판정을 보고 D와 G가 정반대 방향으로 고쳐요. 번갈아 한 번씩 고치는 것이 기본 방식입니다.</p>
+  <div class="review30"><b>30초 복습 · 정규분포</b> 키나 시험 점수처럼 가운데가 많고 양 끝이 적은 종 모양 분포죠. 아래 실험대의 초록 산(진짜)과 보라 산(가짜)이 바로 그 종 모양이에요. GAN의 목표는 보라 산을 초록 산에 포개는 것입니다.</div>
+  <p><b>도면의 위치</b> · <a href="06_autoencoder.html">06 오토인코더</a>(되살리기, 새로 만들기는 약함) · <a href="07_dbn.html">07 DBN</a>(확률 부품 쌓기) → 이 도면(겨루며 진짜 같은 데이터 만들기). 생성자와 판별자 안에는 <a href="01_fnn.html">01 FNN</a>이나 <a href="02_cnn.html">02 CNN</a>의 층이 들어갑니다.</p>
+</div></section>
+
+<section id="spec"><div class="wrap">
+  <h2><span class="no">04</span>부품 명세 — 한 판의 겨루기</h2>
+  <p class="lead">도면의 번호 ①~⑥ 순서입니다. 회색 줄은 시아가 불량 사진 합성 현장에서 건넬 말이에요.</p>
+  <div class="steps">
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="3" y="3" width="10" height="10" fill="#fff" stroke="#1E2F5C"/><rect x="5" y="5" width="2" height="2" fill="#6E5BA8"/><rect x="9" y="5" width="2" height="2" fill="#6E5BA8"/><rect x="7" y="7" width="2" height="2" fill="#6E5BA8"/><rect x="5" y="9" width="2" height="2" fill="#6E5BA8"/><rect x="9" y="9" width="2" height="2" fill="#6E5BA8"/></svg></div>
+      <div><h3><span>①</span>잡음 z — 주사위 던지기</h3><p>정규분포에서 무작위 숫자 묶음을 뽑습니다. 뽑을 때마다 다른 가짜가 나오게 하는 씨앗이에요.</p>
+      <p class="say">"주사위를 100번 던져서 가짜 불량 사진 100장의 씨앗을 만들게요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="5" width="4" height="6" fill="#dbe7fb" stroke="#1E2F5C"/><rect x="6" y="3" width="4" height="10" fill="#dbe7fb" stroke="#1E2F5C"/><rect x="10" y="1" width="4" height="14" fill="#dbe7fb" stroke="#1E2F5C"/></svg></div>
+      <div><h3><span>②</span>생성자 G — 씨앗을 데이터로 키우기</h3><p>작은 잡음을 층을 거치며 점점 키워 사진 크기의 데이터로 만듭니다. 처음엔 엉망이지만, 판별자에게 들킬 때마다 고쳐 가요.</p>
+      <p class="say">"처음 만든 사진은 그냥 회색 얼룩이었어요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="2" width="12" height="12" fill="#fff" stroke="#6E5BA8"/><rect x="4" y="4" width="3" height="3" fill="#c9bfe6"/><rect x="8" y="7" width="3" height="3" fill="#c9bfe6"/><rect x="4" y="10" width="3" height="2" fill="#c9bfe6"/></svg></div>
+      <div><h3><span>③</span>가짜 G(z)</h3><p>생성자가 만든 결과물입니다. 판별자에게 진짜 데이터와 섞여 보내져요.</p>
+      <p class="say">"가짜 100장과 진짜 100장을 섞어서 감정사에게 보낼게요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="2" width="12" height="12" fill="#fff" stroke="#2e8b57"/><rect x="4" y="4" width="3" height="3" fill="#9fd3ae"/><rect x="8" y="7" width="3" height="3" fill="#9fd3ae"/><rect x="4" y="10" width="3" height="2" fill="#9fd3ae"/></svg></div>
+      <div><h3><span>④</span>진짜 데이터 x</h3><p>실제로 모은 데이터입니다. 생성자는 이 진짜를 직접 보지 못하고, 판별자의 판정을 통해서만 간접적으로 배워요.</p>
+      <p class="say">"실제 불량 사진은 120장뿐이라, 이걸로 감정사를 가르쳐요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="3" width="8" height="10" fill="#f6c6cf" stroke="#1E2F5C"/><rect x="11" y="4" width="3" height="3" fill="#2e8b57"/><rect x="11" y="9" width="3" height="3" fill="#d9443a"/></svg></div>
+      <div><h3><span>⑤</span>판별자 D — 진짜일 확률 내기</h3><p>입력 하나를 보고 "진짜일 확률"을 0~1로 냅니다. 01 도면의 시그모이드 출력을 단 분류기예요.</p>
+      <p class="say">"이 사진은 진짜일 확률 0.93, 저건 0.12로 봤어요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="7" width="4" height="4" fill="#dbe7fb" stroke="#1E2F5C"/><rect x="10" y="7" width="4" height="4" fill="#f6c6cf" stroke="#1E2F5C"/><rect x="6" y="4" width="4" height="1" fill="#d9443a"/><rect x="6" y="12" width="4" height="1" fill="#d9443a"/></svg></div>
+      <div><h3><span>⑥</span>번갈아 고치기 — 겨루기 한 판</h3><p>D는 진짜엔 1, 가짜엔 0을 내도록 고치고, G는 자기 가짜가 1을 받도록 고칩니다. 이것을 번갈아 수천~수만 번 되풀이해요. 둘의 실력이 비슷하게 맞아야 학습이 잘 됩니다.</p>
+      <p class="say">"감정사가 너무 빨리 완벽해지면 위조범이 배울 게 없어져요. 균형을 계속 지켜볼게요."</p></div></div>
+  </div>
+</div></section>
+
+<section id="why"><div class="wrap">
+  <h2><span class="no">05</span>왜 이 설계를 쓰나 · 수식은 동료가 대신 물어봅니다</h2>
+  <div class="say-row neutral"><img src="assets/img/chars/doc_e07.webp" alt="" width="64" height="64">
+    <div class="bubble"><b class="nm">박사</b>불량 판정 모델을 만들려는데 불량 사진이 120장밖에 없다고 해 봅시다. "불량 사진은 이런 확률 분포를 따른다"를 식으로 적을 수 있다면 그 식에서 뽑으면 되겠지만, 사진의 분포를 식으로 적을 수 있을까요?</div></div>
+  <div class="pair">
+    <div class="why" id="whybox">
+      <h3>왜 이 설계를 쓰나</h3>
+      <ol>
+        <li><b>문제 상황</b> · 진짜 같은 새 데이터가 필요한데, 진짜 데이터의 확률 분포는 너무 복잡해 식으로 적을 수 없습니다.</li>
+        <li><b>앞 방법의 한계</b> · <a href="06_autoencoder.html">06 오토인코더</a>는 되살리기는 잘하지만 새로 만들면 흐릿했고, <a href="07_dbn.html">07 DBN</a> 같은 확률 모델은 계산이 무겁고 선명한 사진이 어려웠습니다.</li>
+        <li><b>해법</b> · 분포를 식으로 적는 대신, "진짜와 구별할 수 없는가"를 재는 판별자를 함께 학습시켜 그 판정을 생성자의 선생으로 씁니다(Goodfellow 외, 2014).</li>
+      </ol>
+      <p class="easy"><b>쉽게 말하면</b> · 맛의 공식을 몰라도, 깐깐한 미식가가 "이건 원조 맛이 아니야"라고 할 때마다 고치면 결국 원조 맛에 가까워져요.</p>
+      <p class="calm">아래 식은 기호가 많아서 처음엔 다들 오래 들여다봐요. "D는 맞히려 하고, G는 속이려 한다" 한 줄로 읽어도 충분합니다.</p>
+    </div>
+    <div class="mathq" id="math">
+      <div class="q"><img src="assets/img/chars/asst_e04.webp" alt="" width="56" height="56"><p><b>하루</b> · "min 아래 G, max 아래 D가 붙어 있어요! 누가 줄이고 누가 키워요?"</p></div>
+      <p class="school">학교 수학으로 보면 · 로그함수 + 기댓값(평균) + 확률의 비율</p>
+      <div class="formula">min<sub>G</sub> max<sub>D</sub> E[ log D(x) ] + E[ log(1 − D(G(z))) ]</div>
+      <table class="pieces"><tr><th>조각</th><th>읽는 법 · 뜻</th></tr>
+        <tr><td>max<sub>D</sub></td><td>"D는 이 값을 키우려 한다" → 진짜엔 D(x)를 1로, 가짜엔 D(G(z))를 0으로</td></tr>
+        <tr><td>min<sub>G</sub></td><td>"G는 이 값을 줄이려 한다" → D(G(z))를 1로 만들어 log(1 − D(G(z)))를 작게</td></tr>
+        <tr><td>E[ ]</td><td>"기댓값". 여러 개 뽑아 평균 낸 값</td></tr>
+        <tr><td>D*(x)</td><td>G가 고정됐을 때 가장 잘 가려내는 판별자 = 진짜 밀도 ÷ (진짜 밀도 + 가짜 밀도)</td></tr>
+      </table>
+      <div class="calc"><b class="t">숫자로 한 번 해 보기 (1차원 종 모양 두 개)</b>
+        <ol><li>진짜 데이터는 평균 4, 가짜는 평균 2 (둘 다 표준편차 1). 값 x = 4에서 본다</li>
+          <li>진짜 밀도 = 0.399, 가짜 밀도 = 0.054 (평균에서 2만큼 떨어진 종 모양 높이)</li>
+          <li>가장 잘 가려내는 판별자 D*(4) = 0.399 ÷ (0.399 + 0.054) ≈ <b>0.881</b> → "진짜일 확률 88%"</li>
+          <li>가짜 평균이 4가 되면 두 밀도가 같아져 D*(x) = <b>0.5</b> → 판별자는 동전 던지기만 할 수 있음</li></ol></div>
+      <div class="after"><img src="assets/img/chars/asst_e16.webp" alt="" width="48" height="48"><p><b>하루</b> · "가짜가 진짜에 딱 포개지면 감정사도 반반으로 찍을 수밖에 없네요. 그게 위조범의 완승이에요!"</p></div>
+    </div>
+  </div>
+  <div class="daily" style="margin-top:22px">
+    <div><b>일상으로 치면</b>위조지폐범과 위폐 감별사의 경쟁이에요. 감별사가 잉크 번짐을 잡아내면 위조범은 잉크를 바꾸고, 그러면 감별사는 종이 결을 봐요. 이 경쟁이 오래 갈수록 위조지폐는 진짜에 가까워집니다.</div>
+    <div><b>현장에서는</b>희귀한 불량·질병 사진을 합성해 학습 자료를 늘리고, 저화질 사진을 고화질로 바꾸고(초해상도), 낮 사진을 밤 사진으로 바꾸는 데 씁니다. 합성 데이터는 실제 데이터와 분포가 다를 수 있어서, 섞어 쓴 모델은 반드시 진짜 데이터로만 시험해요.</div>
+  </div>
+</div></section>
+
+<section id="lab"><div class="wrap">
+  <h2><span class="no">06</span>실험 — 두 산 포개기 (위조범 vs 감정사)</h2>
+  <div class="talk">
+    <div class="line"><img src="assets/img/chars/doc_e09.webp" alt="박사" width="56" height="56"><p><b>박사</b>가짜 산을 진짜 산에 포개면 판별자의 최고 정확도는 얼마가 될까요? 진짜 데이터가 두 무리로 나뉘어 있으면 어떻게 될까요?</p></div>
+    <div class="line"><img src="assets/img/chars/robo_e16.webp" alt="주판봇" width="56" height="56"><p><b>주판봇</b>판별자 정확도는 높을수록 좋습니다! 100%가 되면 학습 성공입니다!</p></div>
+    <div class="line"><img src="assets/img/chars/fly_e09.webp" alt="초파리" width="56" height="56"><p><b>초파리</b>100%가 성공? 의심스럽네. 위조범이 이기면 정확도가 몇 %로 가는지 봐. 그리고 '두 무리'를 켜고 학습시켜 봐. 산 하나가 산 둘을 다 덮나.</p></div>
+    <div class="line me"><img src="assets/img/chars/sia_e07.webp" alt="시아" width="56" height="56"><p><b>시아</b>초록은 진짜, 보라는 가짜, 빨간 선은 가장 잘 가려내는 판별자 D*예요. '학습 5걸음'은 단순하게 본 학습이에요(판별자는 늘 최선이라고 가정). 숫자는 제가 정리해 드릴게요.</p></div>
+  </div>
+  <div class="lab">
+    <div class="bar"><span class="dot" style="background:var(--pink)"></span><span class="dot" style="background:var(--lav)"></span><span class="dot" style="background:var(--navy)"></span><span class="t">forger_vs_expert.sim</span></div>
+    <div class="lab-body">
+      <div class="ctrl">
+        <label for="mu8">가짜의 평균 μ <span class="val" data-for="mu8" data-d="2"></span></label><input type="range" id="mu8" min="-1" max="9" step="0.01" value="2">
+        <label for="sg8">가짜의 퍼짐 σ <span class="val" data-for="sg8" data-d="2"></span></label><input type="range" id="sg8" min="0.3" max="2.5" step="0.05" value="1">
+        <label><input type="checkbox" id="bi8"> 진짜 데이터가 두 무리 (평균 2와 6)</label>
+        <button class="btn" id="train8" type="button">학습 5걸음 ▶</button>
+        <button class="btn ghost" id="reset8" type="button">처음 값으로</button>
+      </div>
+      <div>
+        <svg id="plot8" viewBox="0 0 540 280" role="img" aria-label="진짜와 가짜의 분포, 그리고 최선의 판별자 곡선"></svg>
+        <div class="readout" id="out8" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+  <div class="sol">
+    <p><b>시아의 보고</b> · 처음 값(가짜 평균 2)에서 D*(4) = 0.881이고, 판별자가 낼 수 있는 최고 정확도는 84.1%예요. '학습 5걸음'을 몇 번 누르면 가짜 평균이 4로 가고, 정확도는 50.0%, D*는 어디서나 0.5가 돼요. '두 무리'를 켜고 평균 0에서 학습시키면 가짜 산은 평균 2 무리 하나에만 붙고, 정확도는 75%에서 멈춰요.</p>
+    <p><b>박사의 해석</b> · 주판봇 말과 반대로, GAN이 성공하면 판별자 정확도는 <b>50%(동전 던지기)</b>로 갑니다. 진짜와 가짜를 구별할 수 없게 됐다는 뜻이니까요. 두 무리 실험은 <b>모드 붕괴</b>를 단순하게 보여 줍니다. 생성자가 한 무리만 그럴듯하게 흉내 내고 다른 무리는 포기해 버리는 거예요. 실제 GAN은 판별자도 함께 배우는 중이라 더 불안정하게 흔들립니다.</p>
+  </div>
+</div></section>
+
+<section id="judge-sec"><div class="wrap">
+  <h2><span class="no">07</span>AI 판단 코너 — 이 답, 믿어도 될까?</h2>
+  <div class="judge">
+    <h3>AI 도우미가 이렇게 답했습니다</h3>
+    <div class="ai-out">Q. GAN으로 불량 사진 1만 장을 합성했어요. 생성자 손실이 계속 줄었고 사진도 선명합니다. 이걸로 학습 자료를 늘려도 될까요?
+A. 네. 손실이 줄고 사진이 선명하다면 생성이 잘 된 것입니다. 1만 장 모두 학습 자료로 쓰시면 됩니다.</div>
+    <p>어디가 이상할까요?</p>
+    <div class="choices" data-answer="b">
+      <button data-k="a" data-why="사진 수가 많은 것 자체는 문제가 아니에요.">1만 장은 너무 많아서 무조건 안 된다</button>
+      <button data-k="b">선명함과 손실만으로는 다양성을 알 수 없다. 1만 장이 몇 가지 불량만 되풀이하는 모드 붕괴일 수 있으니, 종류별 분포를 진짜와 비교하고 진짜 데이터로만 시험해 봐야 한다</button>
+      <button data-k="c" data-why="GAN 손실은 겨루기라 계속 줄지 않고 흔들리는 게 보통이에요. 줄었다는 것 자체가 품질 보증은 아니에요.">생성자 손실은 늘어야 정상이다</button>
+    </div>
+    <p class="feedback" data-ok="맞아요. 실험대의 두 무리 실험처럼, 한 무리만 흉내 내도 사진은 선명할 수 있어요. '선명하다 = 다양하다'가 아니에요."></p>
+  </div>
+</div></section>
+
+<section id="limit"><div class="wrap">
+  <h2><span class="no">08</span>이 설계의 한계 → 다음 도면</h2>
+  <div class="limit"><b>한계 1 · 학습이 불안정하다</b> — 두 신경망의 실력 균형이 무너지면 학습이 흔들리거나 멈춥니다. 설정(하이퍼파라미터)에 민감해요. WGAN 같은 변형이 이를 줄이려 했어요.<br>
+    <b>한계 2 · 모드 붕괴</b> — 다양성이 사라질 수 있어 결과를 분포로 점검해야 합니다.<br>
+    <b>한계 3 · 성능을 재기 어렵다</b> — 손실 값이 품질을 바로 말해 주지 않아서, 별도의 지표와 사람의 눈으로 확인해야 합니다. 요즘 그림 생성의 주력은 확산 모델로 옮겨 갔어요.</div>
+  <div class="recap"><b>정리</b> · GAN은 생성자와 판별자가 겨루며 학습합니다. 성공하면 가짜 분포가 진짜에 포개지고 판별자는 50%로 찍게 돼요. 압축·생성 계열은 여기까지이고, 하루의 마지막 도면 <a href="09_transformer.html">09 트랜스포머</a>로 이어집니다.</div>
+</div></section>
+
+<section id="quiz"><div class="wrap">
+  <h2><span class="no">09</span>확인 퀴즈</h2>
+  <div class="quiz"><p class="qq">Q1. 학습이 완벽하게 끝나 가짜가 진짜와 같은 분포가 되면, 최선의 판별자 D*(x)는?</p>
+    <div class="choices" data-answer="a"><button data-k="a">어디서나 0.5</button><button data-k="b" data-why="1이면 모든 걸 진짜라고 하는 거예요. 구별할 수 없을 땐 반반이에요.">어디서나 1</button><button data-k="c" data-why="0이면 모든 걸 가짜라고 하는 거예요.">어디서나 0</button></div>
+    <p class="feedback" data-ok="맞아요. 진짜 밀도 ÷ (진짜 + 가짜) = p ÷ 2p = 0.5."></p></div>
+  <div class="quiz"><p class="qq">Q2. 생성자가 몇 가지 결과만 되풀이해 다양성이 사라지는 현상은?</p>
+    <div class="choices" data-answer="c"><button data-k="a" data-why="과적합은 학습 데이터에만 맞고 새 데이터에 못 맞는 현상이에요.">과적합</button><button data-k="b" data-why="기울기 소실은 03 RNN 도면의 문제예요.">기울기 소실</button><button data-k="c">모드 붕괴</button></div>
+    <p class="feedback" data-ok="맞아요. 두 무리 실험에서 산 하나에만 붙은 모습이에요."></p></div>
+</div></section>
+
+<section id="memo"><div class="wrap">
+  <h2><span class="no">10</span>감수 메모 — 참고 자료와 다른 곳</h2>
+  <div class="memo">참고 인포그래픽의 GAN 장 "최소최대 게임" 설명에 <span class="redpen">"G ninimizes the chance…"</span>로 오타가 있었습니다. <b>원자료의 이 낱말을 이 페이지에서는 "minimizes(줄인다)"로 바꿉니다.</b> 또 원자료는 "D는 맞힐 확률을 최대로, G는 들킬 확률을 최소로"라고만 적었는데, 이 페이지에서는 "가장 잘 가려내는 판별자 D* = 진짜 ÷ (진짜 + 가짜)"와 "성공하면 0.5"를 덧붙였어요. 자세한 내용은 <a href="10_review.html#errata">10 감수 도면의 의견서</a>에 있어요.</div>
+</div></section>
+
+<script>
+(function(){
+  var $=BP.$, XS=[];for(var i=0;i<=600;i++)XS.push(-2+i*0.02);
+  function n(x,m,s){return Math.exp(-(x-m)*(x-m)/(2*s*s))/(s*Math.sqrt(2*Math.PI))}
+  function pd(x,bi){return bi?0.5*n(x,2,0.6)+0.5*n(x,6,0.6):n(x,4,1)}
+  function jsd(mu,s,bi){var t=0;XS.forEach(function(x){var a=pd(x,bi),b=n(x,mu,s),m=(a+b)/2;if(a>1e-12)t+=0.5*a*Math.log(a/m)*0.02;if(b>1e-12)t+=0.5*b*Math.log(b/m)*0.02});return t}
+  function acc(mu,s,bi){var t=0;XS.forEach(function(x){t+=Math.max(pd(x,bi),n(x,mu,s))});return 0.5*t*0.02}
+  function draw(){
+    var mu=+$('#mu8').value, s=+$('#sg8').value, bi=$('#bi8').checked;
+    var g=$('#plot8');while(g.firstChild)g.removeChild(g.firstChild);
+    var X=function(x){return 30+(x+2)*44}, Y=function(y){return 230-y*260};
+    g.appendChild(BP.svg('line',{x1:30,y1:230,x2:520,y2:230,stroke:'#1E2F5C'}));
+    for(var k=-2;k<=9;k++){g.appendChild(BP.svg('text',{x:X(k)-4,y:248,'font-size':11,fill:'#6b6b7a'},k+''))}
+    function curve(f,col,w,dash){var d='';XS.forEach(function(x,i){d+=(i?'L':'M')+X(x).toFixed(1)+' '+Y(Math.min(0.85,f(x))).toFixed(1)});var a={d:d,fill:'none',stroke:col,'stroke-width':w};if(dash)a['stroke-dasharray']=dash;g.appendChild(BP.svg('path',a))}
+    curve(function(x){return pd(x,bi)},'#2e8b57',3);
+    curve(function(x){return n(x,mu,s)},'#6E5BA8',3);
+    curve(function(x){var a=pd(x,bi),b=n(x,mu,s);return (a+b)>1e-9?0.25*a/(a+b):0.125},'#d9443a',2,'5 3');
+    g.appendChild(BP.svg('line',{x1:30,y1:Y(0.125),x2:520,y2:Y(0.125),stroke:'#d9443a','stroke-width':0.8,opacity:.4}));
+    g.appendChild(BP.svg('text',{x:34,y:18,'font-size':12,fill:'#2e8b57'},'━ 진짜'));
+    g.appendChild(BP.svg('text',{x:94,y:18,'font-size':12,fill:'#6E5BA8'},'━ 가짜'));
+    g.appendChild(BP.svg('text',{x:154,y:18,'font-size':12,fill:'#d9443a'},'┅ D*(x) (높이 ×0.25로 그림, 옅은 선 = 0.5)'));
+    var a4=pd(4,bi), b4=n(4,mu,s), ac=acc(mu,s,bi);
+    $('#out8').innerHTML='<b>D*(4)</b> = '+BP.fmt(a4/(a4+b4),3)+' · <b>판별자 최고 정확도</b> '+BP.fmt(ac*100,1)+'%'+
+      (ac<0.51?'<br>위조범 승리: 진짜와 가짜를 구별할 수 없어요 (동전 던지기 50%).':'')+
+      (bi&&ac>0.7&&ac<0.8&&Math.min(Math.abs(mu-2),Math.abs(mu-6))<0.15?'<br>⚠ 모드 붕괴: 가짜가 한 무리에만 붙었어요. 다른 무리는 흉내 내지 못해요.':'');
+  }
+  $('#train8').addEventListener('click',function(){var mu=+$('#mu8').value,s=+$('#sg8').value,bi=$('#bi8').checked;
+    for(var k=0;k<5;k++){var gr=(jsd(mu+0.01,s,bi)-jsd(mu-0.01,s,bi))/0.02;mu=Math.max(-1,Math.min(9,mu-3*gr))}
+    $('#mu8').value=mu.toFixed(2);$('#mu8').dispatchEvent(new Event('input'))});
+  ['mu8','sg8','bi8'].forEach(function(i){$('#'+i).addEventListener('input',draw);$('#'+i).addEventListener('change',draw)});
+  $('#bi8').addEventListener('change',function(){if($('#bi8').checked){$('#mu8').value=0;$('#sg8').value=0.6}else{$('#mu8').value=2;$('#sg8').value=1}BP.$$('input[type=range]').forEach(function(x){x.dispatchEvent(new Event('input'))})});
+  $('#reset8').addEventListener('click',function(){$('#mu8').value=2;$('#sg8').value=1;$('#bi8').checked=false;BP.$$('input[type=range]').forEach(function(x){x.dispatchEvent(new Event('input'))});draw()});
+  draw();
+})();
+</script>
+
+</main>
+<section id="next"><div class="wrap">
+  <h2><span class="no">▣</span>다른 도면 펼치기</h2>
+  <div class="pnav"><a href="07_dbn.html"><small>← 앞 도면 DL-07</small>DBN · 심층 신뢰 신경망</a><a class="ix" href="index.html">INDEX</a><a class="nx" href="09_transformer.html"><small>다음 도면 DL-09 →</small>Transformer · 트랜스포머</a></div>
+</div></section>
+<!-- lab-kg:body -->
+<section class="kgx kgx-sec" id="kg"><div class="kgx-wrap">
+<h2>지식 색인 — 이 페이지에서 찾아보기</h2>
+<p class="kgx-sub">이 페이지에 나온 개념, 방법, 생물 대응, 주장, 열린 질문을 한곳에 모았다. 검색하고, 항목을 눌러 이웃 관계를 보고, "설명 보러 가기"로 본문에 돌아간다.</p>
+<div id="kg-mount"></div>
+</div></section>
+<section class="kgx kgx-sec" id="export"><div class="kgx-wrap">
+<h2>온톨로지·서지 꾸러미 — 이 페이지의 지식을 가져가기</h2>
+<p class="kgx-sub">지식 색인을 출처와 함께 파일로 내려받는다. Zotero(BibTeX·RIS), Protégé(Turtle), Neo4j·Gephi(CSV), 여러 페이지 합치기(kg.json)에 쓴다.</p>
+<div id="export-mount"></div>
+</div></section>
+<script type="application/json" id="kg-raw">{"version":"1.0","page":"08_gan","nodes":[{"id":"lab:method/gan","type":"Method","label":{"ko":"적대적 생성 신경망","en":"Generative adversarial network"},"anchor":"#dwg","level":2,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"생성자와 판별자가 겨루며 학습하는 생성 모델."},"page":"08_gan"},{"id":"lab:concept/generator","type":"Concept","label":{"ko":"생성자","en":"Generator"},"anchor":"#spec","level":1,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"무작위 잡음을 받아 진짜 같은 데이터를 만드는 쪽 G."},"page":"08_gan"},{"id":"lab:concept/discriminator","type":"Concept","label":{"ko":"판별자","en":"Discriminator"},"anchor":"#spec","level":1,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"진짜와 가짜를 받아 진짜일 확률을 내는 쪽 D."},"page":"08_gan"},{"id":"lab:concept/minimax","type":"Concept","label":{"ko":"최소최대 게임","en":"Minimax game"},"anchor":"#math","level":2,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"D는 맞히는 확률을 키우고 G는 들키는 확률을 줄이는 겨루기."},"page":"08_gan"},{"id":"lab:limit/mode-collapse","type":"Limitation","label":{"ko":"모드 붕괴","en":"Mode collapse"},"anchor":"#limit","level":2,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"생성자가 몇 가지 결과만 되풀이해 다양성이 사라지는 문제."},"page":"08_gan"}],"edges":[{"s":"lab:method/gan","p":"lab:broader","o":"lab:topic/gan","anchor":"#dwg","confidence":"high"},{"s":"lab:method/gan","p":"lab:uses","o":"lab:concept/generator","anchor":"#dwg","confidence":"high"},{"s":"lab:method/gan","p":"lab:uses","o":"lab:concept/discriminator","anchor":"#dwg","confidence":"high"},{"s":"lab:method/gan","p":"lab:uses","o":"lab:concept/minimax","anchor":"#dwg","confidence":"high"},{"s":"lab:method/gan","p":"lab:hasLimitation","o":"lab:limit/mode-collapse","anchor":"#dwg","confidence":"high"}]}</script>
+<script type="application/ld+json" id="kg-ld">{"@context":{"@vocab":"urn:lab:","lab":"urn:lab:","skos":"http://www.w3.org/2004/02/skos/core#","schema":"https://schema.org/","dct":"http://purl.org/dc/terms/","prov":"http://www.w3.org/ns/prov#","rdfs":"http://www.w3.org/2000/01/rdf-schema#"},"@graph":[{"@id":"urn:lab:page/08","@type":["schema:LearningResource","schema:WebPage"],"schema:name":"DL-08 적대적 생성 신경망 설계도면","schema:dateCreated":"2026-11-26","schema:version":"1.0","dct:isPartOf":"딥러닝 설계도면 연구실 01","schema:about":[{"@id":"lab:method/gan"}],"schema:educationalLevel":"입문","dct:source":[{"@id":"lab:work/goodfellow2014"},{"@id":"lab:work/ref-infographic"},{"@id":"lab:work/ref-infographic"}]},{"@id":"lab:method/gan","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"적대적 생성 신경망","@language":"ko"},{"@value":"Generative adversarial network","@language":"en"}],"skos:definition":[{"@value":"생성자와 판별자가 겨루며 학습하는 생성 모델.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"08_gan","lab:anchor":"#dwg","lab:broader":[{"@id":"lab:topic/gan"}],"skos:broader":[{"@id":"lab:topic/gan"}],"lab:uses":[{"@id":"lab:concept/generator"},{"@id":"lab:concept/discriminator"},{"@id":"lab:concept/minimax"}],"lab:hasLimitation":[{"@id":"lab:limit/mode-collapse"}]},{"@id":"lab:concept/generator","@type":["lab:Concept","skos:Concept"],"skos:prefLabel":[{"@value":"생성자","@language":"ko"},{"@value":"Generator","@language":"en"}],"skos:definition":[{"@value":"무작위 잡음을 받아 진짜 같은 데이터를 만드는 쪽 G.","@language":"ko"}],"lab:level":1,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"08_gan","lab:anchor":"#spec"},{"@id":"lab:concept/discriminator","@type":["lab:Concept","skos:Concept"],"skos:prefLabel":[{"@value":"판별자","@language":"ko"},{"@value":"Discriminator","@language":"en"}],"skos:definition":[{"@value":"진짜와 가짜를 받아 진짜일 확률을 내는 쪽 D.","@language":"ko"}],"lab:level":1,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"08_gan","lab:anchor":"#spec"},{"@id":"lab:concept/minimax","@type":["lab:Concept","skos:Concept"],"skos:prefLabel":[{"@value":"최소최대 게임","@language":"ko"},{"@value":"Minimax game","@language":"en"}],"skos:definition":[{"@value":"D는 맞히는 확률을 키우고 G는 들키는 확률을 줄이는 겨루기.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"08_gan","lab:anchor":"#math"},{"@id":"lab:limit/mode-collapse","@type":["lab:Limitation","skos:Concept"],"skos:prefLabel":[{"@value":"모드 붕괴","@language":"ko"},{"@value":"Mode collapse","@language":"en"}],"skos:definition":[{"@value":"생성자가 몇 가지 결과만 되풀이해 다양성이 사라지는 문제.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"08_gan","lab:anchor":"#limit"}]}</script>
+<script type="application/json" id="refs-csl">[{"id":"goodfellow2014","type":"paper-conference","title":"Generative adversarial nets","author":[{"family":"Goodfellow","given":"Ian J."},{"literal":"외"}],"container-title":"Advances in Neural Information Processing Systems 27","issued":{"date-parts":[[2014]]},"URL":"https://arxiv.org/abs/1406.2661","lab":{"verified":{"title":true,"author":true,"issued":true,"container-title":true,"URL":true}}},{"id":"ref-infographic","type":"graphic","title":"9 Deep Learning Algorithms Every Engineer Should Know (인포그래픽 10장)","note":"작성자 표기 없음. 이 시리즈는 내용만 참고하고 그림은 새로 그렸다.","lab":{"verified":{"title":true}}}]</script>
+<script type="application/json" id="page-meta">{"title":"DL-08 적대적 생성 신경망 설계도면","number":"08","series":"딥러닝 설계도면 연구실 01","date":"2026-11-26","version":"1.0","creator":[{"name":"안상선","role":"author"}],"contributor":[{"name":"AI 보조 제작","role":"assistant"}],"about":["lab:method/gan"],"basedOn":["goodfellow2014","ref-infographic","ref-infographic"],"educationalLevel":"입문","license":"","url":"https://adminmrobo.github.io/deep_learning_model_design_lab_01/08_gan.html","registry":"KG_00_registry 0.3","seeAlso":"https://adminmrobo.github.io/deep_learning_model_design_lab_01/index.html","suggestedCitation":"안상선 (2026). DL-08 적대적 생성 신경망 설계도면. 딥러닝 설계도면 연구실 01 v1.0."}</script>
+<!-- /lab-kg:body -->
+<footer>
+  <div class="wrap">
+    <p>글 · 안상선 (<a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">https://adminmrobo.github.io/who_am_i/who_am_i.html</a>) · (주)M-Robo 대표</p>
+    <p>캐릭터: 조수 하루 · 인턴 모아 · 인턴 시아 · 초파리 연구원 · 주판봇 · 박사 — <a href="https://github.com/adminmrobo/fruitfly-lab-expressions">fruitfly-lab-expressions</a> 픽셀아트 캐릭터 팩. 도면 그림은 이 저장소에서 새로 그렸습니다.</p>
+    <p>참고 자료: 「9 Deep Learning Algorithms Every Engineer Should Know」 인포그래픽 10장(작성자 표기 없음). 내용만 참고했고, 그림과 문장은 새로 만들었으며 틀린 곳은 고쳤습니다(<a href="10_review.html#errata">감수 의견서</a>).</p>
+    <p>저장소: <a href="https://github.com/adminmrobo/deep_learning_model_design_lab_01">adminmrobo/deep_learning_model_design_lab_01</a> · <a href="https://www.ahnboat.xyz">ahnboat.xyz</a></p>
+  </div>
+</footer>
+<!-- lab-kg:script -->
+<script src="kg/kgx.js"></script>
+<!-- /lab-kg:script -->
+</body>
+</html>

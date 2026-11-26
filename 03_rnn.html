@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DL-03 RNN — 순환 신경망 설계도면 | 딥러닝 설계도면 연구실 01</title>
+<meta name="description" content="한 번에 하나씩 읽으며 앞에서 읽은 것을 메모(은닉 상태)로 넘긴다. 순서가 있는 데이터의 기본 설계.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DL-03 RNN — 순환 신경망 설계도면 | 딥러닝 설계도면 연구실 01">
+<meta property="og:description" content="한 번에 하나씩 읽으며 앞에서 읽은 것을 메모(은닉 상태)로 넘긴다. 순서가 있는 데이터의 기본 설계.">
+<meta property="og:image" content="https://adminmrobo.github.io/deep_learning_model_design_lab_01/assets/img/covers/og_03.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/chars/asst_e13.webp">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css">
+<link rel="stylesheet" href="assets/css/blueprint.css">
+<script src="assets/js/blueprint.js"></script>
+<!-- px-fix v1 --><style id="px-fix">img{image-rendering:auto!important}</style><script id="px-fix-js">(function(){var R=window.ResizeObserver;function f(i){var n=i.naturalWidth,w=i.getBoundingClientRect().width;if(!n||!w)return;var s=w*(window.devicePixelRatio||1)/n;i.style.setProperty("image-rendering",s>=1.95?"pixelated":"auto","important")}var ro=R?new R(function(es){es.forEach(function(e){f(e.target)})}):null;function a(i){if(i.__px)return;i.__px=1;i.addEventListener("load",function(){f(i)});if(ro)ro.observe(i);f(i)}function all(r){(r||document).querySelectorAll&&(r||document).querySelectorAll("img").forEach(a)}function go(){all();if(window.MutationObserver)new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType!==1)return;if(n.tagName==="IMG")a(n);else all(n)})})}).observe(document.documentElement,{childList:true,subtree:true});window.addEventListener("resize",function(){document.querySelectorAll("img").forEach(f)})}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go()})();</script><!-- /px-fix -->
+<!-- lab-kg:head -->
+<meta name="citation_title" content="DL-03 순환 신경망 설계도면">
+<meta name="dc.title" content="DL-03 순환 신경망 설계도면">
+<meta name="dc.date" content="2026-11-26">
+<meta name="dc.language" content="ko">
+<meta name="dc.type" content="InteractiveResource">
+<meta name="citation_author" content="안상선">
+<meta name="dcterms.isPartOf" content="딥러닝 설계도면 연구실 01">
+<meta name="dc.source" content="doi:10.1207/s15516709cog1402_1">
+<!-- /lab-kg:head -->
+</head>
+<body class="by-moa">
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<nav class="topnav" aria-label="도면 목록"><div class="wrap"><a class="home" href="index.html">DL 설계도면 연구실</a><a href="01_fnn.html">01 FNN</a><a href="02_cnn.html">02 CNN</a><a href="03_rnn.html" class="here" aria-current="page">03 RNN</a><a href="04_lstm.html">04 LSTM</a><a href="05_gru.html">05 GRU</a><a href="06_autoencoder.html">06 AE</a><a href="07_dbn.html">07 DBN</a><a href="08_gan.html">08 GAN</a><a href="09_transformer.html">09 Transformer</a><a href="10_review.html">10 감수</a><a href="practice/index.html">실전 연습장</a></div></nav>
+<header class="cover" id="cover" data-img="cover_03"><picture><img src="assets/img/covers/cover_03.webp" width="1600" height="900" alt="DL-03 RNN 설계도면 표지: 모눈 바탕 위의 인턴 모아 픽셀아트" fetchpriority="high" decoding="async"></picture><span class="cover-chip">딥러닝 설계도면 연구실 01 · DL-03</span></header>
+<div class="wrap">
+  <div class="term">
+    <div class="bar"><span class="dot" style="background:var(--pink)"></span><span class="dot" style="background:var(--lav)"></span><span class="dot" style="background:var(--navy)"></span><span class="t mono">blueprint · DL-03_RNN.dwg</span></div>
+    <div class="term-body">
+      <p class="prompt mono"><b>moa@lab</b>:~$ open DL-03_RNN.blueprint</p>
+      <div class="hero">
+        <div class="who"><img src="assets/img/chars/moa_e07.webp" alt="인턴 모아 픽셀아트 초상, 검지를 세워 설명하는 모습" width="192" height="192"></div>
+        <div>
+          <h1>RNN</h1>
+          <div class="sub">메모를 들고 다음 순서로 넘기는 설계도</div>
+          <p class="by">DL-03 · 순환 신경망 (Recurrent Neural Network) · 인턴 모아 작성</p>
+          <span class="motto pix">읽은 것은 메모에 모아서 다음으로.</span>
+        </div>
+      </div>
+      <table class="titleblock" aria-label="도면 표제란">
+        <tr><th>도면 번호</th><td>DL-03</td><th>계열</th><td>순서·기억 계열 (모아 담당)</td></tr>
+        <tr><th>작성</th><td>인턴 모아</td><th>감수</th><td>초파리 연구원 · 주판봇 (<a href="10_review.html">10 감수 도면</a>)</td></tr>
+        <tr><th>모델</th><td>RNN · 순환 신경망</td><th>날짜 · 판</th><td>2026-11-26 · v1.0</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+<main id="main">
+<section id="three"><div class="wrap">
+  <h2><span class="no">01</span>처음 오신 분께 — 이 도면을 3줄로</h2>
+  <p class="lead">인턴 모아가 그린 첫 도면입니다. 기록을 '모아' 두는 일을 좋아하는 모아가 순서·기억 계열 세 장(03 RNN · 04 LSTM · 05 GRU)을 맡았어요.</p>
+  <div class="three">
+    <div><b>무엇을</b>문장이나 매출처럼 순서가 있는 데이터를 한 번에 하나씩 읽고, 읽은 내용을 메모(은닉 상태)에 적어 다음 순서로 넘깁니다.</div>
+    <div><b>왜 중요한가</b>01 FNN은 입력 하나를 따로 봐서 "앞에서 무슨 일이 있었는지"를 몰랐어요. RNN은 그 메모 하나로 앞뒤 맥락을 잇습니다.</div>
+    <div><b>업무에서는</b>센서 시계열의 이상 감지, 다음 주 판매량 예측, 짧은 문장의 감정 분류처럼 <b>순서가 뜻을 가진</b> 일에 씁니다.</div>
+  </div>
+  <p class="nocode">코드나 수식을 몰라도 됩니다. 메모가 어떻게 넘어가고, 어떻게 흐려지는지만 보면 돼요.</p>
+  <details><summary>이 도면에 나오는 영어 약어 풀이</summary>
+    <dl class="abbr">
+      <dt>RNN</dt><dd>Recurrent Neural Network, 순환 신경망. 같은 장치를 순서마다 되풀이해 쓴다는 뜻</dd>
+      <dt>hₜ</dt><dd>"에이치 티". t번째 순서의 은닉 상태(메모)</dd>
+      <dt>tanh</dt><dd>"탄젠트 에이치". 값을 −1과 1 사이로 눌러 주는 함수</dd>
+      <dt>BPTT</dt><dd>Backpropagation Through Time. 순서를 거슬러 올라가며 가중치를 고치는 학습</dd>
+    </dl>
+  </details>
+</div></section>
+
+<section id="cast"><div class="wrap">
+  <h2><span class="no">02</span>도면을 전달하는 사람들</h2>
+  <div class="cast">
+    <div class="me"><img src="assets/img/chars/moa_e13.webp" alt="인턴 모아" width="84" height="84"><b>인턴 모아</b>이 도면 작성자<br><span class="tag">설계 · 숫자 발표</span></div>
+    <div><img src="assets/img/chars/asst_e09.webp" alt="조수 하루" width="84" height="84"><b>조수 하루</b>수식을 대신 물어봄<br><span class="tag">질문 담당</span></div>
+    <div><img src="assets/img/chars/doc_e07.webp" alt="박사" width="84" height="84"><b>박사</b>현장 질문과 해석<br><span class="tag">교육 · 판정</span></div>
+    <div><img src="assets/img/chars/fly_e09.webp" alt="초파리 연구원" width="84" height="84"><b>초파리 연구원</b>크고 복잡한 것을 의심<br><span class="tag">감수</span></div>
+    <div><img src="assets/img/chars/robo_e16.webp" alt="주판봇" width="84" height="84"><b>주판봇</b>큰 숫자를 좋아함<br><span class="tag">감수</span></div>
+  </div>
+  <div class="say-row"><img src="assets/img/chars/moa_e16.webp" alt="" width="64" height="64">
+    <div class="bubble"><b class="nm">모아</b>안녕하세요, 모아예요. 저는 매일 화분에 물 준 날을 수첩에 적어 둬요. 오늘 물을 줄지 말지는 오늘 흙만 봐선 모르고, 지난 며칠 기록을 같이 봐야 하거든요. RNN이 바로 그 수첩을 들고 다니는 장치예요.</div></div>
+</div></section>
+
+<section id="dwg"><div class="wrap">
+  <h2><span class="no">03</span>전체 구조도 — SHEET 3</h2>
+  <p class="lead">왼쪽은 접은 그림, 오른쪽은 순서대로 펼친 그림입니다. 펼쳐 보면 같은 장치(초록 네모)가 순서마다 되풀이되고, 메모가 오른쪽으로 넘어가요.</p>
+  <div class="dwg scroll-x"><span class="stamp" style="color:#B47B32;border-color:#B47B32">작성 · 모아</span>
+    <svg viewBox="0 0 940 380" role="img" aria-labelledby="d3t">
+      <title id="d3t">RNN 구조: 접은 그림에서는 은닉 상태 h가 자기 자신으로 되돌아가는 고리가 있고, 펼친 그림에서는 x₁부터 x₄까지 입력이 들어갈 때마다 h₁부터 h₄가 차례로 이어지며 각자 출력 y를 낸다</title>
+      <defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1E2F5C"/></marker></defs>
+      <!-- 접은 그림 -->
+      <g stroke="#1E2F5C" stroke-width="2.5"><rect x="60" y="150" width="70" height="56" rx="6" fill="#cfe8c9"/><circle cx="95" cy="290" r="24" fill="#cfe0f7"/><circle cx="95" cy="66" r="24" fill="#f6c6cf"/></g>
+      <g fill="#1E2F5C" font-size="17"><text x="86" y="184">h</text><text x="86" y="296">x</text><text x="86" y="72">y</text></g>
+      <g stroke="#1E2F5C" stroke-width="2" fill="none"><path d="M95 266 V210" marker-end="url(#ar3)"/><path d="M95 150 V94" marker-end="url(#ar3)"/><path d="M130 168 C 175 150, 175 210, 133 196" marker-end="url(#ar3)"/></g>
+      <text x="150" y="150" font-size="13" fill="#B47B32">메모가 자기에게</text><text x="150" y="166" font-size="13" fill="#B47B32">되돌아옴</text>
+      <text x="40" y="350" font-size="14" fill="#2f5fa8">접은 그림</text>
+      <path d="M220 228 H262" stroke="#2f5fa8" stroke-width="3" marker-end="url(#ar3)"/><text x="214" y="252" font-size="13" fill="#2f5fa8">펼치면</text>
+      <!-- 펼친 그림 -->
+      <g id="cells">
+        <g stroke="#1E2F5C" stroke-width="2.5"><rect x="300" y="150" width="80" height="56" rx="6" fill="#cfe8c9"/><rect x="460" y="150" width="80" height="56" rx="6" fill="#cfe8c9"/><rect x="620" y="150" width="80" height="56" rx="6" fill="#cfe8c9"/><rect x="780" y="150" width="80" height="56" rx="6" fill="#cfe8c9"/></g>
+        <g stroke="#1E2F5C" stroke-width="2.5" fill="#cfe0f7"><circle cx="340" cy="290" r="24"/><circle cx="500" cy="290" r="24"/><circle cx="660" cy="290" r="24"/><circle cx="820" cy="290" r="24"/></g>
+        <g stroke="#1E2F5C" stroke-width="2.5" fill="#f6c6cf"><circle cx="340" cy="66" r="24"/><circle cx="500" cy="66" r="24"/><circle cx="660" cy="66" r="24"/><circle cx="820" cy="66" r="24"/></g>
+        <g fill="#1E2F5C" font-size="16"><text x="326" y="184">h₁</text><text x="486" y="184">h₂</text><text x="646" y="184">h₃</text><text x="806" y="184">h₄</text>
+          <text x="328" y="296">x₁</text><text x="488" y="296">x₂</text><text x="648" y="296">x₃</text><text x="808" y="296">x₄</text>
+          <text x="328" y="72">y₁</text><text x="488" y="72">y₂</text><text x="648" y="72">y₃</text><text x="808" y="72">y₄</text></g>
+        <g stroke="#1E2F5C" stroke-width="2" fill="none"><path d="M340 266V210" marker-end="url(#ar3)"/><path d="M340 150V94" marker-end="url(#ar3)"/><path d="M500 266V210" marker-end="url(#ar3)"/><path d="M500 150V94" marker-end="url(#ar3)"/><path d="M660 266V210" marker-end="url(#ar3)"/><path d="M660 150V94" marker-end="url(#ar3)"/><path d="M820 266V210" marker-end="url(#ar3)"/><path d="M820 150V94" marker-end="url(#ar3)"/></g>
+        <g stroke="#B47B32" stroke-width="3" fill="none"><path d="M380 178H456" marker-end="url(#ar3)"/><path d="M540 178H616" marker-end="url(#ar3)"/><path d="M700 178H776" marker-end="url(#ar3)"/></g>
+        <g fill="#B47B32" font-size="13"><text x="392" y="170">메모</text><text x="552" y="170">메모</text><text x="712" y="170">메모</text></g>
+        <g fill="#fff" font-size="13"><circle cx="300" cy="140" r="12" fill="#B47B32"/><text x="296" y="145">1</text><circle cx="418" cy="200" r="12" fill="#B47B32"/><text x="414" y="205">2</text><circle cx="382" cy="102" r="12" fill="#B47B32"/><text x="378" y="107">3</text><circle cx="870" cy="140" r="12" fill="#B47B32"/><text x="866" y="145">4</text></g>
+      </g>
+      <text x="300" y="350" font-size="14" fill="#2f5fa8">펼친 그림 — 네 초록 네모는 모두 같은 가중치를 씀</text>
+    </svg>
+  </div>
+  <p class="dwg-cap">번호 ①~④는 아래 부품 명세의 순서입니다. 초록 네모 넷은 모양만 넷이지 실제로는 같은 장치 하나예요.</p>
+  <div class="review30"><b>30초 복습 · 점화식</b> 수열에서 "다음 항 = 앞 항으로 계산"하는 식(예: aₙ₊₁ = 0.5·aₙ + 1)을 배웠죠. RNN의 메모도 "이번 메모 = 앞 메모와 이번 입력으로 계산"하는 점화식이에요.</div>
+  <p><b>도면의 위치</b> · <a href="01_fnn.html">01 FNN</a>(기억 없음) → 이 도면(메모 하나로 기억) → 메모가 흐려지는 문제를 문으로 막은 <a href="04_lstm.html">04 LSTM</a>, <a href="05_gru.html">05 GRU</a>.</p>
+</div></section>
+
+<section id="spec"><div class="wrap">
+  <h2><span class="no">04</span>부품 명세 — 순서 하나를 읽을 때 일어나는 일</h2>
+  <p class="lead">도면의 번호 ①~④ 순서입니다. 회색 줄은 모아가 설비 센서 현장에서 건넬 말이에요.</p>
+  <div class="steps">
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="9" width="3" height="5" fill="#cfe0f7" stroke="#1E2F5C"/><rect x="6.5" y="6" width="3" height="8" fill="#cfe0f7" stroke="#1E2F5C"/><rect x="11" y="3" width="3" height="11" fill="#B47B32" stroke="#1E2F5C"/></svg></div>
+      <div><h3><span>①</span>이번 순서의 입력 xₜ</h3><p>문장이면 단어 하나, 센서면 1분 측정값 하나를 넣습니다. 한 번에 하나씩, 순서를 지켜서요.</p>
+      <p class="say">"진동 센서 값을 1분마다 하나씩 넣을게요. 순서를 섞으면 안 돼요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="6" width="5" height="4" fill="#cfe8c9" stroke="#1E2F5C"/><rect x="10" y="6" width="5" height="4" fill="#cfe8c9" stroke="#1E2F5C"/><rect x="6" y="7" width="4" height="2" fill="#B47B32"/></svg></div>
+      <div><h3><span>②</span>메모 넘기기 — 앞 메모 hₜ₋₁ + 이번 입력</h3><p>앞에서 넘어온 메모와 이번 입력을 각각 가중치로 곱해 더하고, tanh로 −1~1 사이에 눌러 새 메모 hₜ를 만듭니다. 01 도면의 "곱해서 더하고 구부리기"에 입력이 하나(앞 메모) 더 붙은 꼴이에요.</p>
+      <p class="say">"지난 10분 동안 진동이 조금씩 커졌다는 게 메모에 남아 있어요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="5" y="2" width="6" height="5" fill="#f6c6cf" stroke="#1E2F5C"/><rect x="7" y="7" width="2" height="4" fill="#1E2F5C"/><rect x="4" y="11" width="8" height="3" fill="#cfe8c9" stroke="#1E2F5C"/></svg></div>
+      <div><h3><span>③</span>출력 yₜ — 필요할 때만</h3><p>메모를 보고 이번 순서의 답을 냅니다. 매 순서마다 낼 수도 있고(다음 값 예측), 마지막에 한 번만 낼 수도 있어요(문장 전체의 감정).</p>
+      <p class="say">"문장 감정은 마지막 단어까지 다 읽고 한 번만 '긍정·부정'을 낼게요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="4" width="3" height="3" fill="#cfe8c9" stroke="#1E2F5C"/><rect x="7" y="4" width="3" height="3" fill="#cfe8c9" stroke="#1E2F5C"/><rect x="12" y="4" width="3" height="3" fill="#cfe8c9" stroke="#1E2F5C"/><rect x="2" y="10" width="13" height="2" fill="#B47B32"/></svg></div>
+      <div><h3><span>④</span>가중치 공유 — 모든 순서에 같은 장치</h3><p>첫째 순서와 백째 순서에 같은 가중치를 씁니다. 그래서 길이가 5인 문장도 500인 문장도 같은 장치로 읽을 수 있어요. 학습은 순서를 거슬러 올라가며 가중치를 고칩니다(BPTT).</p>
+      <p class="say">"월요일 장치, 화요일 장치가 따로 있는 게 아니라 하나를 매일 써요."</p></div></div>
+  </div>
+</div></section>
+
+<section id="why"><div class="wrap">
+  <h2><span class="no">05</span>왜 이 설계를 쓰나 · 수식은 동료가 대신 물어봅니다</h2>
+  <div class="say-row neutral"><img src="assets/img/chars/doc_e07.webp" alt="" width="64" height="64">
+    <div class="bubble"><b class="nm">박사</b>"배송은 빨랐는데 포장이 엉망이에요"와 "포장은 엉망인데 배송이 빨랐어요"는 같은 단어로 이뤄졌지만 손님의 기분은 다릅니다. 단어 순서를 보지 않는 장치라면 둘을 구분할 수 있을까요?</div></div>
+  <div class="pair">
+    <div class="why" id="whybox">
+      <h3>왜 이 설계를 쓰나</h3>
+      <ol>
+        <li><b>문제 상황</b> · 순서가 바뀌면 뜻이 바뀌고, 데이터 길이도 매번 다릅니다.</li>
+        <li><b>앞 방법의 한계</b> · 01 FNN은 입력 크기가 정해져 있고 기억이 없습니다. 단어를 다 더해서 넣으면 순서가 사라져요.</li>
+        <li><b>해법</b> · 한 번에 하나씩 읽고, 지금까지의 내용을 메모 하나에 눌러 담아 다음 순서로 넘깁니다. 장치는 하나를 되풀이해 써서 길이에 상관없이 읽어요.</li>
+      </ol>
+      <p class="easy"><b>쉽게 말하면</b> · 책을 한 쪽씩 넘기며 "지금까지 줄거리" 메모를 한 줄로 고쳐 쓰는 것과 같아요.</p>
+      <p class="calm">"메모"라는 말만 기억해도 이 도면의 절반은 읽은 거예요. 수식은 그 메모를 고쳐 쓰는 규칙일 뿐이에요.</p>
+    </div>
+    <div class="mathq" id="math">
+      <div class="q"><img src="assets/img/chars/asst_e04.webp" alt="" width="56" height="56"><p><b>하루</b> · "h 옆에 t−1이 붙어 있어요! 이건 '앞에 것'이라는 뜻인가요? 계산 순서도 알려 주세요."</p></div>
+      <p class="school">학교 수학으로 보면 · 점화식(다음 항을 앞 항으로 계산) + 01 도면의 일차식</p>
+      <div class="formula">hₜ = tanh( wₕ · hₜ₋₁ + wₓ · xₜ + b )</div>
+      <table class="pieces"><tr><th>조각</th><th>읽는 법 · 뜻</th></tr>
+        <tr><td>hₜ₋₁</td><td>"에이치 티 빼기 일". 바로 앞 순서의 메모</td></tr>
+        <tr><td>wₕ</td><td>앞 메모를 얼마나 이어 갈지 정하는 가중치</td></tr>
+        <tr><td>wₓ · xₜ</td><td>이번 입력에 가중치를 곱한 것</td></tr>
+        <tr><td>tanh</td><td>합을 −1과 1 사이로 눌러 메모가 끝없이 커지지 않게 함</td></tr>
+      </table>
+      <div class="calc"><b class="t">숫자로 한 번 해 보기 (wₕ = 0.5, wₓ = 1, b = 0)</b>
+        <ol><li>첫 순서만 입력 1, 그 뒤는 모두 0. 처음 메모 h₀ = 0</li>
+          <li>h₁ = tanh(0.5×0 + 1×1) = tanh(1) ≈ <b>0.762</b></li>
+          <li>h₂ = tanh(0.5×0.762 + 0) = tanh(0.381) ≈ <b>0.363</b></li>
+          <li>h₃ = tanh(0.5×0.363) ≈ <b>0.180</b>, h₄ ≈ <b>0.090</b> … h₁₀ ≈ <b>0.0014</b></li></ol></div>
+      <div class="after"><img src="assets/img/chars/asst_e16.webp" alt="" width="48" height="48"><p><b>하루</b> · "순서마다 메모가 거의 절반씩 줄어요! 열 번째엔 첫 입력이 거의 안 남네요."</p></div>
+    </div>
+  </div>
+  <div class="daily" style="margin-top:22px">
+    <div><b>일상으로 치면</b>귓속말 전달 놀이와 같아요. 한 사람씩 들은 말을 다음 사람에게 전하면, 줄이 길어질수록 첫 사람의 말은 점점 흐려지죠. 그 흐려짐이 이 도면의 가장 큰 숙제예요.</div>
+    <div><b>현장에서는</b>설비 진동·온도 시계열의 이상 감지, 짧은 기간의 판매량 예측, 짧은 문장 분류에 씁니다. 다만 요즘은 긴 순서는 04 LSTM·05 GRU나 09 트랜스포머를 먼저 써 보고, 기본 RNN은 비교 기준으로 많이 둬요.</div>
+  </div>
+</div></section>
+
+<section id="lab"><div class="wrap">
+  <h2><span class="no">06</span>실험 — 메모 흐려짐 측정대</h2>
+  <div class="talk">
+    <div class="line"><img src="assets/img/chars/doc_e09.webp" alt="박사" width="56" height="56"><p><b>박사</b>첫 순서에 들어온 신호는 열 번째 순서에 얼마나 남을까요? 그리고 학습할 때 고칠 신호(기울기)는요?</p></div>
+    <div class="line"><img src="assets/img/chars/robo_e16.webp" alt="주판봇" width="56" height="56"><p><b>주판봇</b>메모가 있으니 100번째에도 그대로 남습니다! 메모는 지워지지 않으니까요!</p></div>
+    <div class="line"><img src="assets/img/chars/fly_e09.webp" alt="초파리" width="56" height="56"><p><b>초파리</b>그대로? 의심스럽네. 막대를 봐. 순서마다 얼마씩 줄어드는지. wₕ를 1 가까이 올리면 또 어떻게 되는지.</p></div>
+    <div class="line me"><img src="assets/img/chars/moa_e07.webp" alt="모아" width="56" height="56"><p><b>모아</b>갈색 막대는 메모 값, 빨간 막대는 첫 입력에 대한 기울기(고칠 신호)예요. 제가 숫자로 읽어 드릴게요.</p></div>
+  </div>
+  <div class="lab">
+    <div class="bar"><span class="dot" style="background:var(--pink)"></span><span class="dot" style="background:var(--lav)"></span><span class="dot" style="background:var(--navy)"></span><span class="t">memo_fade.sim</span></div>
+    <div class="lab-body">
+      <div class="ctrl">
+        <label for="wh">앞 메모 가중치 wₕ <span class="val" data-for="wh" data-d="2"></span></label><input type="range" id="wh" min="0" max="1.5" step="0.05" value="0.5">
+        <label for="x1v">첫 순서 입력 x₁ <span class="val" data-for="x1v" data-d="1"></span></label><input type="range" id="x1v" min="0" max="3" step="0.1" value="1">
+        <label for="len3">순서 길이 <span class="val" data-for="len3" data-d="0"></span></label><input type="range" id="len3" min="4" max="20" step="1" value="10">
+        <button class="btn ghost" id="reset3" type="button">처음 값으로</button>
+      </div>
+      <div>
+        <svg id="plot3" viewBox="0 0 540 280" role="img" aria-label="순서별 메모 값과 첫 입력에 대한 기울기 막대"></svg>
+        <div class="readout" id="out3" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+  <div class="sol">
+    <p><b>모아의 보고</b> · 처음 값(wₕ = 0.5, x₁ = 1)에서 메모는 0.762 → 0.363 → 0.180 → 0.090으로 순서마다 거의 반씩 줄고, 열 번째엔 0.0014예요. 첫 입력에 대한 기울기도 0.420에서 열 번째 0.0007까지 줄어요.</p>
+    <p><b>박사의 해석</b> · 메모 값이 작아지는 것보다 기울기가 작아지는 게 더 큰 문제입니다. 기울기는 "첫 입력 쪽 가중치를 얼마나 고쳐야 하나"를 알려 주는 신호인데, 0에 가까우면 학습이 먼 과거를 배우지 못해요. 이것이 <b>기울기 소실</b>입니다. wₕ를 1 가까이 올려도 tanh의 꺾임 때문에 결국 줄어들어요. 순서마다 곱해지는 값이 1보다 작으면 사라지고, 1보다 크면 반대로 폭발할 수 있습니다.</p>
+  </div>
+</div></section>
+
+<section id="judge-sec"><div class="wrap">
+  <h2><span class="no">07</span>AI 판단 코너 — 이 답, 믿어도 될까?</h2>
+  <div class="judge">
+    <h3>AI 도우미가 이렇게 답했습니다</h3>
+    <div class="ai-out">Q. 기본 RNN으로 한 달치(약 4만 분) 설비 센서를 1분 단위로 읽고, 첫날 아침의 충격이 오늘 고장과 관계있는지 배우게 하려 합니다. 괜찮을까요?
+A. 네. RNN은 은닉 상태에 지난 정보를 모두 담기 때문에, 순서가 아무리 길어도 첫날 정보를 그대로 기억합니다.</div>
+    <p>어디가 이상할까요?</p>
+    <div class="choices" data-answer="b">
+      <button data-k="a" data-why="1분 단위 자체가 문제는 아니에요. 문제는 그 길이를 기본 RNN이 기억할 수 있느냐예요.">1분 단위로 읽으면 안 되고 1초 단위여야 한다</button>
+      <button data-k="b">메모는 순서마다 곱해지며 흐려지고 기울기도 사라진다. 4만 순서 전의 정보는 기본 RNN으로 배우기 어렵다. 시간 단위를 묶어 줄이거나, LSTM·GRU·트랜스포머를 검토해야 한다</button>
+      <button data-k="c" data-why="tanh는 메모를 −1~1에 눌러 줄 뿐, 흐려짐을 막지는 못해요.">tanh가 메모를 지켜 주므로 문제없다</button>
+    </div>
+    <p class="feedback" data-ok="맞아요. 실험대에서 길이 20만 돼도 첫 입력의 기울기가 거의 0이었죠. '그대로 기억한다'는 말에는 늘 '몇 순서까지?'를 되물어 보세요."></p>
+  </div>
+</div></section>
+
+<section id="limit"><div class="wrap">
+  <h2><span class="no">08</span>이 설계의 한계 → 다음 도면</h2>
+  <div class="limit"><b>한계 1 · 먼 과거를 잊는다(기울기 소실)</b> — 순서마다 곱셈을 거듭하며 먼 과거의 영향이 0에 가까워집니다. 반대로 커지면 기울기 폭발이 생겨요. 메모가 흐려지지 않게 문(게이트)을 단 것이 <a href="04_lstm.html">04 LSTM</a>입니다.<br>
+    <b>한계 2 · 차례차례라 느리다</b> — 앞 순서를 다 계산해야 다음을 계산할 수 있어서, 긴 데이터를 동시에 계산하기 어렵습니다. 이 한계는 <a href="09_transformer.html">09 트랜스포머</a>가 풀었어요.</div>
+  <div class="recap"><b>정리</b> · RNN은 같은 장치를 순서마다 되풀이 쓰며, 앞 메모와 이번 입력으로 새 메모를 만들어 넘깁니다. 메모 덕분에 맥락을 잇지만, 길어지면 먼 과거가 흐려집니다.</div>
+</div></section>
+
+<section id="quiz"><div class="wrap">
+  <h2><span class="no">09</span>확인 퀴즈</h2>
+  <div class="quiz"><p class="qq">Q1. RNN이 01 FNN과 가장 다른 부품은?</p>
+    <div class="choices" data-answer="c"><button data-k="a" data-why="tanh 같은 활성화 함수는 FNN에도 있어요.">활성화 함수</button><button data-k="b" data-why="가중치는 FNN에도 있어요.">가중치</button><button data-k="c">앞 순서에서 넘어온 메모(은닉 상태)</button></div>
+    <p class="feedback" data-ok="맞아요. 메모가 다음 순서로 넘어가는 길이 RNN의 이름(순환)이에요."></p></div>
+  <div class="quiz"><p class="qq">Q2. wₕ = 0.5일 때 첫 입력의 흔적이 순서마다 거의 반씩 줄었습니다. 이 현상이 학습에서 일으키는 문제는?</p>
+    <div class="choices" data-answer="a"><button data-k="a">먼 과거의 입력에 대한 기울기가 0에 가까워져 그 부분을 배우지 못한다</button><button data-k="b" data-why="메모가 줄어든다고 계산이 빨라지지는 않아요.">계산이 너무 빨라진다</button><button data-k="c" data-why="반대예요. 줄어드는 쪽은 '소실', 커지는 쪽이 '폭발'이에요.">기울기가 폭발한다</button></div>
+    <p class="feedback" data-ok="맞아요. 이것이 기울기 소실이고, 04 LSTM이 나온 이유예요."></p></div>
+</div></section>
+
+<section id="memo"><div class="wrap">
+  <h2><span class="no">10</span>감수 메모 — 참고 자료와 다른 곳</h2>
+  <div class="memo">참고 인포그래픽의 RNN 장 "감정 분석 예시" 그림에서 은닉 상태 번호가 <span class="redpen">h₁, h₂, h₂, h₃, h₅</span>로, 넷째 입력이 <span class="redpen">xₜ</span>로 적혀 있었습니다. <b>원자료의 이 번호를 이 페이지에서는 h₁, h₂, h₃, h₄, h₅와 x₁~x₅로 바꿉니다.</b> 같은 장치를 다섯 번 쓰더라도 메모는 순서마다 다른 값이기 때문이에요. 자세한 내용은 <a href="10_review.html#errata">10 감수 도면의 의견서</a>에 있어요.</div>
+</div></section>
+
+<script>
+(function(){
+  var $=BP.$;
+  function draw(){
+    var wh=+$('#wh').value, x1=+$('#x1v').value, L=+$('#len3').value, h=0, H=[], G=[], g=1;
+    for(var t=0;t<L;t++){var x=t===0?x1:0;h=BP.tanh(wh*h+x);H.push(h);g=(t===0)?(1-h*h):g*wh*(1-h*h);G.push(g)}
+    var s=$('#plot3');while(s.firstChild)s.removeChild(s.firstChild);
+    var bw=480/L, base=230;
+    s.appendChild(BP.svg('line',{x1:40,y1:base,x2:530,y2:base,stroke:'#1E2F5C'}));
+    s.appendChild(BP.svg('text',{x:40,y:20,'font-size':13,fill:'#B47B32'},'■ 메모 hₜ'));
+    s.appendChild(BP.svg('text',{x:130,y:20,'font-size':13,fill:'#d9443a'},'■ 첫 입력에 대한 기울기'));
+    for(t=0;t<L;t++){var x0=44+t*bw;
+      s.appendChild(BP.svg('rect',{x:x0,y:base-190*Math.abs(H[t]),width:bw*0.42,height:190*Math.abs(H[t]),fill:'#B47B32'}));
+      s.appendChild(BP.svg('rect',{x:x0+bw*0.45,y:base-190*Math.min(1,Math.abs(G[t])),width:bw*0.42,height:190*Math.min(1,Math.abs(G[t])),fill:'#d9443a'}));
+      if(L<=12||t%2===0)s.appendChild(BP.svg('text',{x:x0+bw*0.2,y:base+18,'font-size':12,fill:'#1E2F5C'},(t+1)+''));}
+    s.appendChild(BP.svg('text',{x:470,y:base+36,'font-size':12,fill:'#6b6b7a'},'순서 t'));
+    $('#out3').innerHTML='<b>메모</b> h₁ = '+BP.fmt(H[0],3)+', h₂ = '+BP.fmt(H[1],3)+', h₃ = '+BP.fmt(H[2],3)+' … h<sub>'+L+'</sub> = <b>'+BP.fmt(H[L-1],4)+'</b><br><b>첫 입력에 대한 기울기</b> 1번째 '+BP.fmt(G[0],3)+' → '+L+'번째 <b>'+BP.fmt(G[L-1],4)+'</b>'+(Math.abs(G[L-1])<0.01?' · 거의 0: 먼 과거를 배우기 어려워요':'');
+  }
+  ['wh','x1v','len3'].forEach(function(i){$('#'+i).addEventListener('input',draw)});
+  $('#reset3').addEventListener('click',function(){$('#wh').value=0.5;$('#x1v').value=1;$('#len3').value=10;BP.$$('input[type=range]').forEach(function(x){x.dispatchEvent(new Event('input'))})});
+  draw();
+})();
+</script>
+
+</main>
+<section id="next"><div class="wrap">
+  <h2><span class="no">▣</span>다른 도면 펼치기</h2>
+  <div class="pnav"><a href="02_cnn.html"><small>← 앞 도면 DL-02</small>CNN · 합성곱 신경망</a><a class="ix" href="index.html">INDEX</a><a class="nx" href="04_lstm.html"><small>다음 도면 DL-04 →</small>LSTM · 장단기 기억 신경망</a></div>
+</div></section>
+<!-- lab-kg:body -->
+<section class="kgx kgx-sec" id="kg"><div class="kgx-wrap">
+<h2>지식 색인 — 이 페이지에서 찾아보기</h2>
+<p class="kgx-sub">이 페이지에 나온 개념, 방법, 생물 대응, 주장, 열린 질문을 한곳에 모았다. 검색하고, 항목을 눌러 이웃 관계를 보고, "설명 보러 가기"로 본문에 돌아간다.</p>
+<div id="kg-mount"></div>
+</div></section>
+<section class="kgx kgx-sec" id="export"><div class="kgx-wrap">
+<h2>온톨로지·서지 꾸러미 — 이 페이지의 지식을 가져가기</h2>
+<p class="kgx-sub">지식 색인을 출처와 함께 파일로 내려받는다. Zotero(BibTeX·RIS), Protégé(Turtle), Neo4j·Gephi(CSV), 여러 페이지 합치기(kg.json)에 쓴다.</p>
+<div id="export-mount"></div>
+</div></section>
+<script type="application/json" id="kg-raw">{"version":"1.0","page":"03_rnn","nodes":[{"id":"lab:method/rnn","type":"Method","label":{"ko":"순환 신경망","en":"Recurrent neural network"},"anchor":"#dwg","level":2,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"순서대로 하나씩 읽으며 은닉 상태를 다음 시점으로 넘기는 신경망."},"page":"03_rnn"},{"id":"lab:concept/hidden-state","type":"Concept","label":{"ko":"은닉 상태","en":"Hidden state"},"anchor":"#math","level":1,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"지금까지 읽은 내용을 요약한 숫자 묶음(메모). h_t로 쓴다."},"page":"03_rnn"},{"id":"lab:concept/shared-weights-time","type":"Concept","label":{"ko":"시점 간 가중치 공유","en":"Weights shared across time"},"anchor":"#spec","level":2,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"모든 시점에 같은 가중치를 쓴다. 길이가 달라도 같은 부품으로 읽는다."},"page":"03_rnn"},{"id":"lab:limit/vanishing-gradient","type":"Limitation","label":{"ko":"기울기 소실","en":"Vanishing gradient"},"anchor":"#lab","level":2,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"먼 과거의 영향이 곱셈을 거듭하며 0에 가까워져 학습이 안 되는 문제."},"page":"03_rnn"},{"id":"lab:method/lstm","type":"Method","label":{"ko":"LSTM","en":"Long short-term memory"},"page":"03_rnn","anchor":"#limit","level":2,"status":"known","confidence":"high","coverage":"mentioned","domain":["ai"],"match":[],"definition":{"ko":"문 세 개로 긴 기억을 지키는 RNN."}},{"id":"lab:method/fnn","type":"Method","label":{"ko":"피드포워드 신경망","en":"Feedforward neural network"},"page":"03_rnn","anchor":"#limit","level":2,"status":"known","confidence":"high","coverage":"mentioned","domain":["ai"],"match":[],"definition":{"ko":"01 도면."}}],"edges":[{"s":"lab:method/rnn","p":"lab:broader","o":"lab:topic/rnn","anchor":"#dwg","confidence":"high"},{"s":"lab:method/rnn","p":"lab:uses","o":"lab:concept/hidden-state","anchor":"#dwg","confidence":"high"},{"s":"lab:method/rnn","p":"lab:uses","o":"lab:concept/shared-weights-time","anchor":"#dwg","confidence":"high"},{"s":"lab:method/rnn","p":"lab:hasLimitation","o":"lab:limit/vanishing-gradient","anchor":"#dwg","confidence":"high"},{"s":"lab:limit/vanishing-gradient","p":"lab:addressedBy","o":"lab:method/lstm","anchor":"#dwg","confidence":"high"},{"s":"lab:method/fnn","p":"lab:prerequisiteOf","o":"lab:method/rnn","anchor":"#dwg","confidence":"high"}]}</script>
+<script type="application/ld+json" id="kg-ld">{"@context":{"@vocab":"urn:lab:","lab":"urn:lab:","skos":"http://www.w3.org/2004/02/skos/core#","schema":"https://schema.org/","dct":"http://purl.org/dc/terms/","prov":"http://www.w3.org/ns/prov#","rdfs":"http://www.w3.org/2000/01/rdf-schema#"},"@graph":[{"@id":"urn:lab:page/03","@type":["schema:LearningResource","schema:WebPage"],"schema:name":"DL-03 순환 신경망 설계도면","schema:dateCreated":"2026-11-26","schema:version":"1.0","dct:isPartOf":"딥러닝 설계도면 연구실 01","schema:about":[{"@id":"lab:method/rnn"}],"schema:educationalLevel":"입문","dct:source":[{"@id":"lab:work/elman1990"},{"@id":"lab:work/ref-infographic"},{"@id":"lab:work/ref-infographic"}]},{"@id":"lab:method/rnn","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"순환 신경망","@language":"ko"},{"@value":"Recurrent neural network","@language":"en"}],"skos:definition":[{"@value":"순서대로 하나씩 읽으며 은닉 상태를 다음 시점으로 넘기는 신경망.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"03_rnn","lab:anchor":"#dwg","lab:broader":[{"@id":"lab:topic/rnn"}],"skos:broader":[{"@id":"lab:topic/rnn"}],"lab:uses":[{"@id":"lab:concept/hidden-state"},{"@id":"lab:concept/shared-weights-time"}],"lab:hasLimitation":[{"@id":"lab:limit/vanishing-gradient"}]},{"@id":"lab:concept/hidden-state","@type":["lab:Concept","skos:Concept"],"skos:prefLabel":[{"@value":"은닉 상태","@language":"ko"},{"@value":"Hidden state","@language":"en"}],"skos:definition":[{"@value":"지금까지 읽은 내용을 요약한 숫자 묶음(메모). h_t로 쓴다.","@language":"ko"}],"lab:level":1,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"03_rnn","lab:anchor":"#math"},{"@id":"lab:concept/shared-weights-time","@type":["lab:Concept","skos:Concept"],"skos:prefLabel":[{"@value":"시점 간 가중치 공유","@language":"ko"},{"@value":"Weights shared across time","@language":"en"}],"skos:definition":[{"@value":"모든 시점에 같은 가중치를 쓴다. 길이가 달라도 같은 부품으로 읽는다.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"03_rnn","lab:anchor":"#spec"},{"@id":"lab:limit/vanishing-gradient","@type":["lab:Limitation","skos:Concept"],"skos:prefLabel":[{"@value":"기울기 소실","@language":"ko"},{"@value":"Vanishing gradient","@language":"en"}],"skos:definition":[{"@value":"먼 과거의 영향이 곱셈을 거듭하며 0에 가까워져 학습이 안 되는 문제.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"03_rnn","lab:anchor":"#lab","lab:addressedBy":[{"@id":"lab:method/lstm"}]},{"@id":"lab:method/lstm","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"LSTM","@language":"ko"},{"@value":"Long short-term memory","@language":"en"}],"skos:definition":[{"@value":"문 세 개로 긴 기억을 지키는 RNN.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"mentioned","lab:page":"03_rnn","lab:anchor":"#limit"},{"@id":"lab:method/fnn","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"피드포워드 신경망","@language":"ko"},{"@value":"Feedforward neural network","@language":"en"}],"skos:definition":[{"@value":"01 도면.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"mentioned","lab:page":"03_rnn","lab:anchor":"#limit","lab:prerequisiteOf":[{"@id":"lab:method/rnn"}]}]}</script>
+<script type="application/json" id="refs-csl">[{"id":"elman1990","type":"article-journal","title":"Finding structure in time","author":[{"family":"Elman","given":"Jeffrey L."}],"container-title":"Cognitive Science","volume":"14","issue":"2","page":"179-211","issued":{"date-parts":[[1990]]},"DOI":"10.1207/s15516709cog1402_1","lab":{"verified":{"title":true,"author":true,"issued":true,"container-title":true,"DOI":true}}},{"id":"ref-infographic","type":"graphic","title":"9 Deep Learning Algorithms Every Engineer Should Know (인포그래픽 10장)","note":"작성자 표기 없음. 이 시리즈는 내용만 참고하고 그림은 새로 그렸다.","lab":{"verified":{"title":true}}}]</script>
+<script type="application/json" id="page-meta">{"title":"DL-03 순환 신경망 설계도면","number":"03","series":"딥러닝 설계도면 연구실 01","date":"2026-11-26","version":"1.0","creator":[{"name":"안상선","role":"author"}],"contributor":[{"name":"AI 보조 제작","role":"assistant"}],"about":["lab:method/rnn"],"basedOn":["elman1990","ref-infographic","ref-infographic"],"educationalLevel":"입문","license":"","url":"https://adminmrobo.github.io/deep_learning_model_design_lab_01/03_rnn.html","registry":"KG_00_registry 0.3","seeAlso":"https://adminmrobo.github.io/deep_learning_model_design_lab_01/index.html","suggestedCitation":"안상선 (2026). DL-03 순환 신경망 설계도면. 딥러닝 설계도면 연구실 01 v1.0."}</script>
+<!-- /lab-kg:body -->
+<footer>
+  <div class="wrap">
+    <p>글 · 안상선 (<a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">https://adminmrobo.github.io/who_am_i/who_am_i.html</a>) · (주)M-Robo 대표</p>
+    <p>캐릭터: 조수 하루 · 인턴 모아 · 인턴 시아 · 초파리 연구원 · 주판봇 · 박사 — <a href="https://github.com/adminmrobo/fruitfly-lab-expressions">fruitfly-lab-expressions</a> 픽셀아트 캐릭터 팩. 도면 그림은 이 저장소에서 새로 그렸습니다.</p>
+    <p>참고 자료: 「9 Deep Learning Algorithms Every Engineer Should Know」 인포그래픽 10장(작성자 표기 없음). 내용만 참고했고, 그림과 문장은 새로 만들었으며 틀린 곳은 고쳤습니다(<a href="10_review.html#errata">감수 의견서</a>).</p>
+    <p>저장소: <a href="https://github.com/adminmrobo/deep_learning_model_design_lab_01">adminmrobo/deep_learning_model_design_lab_01</a> · <a href="https://www.ahnboat.xyz">ahnboat.xyz</a></p>
+  </div>
+</footer>
+<!-- lab-kg:script -->
+<script src="kg/kgx.js"></script>
+<!-- /lab-kg:script -->
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DL-06 AE — 오토인코더 설계도면 | 딥러닝 설계도면 연구실 01</title>
+<meta name="description" content="입력을 작은 요약으로 줄였다가 다시 펼쳐 원래대로 되살린다. 정답표 없이 배운다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DL-06 AE — 오토인코더 설계도면 | 딥러닝 설계도면 연구실 01">
+<meta property="og:description" content="입력을 작은 요약으로 줄였다가 다시 펼쳐 원래대로 되살린다. 정답표 없이 배운다.">
+<meta property="og:image" content="https://adminmrobo.github.io/deep_learning_model_design_lab_01/assets/img/covers/og_06.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/chars/asst_e13.webp">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css">
+<link rel="stylesheet" href="assets/css/blueprint.css">
+<script src="assets/js/blueprint.js"></script>
+<!-- px-fix v1 --><style id="px-fix">img{image-rendering:auto!important}</style><script id="px-fix-js">(function(){var R=window.ResizeObserver;function f(i){var n=i.naturalWidth,w=i.getBoundingClientRect().width;if(!n||!w)return;var s=w*(window.devicePixelRatio||1)/n;i.style.setProperty("image-rendering",s>=1.95?"pixelated":"auto","important")}var ro=R?new R(function(es){es.forEach(function(e){f(e.target)})}):null;function a(i){if(i.__px)return;i.__px=1;i.addEventListener("load",function(){f(i)});if(ro)ro.observe(i);f(i)}function all(r){(r||document).querySelectorAll&&(r||document).querySelectorAll("img").forEach(a)}function go(){all();if(window.MutationObserver)new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType!==1)return;if(n.tagName==="IMG")a(n);else all(n)})})}).observe(document.documentElement,{childList:true,subtree:true});window.addEventListener("resize",function(){document.querySelectorAll("img").forEach(f)})}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go()})();</script><!-- /px-fix -->
+<!-- lab-kg:head -->
+<meta name="citation_title" content="DL-06 오토인코더 설계도면">
+<meta name="dc.title" content="DL-06 오토인코더 설계도면">
+<meta name="dc.date" content="2026-11-26">
+<meta name="dc.language" content="ko">
+<meta name="dc.type" content="InteractiveResource">
+<meta name="citation_author" content="안상선">
+<meta name="dcterms.isPartOf" content="딥러닝 설계도면 연구실 01">
+<meta name="dc.source" content="doi:10.1126/science.1127647">
+<!-- /lab-kg:head -->
+</head>
+<body class="by-sia">
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<nav class="topnav" aria-label="도면 목록"><div class="wrap"><a class="home" href="index.html">DL 설계도면 연구실</a><a href="01_fnn.html">01 FNN</a><a href="02_cnn.html">02 CNN</a><a href="03_rnn.html">03 RNN</a><a href="04_lstm.html">04 LSTM</a><a href="05_gru.html">05 GRU</a><a href="06_autoencoder.html" class="here" aria-current="page">06 AE</a><a href="07_dbn.html">07 DBN</a><a href="08_gan.html">08 GAN</a><a href="09_transformer.html">09 Transformer</a><a href="10_review.html">10 감수</a><a href="practice/index.html">실전 연습장</a></div></nav>
+<header class="cover" id="cover" data-img="cover_06"><picture><img src="assets/img/covers/cover_06.webp" width="1600" height="900" alt="DL-06 AE 설계도면 표지: 모눈 바탕 위의 인턴 시아 픽셀아트" fetchpriority="high" decoding="async"></picture><span class="cover-chip">딥러닝 설계도면 연구실 01 · DL-06</span></header>
+<div class="wrap">
+  <div class="term">
+    <div class="bar"><span class="dot" style="background:var(--pink)"></span><span class="dot" style="background:var(--lav)"></span><span class="dot" style="background:var(--navy)"></span><span class="t mono">blueprint · DL-06_AE.dwg</span></div>
+    <div class="term-body">
+      <p class="prompt mono"><b>sia@lab</b>:~$ open DL-06_AE.blueprint</p>
+      <div class="hero">
+        <div class="who"><img src="assets/img/chars/sia_e07.webp" alt="인턴 시아 픽셀아트 초상, 검지를 세워 설명하는 모습" width="192" height="192"></div>
+        <div>
+          <h1>AUTOENCODER</h1>
+          <div class="sub">좁은 목을 지나 다시 그려 내는 설계도</div>
+          <p class="by">DL-06 · 오토인코더 (Autoencoder) · 인턴 시아 작성</p>
+          <span class="motto pix">줄여 보면 중요한 것만 남는다.</span>
+        </div>
+      </div>
+      <table class="titleblock" aria-label="도면 표제란">
+        <tr><th>도면 번호</th><td>DL-06</td><th>계열</th><td>압축·생성 계열 (시아 담당)</td></tr>
+        <tr><th>작성</th><td>인턴 시아</td><th>감수</th><td>초파리 연구원 · 주판봇 (<a href="10_review.html">10 감수 도면</a>)</td></tr>
+        <tr><th>모델</th><td>AE · 오토인코더</td><th>날짜 · 판</th><td>2026-11-26 · v1.0</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+<main id="main">
+<section id="three"><div class="wrap">
+  <h2><span class="no">01</span>처음 오신 분께 — 이 도면을 3줄로</h2>
+  <p class="lead">인턴 시아가 그린 첫 도면입니다. 정리를 잘하는 시아가 압축·생성 계열 세 장(06 오토인코더 · 07 DBN · 08 GAN)을 맡았어요. 앞의 도면들과 달리 이 계열은 정답표 없이도 배웁니다.</p>
+  <div class="three">
+    <div><b>무엇을</b>입력을 작은 요약(잠재 표현)으로 줄였다가(인코더), 그 요약만 보고 원래대로 다시 그려 냅니다(디코더). 다시 그린 것이 입력과 닮을수록 잘 배운 거예요.</div>
+    <div><b>왜 중요한가</b>목(병목)이 좁아서 데이터의 핵심만 남기게 됩니다. 정답표가 필요 없어서 데이터만 있으면 학습할 수 있어요.</div>
+    <div><b>업무에서는</b>설비·거래의 <b>이상 탐지</b>(잘 못 그려 내는 것 = 평소와 다른 것), 사진 잡음 지우기, 데이터 압축, 다른 모델에 넣을 특징 만들기에 씁니다.</div>
+  </div>
+  <p class="nocode">코드나 수식을 몰라도 됩니다. "줄였다 → 되살렸다 → 얼마나 틀렸나" 세 가지만 보면 돼요.</p>
+  <details><summary>이 도면에 나오는 영어 약어 풀이</summary>
+    <dl class="abbr">
+      <dt>AE</dt><dd>Autoencoder, 오토인코더. 스스로(auto) 부호화(encode)한다는 뜻</dd>
+      <dt>Latent z</dt><dd>잠재 표현. 입력을 줄여 만든 작은 숫자 묶음</dd>
+      <dt>MSE</dt><dd>Mean Squared Error, 평균 제곱 오차. 차이를 제곱해 평균 낸 값</dd>
+      <dt>PCA</dt><dd>Principal Component Analysis, 주성분 분석. 데이터가 가장 많이 퍼진 방향으로 줄이는 고전 방법</dd>
+      <dt>VAE</dt><dd>Variational Autoencoder, 변분 오토인코더. 요약을 확률분포로 만들어 새 데이터도 그릴 수 있게 한 변형</dd>
+    </dl>
+  </details>
+</div></section>
+
+<section id="cast"><div class="wrap">
+  <h2><span class="no">02</span>도면을 전달하는 사람들</h2>
+  <div class="cast">
+    <div class="me"><img src="assets/img/chars/sia_e13.webp" alt="인턴 시아" width="84" height="84"><b>인턴 시아</b>이 도면 작성자<br><span class="tag">설계 · 숫자 발표</span></div>
+    <div><img src="assets/img/chars/asst_e09.webp" alt="조수 하루" width="84" height="84"><b>조수 하루</b>수식을 대신 물어봄<br><span class="tag">질문 담당</span></div>
+    <div><img src="assets/img/chars/doc_e07.webp" alt="박사" width="84" height="84"><b>박사</b>현장 질문과 해석<br><span class="tag">교육 · 판정</span></div>
+    <div><img src="assets/img/chars/fly_e09.webp" alt="초파리 연구원" width="84" height="84"><b>초파리 연구원</b>크고 복잡한 것을 의심<br><span class="tag">감수</span></div>
+    <div><img src="assets/img/chars/robo_e16.webp" alt="주판봇" width="84" height="84"><b>주판봇</b>큰 숫자를 좋아함<br><span class="tag">감수</span></div>
+  </div>
+  <div class="say-row"><img src="assets/img/chars/sia_e07.webp" alt="" width="64" height="64">
+    <div class="bubble"><b class="nm">시아</b>시아입니다. 회의가 끝나면 저는 세 줄 요약만 남겨 둬요. 나중에 그 세 줄만 보고 회의 내용을 다시 설명할 수 있으면 요약이 잘된 거죠. 이 도면이 하는 일이 바로 그거예요. 세 줄로 줄일 수 없는 이상한 회의가 있으면, 그게 눈에 띄고요.</div></div>
+</div></section>
+
+<section id="dwg"><div class="wrap">
+  <h2><span class="no">03</span>전체 구조도 — SHEET 6</h2>
+  <p class="lead">가운데로 갈수록 좁아졌다가 다시 넓어지는 모래시계 모양입니다. 가장 좁은 목이 잠재 표현 z예요.</p>
+  <div class="dwg scroll-x"><span class="stamp" style="color:#6E5BA8;border-color:#6E5BA8">작성 · 시아</span>
+    <svg viewBox="0 0 900 360" role="img" aria-labelledby="d6t">
+      <title id="d6t">오토인코더 구조: 입력 x(뉴런 6개)를 인코더가 잠재 표현 z(뉴런 2개)로 줄이고, 디코더가 다시 x̂(뉴런 6개)로 되살린다. 목표는 x̂가 x와 같아지는 것</title>
+      <defs><marker id="ar6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1E2F5C"/></marker></defs>
+      <path d="M200 60 L380 140 L380 220 L200 300 Z" fill="#dbe7fb" stroke="#1E2F5C" stroke-width="2.5"/>
+      <path d="M700 60 L520 140 L520 220 L700 300 Z" fill="#d8efd9" stroke="#1E2F5C" stroke-width="2.5"/>
+      <g stroke="#1E2F5C" stroke-width="2.5"><g fill="#cfe0f7"><rect x="110" y="62" width="30" height="30" rx="4"/><rect x="110" y="102" width="30" height="30" rx="4"/><rect x="110" y="142" width="30" height="30" rx="4"/><rect x="110" y="182" width="30" height="30" rx="4"/><rect x="110" y="222" width="30" height="30" rx="4"/><rect x="110" y="262" width="30" height="30" rx="4"/></g>
+        <g fill="#e6dcf5"><rect x="435" y="142" width="30" height="30" rx="4"/><rect x="435" y="188" width="30" height="30" rx="4"/></g>
+        <g fill="#cfe0f7"><rect x="760" y="62" width="30" height="30" rx="4"/><rect x="760" y="102" width="30" height="30" rx="4"/><rect x="760" y="142" width="30" height="30" rx="4"/><rect x="760" y="182" width="30" height="30" rx="4"/><rect x="760" y="222" width="30" height="30" rx="4"/><rect x="760" y="262" width="30" height="30" rx="4"/></g></g>
+      <g stroke="#1E2F5C" stroke-width="2" fill="none"><path d="M144 177 H196" marker-end="url(#ar6)"/><path d="M384 180 H430" marker-end="url(#ar6)"/><path d="M470 180 H516" marker-end="url(#ar6)"/><path d="M704 177 H754" marker-end="url(#ar6)"/></g>
+      <g font-size="15" fill="#1E2F5C"><text x="104" y="40">① 입력 x</text><text x="230" y="40">② 인코더 f</text><text x="408" y="120">③ 목 z</text><text x="580" y="40">④ 디코더 g</text><text x="738" y="40">⑤ 복원 x̂</text></g>
+      <g font-size="13" fill="#6E5BA8"><text x="250" y="186">줄이기</text><text x="580" y="186">펼치기</text></g>
+      <g stroke="#d9443a" stroke-width="2" fill="none" stroke-dasharray="6 4"><path d="M125 300 C 125 345, 775 345, 775 300"/></g>
+      <text x="300" y="352" font-size="14" fill="#d9443a">⑥ 재구성 오차 = x와 x̂의 차이 (작을수록 잘 배움)</text>
+      <g fill="#2f5fa8" font-size="13"><text x="96" y="318">6개</text><text x="440" y="244">2개</text><text x="748" y="318">6개</text></g>
+    </svg>
+  </div>
+  <p class="dwg-cap">입력과 출력의 크기가 같고, 목표 출력이 바로 입력 자신입니다. 그래서 따로 정답표를 만들 필요가 없어요.</p>
+  <div class="review30"><b>30초 복습 · 정사영(그림자)</b> 비스듬한 막대에 위에서 빛을 비추면 바닥에 그림자가 생기죠. 2차원 점을 한 방향의 직선 위로 내리는 것이 가장 단순한 '줄이기'예요. 아래 실험대가 바로 그 그림자 실험입니다.</div>
+  <p><b>도면의 위치</b> · <a href="01_fnn.html">01 FNN</a>의 층 두 개를 모래시계처럼 이은 것 → 이 도면(줄였다 되살리기) → 층마다 따로 미리 배우는 <a href="07_dbn.html">07 DBN</a>, 진짜 같은 데이터를 새로 만드는 <a href="08_gan.html">08 GAN</a>.</p>
+</div></section>
+
+<section id="spec"><div class="wrap">
+  <h2><span class="no">04</span>부품 명세 — 줄였다 되살리는 길</h2>
+  <p class="lead">도면의 번호 ①~⑥ 순서입니다. 회색 줄은 시아가 설비 이상 탐지 현장에서 건넬 말이에요.</p>
+  <div class="steps">
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="5" y="1" width="6" height="14" fill="#cfe0f7" stroke="#1E2F5C"/><rect x="7" y="3" width="2" height="2" fill="#1E2F5C"/><rect x="7" y="7" width="2" height="2" fill="#1E2F5C"/><rect x="7" y="11" width="2" height="2" fill="#1E2F5C"/></svg></div>
+      <div><h3><span>①</span>입력 x — 평소 데이터만 모은다</h3><p>센서 값 묶음, 사진, 거래 기록 등을 넣습니다. 이상 탐지에 쓸 때는 <b>정상 상태의 데이터만</b> 모아 학습시켜요.</p>
+      <p class="say">"고장 없이 돌던 석 달치 센서 기록만 넣을게요. 고장 기록은 시험할 때 써요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="2" width="4" height="12" fill="#dbe7fb" stroke="#1E2F5C"/><rect x="5" y="4" width="4" height="8" fill="#dbe7fb" stroke="#1E2F5C"/><rect x="9" y="6" width="4" height="4" fill="#e6dcf5" stroke="#1E2F5C"/></svg></div>
+      <div><h3><span>②</span>인코더 — 층마다 조금씩 줄인다</h3><p>01 도면의 층을 쌓되, 층마다 뉴런 수를 줄여 갑니다. 그림이면 02 CNN 층을 쓸 수도 있어요(합성곱 오토인코더).</p>
+      <p class="say">"센서 6개를 4개, 2개로 줄여 볼게요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="5" y="4" width="6" height="3" fill="#e6dcf5" stroke="#1E2F5C"/><rect x="5" y="9" width="6" height="3" fill="#e6dcf5" stroke="#1E2F5C"/></svg></div>
+      <div><h3><span>③</span>목(병목) z — 핵심만 남는 자리</h3><p>가장 좁은 층입니다. 여기 들어갈 수 있는 숫자가 적어서, 데이터를 되살리는 데 꼭 필요한 정보만 남게 돼요. 목이 너무 넓으면 입력을 그대로 베끼기만 하고 아무것도 배우지 않습니다.</p>
+      <p class="say">"센서 6개가 사실은 '부하'와 '온도' 두 가지에 거의 좌우된다는 걸 찾아냈어요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="3" y="6" width="4" height="4" fill="#e6dcf5" stroke="#1E2F5C"/><rect x="7" y="4" width="4" height="8" fill="#d8efd9" stroke="#1E2F5C"/><rect x="11" y="2" width="4" height="12" fill="#d8efd9" stroke="#1E2F5C"/></svg></div>
+      <div><h3><span>④</span>디코더 — 다시 펼친다</h3><p>인코더를 거꾸로 한 모양으로 z를 다시 원래 크기로 펼칩니다.</p>
+      <p class="say">"두 숫자만 보고 센서 6개 값을 다시 그려 볼게요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="5" y="1" width="6" height="14" fill="#cfe0f7" stroke="#1E2F5C"/><rect x="7" y="3" width="2" height="2" fill="#6E5BA8"/><rect x="7" y="7" width="2" height="2" fill="#6E5BA8"/><rect x="7" y="11" width="2" height="2" fill="#6E5BA8"/></svg></div>
+      <div><h3><span>⑤</span>복원 x̂ — 다시 그린 결과</h3><p>모자(^)가 씌워진 x̂는 "다시 그린 x"입니다. 학습이 잘 되면 평소 데이터는 거의 똑같이 되살아나요.</p>
+      <p class="say">"정상 기록은 오차 0.01 안쪽으로 되살아나요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="12" width="12" height="2" fill="#1E2F5C"/><rect x="3" y="9" width="2" height="3" fill="#6E5BA8"/><rect x="6" y="10" width="2" height="2" fill="#6E5BA8"/><rect x="9" y="9" width="2" height="3" fill="#6E5BA8"/><rect x="12" y="2" width="2" height="10" fill="#d9443a"/></svg></div>
+      <div><h3><span>⑥</span>재구성 오차 — 학습 목표이자 경보 점수</h3><p>x와 x̂의 차이를 줄이도록 학습합니다. 학습이 끝난 뒤에는 이 차이가 <b>이상 점수</b>가 돼요. 평소와 다른 데이터는 잘 못 되살려서 오차가 크게 튀거든요.</p>
+      <p class="say">"오늘 오후 3시 기록만 오차가 1.0이에요. 평소의 100배가 넘으니 점검 요청을 보낼게요."</p></div></div>
+  </div>
+</div></section>
+
+<section id="why"><div class="wrap">
+  <h2><span class="no">05</span>왜 이 설계를 쓰나 · 수식은 동료가 대신 물어봅니다</h2>
+  <div class="say-row neutral"><img src="assets/img/chars/doc_e07.webp" alt="" width="64" height="64">
+    <div class="bubble"><b class="nm">박사</b>공장에서 고장은 1년에 몇 번 안 납니다. "고장" 정답이 붙은 데이터가 열 건뿐이라면, 01~05 도면처럼 정답표로 배우는 장치를 쓸 수 있을까요?</div></div>
+  <div class="pair">
+    <div class="why" id="whybox">
+      <h3>왜 이 설계를 쓰나</h3>
+      <ol>
+        <li><b>문제 상황</b> · 데이터는 많지만 정답(고장·사기 표시)은 거의 없습니다.</li>
+        <li><b>앞 방법의 한계</b> · 01~05 도면은 정답표가 있어야 틀린 만큼 고칠 수 있습니다. 정답이 열 건이면 배울 게 없어요. 고전 방법인 PCA는 직선으로만 줄여서 휘어진 구조를 못 잡습니다.</li>
+        <li><b>해법</b> · 입력 자신을 정답으로 삼아 "줄였다가 되살리기"를 배웁니다. 활성화 함수 덕분에 휘어진 구조도 줄일 수 있어요.</li>
+      </ol>
+      <p class="easy"><b>쉽게 말하면</b> · 평소 모습을 세 줄로 외워 두면, 세 줄로 설명이 안 되는 날이 바로 이상한 날이에요.</p>
+      <p class="calm">"정답 없이 어떻게 배우지?"에서 한 번 멈추는 분이 많아요. 답은 간단해요. 정답이 곧 입력 자신입니다.</p>
+    </div>
+    <div class="mathq" id="math">
+      <div class="q"><img src="assets/img/chars/asst_e04.webp" alt="" width="56" height="56"><p><b>하루</b> · "f와 g가 같이 나오고, x 위에 모자까지 있어요. 어떤 순서로 읽어요?"</p></div>
+      <p class="school">학교 수학으로 보면 · 합성함수 g(f(x)) + 정사영(그림자) + 두 점 사이 거리의 제곱</p>
+      <div class="formula">z = f(x) &nbsp;→&nbsp; x̂ = g(z) &nbsp;→&nbsp; 오차 = 평균( (x − x̂)² )</div>
+      <table class="pieces"><tr><th>조각</th><th>읽는 법 · 뜻</th></tr>
+        <tr><td>f(x)</td><td>"에프 오브 엑스". 인코더. x를 줄여 z를 만든다</td></tr>
+        <tr><td>g(z)</td><td>"지 오브 제트". 디코더. z를 펼쳐 x̂를 만든다</td></tr>
+        <tr><td>x̂</td><td>"엑스 햇". 다시 그린 x</td></tr>
+        <tr><td>(x − x̂)²</td><td>차이를 제곱해 음수를 없애고 큰 차이를 더 크게 본다</td></tr>
+      </table>
+      <div class="calc"><b class="t">숫자로 한 번 해 보기 (2개 → 1개 → 2개, 직선형으로 단순하게)</b>
+        <ol><li>입력 x = (3, 1). 줄이는 방향 u = (1, 1)÷√2 (45도 대각선)</li>
+          <li>인코더: z = (3×1 + 1×1)÷√2 = 4÷1.414 ≈ <b>2.83</b> (숫자 2개가 1개로)</li>
+          <li>디코더: x̂ = z × u = 2.83 × (0.707, 0.707) ≈ <b>(2, 2)</b></li>
+          <li>오차 = ((3−2)² + (1−2)²) ÷ 2 = (1 + 1) ÷ 2 = <b>1.0</b></li></ol></div>
+      <div class="after"><img src="assets/img/chars/asst_e16.webp" alt="" width="48" height="48"><p><b>하루</b> · "대각선 위로 그림자를 내렸다가 다시 세운 거네요. (3, 1)은 대각선에서 멀어서 오차가 1이나 나와요!"</p></div>
+    </div>
+  </div>
+  <div class="daily" style="margin-top:22px">
+    <div><b>일상으로 치면</b>매일 같은 길로 출근하는 사람의 동선을 "집 → 역 → 회사" 세 점으로 외워 두면, 어느 날 동선이 그 세 점으로 설명이 안 될 때 "오늘 뭔가 달랐구나"를 바로 알 수 있어요.</div>
+    <div><b>현장에서는</b>설비 진동·전류의 이상 탐지, 카드 이상 거래 점수, 네트워크 침입 탐지, 사진 잡음 제거, 검색용 특징 만들기에 씁니다. 요약을 확률분포로 바꾼 VAE는 새 데이터를 그려 내는 생성 모델로도 쓰여요.</div>
+  </div>
+</div></section>
+
+<section id="lab"><div class="wrap">
+  <h2><span class="no">06</span>실험 — 그림자 압축기</h2>
+  <div class="talk">
+    <div class="line"><img src="assets/img/chars/doc_e09.webp" alt="박사" width="56" height="56"><p><b>박사</b>줄이는 방향(목)을 돌리면 정상 점의 오차와 이상한 점의 오차가 어떻게 바뀔까요? 경보가 제대로 울리는 방향은 어디일까요?</p></div>
+    <div class="line"><img src="assets/img/chars/robo_e16.webp" alt="주판봇" width="56" height="56"><p><b>주판봇</b>방향 같은 건 아무래도 좋습니다! 이상한 점은 원래 튀니까, 어느 방향이든 경보가 울립니다!</p></div>
+    <div class="line"><img src="assets/img/chars/fly_e09.webp" alt="초파리" width="56" height="56"><p><b>초파리</b>어느 방향이든? 의심스럽네. 방향을 0도로 돌려 봐. 정상 점 오차와 이상한 점 오차, 어느 쪽이 더 큰지.</p></div>
+    <div class="line me"><img src="assets/img/chars/sia_e07.webp" alt="시아" width="56" height="56"><p><b>시아</b>파란 점은 정상 기록 열 개, 빨간 점이 (3, 1) 이상한 기록이에요. 점선이 그림자를 내리는 길이고요. 숫자는 제가 정리해 드릴게요.</p></div>
+  </div>
+  <div class="lab">
+    <div class="bar"><span class="dot" style="background:var(--pink)"></span><span class="dot" style="background:var(--lav)"></span><span class="dot" style="background:var(--navy)"></span><span class="t">shadow_compressor.sim</span></div>
+    <div class="lab-body">
+      <div class="ctrl">
+        <label for="th6">줄이는 방향(목의 각도) <span class="val" data-for="th6" data-d="0"></span>도</label><input type="range" id="th6" min="0" max="179" step="1" value="45">
+        <label for="thr6">경보 기준(오차가 넘으면 경보) <span class="val" data-for="thr6" data-d="2"></span></label><input type="range" id="thr6" min="0.05" max="1.5" step="0.05" value="0.2">
+        <label><input type="checkbox" id="an6" checked> 이상한 기록 (3, 1) 넣기</label>
+        <button class="btn ghost" id="best6" type="button">오차가 가장 작은 방향 찾기</button>
+        <button class="btn ghost" id="reset6" type="button">처음 값으로</button>
+      </div>
+      <div>
+        <svg id="plot6" viewBox="0 0 420 340" role="img" aria-label="정상 점과 이상한 점, 줄이는 방향과 그림자"></svg>
+        <div class="readout" id="out6" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+  <div class="sol">
+    <p><b>시아의 보고</b> · 처음 값(45도)에서 정상 기록 열 개의 평균 오차는 0.008, 이상한 기록 (3, 1)의 오차는 1.000이에요. 약 120배라 경보 기준 0.2에서 이상한 기록만 경보가 울려요. '가장 작은 방향 찾기'를 누르면 44도(평균 오차 0.007)가 나와요.</p>
+    <p><b>박사의 해석</b> · 방향을 0도로 돌리면 정상 기록 평균 오차가 0.974로 커지고, 이상한 기록 오차는 0.500으로 오히려 작아집니다. 정상을 잘 요약하지 못한 오토인코더는 이상한 것을 가려내지 못한다는 뜻이에요. 그래서 학습 목표는 "정상 데이터를 잘 되살리기"이고, 경보 기준은 정상 데이터의 오차 분포를 보고 정합니다. 여기서는 직선 하나로 단순하게 봤어요. 실제 오토인코더는 활성화 함수 덕분에 휘어진 길로도 줄일 수 있어요.</p>
+  </div>
+</div></section>
+
+<section id="judge-sec"><div class="wrap">
+  <h2><span class="no">07</span>AI 판단 코너 — 이 답, 믿어도 될까?</h2>
+  <div class="judge">
+    <h3>AI 도우미가 이렇게 답했습니다</h3>
+    <div class="ai-out">Q. 오토인코더로 이상 탐지를 하려 합니다. 목(잠재 표현) 크기를 정하라는데요?
+A. 입력이 센서 6개라면 목도 6개로 두는 것이 가장 좋습니다. 정보 손실이 0이 되어 재구성 오차가 거의 0이 되므로 가장 정확한 모델입니다.</div>
+    <p>어디가 이상할까요?</p>
+    <div class="choices" data-answer="b">
+      <button data-k="a" data-why="목 크기는 사람이 정할 수 있어요. 문제는 6개를 고른 이유예요.">목 크기는 자동으로만 정해진다</button>
+      <button data-k="b">목이 입력만큼 넓으면 그대로 베끼기만 해서, 이상한 데이터도 잘 되살린다. 오차가 모두 0에 가까우면 이상을 가려낼 수 없다</button>
+      <button data-k="c" data-why="센서 수와 관계없이 목이 너무 넓으면 생기는 문제예요.">센서가 6개가 아니라 7개여야 한다</button>
+    </div>
+    <p class="feedback" data-ok="맞아요. '오차가 작다 = 좋은 모델'이 이상 탐지에서는 성립하지 않아요. 정상은 잘, 이상은 못 되살려야 쓸모가 있어요. AI가 고른 지표가 목적에 맞는지 늘 되물어 보세요."></p>
+  </div>
+</div></section>
+
+<section id="limit"><div class="wrap">
+  <h2><span class="no">08</span>이 설계의 한계 → 다음 도면</h2>
+  <div class="limit"><b>한계 1 · 새 데이터를 만들기는 어렵다</b> — 기본 오토인코더의 목(z)은 띄엄띄엄 흩어져 있어서, 아무 z나 골라 디코더에 넣으면 이상한 그림이 나옵니다. 이를 고친 것이 VAE이고, 다른 방식으로 생성에 도전한 것이 <a href="08_gan.html">08 GAN</a>이에요.<br>
+    <b>한계 2 · 경보 기준은 사람 몫</b> — 오차가 얼마일 때 경보를 울릴지는 정상 데이터의 오차 분포와 현장의 비용(놓침 vs 헛경보)을 보고 정해야 합니다.<br>
+    <b>한계 3 · 깊게 쌓으면 학습이 어려웠다</b> — 2000년대에는 깊은 오토인코더를 바로 학습시키기 어려웠고, 층마다 미리 학습하는 <a href="07_dbn.html">07 DBN</a> 방식이 돌파구였어요.</div>
+  <div class="recap"><b>정리</b> · 오토인코더는 입력을 좁은 목으로 줄였다가 되살리며 핵심 구조를 배웁니다. 정답표가 필요 없고, 학습 후 재구성 오차는 이상 점수로 쓸 수 있어요.</div>
+</div></section>
+
+<section id="quiz"><div class="wrap">
+  <h2><span class="no">09</span>확인 퀴즈</h2>
+  <div class="quiz"><p class="qq">Q1. 오토인코더의 학습 목표(정답)는 무엇인가요?</p>
+    <div class="choices" data-answer="a"><button data-k="a">입력 자신 — 다시 그린 x̂가 x와 같아지게</button><button data-k="b" data-why="정답표가 따로 필요 없는 것이 이 도면의 장점이에요.">사람이 붙인 정상·고장 표시</button><button data-k="c" data-why="z는 중간 결과일 뿐, 정답으로 주지 않아요.">사람이 정해 준 z 값</button></div>
+    <p class="feedback" data-ok="맞아요. 그래서 정답표 없이 배울 수 있어요."></p></div>
+  <div class="quiz"><p class="qq">Q2. 입력 (3, 1)을 45도 대각선 방향으로 줄였다가 되살리면 x̂ = (2, 2)입니다. 평균 제곱 오차는?</p>
+    <div class="choices" data-answer="c"><button data-k="a" data-why="차이 1과 −1을 그냥 더하면 0이에요. 제곱한 뒤 더해야 해요.">0</button><button data-k="b" data-why="제곱해서 더한 합(2)이에요. 평균을 내려면 2로 나눠요.">2</button><button data-k="c">1</button></div>
+    <p class="feedback" data-ok="맞아요. (1² + 1²) ÷ 2 = 1."></p></div>
+</div></section>
+
+<section id="memo"><div class="wrap">
+  <h2><span class="no">10</span>감수 메모 — 참고 자료와 다른 곳</h2>
+  <div class="memo">참고 인포그래픽의 오토인코더 장에서 고칠 값은 찾지 못했습니다. 다만 <b>"오토인코더 vs PCA" 표</b>를 읽을 때 덧붙일 점이 있어요. 활성화 함수 없이 직선으로만 만든 오토인코더는 PCA와 같은 방향(공간)을 찾습니다. 둘의 차이는 "비선형이냐"에서 나오며, 이 페이지의 실험대는 그 직선형을 단순한 예로 썼다고 밝혀 둡니다.</div>
+</div></section>
+
+<script>
+(function(){
+  var $=BP.$, P=[[-2,-1.8],[-1.5,-1.2],[-1,-1.1],[-0.5,-0.3],[0,0.2],[0.5,0.4],[1,1.2],[1.5,1.3],[2,2.1],[2.5,2.4]], A=[3,1];
+  function rec(p,th){var u=[Math.cos(th),Math.sin(th)],z=p[0]*u[0]+p[1]*u[1],r=[z*u[0],z*u[1]];return {z:z,r:r,e:((p[0]-r[0])*(p[0]-r[0])+(p[1]-r[1])*(p[1]-r[1]))/2}}
+  function mean(th){var s=0;P.forEach(function(p){s+=rec(p,th).e});return s/P.length}
+  function draw(){
+    var d=+$('#th6').value, th=d*Math.PI/180, thr=+$('#thr6').value, an=$('#an6').checked;
+    var s=$('#plot6');while(s.firstChild)s.removeChild(s.firstChild);
+    var X=function(v){return 200+v*45},Y=function(v){return 170-v*45};
+    for(var g=-4;g<=4;g++){s.appendChild(BP.svg('line',{x1:X(g),y1:10,x2:X(g),y2:330,stroke:'#e6eef9'}));s.appendChild(BP.svg('line',{x1:10,y1:Y(g),x2:410,y2:Y(g),stroke:'#e6eef9'}))}
+    s.appendChild(BP.svg('line',{x1:10,y1:170,x2:410,y2:170,stroke:'#c3cfe2'}));s.appendChild(BP.svg('line',{x1:200,y1:10,x2:200,y2:330,stroke:'#c3cfe2'}));
+    var u=[Math.cos(th),Math.sin(th)];
+    s.appendChild(BP.svg('line',{x1:X(-4.5*u[0]),y1:Y(-4.5*u[1]),x2:X(4.5*u[0]),y2:Y(4.5*u[1]),stroke:'#6E5BA8','stroke-width':3}));
+    var pts=P.map(function(p){return [p,false]});if(an)pts.push([A,true]);
+    var nal=0;
+    pts.forEach(function(q){var p=q[0],R=rec(p,th),bad=R.e>thr;if(bad&&!q[1])nal++;
+      s.appendChild(BP.svg('line',{x1:X(p[0]),y1:Y(p[1]),x2:X(R.r[0]),y2:Y(R.r[1]),stroke:q[1]?'#d9443a':'#2f5fa8','stroke-dasharray':'3 3'}));
+      s.appendChild(BP.svg('circle',{cx:X(p[0]),cy:Y(p[1]),r:q[1]?7:5,fill:q[1]?'#d9443a':'#2f5fa8',stroke:bad?'#1E2F5C':'none','stroke-width':bad?3:0}));
+      s.appendChild(BP.svg('circle',{cx:X(R.r[0]),cy:Y(R.r[1]),r:3,fill:'#6E5BA8'}));});
+    var m=mean(th), ea=rec(A,th).e;
+    $('#out6').innerHTML='<b>정상 기록 10개 평균 오차</b> '+BP.fmt(m,3)+(an?'<br><b>이상한 기록 (3, 1) 오차</b> '+BP.fmt(ea,3)+' → '+(ea>thr?'<span style="color:#d9443a">경보!</span>':'경보 없음 (놓침)'):'')+
+      '<br>정상인데 경보가 울린 기록(헛경보) <b>'+nal+'</b>개'+(an&&ea<m?'<br>⚠ 이상한 기록 오차가 정상 평균보다 작아요. 이 방향으로는 이상을 가려낼 수 없어요.':'');
+  }
+  ['th6','thr6','an6'].forEach(function(i){$('#'+i).addEventListener('input',draw);$('#'+i).addEventListener('change',draw)});
+  $('#best6').addEventListener('click',function(){var b=0,bv=1e9;for(var d=0;d<180;d++){var v=mean(d*Math.PI/180);if(v<bv){bv=v;b=d}}$('#th6').value=b;$('#th6').dispatchEvent(new Event('input'))});
+  $('#reset6').addEventListener('click',function(){$('#th6').value=45;$('#thr6').value=0.2;$('#an6').checked=true;BP.$$('input[type=range]').forEach(function(x){x.dispatchEvent(new Event('input'))});draw()});
+  draw();
+})();
+</script>
+
+</main>
+<section id="next"><div class="wrap">
+  <h2><span class="no">▣</span>다른 도면 펼치기</h2>
+  <div class="pnav"><a href="05_gru.html"><small>← 앞 도면 DL-05</small>GRU · 게이트 순환 유닛</a><a class="ix" href="index.html">INDEX</a><a class="nx" href="07_dbn.html"><small>다음 도면 DL-07 →</small>DBN · 심층 신뢰 신경망</a></div>
+</div></section>
+<!-- lab-kg:body -->
+<section class="kgx kgx-sec" id="kg"><div class="kgx-wrap">
+<h2>지식 색인 — 이 페이지에서 찾아보기</h2>
+<p class="kgx-sub">이 페이지에 나온 개념, 방법, 생물 대응, 주장, 열린 질문을 한곳에 모았다. 검색하고, 항목을 눌러 이웃 관계를 보고, "설명 보러 가기"로 본문에 돌아간다.</p>
+<div id="kg-mount"></div>
+</div></section>
+<section class="kgx kgx-sec" id="export"><div class="kgx-wrap">
+<h2>온톨로지·서지 꾸러미 — 이 페이지의 지식을 가져가기</h2>
+<p class="kgx-sub">지식 색인을 출처와 함께 파일로 내려받는다. Zotero(BibTeX·RIS), Protégé(Turtle), Neo4j·Gephi(CSV), 여러 페이지 합치기(kg.json)에 쓴다.</p>
+<div id="export-mount"></div>
+</div></section>
+<script type="application/json" id="kg-raw">{"version":"1.0","page":"06_autoencoder","nodes":[{"id":"lab:method/autoencoder","type":"Method","label":{"ko":"오토인코더","en":"Autoencoder"},"anchor":"#dwg","level":2,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"입력을 작은 잠재 표현으로 줄였다가(인코더) 다시 되살리는(디코더) 신경망."},"page":"06_autoencoder"},{"id":"lab:concept/latent","type":"Concept","label":{"ko":"잠재 표현(병목)","en":"Latent representation (bottleneck)"},"anchor":"#math","level":2,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"입력을 줄여 만든 작은 숫자 묶음 z. 중요한 것만 남게 한다."},"page":"06_autoencoder"},{"id":"lab:concept/recon-error","type":"Metric","label":{"ko":"재구성 오차","en":"Reconstruction error"},"anchor":"#lab","level":1,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"입력 x와 되살린 x̂의 차이. 이상 탐지의 점수로도 쓴다."},"page":"06_autoencoder"},{"id":"lab:method/pca","type":"Method","label":{"ko":"주성분 분석(PCA)","en":"Principal component analysis"},"anchor":"#why","level":2,"status":"known","confidence":"high","coverage":"mentioned","domain":["ai"],"match":[],"definition":{"ko":"데이터를 가장 많이 퍼진 방향으로 줄이는 선형 방법. 선형 오토인코더와 같은 공간을 찾는다."},"page":"06_autoencoder"}],"edges":[{"s":"lab:method/autoencoder","p":"lab:broader","o":"lab:topic/autoencoder","anchor":"#dwg","confidence":"high"},{"s":"lab:method/autoencoder","p":"lab:uses","o":"lab:concept/latent","anchor":"#dwg","confidence":"high"},{"s":"lab:method/autoencoder","p":"lab:uses","o":"lab:concept/recon-error","anchor":"#dwg","confidence":"high"},{"s":"lab:method/pca","p":"lab:relatedTo","o":"lab:method/autoencoder","anchor":"#dwg","confidence":"high"},{"s":"lab:method/autoencoder","p":"lab:broader","o":"lab:topic/unsupervised-learning","anchor":"#dwg","confidence":"high"}]}</script>
+<script type="application/ld+json" id="kg-ld">{"@context":{"@vocab":"urn:lab:","lab":"urn:lab:","skos":"http://www.w3.org/2004/02/skos/core#","schema":"https://schema.org/","dct":"http://purl.org/dc/terms/","prov":"http://www.w3.org/ns/prov#","rdfs":"http://www.w3.org/2000/01/rdf-schema#"},"@graph":[{"@id":"urn:lab:page/06","@type":["schema:LearningResource","schema:WebPage"],"schema:name":"DL-06 오토인코더 설계도면","schema:dateCreated":"2026-11-26","schema:version":"1.0","dct:isPartOf":"딥러닝 설계도면 연구실 01","schema:about":[{"@id":"lab:method/autoencoder"}],"schema:educationalLevel":"입문","dct:source":[{"@id":"lab:work/hinton2006science"},{"@id":"lab:work/ref-infographic"},{"@id":"lab:work/ref-infographic"}]},{"@id":"lab:method/autoencoder","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"오토인코더","@language":"ko"},{"@value":"Autoencoder","@language":"en"}],"skos:definition":[{"@value":"입력을 작은 잠재 표현으로 줄였다가(인코더) 다시 되살리는(디코더) 신경망.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"06_autoencoder","lab:anchor":"#dwg","lab:broader":[{"@id":"lab:topic/autoencoder"},{"@id":"lab:topic/unsupervised-learning"}],"skos:broader":[{"@id":"lab:topic/autoencoder"},{"@id":"lab:topic/unsupervised-learning"}],"lab:uses":[{"@id":"lab:concept/latent"},{"@id":"lab:concept/recon-error"}]},{"@id":"lab:concept/latent","@type":["lab:Concept","skos:Concept"],"skos:prefLabel":[{"@value":"잠재 표현(병목)","@language":"ko"},{"@value":"Latent representation (bottleneck)","@language":"en"}],"skos:definition":[{"@value":"입력을 줄여 만든 작은 숫자 묶음 z. 중요한 것만 남게 한다.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"06_autoencoder","lab:anchor":"#math"},{"@id":"lab:concept/recon-error","@type":["lab:Metric","skos:Concept"],"skos:prefLabel":[{"@value":"재구성 오차","@language":"ko"},{"@value":"Reconstruction error","@language":"en"}],"skos:definition":[{"@value":"입력 x와 되살린 x̂의 차이. 이상 탐지의 점수로도 쓴다.","@language":"ko"}],"lab:level":1,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"06_autoencoder","lab:anchor":"#lab"},{"@id":"lab:method/pca","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"주성분 분석(PCA)","@language":"ko"},{"@value":"Principal component analysis","@language":"en"}],"skos:definition":[{"@value":"데이터를 가장 많이 퍼진 방향으로 줄이는 선형 방법. 선형 오토인코더와 같은 공간을 찾는다.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"mentioned","lab:page":"06_autoencoder","lab:anchor":"#why","lab:relatedTo":[{"@id":"lab:method/autoencoder"}],"skos:related":[{"@id":"lab:method/autoencoder"}]}]}</script>
+<script type="application/json" id="refs-csl">[{"id":"hinton2006science","type":"article-journal","title":"Reducing the dimensionality of data with neural networks","author":[{"family":"Hinton","given":"Geoffrey E."},{"family":"Salakhutdinov","given":"Ruslan R."}],"container-title":"Science","volume":"313","issue":"5786","page":"504-507","issued":{"date-parts":[[2006]]},"DOI":"10.1126/science.1127647","lab":{"verified":{"title":true,"author":true,"issued":true,"container-title":true,"DOI":true}}},{"id":"ref-infographic","type":"graphic","title":"9 Deep Learning Algorithms Every Engineer Should Know (인포그래픽 10장)","note":"작성자 표기 없음. 이 시리즈는 내용만 참고하고 그림은 새로 그렸다.","lab":{"verified":{"title":true}}}]</script>
+<script type="application/json" id="page-meta">{"title":"DL-06 오토인코더 설계도면","number":"06","series":"딥러닝 설계도면 연구실 01","date":"2026-11-26","version":"1.0","creator":[{"name":"안상선","role":"author"}],"contributor":[{"name":"AI 보조 제작","role":"assistant"}],"about":["lab:method/autoencoder"],"basedOn":["hinton2006science","ref-infographic","ref-infographic"],"educationalLevel":"입문","license":"","url":"https://adminmrobo.github.io/deep_learning_model_design_lab_01/06_autoencoder.html","registry":"KG_00_registry 0.3","seeAlso":"https://adminmrobo.github.io/deep_learning_model_design_lab_01/index.html","suggestedCitation":"안상선 (2026). DL-06 오토인코더 설계도면. 딥러닝 설계도면 연구실 01 v1.0."}</script>
+<!-- /lab-kg:body -->
+<footer>
+  <div class="wrap">
+    <p>글 · 안상선 (<a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">https://adminmrobo.github.io/who_am_i/who_am_i.html</a>) · (주)M-Robo 대표</p>
+    <p>캐릭터: 조수 하루 · 인턴 모아 · 인턴 시아 · 초파리 연구원 · 주판봇 · 박사 — <a href="https://github.com/adminmrobo/fruitfly-lab-expressions">fruitfly-lab-expressions</a> 픽셀아트 캐릭터 팩. 도면 그림은 이 저장소에서 새로 그렸습니다.</p>
+    <p>참고 자료: 「9 Deep Learning Algorithms Every Engineer Should Know」 인포그래픽 10장(작성자 표기 없음). 내용만 참고했고, 그림과 문장은 새로 만들었으며 틀린 곳은 고쳤습니다(<a href="10_review.html#errata">감수 의견서</a>).</p>
+    <p>저장소: <a href="https://github.com/adminmrobo/deep_learning_model_design_lab_01">adminmrobo/deep_learning_model_design_lab_01</a> · <a href="https://www.ahnboat.xyz">ahnboat.xyz</a></p>
+  </div>
+</footer>
+<!-- lab-kg:script -->
+<script src="kg/kgx.js"></script>
+<!-- /lab-kg:script -->
+</body>
+</html>

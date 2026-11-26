@@ -1,0 +1,223 @@
+<section id="three"><div class="wrap">
+  <h2><span class="no">01</span>처음 오신 분께 — 이 도면을 3줄로</h2>
+  <p class="lead">모아의 세 번째이자 마지막 도면입니다. 04 LSTM의 보관함과 문 세 개를 줄여서, 메모 하나와 문 두 개로 다시 그렸어요.</p>
+  <div class="three">
+    <div><b>무엇을</b>옛 메모와 새 후보를 "얼마나 섞을지"(업데이트 게이트)와, 새 후보를 만들 때 옛 메모를 "얼마나 참고할지"(리셋 게이트) 두 문만으로 정합니다.</div>
+    <div><b>왜 중요한가</b>부품 수가 LSTM의 약 75%라 학습이 빠르고 메모리를 덜 쓰는데, 많은 일에서 성능이 비슷합니다.</div>
+    <div><b>업무에서는</b>LSTM과 같은 일(센서 예측, 수요 예측, 음성·문장)에 쓰고, 특히 장비가 작거나 데이터가 많지 않을 때 먼저 시험해 봅니다.</div>
+  </div>
+  <p class="nocode">코드나 수식을 몰라도 됩니다. "옛 메모 몇 %, 새 메모 몇 %"만 읽으면 돼요.</p>
+  <details><summary>이 도면에 나오는 영어 약어 풀이</summary>
+    <dl class="abbr">
+      <dt>GRU</dt><dd>Gated Recurrent Unit, 게이트 순환 유닛. 문(게이트)이 달린 RNN 장치</dd>
+      <dt>zₜ</dt><dd>업데이트 게이트. 옛 메모를 남길 비율</dd>
+      <dt>rₜ</dt><dd>리셋 게이트. 새 후보를 만들 때 옛 메모를 참고할 비율</dd>
+      <dt>h̃ₜ</dt><dd>"에이치 틸드". 새 메모 후보</dd>
+    </dl>
+  </details>
+</div></section>
+
+<section id="cast"><div class="wrap">
+  <h2><span class="no">02</span>도면을 전달하는 사람들</h2>
+  <div class="cast">
+    <div class="me"><img src="assets/img/chars/moa_e13.webp" alt="인턴 모아" width="84" height="84"><b>인턴 모아</b>이 도면 작성자<br><span class="tag">설계 · 숫자 발표</span></div>
+    <div><img src="assets/img/chars/asst_e09.webp" alt="조수 하루" width="84" height="84"><b>조수 하루</b>수식을 대신 물어봄<br><span class="tag">질문 담당</span></div>
+    <div><img src="assets/img/chars/doc_e07.webp" alt="박사" width="84" height="84"><b>박사</b>현장 질문과 해석<br><span class="tag">교육 · 판정</span></div>
+    <div><img src="assets/img/chars/fly_e09.webp" alt="초파리 연구원" width="84" height="84"><b>초파리 연구원</b>크고 복잡한 것을 의심<br><span class="tag">감수</span></div>
+    <div><img src="assets/img/chars/robo_e16.webp" alt="주판봇" width="84" height="84"><b>주판봇</b>큰 숫자를 좋아함<br><span class="tag">감수</span></div>
+  </div>
+  <div class="say-row"><img src="assets/img/chars/moa_e01.webp" alt="" width="64" height="64">
+    <div class="bubble"><b class="nm">모아</b>차를 우릴 때 옛 찻잎과 새 찻잎을 섞는 비율만 정하면 되잖아요. 보관함을 따로 두지 않고 찻주전자 하나로 해결하는 게 이 도면이에요. 문이 두 개라 그리기도 훨씬 가벼웠어요.</div></div>
+</div></section>
+
+<section id="dwg"><div class="wrap">
+  <h2><span class="no">03</span>전체 구조도 — SHEET 5</h2>
+  <p class="lead">LSTM과 달리 위를 지나는 선은 메모 hₜ 하나뿐입니다. 오른쪽 위의 더하기(+)에서 옛 메모와 새 후보가 비율대로 섞여요.</p>
+  <div class="dwg scroll-x"><span class="stamp" style="color:#B47B32;border-color:#B47B32">작성 · 모아</span>
+    <svg viewBox="0 0 900 400" role="img" aria-labelledby="d5t">
+      <title id="d5t">GRU 셀 구조: 위쪽 메모 선에서 옛 메모에 업데이트 게이트 z를 곱하고, 리셋 게이트 r로 걸러 만든 후보 h̃에 1−z를 곱해 더한다</title>
+      <defs><marker id="ar5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1E2F5C"/></marker></defs>
+      <rect x="150" y="50" width="600" height="280" rx="16" fill="#eef8ef" stroke="#2e8b57" stroke-width="3"/>
+      <path d="M40 90 H850" stroke="#B47B32" stroke-width="6" marker-end="url(#ar5)"/>
+      <text x="26" y="72" font-size="15" fill="#B47B32">hₜ₋₁</text><text x="836" y="72" font-size="15" fill="#B47B32">hₜ</text>
+      <g stroke="#1E2F5C" stroke-width="2.5" fill="#fff"><circle cx="560" cy="90" r="18"/><circle cx="680" cy="90" r="18"/><circle cx="680" cy="200" r="16"/><circle cx="330" cy="200" r="16"/></g>
+      <g font-size="18" fill="#1E2F5C"><text x="553" y="96">×</text><text x="673" y="96">+</text><text x="674" y="206">×</text><text x="324" y="206">×</text></g>
+      <g stroke="#1E2F5C" stroke-width="2.5"><rect x="210" y="250" width="80" height="50" rx="6" fill="#fbecc0"/><rect x="390" y="250" width="80" height="50" rx="6" fill="#fbecc0"/><rect x="500" y="250" width="100" height="50" rx="6" fill="#dbe7fb"/><rect x="532" y="150" width="56" height="34" rx="16" fill="#f6c6cf"/></g>
+      <g font-size="14" fill="#1E2F5C" text-anchor="middle"><text x="250" y="272">① 리셋</text><text x="250" y="291">σ → rₜ</text><text x="430" y="272">② 업데이트</text><text x="430" y="291">σ → zₜ</text><text x="550" y="272">③ 후보</text><text x="550" y="291">tanh → h̃ₜ</text><text x="560" y="172">1−zₜ</text></g>
+      <g stroke="#1E2F5C" stroke-width="2" fill="none">
+        <path d="M250 250 V216 H314" marker-end="url(#ar5)"/>
+        <path d="M190 90 V200 H314" marker-end="url(#ar5)"/>
+        <path d="M346 200 H520 V246" marker-end="url(#ar5)"/>
+        <path d="M430 250 V120 H542 V108" marker-end="url(#ar5)"/>
+        <path d="M430 167 H528" marker-end="url(#ar5)"/>
+        <path d="M588 167 H640 V200 H664" marker-end="url(#ar5)"/>
+        <path d="M600 275 H700 V216" marker-end="url(#ar5)"/>
+        <path d="M680 184 V108" marker-end="url(#ar5)"/>
+      </g>
+      <path d="M40 360 H620" stroke="#1E2F5C" stroke-width="2.5"/>
+      <g stroke="#1E2F5C" stroke-width="2"><path d="M250 360 V304M430 360 V304M560 360 V304"/></g>
+      <text x="26" y="352" font-size="14" fill="#1E2F5C">xₜ</text><text x="60" y="388" font-size="12" fill="#6b6b7a">이번 입력이 세 상자에 들어감 (앞 메모도 함께)</text>
+      <g fill="#fff" font-size="13"><circle cx="560" cy="56" r="12" fill="#B47B32"/><text x="556" y="61">④</text></g>
+      <text x="586" y="60" font-size="13" fill="#B47B32">zₜ × 옛 메모</text>
+    </svg>
+  </div>
+  <p class="dwg-cap">④는 아래 부품 명세의 마지막 단계(섞기)입니다. 옛 메모는 zₜ만큼, 새 후보는 1−zₜ만큼 들어가서 둘의 비율 합이 언제나 1이에요.</p>
+  <div class="review30"><b>30초 복습 · 가중평균</b> 시험 점수 80점과 60점을 7:3으로 섞으면 0.7×80 + 0.3×60 = 74점이죠. GRU의 섞기가 정확히 이 가중평균이에요.</div>
+  <p><b>도면의 위치</b> · <a href="03_rnn.html">03 RNN</a> → <a href="04_lstm.html">04 LSTM</a>(문 셋 + 보관함) → 이 도면(문 둘 + 메모 하나). 순서·기억 계열은 여기까지이고, 다음은 시아의 압축·생성 계열 <a href="06_autoencoder.html">06 오토인코더</a>예요.</p>
+</div></section>
+
+<section id="spec"><div class="wrap">
+  <h2><span class="no">04</span>부품 명세 — 문 두 개로 섞기</h2>
+  <p class="lead">도면의 번호 ①~④ 순서입니다. 회색 줄은 모아가 매장 판매량 예측 현장에서 건넬 말이에요.</p>
+  <div class="steps">
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="3" width="12" height="10" fill="#fbecc0" stroke="#1E2F5C"/><rect x="4" y="6" width="3" height="4" fill="#1E2F5C"/><rect x="9" y="6" width="3" height="4" fill="#ddd"/></svg></div>
+      <div><h3><span>①</span>리셋 게이트 rₜ — 옛 메모를 얼마나 참고할까</h3><p>새 후보를 만들기 전에 옛 메모에 0~1을 곱합니다. 0에 가까우면 "옛 메모는 잊고 이번 입력만 보고" 후보를 만들어요.</p>
+      <p class="say">"명절 연휴가 끝났으니, 연휴 판매 패턴은 참고하지 않고 새로 볼게요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="3" width="12" height="10" fill="#fbecc0" stroke="#1E2F5C"/><rect x="2" y="3" width="8" height="10" fill="#B47B32"/></svg></div>
+      <div><h3><span>②</span>업데이트 게이트 zₜ — 옛 메모를 남길 비율</h3><p>옛 메모를 몇 % 남기고 새 후보를 몇 % 넣을지 정합니다. 이 페이지에서는 <b>zₜ가 클수록 옛 메모를 더 남긴다</b>로 씁니다. LSTM의 망각 게이트와 입력 게이트를 하나로 묶은 셈이에요.</p>
+      <p class="say">"평범한 화요일이면 지난주 메모를 70% 남기고 오늘 걸 30% 섞어요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="3" width="12" height="10" fill="#dbe7fb" stroke="#1E2F5C"/><rect x="4" y="6" width="8" height="1" fill="#1E2F5C"/><rect x="4" y="9" width="5" height="1" fill="#1E2F5C"/></svg></div>
+      <div><h3><span>③</span>후보 h̃ₜ — 새로 쓸 메모</h3><p>이번 입력과 (리셋 게이트로 거른) 옛 메모로 새 메모 후보를 −1~1 값으로 만듭니다.</p>
+      <p class="say">"오늘 비가 와서 우산이 많이 팔렸다는 후보 메모를 만들어요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="6" width="5" height="4" fill="#B47B32"/><rect x="10" y="6" width="5" height="4" fill="#dbe7fb" stroke="#1E2F5C"/><rect x="7" y="5" width="2" height="6" fill="#1E2F5C"/></svg></div>
+      <div><h3><span>④</span>섞기 — 가중평균으로 새 메모</h3><p>새 메모 hₜ = (1−zₜ) × 새 후보 + zₜ × 옛 메모. 보관함을 따로 두지 않고 이 메모 하나가 짧은 기억과 긴 기억을 함께 맡습니다.</p>
+      <p class="say">"섞은 메모로 내일 판매량을 예측할게요."</p></div></div>
+  </div>
+</div></section>
+
+<section id="why"><div class="wrap">
+  <h2><span class="no">05</span>왜 이 설계를 쓰나 · 수식은 동료가 대신 물어봅니다</h2>
+  <div class="say-row neutral"><img src="assets/img/chars/doc_e07.webp" alt="" width="64" height="64">
+    <div class="bubble"><b class="nm">박사</b>매장 300곳의 판매량을 매일 밤 다시 학습해야 하는데, 서버는 작고 시간은 두 시간뿐이라고 해 봅시다. 04 LSTM이 잘 맞더라도 부품이 무겁다면 어떻게 할까요?</div></div>
+  <div class="pair">
+    <div class="why" id="whybox">
+      <h3>왜 이 설계를 쓰나</h3>
+      <ol>
+        <li><b>문제 상황</b> · 긴 기억은 필요하지만 계산 자원과 학습 시간이 넉넉하지 않습니다.</li>
+        <li><b>앞 방법의 한계</b> · 04 LSTM은 상자 넷(문 셋 + 후보)과 보관함·메모 두 줄을 따로 들고 다녀 부품이 많습니다.</li>
+        <li><b>해법</b> · 버리기와 적기를 한 비율(zₜ)로 묶고, 보관함과 메모를 하나로 합칩니다. 상자가 셋이 되어 부품이 약 25% 줄어요.</li>
+      </ol>
+      <p class="easy"><b>쉽게 말하면</b> · 냉장고와 김치냉장고를 따로 두던 집에서, 온도 다이얼 하나로 두 역할을 맡는 냉장고 한 대로 바꾼 셈이에요.</p>
+      <p class="calm">"LSTM과 뭐가 다르지?"가 헷갈려도 괜찮아요. 아래 표의 부품 수 두 줄만 비교해 봐도 차이가 보입니다.</p>
+    </div>
+    <div class="mathq" id="math">
+      <div class="q"><img src="assets/img/chars/asst_e04.webp" alt="" width="56" height="56"><p><b>하루</b> · "1 빼기 z가 왜 나와요? 그냥 z 곱하기 후보면 안 되나요?"</p></div>
+      <p class="school">학교 수학으로 보면 · 가중평균 (비율 p와 1−p로 두 값 섞기)</p>
+      <div class="formula">hₜ = (1 − zₜ) ⊙ h̃ₜ + zₜ ⊙ hₜ₋₁</div>
+      <table class="pieces"><tr><th>조각</th><th>읽는 법 · 뜻</th></tr>
+        <tr><td>zₜ</td><td>"제트 티". 옛 메모를 남길 비율(0~1)</td></tr>
+        <tr><td>1 − zₜ</td><td>남은 비율만큼 새 후보를 넣는다. 둘을 더하면 언제나 1이라 메모 크기가 들쭉날쭉하지 않다</td></tr>
+        <tr><td>h̃ₜ</td><td>새 메모 후보</td></tr>
+        <tr><td>hₜ₋₁</td><td>옛 메모</td></tr>
+      </table>
+      <div class="calc"><b class="t">숫자로 한 번 해 보기</b>
+        <ol><li>옛 메모 hₜ₋₁ = 0.8, 새 후보 h̃ₜ = 0.2, 업데이트 게이트 zₜ = 0.7</li>
+          <li>hₜ = (1 − 0.7)×0.2 + 0.7×0.8 = 0.06 + 0.56 = <b>0.62</b></li>
+          <li>부품 수(입력 128개, 메모 128개일 때): LSTM 4×(128×256 + 128) = <b>131,584</b>개</li>
+          <li>GRU 3×(128×256 + 128) = <b>98,688</b>개 → LSTM의 <b>75%</b></li></ol></div>
+      <div class="after"><img src="assets/img/chars/asst_e16.webp" alt="" width="48" height="48"><p><b>하루</b> · "7:3 가중평균이네요! 부품은 네 상자가 세 상자로 줄어서 딱 3/4."</p></div>
+    </div>
+  </div>
+  <div class="daily" style="margin-top:22px">
+    <div><b>일상으로 치면</b>차를 우릴 때 주전자에 남은 차(옛 메모)를 70% 남기고 새로 우린 차(후보)를 30% 부어 맛을 맞추는 것과 같아요. 리셋 게이트는 "새 차를 우릴 때 남은 찻잎을 얼마나 다시 쓸까"예요.</div>
+    <div><b>현장에서는</b>매장·지역별 수요 예측, 기기 안에서 도는 음성·센서 모델처럼 장비가 작은 곳에서 많이 씁니다. LSTM과 GRU 중 무엇이 나은지는 데이터마다 달라서, 둘 다 시험해 비교하는 게 보통이에요.</div>
+  </div>
+</div></section>
+
+<section id="lab"><div class="wrap">
+  <h2><span class="no">06</span>실험 — 섞는 비율 다이얼과 부품 저울</h2>
+  <div class="talk">
+    <div class="line"><img src="assets/img/chars/doc_e09.webp" alt="박사" width="56" height="56"><p><b>박사</b>zₜ를 0과 1 끝으로 돌리면 각각 어떤 장치처럼 행동할까요? 그리고 부품은 정말 75%일까요?</p></div>
+    <div class="line"><img src="assets/img/chars/robo_e16.webp" alt="주판봇" width="56" height="56"><p><b>주판봇</b>부품이 적으면 성능도 적습니다! 메모를 512개로, 1024개로! 크면 이깁니다!</p></div>
+    <div class="line"><img src="assets/img/chars/fly_e09.webp" alt="초파리" width="56" height="56"><p><b>초파리</b>크면 이긴다? 의심스럽네. 메모 크기를 두 배로 하면 부품이 몇 배가 되는지부터 봐.</p></div>
+    <div class="line me"><img src="assets/img/chars/moa_e07.webp" alt="모아" width="56" height="56"><p><b>모아</b>위 그래프는 섞기, 아래 막대는 부품 수예요. 숫자는 제가 읽어 드릴게요.</p></div>
+  </div>
+  <div class="lab">
+    <div class="bar"><span class="dot" style="background:var(--pink)"></span><span class="dot" style="background:var(--lav)"></span><span class="dot" style="background:var(--navy)"></span><span class="t">mix_dial.sim</span></div>
+    <div class="lab-body">
+      <div class="ctrl">
+        <label for="z5">업데이트 게이트 zₜ <span class="val" data-for="z5" data-d="2"></span></label><input type="range" id="z5" min="0" max="1" step="0.05" value="0.7">
+        <label for="hp5">옛 메모 hₜ₋₁ <span class="val" data-for="hp5" data-d="2"></span></label><input type="range" id="hp5" min="-1" max="1" step="0.05" value="0.8">
+        <label for="hc5">새 후보 h̃ₜ <span class="val" data-for="hc5" data-d="2"></span></label><input type="range" id="hc5" min="-1" max="1" step="0.05" value="0.2">
+        <label for="n5">메모 크기 n (입력 크기 m = 128) <span class="val" data-for="n5" data-d="0"></span></label><input type="range" id="n5" min="32" max="1024" step="32" value="128">
+        <button class="btn ghost" id="reset5" type="button">처음 값으로</button>
+      </div>
+      <div>
+        <svg id="plot5" viewBox="0 0 540 290" role="img" aria-label="옛 메모와 새 후보를 섞는 위치, 그리고 LSTM과 GRU의 부품 수 막대"></svg>
+        <div class="readout" id="out5" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+  <div class="sol">
+    <p><b>모아의 보고</b> · 처음 값(zₜ = 0.7, 옛 0.8, 후보 0.2)에서 새 메모는 0.62예요. 메모 크기 128에서 부품은 LSTM 131,584개, GRU 98,688개(75%). 메모를 256으로 두 배 하면 GRU 부품은 295,680개로 약 3배가 돼요.</p>
+    <p><b>박사의 해석</b> · zₜ = 1이면 옛 메모를 그대로 들고 가고(입력을 무시), zₜ = 0이면 옛 메모를 버리고 새 후보로 바꿉니다. 이 두 끝 사이를 학습으로 정하는 게 GRU예요. 메모 크기를 키우면 부품은 크기의 제곱에 가깝게 늘어서, 주판봇 말대로 키우기만 하면 학습 시간과 과적합 위험이 함께 커집니다. 크기는 검증 데이터로 성능을 보며 정해요.</p>
+  </div>
+</div></section>
+
+<section id="judge-sec"><div class="wrap">
+  <h2><span class="no">07</span>AI 판단 코너 — 이 답, 믿어도 될까?</h2>
+  <div class="judge">
+    <h3>AI 도우미가 이렇게 답했습니다</h3>
+    <div class="ai-out">Q. 판매량 예측에 LSTM과 GRU 중 무엇을 써야 하나요?
+A. GRU를 쓰세요. GRU는 LSTM보다 나중에 나온 개선판이고 부품도 적기 때문에 모든 경우에 LSTM보다 정확합니다.</div>
+    <p>어디가 이상할까요?</p>
+    <div class="choices" data-answer="a">
+      <button data-k="a">'나중에 나왔다', '부품이 적다'는 '항상 더 정확하다'의 근거가 아니다. 데이터에 따라 LSTM이 나을 때도 있으니 둘 다 검증 데이터로 비교해야 한다</button>
+      <button data-k="b" data-why="GRU가 LSTM보다 부품이 적은 건 맞아요(같은 크기에서 75%).">GRU는 LSTM보다 부품이 많다</button>
+      <button data-k="c" data-why="GRU도 순서 데이터를 위한 장치라 판매량 예측에 쓸 수 있어요.">GRU는 판매량 예측에 쓸 수 없다</button>
+    </div>
+    <p class="feedback" data-ok="맞아요. '항상', '모든 경우'라는 말이 나오면 근거 데이터가 있는지 되물어 보세요. 실무에서는 같은 데이터로 둘을 돌려 오차를 비교합니다."></p>
+  </div>
+</div></section>
+
+<section id="limit"><div class="wrap">
+  <h2><span class="no">08</span>이 설계의 한계 → 다음 도면</h2>
+  <div class="limit"><b>한계 1 · 아주 긴 순서</b> — 보관함이 따로 없어서, 일부 아주 긴 순서에서는 LSTM보다 못할 수 있다는 보고가 있습니다. 데이터로 확인해야 해요.<br>
+    <b>한계 2 · 여전히 차례차례</b> — RNN 계열이라 동시 계산이 어렵습니다(<a href="09_transformer.html">09 트랜스포머</a>).<br>
+    <b>한계 3 · 정답표가 필요하다</b> — 순서·기억 계열 세 도면은 모두 정답(다음 값, 감정 표시)이 있어야 배웁니다. 정답 없이 데이터의 구조를 배우는 설계는 시아의 <a href="06_autoencoder.html">06 오토인코더</a>부터 이어져요.</div>
+  <div class="recap"><b>정리</b> · GRU는 리셋·업데이트 두 문과 메모 하나로 LSTM의 일을 가볍게 합니다. 새 메모는 옛 메모와 새 후보의 가중평균(zₜ : 1−zₜ)이에요.</div>
+</div></section>
+
+<section id="quiz"><div class="wrap">
+  <h2><span class="no">09</span>확인 퀴즈</h2>
+  <div class="quiz"><p class="qq">Q1. 옛 메모 0.8, 새 후보 0.2, zₜ = 0.7이면 새 메모는? (이 페이지의 식 기준)</p>
+    <div class="choices" data-answer="b"><button data-k="a" data-why="z와 1−z를 바꿔 넣으면 0.3×0.8 + 0.7×0.2 = 0.38이 나와요.">0.38</button><button data-k="b">0.62</button><button data-k="c" data-why="두 값을 그냥 더하면 1.0이에요. 비율을 곱해야 해요.">1.0</button></div>
+    <p class="feedback" data-ok="맞아요. 0.3×0.2 + 0.7×0.8 = 0.62."></p></div>
+  <div class="quiz"><p class="qq">Q2. GRU의 부품 수가 같은 크기의 LSTM의 약 75%인 이유는?</p>
+    <div class="choices" data-answer="c"><button data-k="a" data-why="활성화 함수는 부품 수(가중치)에 거의 영향을 주지 않아요.">tanh 대신 ReLU를 써서</button><button data-k="b" data-why="메모 크기는 같게 놓고 비교했어요.">메모 크기가 작아서</button><button data-k="c">가중치를 가진 상자가 넷(문 셋 + 후보)에서 셋(문 둘 + 후보)으로 줄어서</button></div>
+    <p class="feedback" data-ok="맞아요. 상자 하나의 부품 수가 같으니 3/4 = 75%예요."></p></div>
+</div></section>
+
+<section id="memo"><div class="wrap">
+  <h2><span class="no">10</span>감수 메모 — 참고 자료와 다른 곳</h2>
+  <div class="memo">참고 인포그래픽의 GRU 장에서 고칠 값은 찾지 못했습니다. <b>읽을 때 주의할 점</b>을 하나 덧붙여요. 자료에 따라 업데이트 게이트의 뜻이 반대로 쓰여, hₜ = zₜ ⊙ h̃ₜ + (1 − zₜ) ⊙ hₜ₋₁ 꼴로 적은 곳도 있습니다. 이 페이지는 원자료와 원 논문(Cho 외, 2014)처럼 <b>zₜ가 클수록 옛 메모를 남긴다</b>로 통일했어요. 부품 수 비율(75%)은 이 페이지에서 직접 계산해 보탠 값입니다.</div>
+</div></section>
+
+<script>
+(function(){
+  var $=BP.$;
+  function P(k,n,m){return k*(n*(n+m)+n)}
+  function draw(){
+    var z=+$('#z5').value, hp=+$('#hp5').value, hc=+$('#hc5').value, n=+$('#n5').value, m=128, h=(1-z)*hc+z*hp;
+    var s=$('#plot5');while(s.firstChild)s.removeChild(s.firstChild);
+    var X=function(v){return 70+(v+1)*200};
+    s.appendChild(BP.svg('line',{x1:70,y1:60,x2:470,y2:60,stroke:'#1E2F5C','stroke-width':2}));
+    [-1,0,1].forEach(function(v){s.appendChild(BP.svg('line',{x1:X(v),y1:54,x2:X(v),y2:66,stroke:'#1E2F5C'}));s.appendChild(BP.svg('text',{x:X(v)-6,y:84,'font-size':12,fill:'#6b6b7a'},v+''))});
+    s.appendChild(BP.svg('circle',{cx:X(hp),cy:60,r:9,fill:'#B47B32'}));s.appendChild(BP.svg('text',{x:X(hp)-14,y:40,'font-size':12,fill:'#B47B32'},'옛 메모'));
+    s.appendChild(BP.svg('circle',{cx:X(hc),cy:60,r:9,fill:'#2f5fa8'}));s.appendChild(BP.svg('text',{x:X(hc)-14,y:40,'font-size':12,fill:'#2f5fa8'},'새 후보'));
+    s.appendChild(BP.svg('rect',{x:X(h)-7,y:53,width:14,height:14,fill:'#D9707E',stroke:'#1E2F5C'}));s.appendChild(BP.svg('text',{x:X(h)-14,y:104,'font-size':13,fill:'#D9707E'},'새 메모 '+BP.fmt(h,2)));
+    var pl=P(4,n,m), pg=P(3,n,m), mx=P(4,1024,m);
+    s.appendChild(BP.svg('text',{x:20,y:150,'font-size':13,fill:'#1E2F5C'},'부품 수 (메모 '+n+', 입력 128)'));
+    [['LSTM',pl,'#bbb'],['GRU',pg,'#B47B32']].forEach(function(r,i){var y=170+i*50;
+      s.appendChild(BP.svg('text',{x:20,y:y+22,'font-size':14,fill:'#1E2F5C'},r[0]));
+      s.appendChild(BP.svg('rect',{x:80,y:y,width:Math.max(2,380*r[1]/mx),height:32,fill:r[2]}));
+      s.appendChild(BP.svg('text',{x:Math.min(84+380*r[1]/mx,400),y:y+22,'font-size':13,fill:'#1E2F5C'},r[1].toLocaleString('ko-KR')));});
+    $('#out5').innerHTML='<b>섞기</b> (1−'+BP.fmt(z,2)+')×'+BP.fmt(hc,2)+' + '+BP.fmt(z,2)+'×'+BP.fmt(hp,2)+' = <b>'+BP.fmt(h,3)+'</b>'+
+      (z>=0.999?' · zₜ = 1: 옛 메모를 그대로 들고 가요':'')+(z<=0.001?' · zₜ = 0: 새 후보로 완전히 바꿔요':'')+
+      '<br><b>부품</b> LSTM '+pl.toLocaleString('ko-KR')+'개 · GRU '+pg.toLocaleString('ko-KR')+'개 (GRU/LSTM = '+Math.round(pg/pl*100)+'%) · 메모 128 대비 GRU '+BP.fmt(pg/P(3,128,128),2)+'배';
+  }
+  ['z5','hp5','hc5','n5'].forEach(function(i){$('#'+i).addEventListener('input',draw)});
+  $('#reset5').addEventListener('click',function(){$('#z5').value=0.7;$('#hp5').value=0.8;$('#hc5').value=0.2;$('#n5').value=128;BP.$$('input[type=range]').forEach(function(x){x.dispatchEvent(new Event('input'))})});
+  draw();
+})();
+</script>

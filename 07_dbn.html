@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DL-07 DBN — 심층 신뢰 신경망 설계도면 | 딥러닝 설계도면 연구실 01</title>
+<meta name="description" content="작은 확률 부품(RBM)을 한 층씩 미리 학습해 쌓고, 마지막에 정답표로 다듬는다. 깊은 학습을 다시 가능하게 한 역사적 설계.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DL-07 DBN — 심층 신뢰 신경망 설계도면 | 딥러닝 설계도면 연구실 01">
+<meta property="og:description" content="작은 확률 부품(RBM)을 한 층씩 미리 학습해 쌓고, 마지막에 정답표로 다듬는다. 깊은 학습을 다시 가능하게 한 역사적 설계.">
+<meta property="og:image" content="https://adminmrobo.github.io/deep_learning_model_design_lab_01/assets/img/covers/og_07.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/chars/asst_e13.webp">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css">
+<link rel="stylesheet" href="assets/css/blueprint.css">
+<script src="assets/js/blueprint.js"></script>
+<!-- px-fix v1 --><style id="px-fix">img{image-rendering:auto!important}</style><script id="px-fix-js">(function(){var R=window.ResizeObserver;function f(i){var n=i.naturalWidth,w=i.getBoundingClientRect().width;if(!n||!w)return;var s=w*(window.devicePixelRatio||1)/n;i.style.setProperty("image-rendering",s>=1.95?"pixelated":"auto","important")}var ro=R?new R(function(es){es.forEach(function(e){f(e.target)})}):null;function a(i){if(i.__px)return;i.__px=1;i.addEventListener("load",function(){f(i)});if(ro)ro.observe(i);f(i)}function all(r){(r||document).querySelectorAll&&(r||document).querySelectorAll("img").forEach(a)}function go(){all();if(window.MutationObserver)new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType!==1)return;if(n.tagName==="IMG")a(n);else all(n)})})}).observe(document.documentElement,{childList:true,subtree:true});window.addEventListener("resize",function(){document.querySelectorAll("img").forEach(f)})}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go()})();</script><!-- /px-fix -->
+<!-- lab-kg:head -->
+<meta name="citation_title" content="DL-07 심층 신뢰 신경망 설계도면">
+<meta name="dc.title" content="DL-07 심층 신뢰 신경망 설계도면">
+<meta name="dc.date" content="2026-11-26">
+<meta name="dc.language" content="ko">
+<meta name="dc.type" content="InteractiveResource">
+<meta name="citation_author" content="안상선">
+<meta name="dcterms.isPartOf" content="딥러닝 설계도면 연구실 01">
+<meta name="dc.source" content="doi:10.1162/neco.2006.18.7.1527">
+<!-- /lab-kg:head -->
+</head>
+<body class="by-sia">
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<nav class="topnav" aria-label="도면 목록"><div class="wrap"><a class="home" href="index.html">DL 설계도면 연구실</a><a href="01_fnn.html">01 FNN</a><a href="02_cnn.html">02 CNN</a><a href="03_rnn.html">03 RNN</a><a href="04_lstm.html">04 LSTM</a><a href="05_gru.html">05 GRU</a><a href="06_autoencoder.html">06 AE</a><a href="07_dbn.html" class="here" aria-current="page">07 DBN</a><a href="08_gan.html">08 GAN</a><a href="09_transformer.html">09 Transformer</a><a href="10_review.html">10 감수</a><a href="practice/index.html">실전 연습장</a></div></nav>
+<header class="cover" id="cover" data-img="cover_07"><picture><img src="assets/img/covers/cover_07.webp" width="1600" height="900" alt="DL-07 DBN 설계도면 표지: 모눈 바탕 위의 인턴 시아 픽셀아트" fetchpriority="high" decoding="async"></picture><span class="cover-chip">딥러닝 설계도면 연구실 01 · DL-07</span></header>
+<div class="wrap">
+  <div class="term">
+    <div class="bar"><span class="dot" style="background:var(--pink)"></span><span class="dot" style="background:var(--lav)"></span><span class="dot" style="background:var(--navy)"></span><span class="t mono">blueprint · DL-07_DBN.dwg</span></div>
+    <div class="term-body">
+      <p class="prompt mono"><b>sia@lab</b>:~$ open DL-07_DBN.blueprint</p>
+      <div class="hero">
+        <div class="who"><img src="assets/img/chars/sia_e07.webp" alt="인턴 시아 픽셀아트 초상, 검지를 세워 설명하는 모습" width="192" height="192"></div>
+        <div>
+          <h1>DBN</h1>
+          <div class="sub">한 층씩 쌓아 올린 옛 설계도</div>
+          <p class="by">DL-07 · 심층 신뢰 신경망 (Deep Belief Network) · 인턴 시아 작성</p>
+          <span class="motto pix">한 번에 한 층씩, 차곡차곡.</span>
+        </div>
+      </div>
+      <table class="titleblock" aria-label="도면 표제란">
+        <tr><th>도면 번호</th><td>DL-07</td><th>계열</th><td>압축·생성 계열 (시아 담당)</td></tr>
+        <tr><th>작성</th><td>인턴 시아</td><th>감수</th><td>초파리 연구원 · 주판봇 (<a href="10_review.html">10 감수 도면</a>)</td></tr>
+        <tr><th>모델</th><td>DBN · 심층 신뢰 신경망</td><th>날짜 · 판</th><td>2026-11-26 · v1.0</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+<main id="main">
+<section id="three"><div class="wrap">
+  <h2><span class="no">01</span>처음 오신 분께 — 이 도면을 3줄로</h2>
+  <p class="lead">시아의 두 번째 도면입니다. 아홉 장 가운데 가장 오래된 설계라, 시아가 "역사 자료실에서 꺼내 온 도면"이라고 표지에 적어 두었어요.</p>
+  <div class="three">
+    <div><b>무엇을</b>두 층짜리 작은 확률 부품(RBM)을 아래층부터 한 층씩 정답표 없이 미리 학습시켜 쌓고, 맨 위에 분류기를 얹어 정답표로 전체를 다듬습니다.</div>
+    <div><b>왜 중요한가</b>2006년, 깊은 신경망을 학습시키기 어려웠던 시기에 "한 층씩 미리 배우면 깊게 쌓을 수 있다"를 보여 줘 딥러닝이 다시 주목받는 계기가 됐어요.</div>
+    <div><b>업무에서는</b>지금은 새 프로젝트에 거의 쓰지 않습니다. 대신 "미리 배워 두고 나중에 다듬는다"는 생각이 오늘날의 사전학습·파인튜닝으로 이어졌어요.</div>
+  </div>
+  <p class="nocode">코드나 수식을 몰라도 됩니다. "한 층씩 쌓는다"는 그림만 가져가면 돼요.</p>
+  <details><summary>이 도면에 나오는 영어 약어 풀이</summary>
+    <dl class="abbr">
+      <dt>DBN</dt><dd>Deep Belief Network, 심층 신뢰 신경망. 'belief'는 확률(믿음의 정도)을 다룬다는 뜻</dd>
+      <dt>RBM</dt><dd>Restricted Boltzmann Machine, 제한 볼츠만 머신. 보이는 층과 숨은 층 사이만 잇고 같은 층끼리는 잇지 않은 확률 모델</dd>
+      <dt>CD</dt><dd>Contrastive Divergence, 대조 발산. RBM을 빠르게 학습시키는 근사 방법</dd>
+      <dt>Fine-tune</dt><dd>미세조정. 미리 배운 모델을 정답표로 조금 더 다듬는 일</dd>
+    </dl>
+  </details>
+</div></section>
+
+<section id="cast"><div class="wrap">
+  <h2><span class="no">02</span>도면을 전달하는 사람들</h2>
+  <div class="cast">
+    <div class="me"><img src="assets/img/chars/sia_e13.webp" alt="인턴 시아" width="84" height="84"><b>인턴 시아</b>이 도면 작성자<br><span class="tag">설계 · 숫자 발표</span></div>
+    <div><img src="assets/img/chars/asst_e09.webp" alt="조수 하루" width="84" height="84"><b>조수 하루</b>수식을 대신 물어봄<br><span class="tag">질문 담당</span></div>
+    <div><img src="assets/img/chars/doc_e07.webp" alt="박사" width="84" height="84"><b>박사</b>현장 질문과 해석<br><span class="tag">교육 · 판정</span></div>
+    <div><img src="assets/img/chars/fly_e09.webp" alt="초파리 연구원" width="84" height="84"><b>초파리 연구원</b>크고 복잡한 것을 의심<br><span class="tag">감수</span></div>
+    <div><img src="assets/img/chars/robo_e16.webp" alt="주판봇" width="84" height="84"><b>주판봇</b>큰 숫자를 좋아함<br><span class="tag">감수</span></div>
+  </div>
+  <div class="say-row"><img src="assets/img/chars/sia_e09.webp" alt="" width="64" height="64">
+    <div class="bubble"><b class="nm">시아</b>이 도면은 서랍 정리하듯 그렸어요. 맨 아래 서랍을 먼저 다 정리하고, 그 정리 결과를 바탕으로 위 서랍을 정리하고… 한 번에 전부 정리하려면 엄두가 안 나는데, 한 서랍씩이면 할 수 있잖아요. 2006년의 연구자들도 그렇게 생각했대요.</div></div>
+</div></section>
+
+<section id="dwg"><div class="wrap">
+  <h2><span class="no">03</span>전체 구조도 — SHEET 7</h2>
+  <p class="lead">위쪽은 완성된 DBN, 아래쪽은 그것을 만드는 순서입니다. 이웃한 두 층이 짝을 이뤄 RBM 하나가 되고, RBM을 한 층씩 쌓아 올려요.</p>
+  <div class="dwg scroll-x"><span class="stamp" style="color:#6E5BA8;border-color:#6E5BA8">작성 · 시아</span>
+    <svg viewBox="0 0 900 470" role="img" aria-labelledby="d7t">
+      <title id="d7t">DBN 구조: 보이는 층과 은닉층 1, 은닉층 1과 은닉층 2, 은닉층 2와 은닉층 3이 각각 RBM을 이루며 차례로 쌓이고, 맨 위에 분류기가 붙는다. 아래에는 RBM 1 학습, 변환, RBM 2 학습, 반복, 미세조정의 다섯 단계가 있다</title>
+      <defs><marker id="ar7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1E2F5C"/></marker></defs>
+      <g id="layers7">
+        <g stroke="#1E2F5C" stroke-width="2.5"><rect x="60" y="60" width="44" height="200" rx="12" fill="#cfe0f7"/><rect x="230" y="60" width="44" height="200" rx="12" fill="#e6dcf5"/><rect x="400" y="60" width="44" height="200" rx="12" fill="#e6dcf5"/><rect x="570" y="60" width="44" height="200" rx="12" fill="#e6dcf5"/><rect x="720" y="110" width="44" height="100" rx="12" fill="#f6c6cf"/></g>
+        <g fill="#fff" stroke="#1E2F5C" stroke-width="2"><circle cx="82" cy="90" r="10"/><circle cx="82" cy="130" r="10"/><circle cx="82" cy="170" r="10"/><circle cx="82" cy="230" r="10"/><circle cx="252" cy="90" r="10"/><circle cx="252" cy="130" r="10"/><circle cx="252" cy="170" r="10"/><circle cx="252" cy="230" r="10"/><circle cx="422" cy="110" r="10"/><circle cx="422" cy="160" r="10"/><circle cx="422" cy="210" r="10"/><circle cx="592" cy="120" r="10"/><circle cx="592" cy="200" r="10"/><circle cx="742" cy="140" r="10"/><circle cx="742" cy="180" r="10"/></g>
+        <g stroke="#1E2F5C" stroke-width="1" opacity=".5"><path d="M104 90L230 130M104 90L230 170M104 130L230 90M104 130L230 230M104 170L230 90M104 170L230 230M104 230L230 130M104 230L230 170M104 90L230 90M104 230L230 230"/><path d="M274 90L400 160M274 130L400 110M274 130L400 210M274 170L400 110M274 170L400 210M274 230L400 160M274 90L400 110M274 230L400 210"/><path d="M444 110L570 200M444 160L570 120M444 160L570 200M444 210L570 120M444 110L570 120M444 210L570 200"/><path d="M614 120L720 140M614 120L720 180M614 200L720 140M614 200L720 180"/></g>
+        <g stroke="#6E5BA8" stroke-width="2" fill="none"><path d="M104 290 H226" marker-end="url(#ar7)"/><path d="M226 290 H108" marker-end="url(#ar7)"/><path d="M274 290 H396" marker-end="url(#ar7)"/><path d="M396 290 H278" marker-end="url(#ar7)"/><path d="M444 290 H566" marker-end="url(#ar7)"/><path d="M566 290 H448" marker-end="url(#ar7)"/></g>
+        <g font-size="14" fill="#6E5BA8"><text x="140" y="312">RBM 1</text><text x="310" y="312">RBM 2</text><text x="480" y="312">RBM 3</text></g>
+        <g font-size="14" fill="#1E2F5C"><text x="40" y="44">보이는 층 v</text><text x="214" y="44">은닉층 1</text><text x="384" y="44">은닉층 2</text><text x="554" y="44">은닉층 3</text><text x="704" y="94">분류기</text></g>
+      </g>
+      <!-- 단계 -->
+      <g id="steps7" font-size="13">
+        <g data-s="1"><rect x="40" y="350" width="150" height="80" rx="8" fill="#fff" stroke="#1E2F5C" stroke-width="2"/><text x="52" y="374" fill="#6E5BA8">① RBM 1 학습</text><text x="52" y="396" fill="#1E2F5C">원본 데이터로</text><text x="52" y="414" fill="#1E2F5C">기본 무늬 배우기</text></g>
+        <g data-s="2"><rect x="210" y="350" width="150" height="80" rx="8" fill="#fff" stroke="#1E2F5C" stroke-width="2"/><text x="222" y="374" fill="#6E5BA8">② 변환</text><text x="222" y="396" fill="#1E2F5C">은닉층 1의 반응을</text><text x="222" y="414" fill="#1E2F5C">새 데이터로 삼기</text></g>
+        <g data-s="3"><rect x="380" y="350" width="150" height="80" rx="8" fill="#fff" stroke="#1E2F5C" stroke-width="2"/><text x="392" y="374" fill="#6E5BA8">③ RBM 2 학습</text><text x="392" y="396" fill="#1E2F5C">변환된 데이터로</text><text x="392" y="414" fill="#1E2F5C">한 단계 위 무늬</text></g>
+        <g data-s="4"><rect x="550" y="350" width="140" height="80" rx="8" fill="#fff" stroke="#1E2F5C" stroke-width="2"/><text x="562" y="374" fill="#6E5BA8">④ 반복</text><text x="562" y="396" fill="#1E2F5C">마지막 층까지</text><text x="562" y="414" fill="#1E2F5C">한 층씩</text></g>
+        <g data-s="5"><rect x="710" y="350" width="160" height="80" rx="8" fill="#fff" stroke="#1E2F5C" stroke-width="2"/><text x="722" y="374" fill="#6E5BA8">⑤ 미세조정</text><text x="722" y="396" fill="#1E2F5C">분류기를 얹고 정답표로</text><text x="722" y="414" fill="#1E2F5C">전체를 다듬기</text></g>
+      </g>
+      <g stroke="#1E2F5C" stroke-width="2"><path d="M190 390 H206" marker-end="url(#ar7)"/><path d="M360 390 H376" marker-end="url(#ar7)"/><path d="M530 390 H546" marker-end="url(#ar7)"/><path d="M690 390 H706" marker-end="url(#ar7)"/></g>
+    </svg>
+  </div>
+  <p class="dwg-cap">보라 양쪽 화살표는 RBM 안에서 신호가 위로도 아래로도 오간다는 뜻입니다. 앞의 도면들과 달리 RBM은 방향이 없는(양쪽으로 잇는) 부품이에요.</p>
+  <div class="review30"><b>30초 복습 · 확률</b> "비 올 확률 70%"처럼, 확률은 0과 1 사이 숫자로 "얼마나 그럴 것 같은가"를 나타내죠. RBM의 숨은 뉴런은 켜졌다(1)·꺼졌다(0) 중 하나인데, 켜질 확률을 01 도면의 시그모이드로 계산해요.</div>
+  <p><b>도면의 위치</b> · <a href="06_autoencoder.html">06 오토인코더</a>(줄였다 되살리기) ↔ 이 도면(확률 부품을 층별로 쌓기, 깊은 오토인코더의 사전학습에도 쓰였음) → 진짜 같은 데이터를 만드는 <a href="08_gan.html">08 GAN</a>.</p>
+</div></section>
+
+<section id="spec"><div class="wrap">
+  <h2><span class="no">04</span>부품 명세 — RBM 한 개와 쌓는 순서</h2>
+  <p class="lead">도면 아래쪽 ①~⑤ 순서입니다. 회색 줄은 시아가 손글씨 숫자 인식(이 설계가 처음 실력을 보인 과제) 현장에서 건넬 말이에요.</p>
+  <div class="steps">
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="2" width="12" height="4" fill="#e6dcf5" stroke="#1E2F5C"/><rect x="2" y="10" width="12" height="4" fill="#cfe0f7" stroke="#1E2F5C"/><rect x="4" y="6" width="1" height="4" fill="#1E2F5C"/><rect x="8" y="6" width="1" height="4" fill="#1E2F5C"/><rect x="11" y="6" width="1" height="4" fill="#1E2F5C"/></svg></div>
+      <div><h3><span>①</span>RBM 1 학습 — 원본에서 기본 무늬 배우기</h3><p>보이는 층(픽셀)과 숨은 층 하나로 RBM을 만들고, 정답 없이 "이 데이터가 나올 확률이 높아지도록" 연결 가중치를 학습합니다. 학습에는 대조 발산(CD)이라는 빠른 근사법을 써요.</p>
+      <p class="say">"숨은 뉴런 하나는 '왼쪽 위 짧은 획'에, 다른 하나는 '아래 둥근 획'에 잘 켜지게 됐어요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="6" width="4" height="4" fill="#cfe0f7" stroke="#1E2F5C"/><rect x="6" y="7" width="4" height="2" fill="#6E5BA8"/><rect x="10" y="6" width="4" height="4" fill="#e6dcf5" stroke="#1E2F5C"/></svg></div>
+      <div><h3><span>②</span>변환 — 반응을 새 데이터로</h3><p>RBM 1을 고정하고, 원본 데이터를 넣었을 때 숨은 층의 반응(켜질 확률)을 모읍니다. 이것이 다음 층의 '새 데이터'가 돼요.</p>
+      <p class="say">"픽셀 784개짜리 그림이 '획 반응' 500개짜리 묶음으로 바뀌었어요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="1" width="12" height="3" fill="#e6dcf5" stroke="#1E2F5C"/><rect x="2" y="6" width="12" height="3" fill="#e6dcf5" stroke="#1E2F5C"/><rect x="2" y="11" width="12" height="3" fill="#cfe0f7" stroke="#1E2F5C"/></svg></div>
+      <div><h3><span>③</span>RBM 2 학습 — 한 단계 위 무늬</h3><p>변환된 데이터로 두 번째 RBM을 같은 방식으로 학습합니다. 이번엔 "획"이 아니라 "획들의 조합"을 배워요.</p>
+      <p class="say">"'둥근 획 + 세로 획' 조합에 켜지는 뉴런이 생겼어요. 6이나 9에서 자주 켜져요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="3" y="11" width="10" height="3" fill="#cfe0f7" stroke="#1E2F5C"/><rect x="4" y="7" width="8" height="3" fill="#e6dcf5" stroke="#1E2F5C"/><rect x="5" y="3" width="6" height="3" fill="#e6dcf5" stroke="#1E2F5C"/><rect x="7" y="1" width="2" height="1" fill="#6E5BA8"/></svg></div>
+      <div><h3><span>④</span>반복 — 원하는 깊이까지</h3><p>②와 ③을 되풀이해 층을 쌓습니다. 층마다 따로, 그리고 욕심내지 않고(greedy) 그 층만 최선을 다해 배워요.</p>
+      <p class="say">"세 층까지 쌓았어요. 여기까지는 정답표를 한 번도 안 썼어요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="3" y="7" width="10" height="7" fill="#e6dcf5" stroke="#1E2F5C"/><rect x="5" y="2" width="6" height="4" fill="#f6c6cf" stroke="#1E2F5C"/><rect x="7" y="9" width="2" height="2" fill="#2e8b57"/></svg></div>
+      <div><h3><span>⑤</span>미세조정 — 분류기를 얹고 다듬기</h3><p>맨 위에 분류기(01 도면의 소프트맥스 출력)를 얹고, 이제야 정답표를 써서 전체 가중치를 역전파로 조금씩 다듬습니다. 미리 배운 가중치가 좋은 출발점이 되어 주는 거예요.</p>
+      <p class="say">"정답이 붙은 그림이 적어도, 출발점이 좋아서 금방 잘 맞히게 됐어요."</p></div></div>
+  </div>
+</div></section>
+
+<section id="why"><div class="wrap">
+  <h2><span class="no">05</span>왜 이 설계를 쓰나 · 수식은 동료가 대신 물어봅니다</h2>
+  <div class="say-row neutral"><img src="assets/img/chars/doc_e07.webp" alt="" width="64" height="64">
+    <div class="bubble"><b class="nm">박사</b>2000년대 초반으로 돌아가 봅시다. 층이 깊은 신경망을 무작위 가중치에서 바로 학습시키면 신호가 층을 지나며 흐려져서 학습이 잘 안 됐어요. 03 도면에서 본 기울기 소실이 층 방향으로도 일어난 거죠. 어떻게 깊게 쌓을 수 있었을까요?</div></div>
+  <div class="pair">
+    <div class="why" id="whybox">
+      <h3>왜 이 설계를 썼나</h3>
+      <ol>
+        <li><b>문제 상황</b> · 깊은 신경망이 더 좋을 것 같은데, 당시 방법으로는 깊게 쌓으면 학습이 되지 않았습니다. 정답이 붙은 데이터도 적었어요.</li>
+        <li><b>앞 방법의 한계</b> · 무작위 가중치에서 전체를 한 번에 학습하면 아래층까지 고칠 신호가 거의 닿지 않았습니다.</li>
+        <li><b>해법</b> · 한 번에 전체가 아니라 두 층짜리 RBM을 하나씩 정답 없이 미리 학습시켜, 좋은 출발점을 만든 뒤에 전체를 다듬습니다(Hinton 외, 2006).</li>
+      </ol>
+      <p class="easy"><b>쉽게 말하면</b> · 탑을 한 번에 세우면 무너지니, 한 층씩 굳힌 다음 올리는 공법이에요.</p>
+      <p class="calm">이 도면은 "지금 쓰는 기술"보다 "왜 딥러닝이 다시 살아났나"를 이해하는 자료로 읽으면 편해요.</p>
+    </div>
+    <div class="mathq" id="math">
+      <div class="q"><img src="assets/img/chars/asst_e04.webp" alt="" width="56" height="56"><p><b>하루</b> · "P(h=1 | v)는 어떻게 읽어요? 세로 막대가 들어 있어요!"</p></div>
+      <p class="school">학교 수학으로 보면 · 조건부 확률 P(A | B) + 01 도면의 시그모이드</p>
+      <div class="formula">P(hⱼ = 1 | v) = σ( Σᵢ wᵢⱼ vᵢ + cⱼ )</div>
+      <table class="pieces"><tr><th>조각</th><th>읽는 법 · 뜻</th></tr>
+        <tr><td>P(hⱼ=1 | v)</td><td>"v가 주어졌을 때 j번째 숨은 뉴런이 켜질 확률". 세로 막대는 '~일 때'</td></tr>
+        <tr><td>wᵢⱼ</td><td>i번째 보이는 뉴런과 j번째 숨은 뉴런 사이 연결의 세기</td></tr>
+        <tr><td>cⱼ</td><td>j번째 숨은 뉴런의 편향(켜지기 쉬운 정도)</td></tr>
+        <tr><td>σ</td><td>시그모이드. 합을 0~1 확률로 바꾼다</td></tr>
+      </table>
+      <div class="calc"><b class="t">숫자로 한 번 해 보기 (보이는 뉴런 3개, 숨은 뉴런 1개)</b>
+        <ol><li>보이는 층 v = (1, 0, 1). 연결 w = (0.8, −0.4, 0.6), 편향 c = −0.5</li>
+          <li>합 = 0.8×1 + (−0.4)×0 + 0.6×1 − 0.5 = <b>0.9</b></li>
+          <li>켜질 확률 = σ(0.9) = 1 ÷ (1 + e<sup>−0.9</sup>) ≈ <b>0.711</b></li>
+          <li>v = (0, 1, 0)이면 합 = −0.4 − 0.5 = −0.9 → 확률 ≈ <b>0.289</b></li></ol></div>
+      <div class="after"><img src="assets/img/chars/asst_e16.webp" alt="" width="48" height="48"><p><b>하루</b> · "양 끝이 켜진 무늬에는 71%, 가운데만 켜진 무늬에는 29%! 이 뉴런은 '양 끝 무늬 탐지기'네요."</p></div>
+    </div>
+  </div>
+  <div class="daily" style="margin-top:22px">
+    <div><b>일상으로 치면</b>외국어를 배울 때 처음엔 발음(소리 무늬)만, 다음엔 단어(소리의 조합)만, 그다음 문장(단어의 조합)을 따로 익힌 뒤 마지막에 시험 문제(정답표)로 다듬는 순서와 닮았어요.</div>
+    <div><b>현장에서는</b>2006~2012년 무렵 손글씨·음성 인식 연구에서 큰 성과를 냈습니다. 지금은 ReLU, 더 나은 가중치 초기화, 정규화 층, 많은 데이터와 GPU 덕분에 이런 사전학습 없이도 깊은 모델을 바로 학습할 수 있어서, 새 프로젝트에는 거의 쓰지 않아요.</div>
+  </div>
+</div></section>
+
+<section id="lab"><div class="wrap">
+  <h2><span class="no">06</span>실험 — RBM 무늬 탐지기와 층 쌓기 순서</h2>
+  <div class="talk">
+    <div class="line"><img src="assets/img/chars/doc_e09.webp" alt="박사" width="56" height="56"><p><b>박사</b>보이는 뉴런을 켜고 끄면 숨은 뉴런 둘의 켜질 확률이 어떻게 바뀔까요? 각 숨은 뉴런은 어떤 무늬를 찾고 있을까요?</p></div>
+    <div class="line"><img src="assets/img/chars/robo_e16.webp" alt="주판봇" width="56" height="56"><p><b>주판봇</b>미리 배우기는 시간 낭비입니다! 층을 100개 쌓고 처음부터 한 번에 정답표로 돌리면 끝입니다!</p></div>
+    <div class="line"><img src="assets/img/chars/fly_e09.webp" alt="초파리" width="56" height="56"><p><b>초파리</b>100개를 한 번에? 2006년엔 그게 안 됐다고. 아래 '한 단계씩' 버튼으로 순서를 따라가 봐. 정답표는 몇 번째에 처음 나오는지.</p></div>
+    <div class="line me"><img src="assets/img/chars/sia_e07.webp" alt="시아" width="56" height="56"><p><b>시아</b>네모 셋이 보이는 뉴런이에요. 눌러서 켜고 끄면 숨은 뉴런 확률을 제가 정리해 드릴게요.</p></div>
+  </div>
+  <div class="lab">
+    <div class="bar"><span class="dot" style="background:var(--pink)"></span><span class="dot" style="background:var(--lav)"></span><span class="dot" style="background:var(--navy)"></span><span class="t">rbm_probe.sim</span></div>
+    <div class="lab-body">
+      <div class="ctrl">
+        <label>보이는 뉴런 v (눌러서 켜고 끄기)</label>
+        <div id="vis7" style="display:flex;gap:8px"></div>
+        <p style="font-size:14px;color:var(--mute)">숨은 뉴런 h₁: w = (0.8, −0.4, 0.6), c = −0.5<br>숨은 뉴런 h₂: w = (−0.6, 1.2, −0.6), c = −0.3</p>
+        <label>층 쌓기 순서</label>
+        <button class="btn" id="step7" type="button">한 단계씩 ▶</button><button class="btn ghost" id="rst7" type="button">처음부터</button>
+        <div class="readout" id="stepout7" aria-live="polite" style="margin-top:8px"></div>
+      </div>
+      <div>
+        <svg id="plot7" viewBox="0 0 520 240" role="img" aria-label="두 숨은 뉴런이 켜질 확률 막대"></svg>
+        <div class="readout" id="out7" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+  <div class="sol">
+    <p><b>시아의 보고</b> · v = (1, 0, 1)일 때 h₁의 켜질 확률은 0.711, h₂는 0.182예요. v = (0, 1, 0)으로 바꾸면 h₁ 0.289, h₂ 0.711로 뒤바뀌어요. 층 쌓기 순서에서는 다섯 단계 중 <b>⑤ 미세조정에서 처음으로</b> 정답표가 쓰여요.</p>
+    <p><b>박사의 해석</b> · h₁은 "양 끝 무늬", h₂는 "가운데 무늬" 탐지기처럼 행동합니다. 이런 탐지기를 정답 없이 데이터만으로 만들어 두는 것이 사전학습이에요. 주판봇 말처럼 지금은 많은 경우 처음부터 한 번에 학습해도 되지만, 그건 이후 십여 년 동안 나온 여러 기법 덕분입니다. 당시에는 이 순서가 깊은 학습을 가능하게 한 열쇠였어요.</p>
+  </div>
+</div></section>
+
+<section id="judge-sec"><div class="wrap">
+  <h2><span class="no">07</span>AI 판단 코너 — 이 답, 믿어도 될까?</h2>
+  <div class="judge">
+    <h3>AI 도우미가 이렇게 답했습니다</h3>
+    <div class="ai-out">Q. 2026년에 새 이미지 분류 프로젝트를 시작합니다. 어떤 모델로 시작할까요?
+A. DBN을 추천합니다. DBN은 비지도 사전학습 덕분에 어떤 이미지 분류 문제에서든 최고 성능을 보장하는 최신 기법입니다.</div>
+    <p>어디가 이상할까요?</p>
+    <div class="choices" data-answer="c">
+      <button data-k="a" data-why="DBN도 이미지 분류에 쓸 수는 있어요. 문제는 다른 데 있어요.">DBN은 이미지를 아예 다룰 수 없다</button>
+      <button data-k="b" data-why="DBN 사전학습은 정답표 없이(비지도) 하는 게 맞아요.">DBN의 사전학습은 정답표가 꼭 필요하다</button>
+      <button data-k="c">DBN은 2006년의 설계로 '최신'이 아니고, '어떤 문제든 최고 성능 보장'도 근거가 없다. 지금 이미지 분류는 CNN이나 비전 트랜스포머(미리 배운 모델 가져오기)로 시작하는 것이 보통이다</button>
+    </div>
+    <p class="feedback" data-ok="맞아요. '최신', '보장' 같은 말은 날짜와 근거를 확인해야 해요. AI의 지식이 오래된 자료에 기대고 있을 수도 있어요."></p>
+  </div>
+</div></section>
+
+<section id="limit"><div class="wrap">
+  <h2><span class="no">08</span>이 설계의 한계 → 다음 도면</h2>
+  <div class="limit"><b>한계 1 · 학습이 번거롭고 느리다</b> — 층마다 따로 학습하고, RBM 학습은 근사(CD)에 기대서 조절할 것이 많습니다.<br>
+    <b>한계 2 · 지금은 더 단순한 길이 있다</b> — ReLU, 가중치 초기화, 정규화 층, 큰 데이터 덕분에 사전학습 없이 깊은 모델을 바로 학습할 수 있게 되면서 거의 쓰이지 않게 됐어요.<br>
+    <b>한계 3 · 진짜 같은 그림을 그리기엔 약하다</b> — 생성 모델이지만 선명한 사진을 그려 내는 데에는 한계가 있었어요. 다른 방식으로 이를 넘은 것이 <a href="08_gan.html">08 GAN</a>입니다.</div>
+  <div class="recap"><b>정리</b> · DBN은 RBM을 아래층부터 정답 없이 한 층씩 학습해 쌓고, 마지막에 정답표로 전체를 다듬는 설계입니다. 지금은 잘 쓰지 않지만, "미리 배우고 나중에 다듬기"라는 생각을 남겼어요.</div>
+</div></section>
+
+<section id="quiz"><div class="wrap">
+  <h2><span class="no">09</span>확인 퀴즈</h2>
+  <div class="quiz"><p class="qq">Q1. DBN에서 정답표(라벨)가 처음 쓰이는 단계는?</p>
+    <div class="choices" data-answer="c"><button data-k="a" data-why="RBM 1은 정답 없이 데이터만으로 학습해요.">① RBM 1 학습</button><button data-k="b" data-why="RBM 2도 정답 없이 배워요.">③ RBM 2 학습</button><button data-k="c">⑤ 미세조정</button></div>
+    <p class="feedback" data-ok="맞아요. 그 전까지는 모두 비지도 사전학습이에요."></p></div>
+  <div class="quiz"><p class="qq">Q2. v = (1, 0, 1), w = (0.8, −0.4, 0.6), c = −0.5일 때 숨은 뉴런이 켜질 확률은 약?</p>
+    <div class="choices" data-answer="b"><button data-k="a" data-why="0.9는 시그모이드에 넣기 전의 합이에요.">0.9</button><button data-k="b">0.711</button><button data-k="c" data-why="0.289는 합이 −0.9일 때예요.">0.289</button></div>
+    <p class="feedback" data-ok="맞아요. σ(0.9) ≈ 0.711."></p></div>
+</div></section>
+
+<section id="memo"><div class="wrap">
+  <h2><span class="no">10</span>감수 메모 — 참고 자료와 다른 곳</h2>
+  <div class="memo">참고 인포그래픽의 DBN 장 <b>"DBN vs 다른 모델" 표</b>는 열이 어긋나 있었고, <span class="redpen">"Supervised modelen", "pɑd"</span>처럼 깨진 글자가 있었으며, CNN 줄에 "좋은 압축·재구성", RNN/LSTM 줄에 "공간 데이터에 뛰어남·이미지, 영상"처럼 다른 줄의 내용이 섞여 있었습니다. <b>원자료의 이 표를 이 페이지에서는 아래 표로 바꿉니다.</b>
+    <table class="diff" style="margin-top:12px">
+      <tr><th>모델</th><th>종류</th><th>학습</th><th>잘하는 일</th></tr>
+      <tr><td>DBN</td><td>생성 모델</td><td>비지도 사전학습 → 지도 미세조정</td><td>층별 특징 학습 (지금은 역사적 의미)</td></tr>
+      <tr><td>오토인코더</td><td>표현 학습 (기본형은 생성 모델로 보지 않음, VAE는 생성 모델)</td><td>비지도</td><td>압축·재구성, 차원 축소, 이상 탐지</td></tr>
+      <tr><td>CNN</td><td>판별 모델</td><td>지도</td><td>공간 데이터(그림·영상)</td></tr>
+      <tr><td>RNN / LSTM</td><td>판별 모델 (주로)</td><td>지도</td><td>순서 데이터(문장·시계열)</td></tr>
+    </table>
+    <p style="margin:10px 0 0">원자료는 오토인코더의 종류를 "생성(Generative)"으로 적었는데, 기본 오토인코더는 새 데이터를 뽑아내는 장치가 아니라서 이 페이지에서는 "표현 학습"으로 바꿨어요. 자세한 내용은 <a href="10_review.html#errata">10 감수 도면의 의견서</a>에 있어요.</p></div>
+</div></section>
+
+<script>
+(function(){
+  var $=BP.$, v=[1,0,1], W=[[0.8,-0.4,0.6],[-0.6,1.2,-0.6]], C=[-0.5,-0.3], st=0;
+  var STEPS=['① RBM 1 학습: 보이는 층 ↔ 은닉층 1. 정답표 쓰지 않음','② 변환: 은닉층 1의 반응을 새 데이터로. 정답표 쓰지 않음','③ RBM 2 학습: 은닉층 1 ↔ 은닉층 2. 정답표 쓰지 않음','④ 반복: 은닉층 2 ↔ 은닉층 3까지. 정답표 쓰지 않음','⑤ 미세조정: 분류기를 얹고 <b>정답표를 처음 사용</b>해 전체를 다듬음'];
+  var box=$('#vis7');
+  v.forEach(function(_,i){var b=document.createElement('button');b.type='button';b.className='cellbtn';b.style.cssText='width:56px;height:56px;border:2px solid #1E2F5C;border-radius:6px;cursor:pointer;font:14px Galmuri11,monospace';b.setAttribute('aria-label','보이는 뉴런 v'+(i+1));b.addEventListener('click',function(){v[i]=1-v[i];draw()});box.appendChild(b)});
+  function draw(){
+    BP.$$('button',box).forEach(function(b,i){b.style.background=v[i]?'#6E5BA8':'#fff';b.style.color=v[i]?'#fff':'#1E2F5C';b.textContent='v'+(i+1)+'='+v[i]});
+    var z=W.map(function(w,j){return w[0]*v[0]+w[1]*v[1]+w[2]*v[2]+C[j]}), p=z.map(BP.sig);
+    var s=$('#plot7');while(s.firstChild)s.removeChild(s.firstChild);
+    ['h₁ (양 끝 무늬?)','h₂ (가운데 무늬?)'].forEach(function(n,j){var y=40+j*90;
+      s.appendChild(BP.svg('text',{x:6,y:y+24,'font-size':14,fill:'#1E2F5C'},n));
+      s.appendChild(BP.svg('rect',{x:150,y:y,width:320,height:36,fill:'#f6f8fc',stroke:'#d3e1f4'}));
+      s.appendChild(BP.svg('rect',{x:150,y:y,width:320*p[j],height:36,fill:'#6E5BA8'}));
+      s.appendChild(BP.svg('text',{x:476,y:y+24,'font-size':14,fill:'#1E2F5C'},BP.fmt(p[j],3)));
+      s.appendChild(BP.svg('text',{x:150,y:y+54,'font-size':12,fill:'#6b6b7a'},'합 '+BP.fmt(z[j],2)+' → σ'));});
+    $('#out7').innerHTML='v = ('+v.join(', ')+') · <b>h₁ 켜질 확률 '+BP.fmt(p[0],3)+'</b> · <b>h₂ 켜질 확률 '+BP.fmt(p[1],3)+'</b>';
+  }
+  function steps(){
+    BP.$$('#steps7 g').forEach(function(g){var k=+g.getAttribute('data-s'),r=g.querySelector('rect');r.setAttribute('fill',k<=st?(k===5?'#fff4f5':'#f5f2fb'):'#fff');r.setAttribute('stroke-width',k===st?4:2)});
+    $('#stepout7').innerHTML=st?STEPS[st-1]:'버튼을 누르면 구조도 아래쪽 단계가 하나씩 켜져요.';
+    $('#step7').disabled=st>=5;
+  }
+  $('#step7').addEventListener('click',function(){if(st<5)st++;steps()});
+  $('#rst7').addEventListener('click',function(){st=0;steps()});
+  draw();steps();
+})();
+</script>
+
+</main>
+<section id="next"><div class="wrap">
+  <h2><span class="no">▣</span>다른 도면 펼치기</h2>
+  <div class="pnav"><a href="06_autoencoder.html"><small>← 앞 도면 DL-06</small>AE · 오토인코더</a><a class="ix" href="index.html">INDEX</a><a class="nx" href="08_gan.html"><small>다음 도면 DL-08 →</small>GAN · 적대적 생성 신경망</a></div>
+</div></section>
+<!-- lab-kg:body -->
+<section class="kgx kgx-sec" id="kg"><div class="kgx-wrap">
+<h2>지식 색인 — 이 페이지에서 찾아보기</h2>
+<p class="kgx-sub">이 페이지에 나온 개념, 방법, 생물 대응, 주장, 열린 질문을 한곳에 모았다. 검색하고, 항목을 눌러 이웃 관계를 보고, "설명 보러 가기"로 본문에 돌아간다.</p>
+<div id="kg-mount"></div>
+</div></section>
+<section class="kgx kgx-sec" id="export"><div class="kgx-wrap">
+<h2>온톨로지·서지 꾸러미 — 이 페이지의 지식을 가져가기</h2>
+<p class="kgx-sub">지식 색인을 출처와 함께 파일로 내려받는다. Zotero(BibTeX·RIS), Protégé(Turtle), Neo4j·Gephi(CSV), 여러 페이지 합치기(kg.json)에 쓴다.</p>
+<div id="export-mount"></div>
+</div></section>
+<script type="application/json" id="kg-raw">{"version":"1.0","page":"07_dbn","nodes":[{"id":"lab:method/dbn","type":"Method","label":{"ko":"심층 신뢰 신경망","en":"Deep belief network"},"anchor":"#dwg","level":2,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"RBM을 한 층씩 비지도 사전학습으로 쌓고, 정답표로 미세조정하는 생성 모델."},"page":"07_dbn"},{"id":"lab:method/rbm","type":"Method","label":{"ko":"제한 볼츠만 머신","en":"Restricted Boltzmann machine"},"anchor":"#math","level":2,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"보이는 층과 숨은 층 두 층만 서로 이어진 확률 모델. 같은 층끼리는 잇지 않는다."},"page":"07_dbn"},{"id":"lab:concept/pretraining","type":"Concept","label":{"ko":"층별 사전학습","en":"Greedy layer-wise pretraining"},"anchor":"#spec","level":2,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"아래층부터 하나씩 따로 학습해 좋은 출발점을 만드는 방법."},"page":"07_dbn"},{"id":"lab:concept/cd","type":"Method","label":{"ko":"대조 발산","en":"Contrastive divergence"},"anchor":"#spec","level":3,"status":"known","confidence":"high","coverage":"mentioned","domain":["ai"],"match":[],"definition":{"ko":"RBM을 빠르게 학습시키는 근사 방법."},"page":"07_dbn"}],"edges":[{"s":"lab:method/dbn","p":"lab:broader","o":"lab:topic/unsupervised-learning","anchor":"#dwg","confidence":"high"},{"s":"lab:method/dbn","p":"lab:uses","o":"lab:method/rbm","anchor":"#dwg","confidence":"high"},{"s":"lab:method/dbn","p":"lab:uses","o":"lab:concept/pretraining","anchor":"#dwg","confidence":"high"},{"s":"lab:method/rbm","p":"lab:uses","o":"lab:concept/cd","anchor":"#dwg","confidence":"high"},{"s":"lab:concept/pretraining","p":"lab:relatedTo","o":"lab:topic/transfer-learning","anchor":"#dwg","confidence":"high"}]}</script>
+<script type="application/ld+json" id="kg-ld">{"@context":{"@vocab":"urn:lab:","lab":"urn:lab:","skos":"http://www.w3.org/2004/02/skos/core#","schema":"https://schema.org/","dct":"http://purl.org/dc/terms/","prov":"http://www.w3.org/ns/prov#","rdfs":"http://www.w3.org/2000/01/rdf-schema#"},"@graph":[{"@id":"urn:lab:page/07","@type":["schema:LearningResource","schema:WebPage"],"schema:name":"DL-07 심층 신뢰 신경망 설계도면","schema:dateCreated":"2026-11-26","schema:version":"1.0","dct:isPartOf":"딥러닝 설계도면 연구실 01","schema:about":[{"@id":"lab:method/dbn"}],"schema:educationalLevel":"입문","dct:source":[{"@id":"lab:work/hinton2006nc"},{"@id":"lab:work/ref-infographic"},{"@id":"lab:work/ref-infographic"}]},{"@id":"lab:method/dbn","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"심층 신뢰 신경망","@language":"ko"},{"@value":"Deep belief network","@language":"en"}],"skos:definition":[{"@value":"RBM을 한 층씩 비지도 사전학습으로 쌓고, 정답표로 미세조정하는 생성 모델.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"07_dbn","lab:anchor":"#dwg","lab:broader":[{"@id":"lab:topic/unsupervised-learning"}],"skos:broader":[{"@id":"lab:topic/unsupervised-learning"}],"lab:uses":[{"@id":"lab:method/rbm"},{"@id":"lab:concept/pretraining"}]},{"@id":"lab:method/rbm","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"제한 볼츠만 머신","@language":"ko"},{"@value":"Restricted Boltzmann machine","@language":"en"}],"skos:definition":[{"@value":"보이는 층과 숨은 층 두 층만 서로 이어진 확률 모델. 같은 층끼리는 잇지 않는다.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"07_dbn","lab:anchor":"#math","lab:uses":[{"@id":"lab:concept/cd"}]},{"@id":"lab:concept/pretraining","@type":["lab:Concept","skos:Concept"],"skos:prefLabel":[{"@value":"층별 사전학습","@language":"ko"},{"@value":"Greedy layer-wise pretraining","@language":"en"}],"skos:definition":[{"@value":"아래층부터 하나씩 따로 학습해 좋은 출발점을 만드는 방법.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"07_dbn","lab:anchor":"#spec","lab:relatedTo":[{"@id":"lab:topic/transfer-learning"}],"skos:related":[{"@id":"lab:topic/transfer-learning"}]},{"@id":"lab:concept/cd","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"대조 발산","@language":"ko"},{"@value":"Contrastive divergence","@language":"en"}],"skos:definition":[{"@value":"RBM을 빠르게 학습시키는 근사 방법.","@language":"ko"}],"lab:level":3,"lab:status":"known","lab:confidence":"high","lab:coverage":"mentioned","lab:page":"07_dbn","lab:anchor":"#spec"}]}</script>
+<script type="application/json" id="refs-csl">[{"id":"hinton2006nc","type":"article-journal","title":"A fast learning algorithm for deep belief nets","author":[{"family":"Hinton","given":"Geoffrey E."},{"family":"Osindero","given":"Simon"},{"family":"Teh","given":"Yee-Whye"}],"container-title":"Neural Computation","volume":"18","issue":"7","page":"1527-1554","issued":{"date-parts":[[2006]]},"DOI":"10.1162/neco.2006.18.7.1527","lab":{"verified":{"title":true,"author":true,"issued":true,"container-title":true,"DOI":true}}},{"id":"ref-infographic","type":"graphic","title":"9 Deep Learning Algorithms Every Engineer Should Know (인포그래픽 10장)","note":"작성자 표기 없음. 이 시리즈는 내용만 참고하고 그림은 새로 그렸다.","lab":{"verified":{"title":true}}}]</script>
+<script type="application/json" id="page-meta">{"title":"DL-07 심층 신뢰 신경망 설계도면","number":"07","series":"딥러닝 설계도면 연구실 01","date":"2026-11-26","version":"1.0","creator":[{"name":"안상선","role":"author"}],"contributor":[{"name":"AI 보조 제작","role":"assistant"}],"about":["lab:method/dbn"],"basedOn":["hinton2006nc","ref-infographic","ref-infographic"],"educationalLevel":"입문","license":"","url":"https://adminmrobo.github.io/deep_learning_model_design_lab_01/07_dbn.html","registry":"KG_00_registry 0.3","seeAlso":"https://adminmrobo.github.io/deep_learning_model_design_lab_01/index.html","suggestedCitation":"안상선 (2026). DL-07 심층 신뢰 신경망 설계도면. 딥러닝 설계도면 연구실 01 v1.0."}</script>
+<!-- /lab-kg:body -->
+<footer>
+  <div class="wrap">
+    <p>글 · 안상선 (<a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">https://adminmrobo.github.io/who_am_i/who_am_i.html</a>) · (주)M-Robo 대표</p>
+    <p>캐릭터: 조수 하루 · 인턴 모아 · 인턴 시아 · 초파리 연구원 · 주판봇 · 박사 — <a href="https://github.com/adminmrobo/fruitfly-lab-expressions">fruitfly-lab-expressions</a> 픽셀아트 캐릭터 팩. 도면 그림은 이 저장소에서 새로 그렸습니다.</p>
+    <p>참고 자료: 「9 Deep Learning Algorithms Every Engineer Should Know」 인포그래픽 10장(작성자 표기 없음). 내용만 참고했고, 그림과 문장은 새로 만들었으며 틀린 곳은 고쳤습니다(<a href="10_review.html#errata">감수 의견서</a>).</p>
+    <p>저장소: <a href="https://github.com/adminmrobo/deep_learning_model_design_lab_01">adminmrobo/deep_learning_model_design_lab_01</a> · <a href="https://www.ahnboat.xyz">ahnboat.xyz</a></p>
+  </div>
+</footer>
+<!-- lab-kg:script -->
+<script src="kg/kgx.js"></script>
+<!-- /lab-kg:script -->
+</body>
+</html>

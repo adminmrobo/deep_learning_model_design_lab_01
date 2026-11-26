@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>실전 연습장 — 설계 의뢰 접수처 | 딥러닝 설계도면 연구실 01</title>
+<meta name="description" content="현장 의뢰서를 받고 아홉 설계도 중 하나를 골라 조건을 맞춰 보는 연습장.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="실전 연습장 — 설계 의뢰 접수처 | 딥러닝 설계도면 연구실 01">
+<meta property="og:description" content="현장 의뢰서를 받고 아홉 설계도 중 하나를 골라 조건을 맞춰 보는 연습장.">
+<meta property="og:image" content="https://adminmrobo.github.io/deep_learning_model_design_lab_01/assets/img/covers/og_00.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/img/chars/asst_e13.webp">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css">
+<link rel="stylesheet" href="../assets/css/blueprint.css">
+<script src="../assets/js/blueprint.js"></script>
+<!-- px-fix v1 --><style id="px-fix">img{image-rendering:auto!important}</style><script id="px-fix-js">(function(){var R=window.ResizeObserver;function f(i){var n=i.naturalWidth,w=i.getBoundingClientRect().width;if(!n||!w)return;var s=w*(window.devicePixelRatio||1)/n;i.style.setProperty("image-rendering",s>=1.95?"pixelated":"auto","important")}var ro=R?new R(function(es){es.forEach(function(e){f(e.target)})}):null;function a(i){if(i.__px)return;i.__px=1;i.addEventListener("load",function(){f(i)});if(ro)ro.observe(i);f(i)}function all(r){(r||document).querySelectorAll&&(r||document).querySelectorAll("img").forEach(a)}function go(){all();if(window.MutationObserver)new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType!==1)return;if(n.tagName==="IMG")a(n);else all(n)})})}).observe(document.documentElement,{childList:true,subtree:true});window.addEventListener("resize",function(){document.querySelectorAll("img").forEach(f)})}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go()})();</script><!-- /px-fix -->
+</head>
+<body class="by-review">
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<nav class="topnav" aria-label="도면 목록"><div class="wrap"><a class="home" href="../index.html">DL 설계도면 연구실</a><a href="../01_fnn.html">01 FNN</a><a href="../02_cnn.html">02 CNN</a><a href="../03_rnn.html">03 RNN</a><a href="../04_lstm.html">04 LSTM</a><a href="../05_gru.html">05 GRU</a><a href="../06_autoencoder.html">06 AE</a><a href="../07_dbn.html">07 DBN</a><a href="../08_gan.html">08 GAN</a><a href="../09_transformer.html">09 Transformer</a><a href="../10_review.html">10 감수</a><a href="../practice/index.html" class="here" aria-current="page">실전 연습장</a></div></nav>
+<div class="wrap">
+  <div class="term">
+    <div class="bar"><span class="dot" style="background:var(--pink)"></span><span class="dot" style="background:var(--lav)"></span><span class="dot" style="background:var(--navy)"></span><span class="t mono">blueprint · PRACTICE</span></div>
+    <div class="term-body">
+      <p class="prompt mono"><b>doc@lab</b>:~$ open request_desk.sim</p>
+      <div class="hero">
+        <div class="who"><img src="../assets/img/chars/doc_e08.webp" alt="안내하는 박사" width="192" height="192"></div>
+        <div>
+          <h1>REQUEST<br>DESK</h1>
+          <div class="sub">마지막 장 · 실전 연습장 — 설계 의뢰 접수처</div>
+          <p class="by">현장에서 온 의뢰서 네 장. 아홉 설계도 가운데 하나를 골라 제출하면, 감수자 넷이 바로 판정합니다.</p>
+          <span class="motto pix">판정은 데이터로 한다.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+<section id="how"><div class="wrap">
+  <h2><span class="no">01</span>연습장 쓰는 법</h2>
+  <div class="three">
+    <div><b>① 의뢰서 고르기</b>위쪽 탭에서 현장 하나를 고릅니다. 주소 끝에 #photo, #call, #vibe, #rare를 붙이면 그 의뢰서가 바로 열려요.</div>
+    <div><b>② 조건 바꾸고 설계도 고르기</b>초록 조작판은 현장 조건, 파란 단추는 내 결정입니다. 막대 그래프가 설계도마다의 적합도를 보여 줘요.</div>
+    <div><b>③ 미션 세 개</b>가장 맞는 설계도 찾기 · 함정 살펴보기 · 조건을 바꿔도 결론이 유지되는지 확인. 조작해야 통과 표시가 켜져요.</div>
+  </div>
+  <p class="calm">적합도 점수는 아홉 도면의 내용을 바탕으로 만든 <b>교육용 예시 값</b>입니다. 실제 모델 성능을 잰 숫자가 아니며, 실제 프로젝트에서는 같은 데이터로 직접 시험해 비교해야 해요.</p>
+</div></section>
+
+<section id="desk"><div class="wrap">
+  <h2><span class="no">02</span>의뢰서 접수</h2>
+  <div id="tabs" role="tablist" aria-label="의뢰서" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px"></div>
+  <div class="say-row neutral"><img src="../assets/img/chars/doc_e07.webp" alt="" width="64" height="64"><div class="bubble"><b class="nm">의뢰서</b><span id="brief"></span></div></div>
+  <div class="lab">
+    <div class="bar"><span class="dot" style="background:var(--pink)"></span><span class="dot" style="background:var(--lav)"></span><span class="dot" style="background:var(--navy)"></span><span class="t" id="labname">request.sim</span></div>
+    <div class="lab-body">
+      <div class="ctrl">
+        <div style="background:#f2fbf5;border:2px solid #cfe9d8;border-radius:8px;padding:10px 12px">
+          <label for="cond" id="condlab" style="margin-top:0">조건</label><input type="range" id="cond" min="0" max="1" step="0.01" value="0.5">
+          <div id="condval" class="pix" style="color:#2e8b57;font-size:14px"></div>
+        </div>
+        <label style="margin-top:14px">내 결정 · 설계도 고르기</label>
+        <div id="picks" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px"></div>
+      </div>
+      <div>
+        <div id="card" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:10px"></div>
+        <svg id="bars" viewBox="0 0 560 230" role="img" aria-label="설계도별 적합도 막대"></svg>
+        <svg id="lines" viewBox="0 0 560 200" role="img" aria-label="조건에 따른 상위 설계도의 적합도 곡선" style="margin-top:8px"></svg>
+      </div>
+    </div>
+  </div>
+  <div class="talk" id="voices" style="margin-top:18px"></div>
+  <h3>미션</h3>
+  <div id="missions" class="steps"></div>
+  <p id="back" style="font-size:15px;margin-top:14px"></p>
+</div></section>
+
+<section id="wrapup"><div class="wrap">
+  <h2><span class="no">03</span>네 의뢰서가 함께 묻는 것</h2>
+  <div class="recap">네 현장 모두에서 "가장 크고 새로운 설계도"가 늘 이기지는 않았습니다. 사진이 적으면 CNN이, 문장이 짧으면 GRU가, 정답표가 없으면 오토인코더가 앞섰어요. 그리고 조건이 바뀌면(사진이 아주 많아지면, 정답이 쌓이면, 종류가 많아지면) 1등도 바뀌었죠. 설계도를 고르는 일은 <b>데이터 모양 → 목적 → 데이터 양·정답 유무·자원</b> 순서로 좁힌 뒤, 후보 두세 개를 같은 데이터로 시험하는 일입니다.</div>
+  <div class="limit"><b>이 연습장의 한계</b> — 적합도는 아홉 도면의 설명을 규칙으로 옮긴 교육용 예시 값이고, 조건도 하나씩만 바꿔 볼 수 있게 단순하게 만들었습니다. 실제 성능은 데이터 품질, 모델 크기, 학습 설정에 따라 크게 달라져요. 경영·투자 판단의 근거로 쓰지 마세요.</div>
+</div></section>
+</main>
+
+<script>
+(function(){
+  var $=BP.$, M=['FNN','CNN','RNN','LSTM','GRU','AE','DBN','GAN','Transformer'];
+  var FILE={FNN:'01_fnn',CNN:'02_cnn',RNN:'03_rnn',LSTM:'04_lstm',GRU:'05_gru',AE:'06_autoencoder',DBN:'07_dbn',GAN:'08_gan',Transformer:'09_transformer'};
+  var KO={FNN:'01 FNN',CNN:'02 CNN',RNN:'03 RNN',LSTM:'04 LSTM',GRU:'05 GRU',AE:'06 오토인코더',DBN:'07 DBN',GAN:'08 GAN',Transformer:'09 트랜스포머'};
+  /* 적합도 = base + slope × 조건(0~1) · 교육용 예시 값 */
+  var T={
+    photo:{tab:'배터리 외관 사진 판정',brief:'"배터리 셀 겉면 사진을 보고 긁힘·찍힘 불량을 가려내 주세요. 정상·불량 표시가 붙은 사진이 있습니다." — 배터리 공장 품질팀',
+      cond:'정답이 붙은 사진 수',fmt:function(s){return Math.round(500*Math.pow(1000,s)).toLocaleString('ko-KR')+'장'},s0:0.53,
+      base:{FNN:38,CNN:84,RNN:15,LSTM:15,GRU:15,AE:30,DBN:28,GAN:10,Transformer:52},slope:{FNN:6,CNN:6,RNN:0,LSTM:0,GRU:0,AE:4,DBN:0,GAN:0,Transformer:41},
+      need:'정답 표시 필요',m2:{t:'함정 살펴보기 — 사진이 아주 적을 때',d:'사진 수를 가장 적게(왼쪽 끝) 내리고, 09 트랜스포머의 적합도가 60점 아래로 떨어지는 것을 확인하세요.',ok:function(s,sc){return s<=0.03&&sc.Transformer<60}},
+      m3:{t:'결론이 유지될까 — 사진이 아주 많을 때',d:'사진 수를 가장 많이(오른쪽 끝) 올리고, 그때의 1등 설계도를 골라 제출하세요. 1등이 바뀌나요?',ok:function(s,sc,pick,best){return s>=0.97&&pick===best}},
+      fly:'사진이 수십만 장이면 모르지만, 지금 장수로 큰 트랜스포머를 처음부터? 의심스럽네.'},
+    call:{tab:'콜센터 상담 문장 분류',brief:'"고객 상담 기록을 읽고 문의 유형(환불·교환·배송·불만)을 자동으로 나눠 주세요. 분류 표시가 붙은 기록은 충분합니다." — 쇼핑몰 고객센터',
+      cond:'상담 기록 평균 길이',fmt:function(s){return Math.round(10*Math.pow(200,s)).toLocaleString('ko-KR')+'단어'},s0:0.6,
+      base:{FNN:40,CNN:48,RNN:72,LSTM:78,GRU:80,AE:20,DBN:18,GAN:5,Transformer:70},slope:{FNN:-15,CNN:-12,RNN:-55,LSTM:-35,GRU:-36,AE:0,DBN:0,GAN:0,Transformer:25},
+      need:'정답 표시 필요',m2:{t:'함정 살펴보기 — 아주 짧은 문장',d:'평균 길이를 가장 짧게(왼쪽 끝) 내리고, 05 GRU가 09 트랜스포머보다 앞서는 것을 확인하세요.',ok:function(s,sc){return s<=0.03&&sc.GRU>sc.Transformer}},
+      m3:{t:'결론이 유지될까 — 아주 긴 상담',d:'평균 길이를 가장 길게(오른쪽 끝) 올리고, 그때의 1등 설계도를 골라 제출하세요.',ok:function(s,sc,pick,best){return s>=0.97&&pick===best}},
+      fly:'한두 문장짜리 문의에도 꼭 큰 걸 써야 해? 짧을 땐 가벼운 순서 모델과 비교해 봐.'},
+    vibe:{tab:'설비 진동 이상 감지',brief:'"압연기 진동 센서로 고장 징후를 미리 알고 싶어요. 정상 운전 기록은 1년치가 있는데, 고장 기록은 거의 없습니다." — 철강 공장 설비팀',
+      cond:'고장 정답이 붙은 기록 수',fmt:function(s){return Math.round(2000*s*s).toLocaleString('ko-KR')+'건'},s0:0.07,
+      base:{FNN:30,CNN:30,RNN:35,LSTM:40,GRU:40,AE:85,DBN:45,GAN:35,Transformer:35},slope:{FNN:30,CNN:30,RNN:35,LSTM:50,GRU:49,AE:-15,DBN:0,GAN:0,Transformer:45},
+      need:'정답 거의 없음',m2:{t:'함정 살펴보기 — 정답이 0건일 때',d:'고장 기록 수를 0건(왼쪽 끝)으로 내리고, 04 LSTM의 적합도가 오토인코더의 절반에도 못 미치는 것을 확인하세요.',ok:function(s,sc){return s<=0.03&&sc.LSTM<sc.AE/2}},
+      m3:{t:'결론이 유지될까 — 고장 기록이 쌓이면',d:'고장 기록 수를 최대(오른쪽 끝)로 올리고, 그때의 1등 설계도를 골라 제출하세요.',ok:function(s,sc,pick,best){return s>=0.97&&pick===best}},
+      fly:'고장 정답이 열 건뿐인데 정답표로 배우는 모델을? 그 열 건만 외워 버릴걸.'},
+    rare:{tab:'희귀 불량 사진 늘리기',brief:'"드물게 생기는 불량 사진이 120장뿐이에요. 판정 모델을 학습시키려고, 진짜 같은 불량 사진을 더 만들고 싶습니다." — 디스플레이 공장 검사팀',
+      cond:'불량 종류 수',fmt:function(s){return Math.round(1+9*s)+'종'},s0:0.1,
+      base:{FNN:10,CNN:25,RNN:5,LSTM:5,GRU:5,AE:58,DBN:40,GAN:85,Transformer:35},slope:{FNN:0,CNN:0,RNN:0,LSTM:0,GRU:0,AE:8,DBN:0,GAN:-27,Transformer:5},
+      need:'정답 표시 불필요',m2:{t:'함정 살펴보기 — 판정 모델로 만들기?',d:'02 CNN을 골라 제출해 보세요. 판정은 잘하지만 새 사진을 만드는 설계가 아니라서 적합도가 낮아요.',ok:function(s,sc,pick){return pick==='CNN'}},
+      m3:{t:'결론이 유지될까 — 불량 종류가 많아지면',d:'불량 종류 수를 최대(오른쪽 끝)로 올리고, 그때의 1등 설계도를 골라 제출하세요. 모드 붕괴 위험을 떠올려 보세요.',ok:function(s,sc,pick,best){return s>=0.97&&pick===best}},
+      fly:'한 무리만 그럴듯하게 흉내 내는 모드 붕괴, 잊었어? 종류가 많으면 결과를 종류별로 세어 봐.'}
+  };
+  var KEYS=['photo','call','vibe','rare'], cur='photo', st={};
+  KEYS.forEach(function(k){st[k]={s:T[k].s0,pick:null,touched:false,done:[false,false,false]}});
+  function scores(k,s){var t=T[k],o={};M.forEach(function(m){o[m]=Math.max(0,Math.min(100,t.base[m]+t.slope[m]*s))});return o}
+  function bestOf(sc){return M.reduce(function(a,b){return sc[b]>sc[a]?b:a},M[0])}
+  var tabs=$('#tabs');
+  KEYS.forEach(function(k){var b=document.createElement('button');b.type='button';b.className='btn ghost';b.setAttribute('role','tab');b.textContent=T[k].tab;b.dataset.k=k;b.addEventListener('click',function(){go(k)});tabs.appendChild(b)});
+  var picks=$('#picks');
+  M.forEach(function(m){var b=document.createElement('button');b.type='button';b.className='btn ghost';b.style.cssText='margin:0;padding:6px 4px;font-size:13px';b.textContent=KO[m];b.dataset.m=m;b.addEventListener('click',function(){st[cur].pick=m;st[cur].touched=true;render()});picks.appendChild(b)});
+  $('#cond').addEventListener('input',function(){st[cur].s=+this.value;st[cur].touched=true;render()});
+  function go(k){cur=k;$('#cond').value=st[k].s;try{history.replaceState(null,'','#'+k)}catch(e){}render()}
+  function line(who,img,txt,me){return '<div class="line'+(me?' me':'')+'"><img src="../assets/img/chars/'+img+'.webp" alt="'+who+'" width="56" height="56"><p><b>'+who+'</b>'+txt+'</p></div>'}
+  function render(){
+    var t=T[cur],S=st[cur],s=S.s,sc=scores(cur,s),best=bestOf(sc),pick=S.pick;
+    BP.$$('button',tabs).forEach(function(b){var on=b.dataset.k===cur;b.classList.toggle('ghost',!on);b.setAttribute('aria-selected',on)});
+    BP.$$('button',picks).forEach(function(b){b.classList.toggle('ghost',b.dataset.m!==pick)});
+    $('#brief').textContent=t.brief;$('#labname').textContent=cur+'_request.sim';
+    $('#condlab').textContent='현장 조건 · '+t.cond;$('#condval').textContent=t.fmt(s);
+    var ps=pick?sc[pick]:null, rank=pick?M.slice().sort(function(a,b){return sc[b]-sc[a]}).indexOf(pick)+1:null;
+    function tile(l,v,good){return '<div style="border:2px solid '+(good==null?'#ecebf2':good?'#2e8b57':'#d9443a')+';border-radius:8px;padding:8px;text-align:center;background:'+(good==null?'#faf9fc':good?'#f2fbf5':'#fff5f4')+'"><div style="font-size:12px;color:#6b6b7a">'+l+'</div><div class="pix" style="font-size:18px;color:#1E2F5C">'+v+'</div></div>'}
+    $('#card').innerHTML=tile('내 설계도',pick?KO[pick].split(' ')[1]:'—',null)+tile('적합도',pick?Math.round(ps)+'점':'—',pick?ps>=75:null)+tile('순위',pick?rank+' / 9':'—',pick?rank===1:null)+tile('정답표',t.need,null);
+    var g=$('#bars');while(g.firstChild)g.removeChild(g.firstChild);
+    M.forEach(function(m,i){var x=12+i*61,h=170*sc[m]/100;
+      g.appendChild(BP.svg('rect',{x:x,y:190-h,width:44,height:h,fill:m===pick?'#d9443a':(m===best?'#2e8b57':'#c3cfe2'),stroke:m===best?'#1E2F5C':'none','stroke-width':2}));
+      g.appendChild(BP.svg('text',{x:x+22,y:186-h,'font-size':12,'text-anchor':'middle',fill:'#1E2F5C'},Math.round(sc[m])+''));
+      g.appendChild(BP.svg('text',{x:x+22,y:208,'font-size':11,'text-anchor':'middle',fill:'#1E2F5C'},m==='Transformer'?'Trans.':m));});
+    g.appendChild(BP.svg('text',{x:12,y:226,'font-size':11,fill:'#6b6b7a'},'초록 = 지금 조건의 1등 · 빨강 = 내 선택 · 점수는 교육용 예시'));
+    var L=$('#lines');while(L.firstChild)L.removeChild(L.firstChild);
+    var top=M.slice().sort(function(a,b){return Math.max(t.base[b],t.base[b]+t.slope[b])-Math.max(t.base[a],t.base[a]+t.slope[a])}).slice(0,3);
+    var X=function(v){return 40+v*500},Y=function(v){return 170-v*1.5};
+    L.appendChild(BP.svg('line',{x1:40,y1:170,x2:540,y2:170,stroke:'#1E2F5C'}));
+    var cols=['#2e8b57','#D9707E','#6E5BA8'];
+    top.forEach(function(m,i){var d='';for(var k=0;k<=20;k++){var v=k/20;d+=(k?'L':'M')+X(v)+' '+Y(scores(cur,v)[m])}L.appendChild(BP.svg('path',{d:d,fill:'none',stroke:cols[i],'stroke-width':3}));L.appendChild(BP.svg('text',{x:44+i*150,y:16,'font-size':12,fill:cols[i]},'━ '+KO[m]))});
+    L.appendChild(BP.svg('line',{x1:X(s),y1:24,x2:X(s),y2:170,stroke:'#1E2F5C','stroke-dasharray':'4 3'}));
+    L.appendChild(BP.svg('text',{x:40,y:190,'font-size':11,fill:'#6b6b7a'},t.cond+' 적음'));L.appendChild(BP.svg('text',{x:470,y:190,'font-size':11,fill:'#6b6b7a'},'많음'));
+    var v='';
+    v+=line('박사','doc_e'+(pick?(pick===best?'10':'09'):'07'),pick?(pick===best?'승인합니다. 지금 조건에서는 '+KO[pick]+'가 가장 맞아요. 그래도 2등 후보와 같은 데이터로 꼭 비교해 보세요.':'반려합니다. '+KO[pick]+'은(는) 지금 조건에서 '+rank+'위예요. 데이터 모양과 정답 유무부터 다시 봅시다.'):'의뢰서를 읽고 설계도를 하나 골라 제출하세요. 조건도 바꿔 보고요.');
+    v+=line('하루','asst_e07','지금 조건('+t.fmt(s)+')의 1등은 '+KO[best]+' '+Math.round(sc[best])+'점'+(pick?', 고른 설계도는 '+Math.round(ps)+'점이에요.':'이에요.'),true);
+    v+=line('초파리','fly_e09',t.fly);
+    v+=line('주판봇','robo_e16',pick==='Transformer'?'역시 제일 큰 트랜스포머! '+(pick===best?'이번엔 맞았습니다!':'…어라, 1등이 아니네요. 조건이 중요하군요!'):'트랜스포머가 제일 큽니다! 큰 걸로 바꾸시죠! (지금 '+Math.round(sc.Transformer)+'점)');
+    $('#voices').innerHTML=v;
+    var ms=[{t:'가장 맞는 설계도 찾기',d:'조건을 그대로 두거나 바꿔 보며, 지금 조건의 1등 설계도를 골라 제출하세요.',ok:function(){return pick===best}},t.m2,t.m3];
+    var html='';ms.forEach(function(m,i){if(S.touched&&!S.done[i]&&m.ok(s,sc,pick,best))S.done[i]=true;var d=S.done[i];
+      html+='<div class="step" style="grid-template-columns:56px 1fr;border-color:'+(d?'#2e8b57':'#ecebf2')+';background:'+(d?'#f2fbf5':'#fff')+'"><div class="pix" style="font-size:26px;color:'+(d?'#2e8b57':'#c3cfe2')+'">'+(d?'✔':(i+1))+'</div><div><h3 style="font-size:16px">'+m.t+(d?' · 통과':'')+'</h3><p style="font-size:15px;margin:0">'+m.d+'</p></div></div>'});
+    $('#missions').innerHTML=html;
+    $('#back').innerHTML='배운 곳 다시 보기: '+top.map(function(m){return '<a href="../'+FILE[m]+'.html">'+KO[m]+'</a>'}).join(' · ')+' · <a href="../10_review.html#choose">감수자의 고르는 법</a>';
+  }
+  var h=(location.hash||'').slice(1);go(T[h]?h:'photo');
+})();
+</script>
+<footer>
+  <div class="wrap">
+    <p>글 · 안상선 (<a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">https://adminmrobo.github.io/who_am_i/who_am_i.html</a>) · (주)M-Robo 대표</p>
+    <p>캐릭터: 조수 하루 · 인턴 모아 · 인턴 시아 · 초파리 연구원 · 주판봇 · 박사 — <a href="https://github.com/adminmrobo/fruitfly-lab-expressions">fruitfly-lab-expressions</a> 픽셀아트 캐릭터 팩. 도면 그림은 이 저장소에서 새로 그렸습니다.</p>
+    <p>참고 자료: 「9 Deep Learning Algorithms Every Engineer Should Know」 인포그래픽 10장(작성자 표기 없음). 내용만 참고했고, 그림과 문장은 새로 만들었으며 틀린 곳은 고쳤습니다(<a href="../10_review.html#errata">감수 의견서</a>).</p>
+    <p>저장소: <a href="https://github.com/adminmrobo/deep_learning_model_design_lab_01">adminmrobo/deep_learning_model_design_lab_01</a> · <a href="https://www.ahnboat.xyz">ahnboat.xyz</a></p>
+  </div>
+</footer>
+</body>
+</html>

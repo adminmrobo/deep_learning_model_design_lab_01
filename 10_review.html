@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DL-10 감수 — 총괄 도면 감수 설계도면 | 딥러닝 설계도면 연구실 01</title>
+<meta name="description" content="아홉 도면을 한 장에 모은 총괄 도면을 초파리·주판봇이 감수한다. 참고 자료에서 찾은 틀린 곳과 고친 곳을 빨간 펜으로 남긴다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DL-10 감수 — 총괄 도면 감수 설계도면 | 딥러닝 설계도면 연구실 01">
+<meta property="og:description" content="아홉 도면을 한 장에 모은 총괄 도면을 초파리·주판봇이 감수한다. 참고 자료에서 찾은 틀린 곳과 고친 곳을 빨간 펜으로 남긴다.">
+<meta property="og:image" content="https://adminmrobo.github.io/deep_learning_model_design_lab_01/assets/img/covers/og_10.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/chars/asst_e13.webp">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css">
+<link rel="stylesheet" href="assets/css/blueprint.css">
+<script src="assets/js/blueprint.js"></script>
+<!-- px-fix v1 --><style id="px-fix">img{image-rendering:auto!important}</style><script id="px-fix-js">(function(){var R=window.ResizeObserver;function f(i){var n=i.naturalWidth,w=i.getBoundingClientRect().width;if(!n||!w)return;var s=w*(window.devicePixelRatio||1)/n;i.style.setProperty("image-rendering",s>=1.95?"pixelated":"auto","important")}var ro=R?new R(function(es){es.forEach(function(e){f(e.target)})}):null;function a(i){if(i.__px)return;i.__px=1;i.addEventListener("load",function(){f(i)});if(ro)ro.observe(i);f(i)}function all(r){(r||document).querySelectorAll&&(r||document).querySelectorAll("img").forEach(a)}function go(){all();if(window.MutationObserver)new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType!==1)return;if(n.tagName==="IMG")a(n);else all(n)})})}).observe(document.documentElement,{childList:true,subtree:true});window.addEventListener("resize",function(){document.querySelectorAll("img").forEach(f)})}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go()})();</script><!-- /px-fix -->
+<!-- lab-kg:head -->
+<meta name="citation_title" content="DL-10 총괄 도면 감수 설계도면">
+<meta name="dc.title" content="DL-10 총괄 도면 감수 설계도면">
+<meta name="dc.date" content="2026-11-26">
+<meta name="dc.language" content="ko">
+<meta name="dc.type" content="InteractiveResource">
+<meta name="citation_author" content="안상선">
+<meta name="dcterms.isPartOf" content="딥러닝 설계도면 연구실 01">
+<!-- /lab-kg:head -->
+</head>
+<body class="by-review">
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<nav class="topnav" aria-label="도면 목록"><div class="wrap"><a class="home" href="index.html">DL 설계도면 연구실</a><a href="01_fnn.html">01 FNN</a><a href="02_cnn.html">02 CNN</a><a href="03_rnn.html">03 RNN</a><a href="04_lstm.html">04 LSTM</a><a href="05_gru.html">05 GRU</a><a href="06_autoencoder.html">06 AE</a><a href="07_dbn.html">07 DBN</a><a href="08_gan.html">08 GAN</a><a href="09_transformer.html">09 Transformer</a><a href="10_review.html" class="here" aria-current="page">10 감수</a><a href="practice/index.html">실전 연습장</a></div></nav>
+<header class="cover" id="cover" data-img="cover_10"><picture><img src="assets/img/covers/cover_10.webp" width="1600" height="900" alt="DL-10 REVIEW 설계도면 표지: 모눈 바탕 위의 감수 · 초파리 연구원 &amp; 주판봇 픽셀아트" fetchpriority="high" decoding="async"></picture><span class="cover-chip">딥러닝 설계도면 연구실 01 · DL-10</span></header>
+<div class="wrap">
+  <div class="term">
+    <div class="bar"><span class="dot" style="background:var(--pink)"></span><span class="dot" style="background:var(--lav)"></span><span class="dot" style="background:var(--navy)"></span><span class="t mono">blueprint · DL-10_REVIEW.dwg</span></div>
+    <div class="term-body">
+      <p class="prompt mono"><b>fly+robo@lab</b>:~$ open DL-10_REVIEW.blueprint</p>
+      <div class="hero">
+        <div class="who two"><img src="assets/img/chars/fly_e10.webp" alt="클립보드를 든 초파리 연구원" width="192" height="192"><img src="assets/img/chars/robo_e10.webp" alt="체크 표시를 하는 주판봇" width="192" height="192"></div>
+        <div>
+          <h1>REVIEW</h1>
+          <div class="sub">초파리와 주판봇이 9장을 한 장에 놓고 감수하다</div>
+          <p class="by">DL-10 · 총괄 도면 감수 (Design review of 9 models) · 감수 · 초파리 연구원 &amp; 주판봇 작성</p>
+          <span class="motto pix">큰 것은 의심하고, 숫자는 세어 본다.</span>
+        </div>
+      </div>
+      <table class="titleblock" aria-label="도면 표제란">
+        <tr><th>도면 번호</th><td>DL-10</td><th>계열</th><td>감수</td></tr>
+        <tr><th>작성</th><td>아홉 도면 작성: 조수 하루 · 인턴 모아 · 인턴 시아</td><th>감수</th><td>초파리 연구원 · 주판봇</td></tr>
+        <tr><th>모델</th><td>9종 총괄 · 총괄 도면 감수</td><th>날짜 · 판</th><td>2026-11-26 · v1.0</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+<main id="main">
+<section id="three"><div class="wrap">
+  <h2><span class="no">01</span>처음 오신 분께 — 감수 도면을 3줄로</h2>
+  <p class="lead">하루·모아·시아가 그린 아홉 장을 한 장에 모아, 초파리 연구원과 주판봇이 감수했습니다. 마지막 승인은 박사가 했어요.</p>
+  <div class="three">
+    <div><b>무엇을</b>아홉 도면을 한 장(총괄 도면)에 놓고, 참고 자료와 도면의 숫자·이름·주장을 하나하나 대조했습니다.</div>
+    <div><b>왜 중요한가</b>도면은 그대로 믿고 쓰는 문서라, 번호 하나만 틀려도 읽는 사람이 헷갈립니다. 참고 자료에서 실제로 틀린 곳 4가지와 과장된 표현 3가지를 찾았어요.</div>
+    <div><b>업무에서는</b>AI가 만든 그림·요약을 받았을 때 "번호를 세어 보고, 큰 주장을 의심하는" 감수 습관 그대로 쓸 수 있습니다.</div>
+  </div>
+  <p class="nocode">코드나 수식을 몰라도 됩니다. 이 페이지는 아홉 도면을 다 읽지 않았어도, 총괄 도면부터 거꾸로 읽어 가도 돼요.</p>
+  <details><summary>감수에 쓴 말 풀이</summary>
+    <dl class="abbr">
+      <dt>고침</dt><dd>참고 자료가 틀려서 도면에서 바꾼 곳</dd>
+      <dt>보충</dt><dd>틀리진 않았지만 오해할 수 있어 설명을 덧붙인 곳</dd>
+      <dt>총괄 도면</dt><dd>여러 도면을 한 장에 모아 관계를 보여 주는 도면</dd>
+    </dl>
+  </details>
+</div></section>
+
+<section id="cast"><div class="wrap">
+  <h2><span class="no">02</span>감수에 참여한 사람들</h2>
+  <div class="cast">
+    <div class="me"><img src="assets/img/chars/fly_e10.webp" alt="초파리 연구원" width="84" height="84"><b>초파리 연구원</b>감수 · 의심 담당<br><span class="tag">큰 주장 점검</span></div>
+    <div class="me"><img src="assets/img/chars/robo_e10.webp" alt="주판봇" width="84" height="84"><b>주판봇</b>감수 · 세기 담당<br><span class="tag">번호·숫자 점검</span></div>
+    <div><img src="assets/img/chars/doc_e10.webp" alt="박사" width="84" height="84"><b>박사</b>최종 승인<br><span class="tag">판정</span></div>
+    <div><img src="assets/img/chars/asst_e13.webp" alt="조수 하루" width="84" height="84"><b>조수 하루</b>01 · 02 · 09 작성<br><span class="tag">기본 구조</span></div>
+    <div><img src="assets/img/chars/moa_e13.webp" alt="인턴 모아" width="84" height="84"><b>인턴 모아</b>03 · 04 · 05 작성<br><span class="tag">순서·기억</span></div>
+    <div><img src="assets/img/chars/sia_e13.webp" alt="인턴 시아" width="84" height="84"><b>인턴 시아</b>06 · 07 · 08 작성<br><span class="tag">압축·생성</span></div>
+  </div>
+  <div class="say-row"><img src="assets/img/chars/fly_e09.webp" alt="" width="64" height="64">
+    <div class="bubble"><b class="nm">초파리</b>나는 작아서 큰 말을 들으면 먼저 의심부터 해. "모든", "항상", "극복" 같은 말이 나오면 정말 그런지 근거를 찾아봤어.</div></div>
+  <div class="say-row right"><img src="assets/img/chars/robo_e16.webp" alt="" width="64" height="64">
+    <div class="bubble"><b class="nm">주판봇</b>저는 세는 걸 좋아합니다! 번호는 1, 2, 3, 4, 5로 이어지는지, 표의 열은 맞는지, 낱말 글자는 맞는지 전부 세어 봤습니다! 이번엔 크게 말하기보다 정확하게 세었습니다!</div></div>
+</div></section>
+
+<section id="overview"><div class="wrap">
+  <h2><span class="no">03</span>총괄 도면 — SHEET 10 · 아홉 장을 한 장에</h2>
+  <p class="lead">세 줄이 세 계열입니다. 도면을 누르면 아래에 한 줄 설명과 바로 가기가 나와요. 회색 화살표는 "이 부품을 빌려 쓴다"는 관계예요.</p>
+  <div class="dwg scroll-x"><span class="stamp" style="color:#d9443a;border-color:#d9443a">감수 · 초파리 · 주판봇</span>
+    <svg viewBox="0 0 960 640" role="img" aria-labelledby="d10t" id="sheet10">
+      <title id="d10t">총괄 도면: 첫 줄 기본 구조 계열(FNN, CNN, 트랜스포머, 하루), 둘째 줄 순서·기억 계열(RNN, LSTM, GRU, 모아), 셋째 줄 압축·생성 계열(오토인코더, DBN, GAN, 시아). FNN에서 CNN·RNN으로, RNN에서 LSTM·GRU·트랜스포머로 화살표가 이어진다</title>
+      <defs><marker id="ar10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9aa4b8"/></marker></defs>
+      <g font-size="13"><text x="10" y="30" fill="#D9707E">기본 구조 · 하루</text><text x="10" y="240" fill="#B47B32">순서·기억 · 모아</text><text x="10" y="450" fill="#6E5BA8">압축·생성 · 시아</text></g>
+      <!-- 카드 틀 -->
+      <g class="mini" data-k="01" tabindex="0" role="button" aria-label="01 FNN"><rect x="20" y="40" width="280" height="170" rx="10" fill="#fff" stroke="#D9707E" stroke-width="3"/><text x="34" y="64" font-size="15" fill="#1E2F5C">01 FNN</text>
+        <g stroke="#1E2F5C" stroke-width="2"><rect x="60" y="90" width="18" height="18" fill="#cfe8c9"/><rect x="60" y="130" width="18" height="18" fill="#cfe8c9"/><rect x="60" y="170" width="18" height="18" fill="#cfe8c9"/><rect x="140" y="80" width="18" height="18" fill="#f8e3a3"/><rect x="140" y="115" width="18" height="18" fill="#f8e3a3"/><rect x="140" y="150" width="18" height="18" fill="#f8e3a3"/><rect x="140" y="185" width="18" height="18" fill="#f8e3a3"/><rect x="220" y="115" width="18" height="18" fill="#f6c6cf"/><rect x="220" y="155" width="18" height="18" fill="#f6c6cf"/></g>
+        <path d="M78 99L140 89M78 99L140 124M78 139L140 159M78 179L140 194M78 139L140 89M78 179L140 124M158 89L220 124M158 124L220 164M158 159L220 124M158 194L220 164" stroke="#1E2F5C" opacity=".35"/></g>
+      <g class="mini" data-k="02" tabindex="0" role="button" aria-label="02 CNN"><rect x="330" y="40" width="280" height="170" rx="10" fill="#fff" stroke="#D9707E" stroke-width="3"/><text x="344" y="64" font-size="15" fill="#1E2F5C">02 CNN</text>
+        <g stroke="#1E2F5C" stroke-width="2"><rect x="350" y="90" width="80" height="80" fill="#c9d6ea"/><rect x="350" y="90" width="30" height="30" fill="none" stroke="#D9707E" stroke-width="3"/><rect x="456" y="100" width="50" height="50" fill="#dbe7fb"/><rect x="448" y="108" width="50" height="50" fill="#dbe7fb"/><rect x="526" y="120" width="28" height="28" fill="#d8efd9"/><rect x="572" y="112" width="14" height="14" fill="#f6c6cf"/><rect x="572" y="136" width="14" height="14" fill="#f6c6cf"/></g></g>
+      <g class="mini" data-k="09" tabindex="0" role="button" aria-label="09 트랜스포머"><rect x="640" y="40" width="300" height="170" rx="10" fill="#fff" stroke="#D9707E" stroke-width="3"/><text x="654" y="64" font-size="15" fill="#1E2F5C">09 TRANSFORMER</text>
+        <g stroke="#1E2F5C" stroke-width="2"><rect x="680" y="80" width="90" height="110" rx="8" fill="#eef8ef" stroke="#2e8b57"/><rect x="690" y="150" width="70" height="28" fill="#f6c6cf"/><rect x="690" y="100" width="70" height="28" fill="#dbe7fb"/><rect x="810" y="80" width="100" height="110" rx="8" fill="#fff4f5" stroke="#D9707E"/><rect x="820" y="150" width="80" height="26" fill="#f6c6cf"/><rect x="820" y="118" width="80" height="24" fill="#e6dcf5"/><rect x="820" y="88" width="80" height="24" fill="#dbe7fb"/></g><path d="M770 130 H806" stroke="#2e8b57" stroke-width="2"/></g>
+      <g class="mini" data-k="03" tabindex="0" role="button" aria-label="03 RNN"><rect x="20" y="250" width="280" height="170" rx="10" fill="#fff" stroke="#B47B32" stroke-width="3"/><text x="34" y="274" font-size="15" fill="#1E2F5C">03 RNN</text>
+        <g stroke="#1E2F5C" stroke-width="2" fill="#cfe8c9"><rect x="50" y="320" width="44" height="34" rx="5"/><rect x="130" y="320" width="44" height="34" rx="5"/><rect x="210" y="320" width="44" height="34" rx="5"/></g><path d="M94 337H130M174 337H210" stroke="#B47B32" stroke-width="3"/>
+        <g fill="#cfe0f7" stroke="#1E2F5C"><circle cx="72" cy="395" r="10"/><circle cx="152" cy="395" r="10"/><circle cx="232" cy="395" r="10"/></g><g fill="#f6c6cf" stroke="#1E2F5C"><circle cx="72" cy="296" r="10"/><circle cx="152" cy="296" r="10"/><circle cx="232" cy="296" r="10"/></g></g>
+      <g class="mini" data-k="04" tabindex="0" role="button" aria-label="04 LSTM"><rect x="330" y="250" width="280" height="170" rx="10" fill="#fff" stroke="#B47B32" stroke-width="3"/><text x="344" y="274" font-size="15" fill="#1E2F5C">04 LSTM</text>
+        <path d="M345 300H595" stroke="#B47B32" stroke-width="5"/><g stroke="#1E2F5C" stroke-width="2"><rect x="370" y="350" width="40" height="30" fill="#fbecc0"/><rect x="420" y="350" width="40" height="30" fill="#dbe7fb"/><rect x="470" y="350" width="40" height="30" fill="#e6dcf5"/><rect x="530" y="360" width="40" height="30" fill="#fbecc0"/></g><g fill="#fff" stroke="#1E2F5C" stroke-width="2"><circle cx="390" cy="300" r="9"/><circle cx="465" cy="300" r="9"/></g></g>
+      <g class="mini" data-k="05" tabindex="0" role="button" aria-label="05 GRU"><rect x="640" y="250" width="300" height="170" rx="10" fill="#fff" stroke="#B47B32" stroke-width="3"/><text x="654" y="274" font-size="15" fill="#1E2F5C">05 GRU</text>
+        <path d="M655 300H925" stroke="#B47B32" stroke-width="5"/><g stroke="#1E2F5C" stroke-width="2"><rect x="700" y="350" width="44" height="30" fill="#fbecc0"/><rect x="770" y="350" width="44" height="30" fill="#fbecc0"/><rect x="840" y="350" width="50" height="30" fill="#dbe7fb"/></g><g fill="#fff" stroke="#1E2F5C" stroke-width="2"><circle cx="820" cy="300" r="9"/><circle cx="880" cy="300" r="9"/></g></g>
+      <g class="mini" data-k="06" tabindex="0" role="button" aria-label="06 오토인코더"><rect x="20" y="460" width="280" height="170" rx="10" fill="#fff" stroke="#6E5BA8" stroke-width="3"/><text x="34" y="484" font-size="15" fill="#1E2F5C">06 AUTOENCODER</text>
+        <path d="M70 500 L140 535 L140 575 L70 610 Z" fill="#dbe7fb" stroke="#1E2F5C" stroke-width="2"/><rect x="150" y="540" width="20" height="30" fill="#e6dcf5" stroke="#1E2F5C" stroke-width="2"/><path d="M250 500 L180 535 L180 575 L250 610 Z" fill="#d8efd9" stroke="#1E2F5C" stroke-width="2"/></g>
+      <g class="mini" data-k="07" tabindex="0" role="button" aria-label="07 DBN"><rect x="330" y="460" width="280" height="170" rx="10" fill="#fff" stroke="#6E5BA8" stroke-width="3"/><text x="344" y="484" font-size="15" fill="#1E2F5C">07 DBN</text>
+        <g stroke="#1E2F5C" stroke-width="2"><rect x="380" y="590" width="180" height="22" rx="6" fill="#cfe0f7"/><rect x="395" y="556" width="150" height="22" rx="6" fill="#e6dcf5"/><rect x="410" y="522" width="120" height="22" rx="6" fill="#e6dcf5"/><rect x="440" y="496" width="60" height="18" rx="6" fill="#f6c6cf"/></g></g>
+      <g class="mini" data-k="08" tabindex="0" role="button" aria-label="08 GAN"><rect x="640" y="460" width="300" height="170" rx="10" fill="#fff" stroke="#6E5BA8" stroke-width="3"/><text x="654" y="484" font-size="15" fill="#1E2F5C">08 GAN</text>
+        <path d="M670 520 L740 535 L740 585 L670 600 Z" fill="#dbe7fb" stroke="#1E2F5C" stroke-width="2"/><path d="M820 520 L890 535 L890 585 L820 600 Z" fill="#f6c6cf" stroke="#1E2F5C" stroke-width="2"/><path d="M744 560 H816" stroke="#1E2F5C" stroke-width="2"/><path d="M855 600 C 855 625, 705 625, 705 602" stroke="#d9443a" stroke-dasharray="4 3" fill="none" stroke-width="2"/></g>
+      <!-- 관계 -->
+      <g stroke="#9aa4b8" stroke-width="2.5" fill="none" stroke-dasharray="7 5">
+        <path d="M300 125 H326" marker-end="url(#ar10)"/><path d="M160 210 V246" marker-end="url(#ar10)"/>
+        <path d="M300 335 H326" marker-end="url(#ar10)"/><path d="M610 335 H636" marker-end="url(#ar10)"/>
+        <path d="M610 220 C 625 240, 640 230, 650 214" marker-end="url(#ar10)"/>
+        <path d="M300 545 H326" marker-end="url(#ar10)"/><path d="M610 545 H636" marker-end="url(#ar10)"/>
+      </g>
+    </svg>
+  </div>
+  <div class="readout" id="pick10" aria-live="polite">도면 하나를 눌러 보세요.</div>
+  <p class="dwg-cap">화살표는 대표적인 관계만 그렸습니다. 예를 들어 CNN·GAN·트랜스포머 안에도 01 FNN의 층이 부품으로 들어 있어요.</p>
+</div></section>
+
+<section id="method"><div class="wrap">
+  <h2><span class="no">04</span>감수 방법 — 두 사람의 점검표</h2>
+  <div class="daily">
+    <div><b>초파리의 점검표 · 의심하기</b>① "모든·항상·극복·보장" 같은 큰 말이 있나 → 근거를 찾는다<br>② 그 모델이 지금도 많이 쓰이나 → 날짜를 확인한다<br>③ 종류 이름(생성·판별·지도·비지도)이 맞나 → 정의와 대조한다</div>
+    <div><b>주판봇의 점검표 · 세어 보기</b>① 번호가 1, 2, 3…으로 이어지나<br>② 표의 열과 줄이 맞나, 다른 줄 내용이 섞이지 않았나<br>③ 낱말 철자와 기호가 맞나<br>④ 도면의 "숫자로 한 번 해 보기"를 계산기로 다시 셈</div>
+  </div>
+  <div class="recap"><b>주판봇의 계산 확인</b> · 아홉 도면의 손계산 예시(가중합 0.5, 경계 3, 메모 0.762→0.0014, 기억 0.567, 섞기 0.62, 부품 75%, 오차 1.0, 확률 0.711, D* 0.881, 비율 0.401·0.198·0.401)를 모두 다시 셈해 맞는 것을 확인했습니다. 실험대도 같은 값을 냅니다.</div>
+</div></section>
+
+<section id="errata"><div class="wrap">
+  <h2><span class="no">05</span>감수 의견서 — 빨간 펜 기록</h2>
+  <p class="lead">참고 자료는 「9 Deep Learning Algorithms Every Engineer Should Know」 인포그래픽 10장(작성자 표기 없음)입니다. 도면은 모두 새로 그렸고, 아래 항목을 반영했습니다.</p>
+  <div class="scroll-x">
+  <table class="diff" style="min-width:760px">
+    <tr><th>번호</th><th>도면</th><th>참고 자료</th><th>무엇이 문제인가</th><th>도면에서는</th><th>감수</th></tr>
+    <tr><td>E1</td><td><a href="03_rnn.html#memo">03 RNN</a></td><td class="bad">감정 분석 예시의 은닉 상태 h₁, h₂, h₂, h₃, h₅ · 넷째 입력 xₜ</td><td>번호가 겹치고 빠졌다. 순서마다 메모는 다른 값</td><td class="good">h₁~h₅, x₁~x₅ <b>(고침)</b></td><td>주판봇</td></tr>
+    <tr><td>E2</td><td><a href="07_dbn.html#memo">07 DBN</a></td><td class="bad">"DBN vs 다른 모델" 표: 열 어긋남, "Supervised modelen", "pɑd", CNN 줄에 "압축·재구성", RNN 줄에 "공간 데이터·이미지"</td><td>깨진 글자, 다른 줄 내용이 섞임</td><td class="good">표를 새로 만듦 <b>(고침)</b></td><td>주판봇</td></tr>
+    <tr><td>E3</td><td><a href="07_dbn.html#memo">07 DBN</a></td><td class="bad">오토인코더 종류 = "생성(Generative)"</td><td>기본 오토인코더는 새 데이터를 뽑는 장치가 아니다 (VAE는 생성 모델)</td><td class="good">"표현 학습" <b>(고침)</b></td><td>초파리</td></tr>
+    <tr><td>E4</td><td><a href="08_gan.html#memo">08 GAN</a></td><td class="bad">"G ninimizes the chance…"</td><td>철자 오류</td><td class="good">minimizes(줄인다) <b>(고침)</b></td><td>주판봇</td></tr>
+    <tr><td>E5</td><td><a href="01_fnn.html#memo">01 FNN</a></td><td class="bad">"모든 딥러닝 모델의 기본 블록"</td><td>큰 말. RBM처럼 이 꼴이 아닌 부품도 있다</td><td class="good">"많은 딥러닝 모델 안에 부품으로" <b>(고침)</b></td><td>초파리</td></tr>
+    <tr><td>E6</td><td><a href="04_lstm.html#memo">04 LSTM</a></td><td class="bad">기울기 소실을 "극복한다(overcomes)"</td><td>망각 게이트가 1보다 작으면 먼 과거는 여전히 줄어든다</td><td class="good">"크게 완화한다" <b>(고침)</b></td><td>초파리</td></tr>
+    <tr><td>E7</td><td>총괄 카드</td><td class="bad">CNN = "컴퓨터 비전의 최고 선택(Best choice)"</td><td>단정. 지금은 비전 트랜스포머도 널리 쓰여 데이터·자원에 따라 고른다</td><td class="good">"사진·영상 일의 기본 설계" <b>(고침)</b></td><td>초파리</td></tr>
+    <tr><td>S1</td><td><a href="02_cnn.html#memo">02 CNN</a></td><td>합성곱 계산</td><td>도구는 필터를 뒤집지 않는다(교차 상관)</td><td>설명 덧붙임 <b>(보충)</b></td><td>초파리</td></tr>
+    <tr><td>S2</td><td><a href="05_gru.html#memo">05 GRU</a></td><td>hₜ = (1 − zₜ)h̃ₜ + zₜhₜ₋₁</td><td>자료마다 zₜ 뜻이 반대인 곳이 있다</td><td>"zₜ 클수록 옛 메모 유지"로 통일 <b>(보충)</b></td><td>주판봇</td></tr>
+    <tr><td>S3</td><td><a href="06_autoencoder.html#memo">06 AE</a></td><td>오토인코더 vs PCA 표</td><td>직선형 오토인코더는 PCA와 같은 공간을 찾는다</td><td>설명 덧붙임 <b>(보충)</b></td><td>초파리</td></tr>
+    <tr><td>S4</td><td><a href="09_transformer.html#memo">09 트랜스포머</a></td><td>인코더-디코더 구조도</td><td>요즘 GPT 계열은 디코더만, 교차 어텐션 없음</td><td>설명 덧붙임 <b>(보충)</b></td><td>초파리</td></tr>
+  </table>
+  </div>
+  <div class="say-row neutral" style="margin-top:20px"><img src="assets/img/chars/doc_e10.webp" alt="" width="64" height="64">
+    <div class="bubble"><b class="nm">박사 · 최종 판정</b>고침 7건, 보충 4건 모두 반영된 것을 확인했습니다. <b>아홉 도면 승인.</b> 참고 자료는 한눈에 보기 좋은 요약이지만, 그림과 표는 사람이든 AI든 만들다 보면 틀릴 수 있어요. 숫자는 세어 보고, 큰 말은 의심하는 두 감수자의 습관을 여러분 것으로 가져가세요.</div></div>
+</div></section>
+
+<section id="spot"><div class="wrap">
+  <h2><span class="no">06</span>AI 판단 코너 — 틀린 곳 직접 찾기</h2>
+  <p class="lead">감수 의견서를 가리고, 참고 자료의 문장만 보고 문제를 찾아보세요. AI가 만든 요약 그림을 받았다고 생각하면 돼요.</p>
+  <div class="judge">
+    <h3>① 이 순서에서 이상한 곳은?</h3>
+    <div class="ai-out">단어:   I    love   deep   learning   !
+입력:   x₁   x₂     x₃     xₜ         x₅
+메모:   h₁   h₂     h₂     h₃         h₅</div>
+    <div class="choices" data-answer="b"><button data-k="a" data-why="단어 다섯 개에 입력 다섯 개라 개수는 맞아요. 이름을 하나씩 세어 보세요.">단어 수와 입력 수가 다르다</button><button data-k="b">메모 번호가 h₂를 두 번 쓰고 h₄가 빠졌으며, 넷째 입력이 x₄가 아니라 xₜ로 적혔다</button><button data-k="c" data-why="RNN은 단어마다 메모를 하나씩 만들어서 이 모양 자체는 맞아요.">RNN은 단어마다 메모를 만들지 않는다</button></div>
+    <p class="feedback" data-ok="맞아요. 주판봇의 방법: 1, 2, 3, 4, 5로 소리 내어 세어 보기."></p>
+  </div>
+  <div class="judge">
+    <h3>② 이 문장에서 의심할 말은?</h3>
+    <div class="ai-out">"LSTM은 표준 RNN의 기울기 소실 문제를 극복한다."</div>
+    <div class="choices" data-answer="c"><button data-k="a" data-why="LSTM이 RNN의 한 종류인 건 맞아요.">"LSTM"과 "RNN"은 관계가 없다</button><button data-k="b" data-why="기울기 소실은 실제로 RNN의 대표적인 문제예요.">"기울기 소실"은 RNN에 없는 문제다</button><button data-k="c">"극복한다" — 크게 줄일 뿐, 망각 게이트가 1보다 작으면 먼 과거는 여전히 줄어든다</button></div>
+    <p class="feedback" data-ok="맞아요. 초파리의 방법: 큰 말(극복·모든·항상)을 만나면 '정말 완전히?'라고 되묻기."></p>
+  </div>
+  <div class="judge">
+    <h3>③ 이 표 한 줄에서 이상한 곳은?</h3>
+    <div class="ai-out">모델: CNN | 종류: 판별 | 학습: 지도 | 잘하는 일: 좋은 압축·재구성, 차원 축소</div>
+    <div class="choices" data-answer="a"><button data-k="a">"좋은 압축·재구성, 차원 축소"는 오토인코더 줄의 내용이다. CNN은 그림·영상 같은 공간 데이터를 잘 다룬다</button><button data-k="b" data-why="CNN은 정답표로 배우는 지도 학습에 주로 써요.">CNN은 비지도로만 배운다</button><button data-k="c" data-why="분류에 쓰는 CNN은 판별 모델이 맞아요.">CNN은 생성 모델이다</button></div>
+    <p class="feedback" data-ok="맞아요. 표는 줄마다 다른 모델을 보고 '이 설명이 이 줄에 맞나'를 확인해야 해요."></p>
+  </div>
+</div></section>
+
+<section id="choose"><div class="wrap">
+  <h2><span class="no">07</span>어느 설계도를 꺼낼까 — 감수자 정리</h2>
+  <p class="lead">데이터 모양과 목적으로 먼저 좁히고, 데이터 양과 계산 자원으로 고릅니다. "지금 쓰임"은 2026년 기준 감수자의 정성 의견이며 순위가 아니에요.</p>
+  <div class="scroll-x">
+  <table class="diff" style="min-width:720px">
+    <tr><th>데이터 · 목적</th><th>먼저 꺼낼 도면</th><th>함께 비교할 도면</th><th>지금 쓰임 (감수 의견)</th></tr>
+    <tr><td>표 데이터로 판정·예측</td><td><a href="01_fnn.html">01 FNN</a></td><td>트리 계열 머신러닝</td><td>많이 씀 (다른 모델의 부품으로도)</td></tr>
+    <tr><td>사진·영상 판정</td><td><a href="02_cnn.html">02 CNN</a></td><td><a href="09_transformer.html">09 비전 트랜스포머</a></td><td>많이 씀</td></tr>
+    <tr><td>짧은 시계열·순서</td><td><a href="05_gru.html">05 GRU</a> · <a href="04_lstm.html">04 LSTM</a></td><td><a href="03_rnn.html">03 RNN</a>(비교 기준)</td><td>상황에 따라 (시계열·작은 장비)</td></tr>
+    <tr><td>긴 글·문서·대화</td><td><a href="09_transformer.html">09 트랜스포머</a></td><td>미리 배운 언어 모델</td><td>많이 씀</td></tr>
+    <tr><td>정답 없이 이상 찾기</td><td><a href="06_autoencoder.html">06 오토인코더</a></td><td>통계적 이상 탐지</td><td>상황에 따라</td></tr>
+    <tr><td>진짜 같은 데이터 만들기</td><td><a href="08_gan.html">08 GAN</a></td><td>확산 모델, VAE</td><td>상황에 따라 (그림 생성 주력은 확산 모델)</td></tr>
+    <tr><td>깊은 학습의 역사 이해</td><td><a href="07_dbn.html">07 DBN</a></td><td>—</td><td>새 프로젝트엔 거의 안 씀 (역사적)</td></tr>
+  </table>
+  </div>
+  <div class="talk" style="margin-top:20px">
+    <div class="line"><img src="assets/img/chars/robo_e16.webp" alt="주판봇" width="56" height="56"><p><b>주판봇</b>그럼 제일 큰 트랜스포머를 모든 일에 쓰면 되겠습니다!</p></div>
+    <div class="line"><img src="assets/img/chars/fly_e09.webp" alt="초파리" width="56" height="56"><p><b>초파리</b>모든 일에? 또 큰 말이네. 표 데이터 천 줄짜리 일에 트랜스포머를 쓰면 느리고 오히려 못할 수도 있어. 작은 것부터 시험해 보고 올라가.</p></div>
+    <div class="line"><img src="assets/img/chars/doc_e08.webp" alt="박사" width="56" height="56"><p><b>박사</b>둘 다 일리가 있습니다. 큰 모델이 강한 건 맞지만, 판정은 데이터로 합니다. 같은 데이터로 작은 설계와 큰 설계를 나란히 시험해서 고르세요. 마지막 장 실전 연습장에서 직접 해 볼 수 있어요.</p></div>
+  </div>
+</div></section>
+
+<section id="limit"><div class="wrap">
+  <h2><span class="no">08</span>이 감수의 한계 → 실전 연습장</h2>
+  <div class="limit"><b>한계 1 · 참고 자료 한 벌만 대조했다</b> — 원 논문(각 도면 꾸러미의 참고문헌)은 핵심 식과 이름만 대조했고, 모든 세부를 검토하지는 않았습니다.<br>
+    <b>한계 2 · "지금 쓰임"은 정성 의견</b> — 사용 통계를 잰 값이 아니라 2026년 기준 감수자의 판단입니다. 분야와 시점에 따라 달라질 수 있어요.<br>
+    <b>한계 3 · 실험대는 단순화했다</b> — 아홉 실험대는 개념을 보여 주려고 숫자를 작게, 식을 단순하게 했습니다. 실제 모델은 훨씬 크고, 결과는 데이터에 따라 달라요.</div>
+  <div class="recap"><b>정리</b> · 감수로 고침 7건·보충 4건을 반영해 아홉 도면을 승인했습니다. 배운 설계도를 현장 의뢰서에 맞춰 골라 보려면 <a href="practice/index.html">실전 연습장 · 설계 의뢰 접수처</a>로 가세요.</div>
+</div></section>
+
+<section id="quiz"><div class="wrap">
+  <h2><span class="no">09</span>확인 퀴즈</h2>
+  <div class="quiz"><p class="qq">Q1. 주판봇의 감수 방법에 가장 가까운 것은?</p>
+    <div class="choices" data-answer="b"><button data-k="a" data-why="큰 말을 의심하는 것은 초파리의 방법이에요.">"항상", "극복" 같은 말을 의심한다</button><button data-k="b">번호·표의 열·철자·계산을 하나하나 세어 다시 확인한다</button><button data-k="c" data-why="감수는 그림의 예쁨보다 정확성을 봐요.">그림 색이 예쁜지 본다</button></div>
+    <p class="feedback" data-ok="맞아요. 이번 주판봇은 크게 말하는 대신 정확하게 셌어요."></p></div>
+  <div class="quiz"><p class="qq">Q2. 기본 오토인코더를 "생성 모델"이 아니라 "표현 학습"으로 고친 이유는?</p>
+    <div class="choices" data-answer="a"><button data-k="a">줄였다 되살리는 장치일 뿐, 새 데이터를 뽑아내도록 만든 장치가 아니라서 (그렇게 고친 VAE는 생성 모델)</button><button data-k="b" data-why="오토인코더도 정답표 없이 배우는 게 맞아요. 문제는 '생성'이라는 분류예요.">오토인코더는 정답표가 꼭 필요해서</button><button data-k="c" data-why="오토인코더는 신경망이 맞아요.">오토인코더는 신경망이 아니어서</button></div>
+    <p class="feedback" data-ok="맞아요. 종류 이름은 정의와 대조해서 확인해요."></p></div>
+</div></section>
+
+<script>
+(function(){
+  var I={'01':['하루','기본 구조','입력→출력 한 방향. 곱해 더하고 구부리기.','01_fnn.html'],'02':['하루','기본 구조','필터 하나를 그림 전체에. 사진·영상 판정.','02_cnn.html'],'09':['하루','기본 구조','점수→비율→섞기. 요즘 AI의 기본.','09_transformer.html'],
+    '03':['모아','순서·기억','메모를 다음 순서로. 길면 흐려짐.','03_rnn.html'],'04':['모아','순서·기억','문 세 개 + 기억 컨베이어.','04_lstm.html'],'05':['모아','순서·기억','문 두 개, 부품 75%.','05_gru.html'],
+    '06':['시아','압축·생성','좁은 목으로 줄였다 되살리기. 이상 탐지.','06_autoencoder.html'],'07':['시아','압축·생성','RBM을 한 층씩 미리 학습. 역사적 설계.','07_dbn.html'],'08':['시아','압축·생성','위조범과 감정사의 겨루기.','08_gan.html']};
+  function pick(g){var k=g.getAttribute('data-k'),d=I[k];BP.$$('#sheet10 .mini rect:first-child').forEach(function(r){r.setAttribute('stroke-width',3)});g.querySelector('rect').setAttribute('stroke-width',6);
+    BP.$('#pick10').innerHTML='<b>'+k+'</b> · '+d[1]+' 계열 · '+d[0]+' 작성 — '+d[2]+' <a href="'+d[3]+'">도면 펼치기 →</a>';}
+  BP.$$('#sheet10 .mini').forEach(function(g){g.style.cursor='pointer';g.addEventListener('click',function(){pick(g)});g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(g)}})});
+})();
+</script>
+
+</main>
+<section id="next"><div class="wrap">
+  <h2><span class="no">▣</span>다른 도면 펼치기</h2>
+  <div class="pnav"><a href="09_transformer.html"><small>← 앞 도면 DL-09</small>Transformer · 트랜스포머</a><a class="ix" href="index.html">INDEX</a><a class="nx" href="practice/index.html"><small>마지막 장 →</small>실전 연습장 · 설계 의뢰 접수처</a></div>
+</div></section>
+<!-- lab-kg:body -->
+<section class="kgx kgx-sec" id="kg"><div class="kgx-wrap">
+<h2>지식 색인 — 이 페이지에서 찾아보기</h2>
+<p class="kgx-sub">이 페이지에 나온 개념, 방법, 생물 대응, 주장, 열린 질문을 한곳에 모았다. 검색하고, 항목을 눌러 이웃 관계를 보고, "설명 보러 가기"로 본문에 돌아간다.</p>
+<div id="kg-mount"></div>
+</div></section>
+<section class="kgx kgx-sec" id="export"><div class="kgx-wrap">
+<h2>온톨로지·서지 꾸러미 — 이 페이지의 지식을 가져가기</h2>
+<p class="kgx-sub">지식 색인을 출처와 함께 파일로 내려받는다. Zotero(BibTeX·RIS), Protégé(Turtle), Neo4j·Gephi(CSV), 여러 페이지 합치기(kg.json)에 쓴다.</p>
+<div id="export-mount"></div>
+</div></section>
+<script type="application/json" id="kg-raw">{"version":"1.0","page":"10_review","nodes":[{"id":"lab:method/fnn","type":"Method","label":{"ko":"피드포워드 신경망","en":"Feedforward neural network"},"anchor":"#overview","level":2,"status":"known","confidence":"high","coverage":"mentioned","domain":["ai"],"match":[],"definition":{"ko":"한 방향으로만 흐르는 기본 신경망."},"page":"10_review"},{"id":"lab:method/cnn","type":"Method","label":{"ko":"합성곱 신경망","en":"Convolutional neural network"},"anchor":"#overview","level":2,"status":"known","confidence":"high","coverage":"mentioned","domain":["ai"],"match":[],"definition":{"ko":"필터로 공간 무늬를 찾는 신경망."},"page":"10_review"},{"id":"lab:method/rnn","type":"Method","label":{"ko":"순환 신경망","en":"Recurrent neural network"},"anchor":"#overview","level":2,"status":"known","confidence":"high","coverage":"mentioned","domain":["ai"],"match":[],"definition":{"ko":"은닉 상태로 순서를 기억하는 신경망."},"page":"10_review"},{"id":"lab:method/lstm","type":"Method","label":{"ko":"LSTM","en":"Long short-term memory"},"anchor":"#overview","level":2,"status":"known","confidence":"high","coverage":"mentioned","domain":["ai"],"match":[],"definition":{"ko":"문 세 개로 긴 기억을 지키는 RNN."},"page":"10_review"},{"id":"lab:method/gru","type":"Method","label":{"ko":"GRU","en":"Gated recurrent unit"},"anchor":"#overview","level":2,"status":"known","confidence":"high","coverage":"mentioned","domain":["ai"],"match":[],"definition":{"ko":"문 두 개의 가벼운 RNN."},"page":"10_review"},{"id":"lab:method/autoencoder","type":"Method","label":{"ko":"오토인코더","en":"Autoencoder"},"anchor":"#overview","level":2,"status":"known","confidence":"high","coverage":"mentioned","domain":["ai"],"match":[],"definition":{"ko":"줄였다 되살리며 표현을 배우는 신경망."},"page":"10_review"},{"id":"lab:method/dbn","type":"Method","label":{"ko":"심층 신뢰 신경망","en":"Deep belief network"},"anchor":"#overview","level":2,"status":"known","confidence":"high","coverage":"mentioned","domain":["ai"],"match":[],"definition":{"ko":"RBM을 층별로 쌓는 생성 모델."},"page":"10_review"},{"id":"lab:method/gan","type":"Method","label":{"ko":"적대적 생성 신경망","en":"Generative adversarial network"},"anchor":"#overview","level":2,"status":"known","confidence":"high","coverage":"mentioned","domain":["ai"],"match":[],"definition":{"ko":"생성자와 판별자의 겨루기."},"page":"10_review"},{"id":"lab:method/transformer","type":"Method","label":{"ko":"트랜스포머","en":"Transformer"},"anchor":"#overview","level":2,"status":"known","confidence":"high","coverage":"mentioned","domain":["ai"],"match":[],"definition":{"ko":"어텐션만으로 만든 구조."},"page":"10_review"},{"id":"lab:claim/review-errata","type":"Claim","label":{"ko":"참고 인포그래픽에 고칠 곳이 있다","en":"The reference infographics contain errors"},"anchor":"#errata","level":2,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"RNN 예시의 번호 오류, DBN 비교표의 어긋난 열과 깨진 글자, GAN 설명의 오타, FNN 요약의 과장 문구를 감수에서 확인했다."},"page":"10_review"},{"id":"lab:question/which-model","type":"Question","label":{"ko":"내 데이터에는 어느 설계도가 맞나","en":"Which blueprint fits my data?"},"anchor":"#choose","level":2,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"데이터 모양(표·그림·순서)과 목적(판정·예측·생성)으로 먼저 좁히고, 데이터 양과 계산 자원으로 고른다."},"page":"10_review"}],"edges":[{"s":"lab:method/fnn","p":"lab:prerequisiteOf","o":"lab:method/cnn","anchor":"#overview","confidence":"high"},{"s":"lab:method/fnn","p":"lab:prerequisiteOf","o":"lab:method/rnn","anchor":"#overview","confidence":"high"},{"s":"lab:method/lstm","p":"lab:specialCaseOf","o":"lab:method/rnn","anchor":"#overview","confidence":"high"},{"s":"lab:method/gru","p":"lab:specialCaseOf","o":"lab:method/rnn","anchor":"#overview","confidence":"high"},{"s":"lab:method/gru","p":"lab:relatedTo","o":"lab:method/lstm","anchor":"#overview","confidence":"high"},{"s":"lab:method/dbn","p":"lab:relatedTo","o":"lab:method/autoencoder","anchor":"#overview","confidence":"high"},{"s":"lab:method/gan","p":"lab:relatedTo","o":"lab:method/autoencoder","anchor":"#overview","confidence":"high"},{"s":"lab:method/rnn","p":"lab:prerequisiteOf","o":"lab:method/transformer","anchor":"#overview","confidence":"high"},{"s":"lab:claim/review-errata","p":"lab:relatedTo","o":"lab:method/dbn","anchor":"#errata","confidence":"high"}]}</script>
+<script type="application/ld+json" id="kg-ld">{"@context":{"@vocab":"urn:lab:","lab":"urn:lab:","skos":"http://www.w3.org/2004/02/skos/core#","schema":"https://schema.org/","dct":"http://purl.org/dc/terms/","prov":"http://www.w3.org/ns/prov#","rdfs":"http://www.w3.org/2000/01/rdf-schema#"},"@graph":[{"@id":"urn:lab:page/10","@type":["schema:LearningResource","schema:WebPage"],"schema:name":"DL-10 총괄 도면 감수 설계도면","schema:dateCreated":"2026-11-26","schema:version":"1.0","dct:isPartOf":"딥러닝 설계도면 연구실 01","schema:about":[{"@id":"lab:method/fnn"}],"schema:educationalLevel":"입문","dct:source":[{"@id":"lab:work/ref-infographic"},{"@id":"lab:work/ref-infographic"}]},{"@id":"lab:method/fnn","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"피드포워드 신경망","@language":"ko"},{"@value":"Feedforward neural network","@language":"en"}],"skos:definition":[{"@value":"한 방향으로만 흐르는 기본 신경망.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"mentioned","lab:page":"10_review","lab:anchor":"#overview","lab:prerequisiteOf":[{"@id":"lab:method/cnn"},{"@id":"lab:method/rnn"}]},{"@id":"lab:method/cnn","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"합성곱 신경망","@language":"ko"},{"@value":"Convolutional neural network","@language":"en"}],"skos:definition":[{"@value":"필터로 공간 무늬를 찾는 신경망.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"mentioned","lab:page":"10_review","lab:anchor":"#overview"},{"@id":"lab:method/rnn","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"순환 신경망","@language":"ko"},{"@value":"Recurrent neural network","@language":"en"}],"skos:definition":[{"@value":"은닉 상태로 순서를 기억하는 신경망.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"mentioned","lab:page":"10_review","lab:anchor":"#overview","lab:prerequisiteOf":[{"@id":"lab:method/transformer"}]},{"@id":"lab:method/lstm","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"LSTM","@language":"ko"},{"@value":"Long short-term memory","@language":"en"}],"skos:definition":[{"@value":"문 세 개로 긴 기억을 지키는 RNN.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"mentioned","lab:page":"10_review","lab:anchor":"#overview","lab:specialCaseOf":[{"@id":"lab:method/rnn"}],"skos:broader":[{"@id":"lab:method/rnn"}]},{"@id":"lab:method/gru","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"GRU","@language":"ko"},{"@value":"Gated recurrent unit","@language":"en"}],"skos:definition":[{"@value":"문 두 개의 가벼운 RNN.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"mentioned","lab:page":"10_review","lab:anchor":"#overview","lab:specialCaseOf":[{"@id":"lab:method/rnn"}],"skos:broader":[{"@id":"lab:method/rnn"}],"lab:relatedTo":[{"@id":"lab:method/lstm"}],"skos:related":[{"@id":"lab:method/lstm"}]},{"@id":"lab:method/autoencoder","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"오토인코더","@language":"ko"},{"@value":"Autoencoder","@language":"en"}],"skos:definition":[{"@value":"줄였다 되살리며 표현을 배우는 신경망.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"mentioned","lab:page":"10_review","lab:anchor":"#overview"},{"@id":"lab:method/dbn","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"심층 신뢰 신경망","@language":"ko"},{"@value":"Deep belief network","@language":"en"}],"skos:definition":[{"@value":"RBM을 층별로 쌓는 생성 모델.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"mentioned","lab:page":"10_review","lab:anchor":"#overview","lab:relatedTo":[{"@id":"lab:method/autoencoder"}],"skos:related":[{"@id":"lab:method/autoencoder"}]},{"@id":"lab:method/gan","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"적대적 생성 신경망","@language":"ko"},{"@value":"Generative adversarial network","@language":"en"}],"skos:definition":[{"@value":"생성자와 판별자의 겨루기.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"mentioned","lab:page":"10_review","lab:anchor":"#overview","lab:relatedTo":[{"@id":"lab:method/autoencoder"}],"skos:related":[{"@id":"lab:method/autoencoder"}]},{"@id":"lab:method/transformer","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"트랜스포머","@language":"ko"},{"@value":"Transformer","@language":"en"}],"skos:definition":[{"@value":"어텐션만으로 만든 구조.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"mentioned","lab:page":"10_review","lab:anchor":"#overview"},{"@id":"lab:claim/review-errata","@type":["lab:Claim","schema:Claim"],"skos:prefLabel":[{"@value":"참고 인포그래픽에 고칠 곳이 있다","@language":"ko"},{"@value":"The reference infographics contain errors","@language":"en"}],"skos:definition":[{"@value":"RNN 예시의 번호 오류, DBN 비교표의 어긋난 열과 깨진 글자, GAN 설명의 오타, FNN 요약의 과장 문구를 감수에서 확인했다.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"10_review","lab:anchor":"#errata","lab:relatedTo":[{"@id":"lab:method/dbn"}],"skos:related":[{"@id":"lab:method/dbn"}]},{"@id":"lab:question/which-model","@type":["lab:Question","schema:Question"],"skos:prefLabel":[{"@value":"내 데이터에는 어느 설계도가 맞나","@language":"ko"},{"@value":"Which blueprint fits my data?","@language":"en"}],"skos:definition":[{"@value":"데이터 모양(표·그림·순서)과 목적(판정·예측·생성)으로 먼저 좁히고, 데이터 양과 계산 자원으로 고른다.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"10_review","lab:anchor":"#choose"}]}</script>
+<script type="application/json" id="refs-csl">[{"id":"ref-infographic","type":"graphic","title":"9 Deep Learning Algorithms Every Engineer Should Know (인포그래픽 10장)","note":"작성자 표기 없음. 이 시리즈는 내용만 참고하고 그림은 새로 그렸다.","lab":{"verified":{"title":true}}}]</script>
+<script type="application/json" id="page-meta">{"title":"DL-10 총괄 도면 감수 설계도면","number":"10","series":"딥러닝 설계도면 연구실 01","date":"2026-11-26","version":"1.0","creator":[{"name":"안상선","role":"author"}],"contributor":[{"name":"AI 보조 제작","role":"assistant"}],"about":["lab:method/fnn"],"basedOn":["ref-infographic","ref-infographic"],"educationalLevel":"입문","license":"","url":"https://adminmrobo.github.io/deep_learning_model_design_lab_01/10_review.html","registry":"KG_00_registry 0.3","seeAlso":"https://adminmrobo.github.io/deep_learning_model_design_lab_01/index.html","suggestedCitation":"안상선 (2026). DL-10 총괄 도면 감수 설계도면. 딥러닝 설계도면 연구실 01 v1.0."}</script>
+<!-- /lab-kg:body -->
+<footer>
+  <div class="wrap">
+    <p>글 · 안상선 (<a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">https://adminmrobo.github.io/who_am_i/who_am_i.html</a>) · (주)M-Robo 대표</p>
+    <p>캐릭터: 조수 하루 · 인턴 모아 · 인턴 시아 · 초파리 연구원 · 주판봇 · 박사 — <a href="https://github.com/adminmrobo/fruitfly-lab-expressions">fruitfly-lab-expressions</a> 픽셀아트 캐릭터 팩. 도면 그림은 이 저장소에서 새로 그렸습니다.</p>
+    <p>참고 자료: 「9 Deep Learning Algorithms Every Engineer Should Know」 인포그래픽 10장(작성자 표기 없음). 내용만 참고했고, 그림과 문장은 새로 만들었으며 틀린 곳은 고쳤습니다(<a href="10_review.html#errata">감수 의견서</a>).</p>
+    <p>저장소: <a href="https://github.com/adminmrobo/deep_learning_model_design_lab_01">adminmrobo/deep_learning_model_design_lab_01</a> · <a href="https://www.ahnboat.xyz">ahnboat.xyz</a></p>
+  </div>
+</footer>
+<!-- lab-kg:script -->
+<script src="kg/kgx.js"></script>
+<!-- /lab-kg:script -->
+</body>
+</html>

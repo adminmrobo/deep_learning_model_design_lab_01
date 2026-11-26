@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DL-01 FNN — 피드포워드 신경망 설계도면 | 딥러닝 설계도면 연구실 01</title>
+<meta name="description" content="입력에서 출력으로 한 방향으로만 흐르는, 모든 신경망의 기본 부품. 가중합과 활성화 함수 두 가지만 알면 읽힌다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DL-01 FNN — 피드포워드 신경망 설계도면 | 딥러닝 설계도면 연구실 01">
+<meta property="og:description" content="입력에서 출력으로 한 방향으로만 흐르는, 모든 신경망의 기본 부품. 가중합과 활성화 함수 두 가지만 알면 읽힌다.">
+<meta property="og:image" content="https://adminmrobo.github.io/deep_learning_model_design_lab_01/assets/img/covers/og_01.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/chars/asst_e13.webp">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css">
+<link rel="stylesheet" href="assets/css/blueprint.css">
+<script src="assets/js/blueprint.js"></script>
+<!-- px-fix v1 --><style id="px-fix">img{image-rendering:auto!important}</style><script id="px-fix-js">(function(){var R=window.ResizeObserver;function f(i){var n=i.naturalWidth,w=i.getBoundingClientRect().width;if(!n||!w)return;var s=w*(window.devicePixelRatio||1)/n;i.style.setProperty("image-rendering",s>=1.95?"pixelated":"auto","important")}var ro=R?new R(function(es){es.forEach(function(e){f(e.target)})}):null;function a(i){if(i.__px)return;i.__px=1;i.addEventListener("load",function(){f(i)});if(ro)ro.observe(i);f(i)}function all(r){(r||document).querySelectorAll&&(r||document).querySelectorAll("img").forEach(a)}function go(){all();if(window.MutationObserver)new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType!==1)return;if(n.tagName==="IMG")a(n);else all(n)})})}).observe(document.documentElement,{childList:true,subtree:true});window.addEventListener("resize",function(){document.querySelectorAll("img").forEach(f)})}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go()})();</script><!-- /px-fix -->
+<!-- lab-kg:head -->
+<meta name="citation_title" content="DL-01 피드포워드 신경망 설계도면">
+<meta name="dc.title" content="DL-01 피드포워드 신경망 설계도면">
+<meta name="dc.date" content="2026-11-26">
+<meta name="dc.language" content="ko">
+<meta name="dc.type" content="InteractiveResource">
+<meta name="citation_author" content="안상선">
+<meta name="dcterms.isPartOf" content="딥러닝 설계도면 연구실 01">
+<meta name="dc.source" content="doi:10.1038/323533a0">
+<!-- /lab-kg:head -->
+</head>
+<body class="by-haru">
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<nav class="topnav" aria-label="도면 목록"><div class="wrap"><a class="home" href="index.html">DL 설계도면 연구실</a><a href="01_fnn.html" class="here" aria-current="page">01 FNN</a><a href="02_cnn.html">02 CNN</a><a href="03_rnn.html">03 RNN</a><a href="04_lstm.html">04 LSTM</a><a href="05_gru.html">05 GRU</a><a href="06_autoencoder.html">06 AE</a><a href="07_dbn.html">07 DBN</a><a href="08_gan.html">08 GAN</a><a href="09_transformer.html">09 Transformer</a><a href="10_review.html">10 감수</a><a href="practice/index.html">실전 연습장</a></div></nav>
+<header class="cover" id="cover" data-img="cover_01"><picture><img src="assets/img/covers/cover_01.webp" width="1600" height="900" alt="DL-01 FNN 설계도면 표지: 모눈 바탕 위의 조수 하루 픽셀아트" fetchpriority="high" decoding="async"></picture><span class="cover-chip">딥러닝 설계도면 연구실 01 · DL-01</span></header>
+<div class="wrap">
+  <div class="term">
+    <div class="bar"><span class="dot" style="background:var(--pink)"></span><span class="dot" style="background:var(--lav)"></span><span class="dot" style="background:var(--navy)"></span><span class="t mono">blueprint · DL-01_FNN.dwg</span></div>
+    <div class="term-body">
+      <p class="prompt mono"><b>haru@lab</b>:~$ open DL-01_FNN.blueprint</p>
+      <div class="hero">
+        <div class="who"><img src="assets/img/chars/asst_e07.webp" alt="조수 하루 픽셀아트 초상, 검지를 세워 설명하는 모습" width="192" height="192"></div>
+        <div>
+          <h1>FNN</h1>
+          <div class="sub">앞으로만 흐르는 기본 설계도</div>
+          <p class="by">DL-01 · 피드포워드 신경망 (Feedforward Neural Network) · 조수 하루 작성</p>
+          <span class="motto pix">부품은 두 개 — 더하기, 그리고 구부리기.</span>
+        </div>
+      </div>
+      <table class="titleblock" aria-label="도면 표제란">
+        <tr><th>도면 번호</th><td>DL-01</td><th>계열</th><td>기본 구조 계열 (하루 담당)</td></tr>
+        <tr><th>작성</th><td>조수 하루</td><th>감수</th><td>초파리 연구원 · 주판봇 (<a href="10_review.html">10 감수 도면</a>)</td></tr>
+        <tr><th>모델</th><td>FNN · 피드포워드 신경망</td><th>날짜 · 판</th><td>2026-11-26 · v1.0</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+<main id="main">
+<section id="three"><div class="wrap">
+  <h2><span class="no">01</span>처음 오신 분께 — 이 도면을 3줄로</h2>
+  <p class="lead">조수 하루가 직접 그려서 건네는 첫 번째 딥러닝 설계도면입니다. 아홉 장 가운데 가장 단순하고, 나머지 여덟 장이 모두 이 도면의 부품을 빌려 씁니다.</p>
+  <div class="three">
+    <div><b>무엇을</b>숫자 몇 개를 받아 곱하고 더한 뒤 살짝 구부려서, 다음 층으로 넘기기를 몇 번 되풀이하는 장치입니다.</div>
+    <div><b>왜 중요한가</b>신호가 앞으로만 흐르는 가장 기본 꼴이라, CNN·RNN·트랜스포머 안에도 이 장치가 부품으로 들어 있습니다.</div>
+    <div><b>업무에서는</b>고객 정보로 해지 여부를 판정하거나, 집 조건으로 가격을 예측하는 표 데이터 일에 바로 씁니다.</div>
+  </div>
+  <p class="nocode">코드나 수식을 몰라도 됩니다. 수식은 옆에서 동료가 한 조각씩 대신 물어봐 줍니다.</p>
+  <details><summary>이 도면에 나오는 영어 약어 풀이</summary>
+    <dl class="abbr">
+      <dt>FNN</dt><dd>Feedforward Neural Network, 피드포워드(앞먹임) 신경망. 신호가 앞으로만 흐른다는 뜻</dd>
+      <dt>ReLU</dt><dd>Rectified Linear Unit, 음수는 0으로 자르고 양수는 그대로 두는 함수</dd>
+      <dt>MLP</dt><dd>Multi-Layer Perceptron, 다층 퍼셉트론. 층이 여럿인 FNN을 부르는 다른 이름</dd>
+    </dl>
+  </details>
+</div></section>
+
+<section id="cast"><div class="wrap">
+  <h2><span class="no">02</span>도면을 전달하는 사람들</h2>
+  <div class="cast">
+    <div class="me"><img src="assets/img/chars/asst_e13.webp" alt="조수 하루" width="84" height="84"><b>조수 하루</b>이 도면 작성자<br><span class="tag">설계 · 숫자 발표</span></div>
+    <div><img src="assets/img/chars/moa_e09.webp" alt="인턴 모아" width="84" height="84"><b>인턴 모아</b>수식을 대신 물어봄<br><span class="tag">질문 담당</span></div>
+    <div><img src="assets/img/chars/doc_e07.webp" alt="박사" width="84" height="84"><b>박사</b>현장 질문과 해석<br><span class="tag">교육 · 판정</span></div>
+    <div><img src="assets/img/chars/fly_e09.webp" alt="초파리 연구원" width="84" height="84"><b>초파리 연구원</b>크고 복잡한 것을 의심<br><span class="tag">감수</span></div>
+    <div><img src="assets/img/chars/robo_e16.webp" alt="주판봇" width="84" height="84"><b>주판봇</b>큰 숫자를 좋아함<br><span class="tag">감수</span></div>
+  </div>
+  <div class="say-row"><img src="assets/img/chars/asst_e01.webp" alt="" width="64" height="64">
+    <div class="bubble"><b class="nm">하루</b>안녕하세요, 하루예요. 첫 장은 제일 단순한 도면으로 골랐어요. 부품은 딱 두 개, <b>더하기</b>와 <b>구부리기</b>예요. 이 두 개만 손에 익으면 뒤의 도면 여덟 장이 훨씬 가볍게 읽혀요.</div></div>
+</div></section>
+
+<section id="dwg"><div class="wrap">
+  <h2><span class="no">03</span>전체 구조도 — SHEET 1</h2>
+  <p class="lead">왼쪽에서 오른쪽으로만 화살표가 갑니다. 되돌아가는 선이 하나도 없다는 점이 이 도면의 이름이에요.</p>
+  <div class="dwg scroll-x"><span class="stamp">작성 · 하루</span>
+    <svg viewBox="0 0 900 430" role="img" aria-labelledby="d1t">
+      <title id="d1t">FNN 전체 구조: 입력층 세 개, 은닉층 두 개(각 네 개), 출력층 두 개가 왼쪽에서 오른쪽으로만 이어진 그림</title>
+      <defs><marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1E2F5C"/></marker></defs>
+      <g stroke="#1E2F5C" stroke-width="1" opacity=".35">
+        <!-- 입력→은닉1 -->
+        <path d="M150 120 L330 90 M150 120 L330 170 M150 120 L330 250 M150 120 L330 330 M150 210 L330 90 M150 210 L330 170 M150 210 L330 250 M150 210 L330 330 M150 300 L330 90 M150 300 L330 170 M150 300 L330 250 M150 300 L330 330"/>
+        <path d="M370 90 L530 90 M370 90 L530 170 M370 90 L530 250 M370 90 L530 330 M370 170 L530 90 M370 170 L530 170 M370 170 L530 250 M370 170 L530 330 M370 250 L530 90 M370 250 L530 170 M370 250 L530 250 M370 250 L530 330 M370 330 L530 90 M370 330 L530 170 M370 330 L530 250 M370 330 L530 330"/>
+        <path d="M570 90 L730 160 M570 90 L730 260 M570 170 L730 160 M570 170 L730 260 M570 250 L730 160 M570 250 L730 260 M570 330 L730 160 M570 330 L730 260"/>
+      </g>
+      <g stroke="#1E2F5C" stroke-width="3">
+        <g fill="#cfe8c9"><rect x="112" y="102" width="36" height="36" rx="4"/><rect x="112" y="192" width="36" height="36" rx="4"/><rect x="112" y="282" width="36" height="36" rx="4"/></g>
+        <g fill="#f8e3a3"><rect x="332" y="72" width="36" height="36" rx="4"/><rect x="332" y="152" width="36" height="36" rx="4"/><rect x="332" y="232" width="36" height="36" rx="4"/><rect x="332" y="312" width="36" height="36" rx="4"/>
+          <rect x="532" y="72" width="36" height="36" rx="4"/><rect x="532" y="152" width="36" height="36" rx="4"/><rect x="532" y="232" width="36" height="36" rx="4"/><rect x="532" y="312" width="36" height="36" rx="4"/></g>
+        <g fill="#f6c6cf"><rect x="732" y="142" width="36" height="36" rx="4"/><rect x="732" y="242" width="36" height="36" rx="4"/></g>
+      </g>
+      <g fill="#1E2F5C" font-size="15">
+        <text x="70" y="126">x₁</text><text x="70" y="216">x₂</text><text x="70" y="306">x₃</text>
+        <path d="M768 160 H835" stroke="#1E2F5C" stroke-width="2" marker-end="url(#ar1)"/><path d="M768 260 H835" stroke="#1E2F5C" stroke-width="2" marker-end="url(#ar1)"/>
+        <text x="842" y="165">ŷ₁</text><text x="842" y="265">ŷ₂</text>
+        <text x="96" y="52">입력층</text><text x="312" y="52">은닉층 1</text><text x="512" y="52">은닉층 2</text><text x="716" y="110">출력층</text>
+      </g>
+      <!-- 치수선 -->
+      <g stroke="#2f5fa8" stroke-width="1.5" fill="none"><path d="M130 380 H750"/><path d="M130 372 V388 M750 372 V388"/></g>
+      <text x="300" y="404" fill="#2f5fa8" font-size="14">신호 방향: 왼쪽 → 오른쪽 (되돌아가는 선 없음)</text>
+      <!-- 번호 표시 -->
+      <g font-size="14" fill="#fff"><circle cx="130" cy="78" r="13" fill="#D9707E"/><text x="125" y="83">1</text>
+        <circle cx="250" cy="70" r="13" fill="#D9707E"/><text x="245" y="75">2</text>
+        <circle cx="395" cy="60" r="13" fill="#D9707E"/><text x="390" y="65">3</text>
+        <circle cx="790" cy="120" r="13" fill="#D9707E"/><text x="785" y="125">4</text></g>
+    </svg>
+  </div>
+  <p class="dwg-cap">번호 ①~④는 아래 부품 명세의 순서와 같습니다. 둥근 모서리 네모 하나하나가 뉴런(계산하는 작은 상자)이에요.</p>
+  <div class="review30"><b>30초 복습 · 일차함수</b> 학교에서 배운 y = ax + b를 떠올려 보세요. a는 기울기, b는 위아래로 옮기는 값이었죠. 뉴런 하나가 하는 계산이 바로 이것을 입력 여러 개로 늘린 모양입니다.</div>
+  <p><b>도면의 위치</b> · 이 도면(FNN) → 그림을 보려면 <a href="02_cnn.html">02 CNN</a>, 순서를 기억하려면 <a href="03_rnn.html">03 RNN</a>으로 갈라집니다.</p>
+</div></section>
+
+<section id="spec"><div class="wrap">
+  <h2><span class="no">04</span>부품 명세 — 한 번 흐를 때 일어나는 일</h2>
+  <p class="lead">도면의 번호를 따라 신호가 한 번 지나가는 길입니다. 회색 줄은 하루가 현장에서 건넬 말이에요.</p>
+  <div class="steps">
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="3" width="12" height="10" fill="#cfe8c9" stroke="#1E2F5C"/><rect x="2" y="6" width="12" height="1" fill="#1E2F5C"/><rect x="2" y="9" width="12" height="1" fill="#1E2F5C"/><rect x="6" y="3" width="1" height="10" fill="#1E2F5C"/></svg></div>
+      <div><h3><span>①</span>입력 — 표의 한 줄을 넣는다</h3><p>고객 한 명의 나이·사용 기간·민원 횟수처럼, 표의 한 줄을 숫자 몇 개로 넣습니다. 이 숫자 하나하나를 <b>특성(feature)</b>이라고 불러요.</p>
+      <p class="say">"단위가 너무 다르면(나이 40, 매출 4,000만) 먼저 비슷한 크기로 맞춰 둘게요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="7" y="2" width="2" height="12" fill="#D9707E"/><rect x="2" y="7" width="12" height="2" fill="#D9707E"/></svg></div>
+      <div><h3><span>②</span>가중합 — 중요도를 곱해 더한다</h3><p>입력마다 중요도(<b>가중치 w</b>)를 곱해서 모두 더하고, 기준을 옮기는 값(<b>편향 b</b>)을 더합니다. 결과를 z라고 부릅니다.</p>
+      <p class="say">"민원 횟수에 가중치를 크게 주면, 민원이 많은 고객일수록 z가 커져요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="12" width="7" height="2" fill="#1E2F5C"/><rect x="8" y="10" width="2" height="2" fill="#1E2F5C"/><rect x="10" y="7" width="2" height="3" fill="#1E2F5C"/><rect x="12" y="3" width="2" height="4" fill="#1E2F5C"/></svg></div>
+      <div><h3><span>③</span>활성화 — 살짝 구부린다</h3><p>z를 활성화 함수에 넣어 구부립니다. 구부리지 않으면 층을 아무리 쌓아도 직선 하나와 같아져요. 은닉층에는 주로 ReLU(음수는 0, 양수는 그대로)를 씁니다.</p>
+      <p class="say">"구부리는 부품이 있어야 '민원 3번까지는 괜찮다가 4번부터 위험' 같은 꺾인 규칙을 배워요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="3" y="3" width="10" height="10" fill="#f6c6cf" stroke="#1E2F5C"/><rect x="6" y="6" width="4" height="4" fill="#1E2F5C"/></svg></div>
+      <div><h3><span>④</span>출력 — 예측값 ŷ를 낸다</h3><p>마지막 층이 답을 냅니다. "해지할까?"처럼 확률이 필요하면 0~1로 눌러 주는 시그모이드를, 가격처럼 아무 숫자나 나와야 하면 그대로 두는 선형 출력을 씁니다.</p>
+      <p class="say">"ŷ(와이 햇)은 '모델이 짐작한 y'라는 뜻이에요. 모자를 씌워서 정답 y와 구분해요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="2" width="2" height="12" fill="#1E2F5C"/><rect x="2" y="12" width="12" height="2" fill="#1E2F5C"/><rect x="5" y="4" width="2" height="2" fill="#2e8b57"/><rect x="7" y="7" width="2" height="2" fill="#2e8b57"/><rect x="10" y="9" width="2" height="2" fill="#2e8b57"/></svg></div>
+      <div><h3><span>⑤</span>학습 — 틀린 만큼 가중치를 고친다</h3><p>예측 ŷ와 정답 y의 차이(<b>손실</b>)를 재고, 손실이 줄어드는 쪽으로 가중치를 조금씩 고칩니다. 고칠 방향은 역전파, 고치는 걸음은 경사하강법이 정해요.</p>
+      <p class="say">"한 번에 크게 고치지 않고, 수천 번 조금씩 고쳐요."</p></div></div>
+  </div>
+</div></section>
+
+<section id="why"><div class="wrap">
+  <h2><span class="no">05</span>왜 이 설계를 쓰나 · 수식은 동료가 대신 물어봅니다</h2>
+  <div class="say-row neutral"><img src="assets/img/chars/doc_e07.webp" alt="" width="64" height="64">
+    <div class="bubble"><b class="nm">박사</b>회사에 고객 표가 있고 "다음 달에 해지할 고객"을 미리 알고 싶다고 해 봅시다. 사람이 규칙을 하나하나 쓰기엔 조건이 너무 많아요. 그럴 때 이 도면이 처음 꺼내는 설계입니다.</div></div>
+  <div class="pair">
+    <div class="why" id="whybox">
+      <h3>왜 이 설계를 쓰나</h3>
+      <ol>
+        <li><b>문제 상황</b> · 입력 여러 개가 얽혀서 답을 정하는데, 그 규칙을 사람이 다 적을 수 없습니다.</li>
+        <li><b>앞 방법의 한계</b> · 직선 하나(선형 회귀·로지스틱 회귀)는 "어느 선을 넘으면 위험"처럼 꺾이거나 휘는 규칙을 못 그립니다.</li>
+        <li><b>해법</b> · 가중합과 구부리기를 여러 층 겹치면, 꺾인 규칙을 여러 개 이어 붙여 웬만한 모양을 근사할 수 있습니다.</li>
+      </ol>
+      <p class="easy"><b>쉽게 말하면</b> · 자 하나로는 직선밖에 못 긋지만, 짧은 자를 여러 개 꺾어 이으면 곡선도 따라 그릴 수 있어요.</p>
+      <p class="calm">여기서 한 번 멈춰도 괜찮아요. "층을 겹치면 꺾인 선을 이어 붙인다" — 이 한 문장이면 충분합니다.</p>
+    </div>
+    <div class="mathq" id="math">
+      <div class="q"><img src="assets/img/chars/moa_e04.webp" alt="" width="56" height="56"><p><b>모아</b> · "z = Σwx + b… 저 뾰족한 E 같은 건 뭐예요? 읽는 법부터 알려 주세요!"</p></div>
+      <p class="school">학교 수학으로 보면 · 일차함수 y = ax + b를 입력 여러 개로 늘린 것 (5장 연결표: 신경망 = 합성함수)</p>
+      <div class="formula">z = w₁x₁ + w₂x₂ + b &nbsp;&nbsp;→&nbsp;&nbsp; ŷ = f(z)</div>
+      <table class="pieces"><tr><th>조각</th><th>읽는 법 · 뜻</th></tr>
+        <tr><td>Σ</td><td>"시그마". 여러 개를 모두 더하라는 기호. 여기서는 w₁x₁ + w₂x₂를 줄여 쓴 것</td></tr>
+        <tr><td>wᵢ</td><td>"더블유 아이". i번째 입력의 중요도(가중치). 학습으로 정해짐</td></tr>
+        <tr><td>b</td><td>"비". 편향. 그래프를 위아래로 옮기는 값</td></tr>
+        <tr><td>f(z)</td><td>"에프 오브 제트". 활성화 함수에 z를 넣은 값</td></tr>
+      </table>
+      <div class="calc"><b class="t">숫자로 한 번 해 보기</b>
+        <ol><li>입력 x₁ = 1, x₂ = 2, 가중치 w₁ = 0.6, w₂ = 0.2, 편향 b = −0.5</li>
+          <li>가중합 z = 0.6×1 + 0.2×2 − 0.5 = 0.6 + 0.4 − 0.5 = <b>0.5</b></li>
+          <li>ReLU라면 f(0.5) = <b>0.5</b> (양수는 그대로)</li>
+          <li>시그모이드라면 f(0.5) = 1 ÷ (1 + e<sup>−0.5</sup>) ≈ <b>0.622</b></li></ol></div>
+      <div class="after"><img src="assets/img/chars/moa_e16.webp" alt="" width="48" height="48"><p><b>모아</b> · "곱하고 더하고, 함수 하나에 넣으면 끝이네요. 아래 조립대에서 직접 돌려 볼게요!"</p></div>
+    </div>
+  </div>
+  <div class="daily" style="margin-top:22px">
+    <div><b>일상으로 치면</b>입사 지원서 평가와 같아요. 경력·자격증·면접 점수에 각각 비중을 곱해 더하고(가중합), "합격선을 넘었나"로 한 번 걸러요(활성화). 심사위원이 여러 단계면 층이 여러 개인 셈이에요.</div>
+    <div><b>현장에서는</b>통신사의 해지 예측, 카드사의 이상 거래 점수, 부동산 가격 예측처럼 <b>표로 된 데이터</b>에 씁니다. 다만 표 데이터만 있다면 트리 계열 모델이 더 잘 맞는 경우도 많아서, 둘을 같이 비교해 봐요.</div>
+  </div>
+</div></section>
+
+<section id="lab"><div class="wrap">
+  <h2><span class="no">06</span>실험 — 뉴런 하나 조립대</h2>
+  <div class="talk">
+    <div class="line"><img src="assets/img/chars/doc_e09.webp" alt="박사" width="56" height="56"><p><b>박사</b>활성화 함수를 빼면 무엇이 달라질까요? 결과가 그럴듯한지부터 봅시다.</p></div>
+    <div class="line"><img src="assets/img/chars/robo_e16.webp" alt="주판봇" width="56" height="56"><p><b>주판봇</b>함수 같은 거 없어도 됩니다! 가중치를 크게, 크게! 숫자만 키우면 다 맞힙니다!</p></div>
+    <div class="line"><img src="assets/img/chars/fly_e09.webp" alt="초파리" width="56" height="56"><p><b>초파리</b>크면 좋다고? 의심스럽네. 아래에서 '선형'을 골라 z를 아무리 키워 봐. 출력이 구부러지는지.</p></div>
+    <div class="line me"><img src="assets/img/chars/asst_e07.webp" alt="하루" width="56" height="56"><p><b>하루</b>값은 제가 읽어 드릴게요. 슬라이더를 움직이면 계산이 한 줄씩 바뀌어요.</p></div>
+  </div>
+  <div class="lab">
+    <div class="bar"><span class="dot" style="background:var(--pink)"></span><span class="dot" style="background:var(--lav)"></span><span class="dot" style="background:var(--navy)"></span><span class="t">neuron_bench.sim</span></div>
+    <div class="lab-body">
+      <div class="ctrl">
+        <label for="x1">입력 x₁ <span class="val" data-for="x1" data-d="1"></span></label><input type="range" id="x1" min="-3" max="3" step="0.1" value="1">
+        <label for="x2">입력 x₂ <span class="val" data-for="x2" data-d="1"></span></label><input type="range" id="x2" min="-3" max="3" step="0.1" value="2">
+        <label for="w1">가중치 w₁ <span class="val" data-for="w1" data-d="1"></span></label><input type="range" id="w1" min="-2" max="2" step="0.1" value="0.6">
+        <label for="w2">가중치 w₂ <span class="val" data-for="w2" data-d="1"></span></label><input type="range" id="w2" min="-2" max="2" step="0.1" value="0.2">
+        <label for="bb">편향 b <span class="val" data-for="bb" data-d="1"></span></label><input type="range" id="bb" min="-3" max="3" step="0.1" value="-0.5">
+        <label>활성화 함수</label>
+        <div id="acts"><button class="btn" data-a="relu">ReLU</button><button class="btn ghost" data-a="sig">시그모이드</button><button class="btn ghost" data-a="tanh">tanh</button><button class="btn ghost" data-a="lin">선형</button></div>
+        <button class="btn ghost" id="reset1" type="button">처음 값으로</button>
+      </div>
+      <div>
+        <svg id="plot1" viewBox="0 0 520 300" role="img" aria-label="활성화 함수 그래프와 현재 z의 위치"></svg>
+        <div class="readout" id="out1" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+  <div class="sol">
+    <p><b>하루의 보고</b> · 처음 값(x₁=1, x₂=2, w₁=0.6, w₂=0.2, b=−0.5)에서 z = 0.5, ReLU 출력 0.5, 시그모이드 출력 0.622예요. 위의 손계산과 같아요.</p>
+    <p><b>박사의 해석</b> · 시그모이드 0.622는 "해지할 확률을 62%쯤으로 본다"는 뜻으로 읽습니다. 그런데 '선형'을 고르면 그래프가 곧은 선이라, z가 커지면 출력도 끝없이 커집니다. 확률이 1을 넘는 이상한 답이 나오는 거죠. 그래서 확률을 낼 때는 마지막에 시그모이드를 씁니다.</p>
+  </div>
+</div></section>
+
+<section id="judge-sec"><div class="wrap">
+  <h2><span class="no">07</span>AI 판단 코너 — 이 답, 믿어도 될까?</h2>
+  <div class="judge">
+    <h3>AI 도우미가 이렇게 답했습니다</h3>
+    <div class="ai-out">Q. 은닉층 활성화 함수를 전부 '선형(그대로 통과)'으로 바꿔도 될까요?
+A. 네, 괜찮습니다. 층을 10개나 쌓았기 때문에 충분히 복잡한 패턴을 배울 수 있습니다. 계산도 빨라집니다.</div>
+    <p>어디가 이상할까요? 하나를 골라 보세요.</p>
+    <div class="choices" data-answer="b">
+      <button data-k="a" data-why="계산이 빨라지는 건 맞아요. 문제는 그다음 문장입니다.">계산이 빨라진다는 말이 틀렸다</button>
+      <button data-k="b">직선 계산을 몇 번 겹쳐도 결국 직선 하나와 같아서, 층을 쌓은 효과가 사라진다</button>
+      <button data-k="c" data-why="층 수는 문제의 핵심이 아니에요. 100층이어도 선형만 겹치면 한 층과 같아요.">층을 10개가 아니라 100개 쌓으면 해결된다</button>
+    </div>
+    <p class="feedback" data-ok="맞아요. 직선을 직선에 넣으면 또 직선이에요. 실험대에서 '선형'을 고르면 그래프가 곧게 펴지는 걸 확인할 수 있어요. 이렇게 확인 질문(가정이 맞나?)을 던지는 습관이 AI 결과를 읽는 힘입니다."></p>
+  </div>
+</div></section>
+
+<section id="limit"><div class="wrap">
+  <h2><span class="no">08</span>이 설계의 한계 → 다음 도면</h2>
+  <div class="limit"><b>한계 1 · 기억이 없다</b> — 입력 하나를 따로 봅니다. "어제 매출 → 오늘 매출"처럼 순서가 중요한 데이터는 <a href="03_rnn.html">03 RNN</a> 도면이 필요해요.<br>
+    <b>한계 2 · 위치를 모른다</b> — 사진을 숫자 한 줄로 펴서 넣으면 "옆 픽셀끼리 붙어 있다"는 정보가 사라집니다. 그래서 <a href="02_cnn.html">02 CNN</a> 도면이 나왔어요.<br>
+    <b>한계 3 · 부품이 금방 많아진다</b> — 모든 뉴런을 서로 다 잇기 때문에 입력이 크면 가중치가 폭발적으로 늘어납니다.</div>
+  <div class="recap"><b>정리</b> · FNN은 ① 곱해서 더하고 ② 구부리기를 층마다 되풀이하며, 신호는 앞으로만 흐릅니다. 학습은 예측과 정답의 차이를 줄이도록 가중치를 고치는 일입니다.</div>
+</div></section>
+
+<section id="quiz"><div class="wrap">
+  <h2><span class="no">09</span>확인 퀴즈</h2>
+  <div class="quiz"><p class="qq">Q1. FNN에서 신호는 어떻게 흐르나요?</p>
+    <div class="choices" data-answer="a"><button data-k="a">입력층 → 은닉층 → 출력층, 한 방향으로만</button><button data-k="b" data-why="되돌아가는 선이 있는 것은 03 RNN 도면이에요.">출력에서 다시 입력으로 되돌아가며 돈다</button><button data-k="c" data-why="층 순서대로 차례차례 갑니다.">모든 층이 무작위 순서로 계산한다</button></div>
+    <p class="feedback" data-ok="맞아요. 되돌아가는 선이 없어서 '피드포워드'예요."></p></div>
+  <div class="quiz"><p class="qq">Q2. "이 고객이 해지할 확률"을 내고 싶다면 출력층에 어떤 활성화 함수가 어울릴까요?</p>
+    <div class="choices" data-answer="b"><button data-k="a" data-why="ReLU는 0부터 끝없이 커질 수 있어서 확률(0~1)로 읽기 어려워요.">ReLU</button><button data-k="b">시그모이드</button><button data-k="c" data-why="선형은 1을 넘는 값도 그대로 내보내요.">선형</button></div>
+    <p class="feedback" data-ok="맞아요. 시그모이드는 어떤 z든 0과 1 사이로 눌러 줘요."></p></div>
+</div></section>
+
+<section id="memo"><div class="wrap">
+  <h2><span class="no">10</span>감수 메모 — 참고 자료와 다른 곳</h2>
+  <div class="memo">참고 인포그래픽의 요약 카드는 FNN을 "모든 딥러닝 모델의 기본 블록"이라고 적었습니다. <b>원자료의 이 표현을 이 페이지에서는 "많은 딥러닝 모델 안에 부품으로 들어 있다"로 바꿉니다.</b> CNN·트랜스포머 안에 완전연결층이 들어 있는 것은 맞지만, RBM처럼 이 꼴이 아닌 부품도 있기 때문이에요. 자세한 내용은 <a href="10_review.html#errata">10 감수 도면의 의견서</a>에 있어요.</div>
+</div></section>
+
+<script>
+(function(){
+  var $=BP.$, act='relu';
+  var F={relu:function(z){return Math.max(0,z)},sig:BP.sig,tanh:BP.tanh,lin:function(z){return z}};
+  var NM={relu:'ReLU',sig:'시그모이드',tanh:'tanh',lin:'선형'};
+  var ids=['x1','x2','w1','w2','bb'], init={x1:1,x2:2,w1:0.6,w2:0.2,bb:-0.5};
+  function v(i){return +document.getElementById(i).value}
+  function draw(){
+    var z=v('w1')*v('x1')+v('w2')*v('x2')+v('bb'), y=F[act](z), s=$('#plot1');
+    while(s.firstChild)s.removeChild(s.firstChild);
+    var X=function(t){return 260+t*40}, Y=function(t){return 150-t*40};
+    for(var g=-6;g<=6;g++){s.appendChild(BP.svg('line',{x1:X(g),y1:10,x2:X(g),y2:290,stroke:'#e6eef9'}))}
+    for(g=-3;g<=3;g++){s.appendChild(BP.svg('line',{x1:20,y1:Y(g),x2:500,y2:Y(g),stroke:'#e6eef9'}))}
+    s.appendChild(BP.svg('line',{x1:20,y1:150,x2:500,y2:150,stroke:'#1E2F5C','stroke-width':1.5}));
+    s.appendChild(BP.svg('line',{x1:260,y1:10,x2:260,y2:290,stroke:'#1E2F5C','stroke-width':1.5}));
+    var d='',pen=false;for(var t=-6;t<=6.001;t+=0.05){var yy=F[act](t);if(Math.abs(yy)>3.5){pen=false;continue}d+=(pen?'L':'M')+X(t).toFixed(1)+' '+Y(yy).toFixed(1);pen=true}
+    s.appendChild(BP.svg('path',{d:d,fill:'none',stroke:'#D9707E','stroke-width':3}));
+    var zc=Math.max(-6,Math.min(6,z)), yc=Math.max(-3.5,Math.min(3.5,y));
+    s.appendChild(BP.svg('line',{x1:X(zc),y1:150,x2:X(zc),y2:Y(yc),stroke:'#2f5fa8','stroke-dasharray':'4 3'}));
+    s.appendChild(BP.svg('circle',{cx:X(zc),cy:Y(yc),r:7,fill:'#1E2F5C'}));
+    s.appendChild(BP.svg('text',{x:28,y:28,'font-size':15,fill:'#1E2F5C'},NM[act]+' · f(z)'));
+    s.appendChild(BP.svg('text',{x:470,y:170,'font-size':14,fill:'#6b6b7a'},'z'));
+    $('#out1').innerHTML='<b>① 가중합</b> z = '+BP.fmt(v('w1'),1)+'×'+BP.fmt(v('x1'),1)+' + '+BP.fmt(v('w2'),1)+'×'+BP.fmt(v('x2'),1)+' + ('+BP.fmt(v('bb'),1)+') = <b>'+BP.fmt(z,2)+'</b><br>'+
+      '<b>② 활성화</b> '+NM[act]+'('+BP.fmt(z,2)+') = <b>'+BP.fmt(y,3)+'</b>'+
+      (act==='sig'?' → 확률로 읽으면 약 '+Math.round(y*100)+'%':'')+(act==='lin'&&Math.abs(y)>1?' → 1을 넘었어요. 확률로는 읽을 수 없어요':'');
+  }
+  ids.forEach(function(i){document.getElementById(i).addEventListener('input',draw)});
+  BP.$$('#acts button').forEach(function(b){b.type='button';b.addEventListener('click',function(){act=b.getAttribute('data-a');BP.$$('#acts button').forEach(function(x){x.classList.toggle('ghost',x!==b)});draw()})});
+  $('#reset1').addEventListener('click',function(){ids.forEach(function(i){var e=document.getElementById(i);e.value=init[i];e.dispatchEvent(new Event('input'))});});
+  draw();
+})();
+</script>
+
+</main>
+<section id="next"><div class="wrap">
+  <h2><span class="no">▣</span>다른 도면 펼치기</h2>
+  <div class="pnav"><a href="index.html"><small>← 처음으로</small>INDEX · 도면 목록</a><a class="ix" href="index.html">INDEX</a><a class="nx" href="02_cnn.html"><small>다음 도면 DL-02 →</small>CNN · 합성곱 신경망</a></div>
+</div></section>
+<!-- lab-kg:body -->
+<section class="kgx kgx-sec" id="kg"><div class="kgx-wrap">
+<h2>지식 색인 — 이 페이지에서 찾아보기</h2>
+<p class="kgx-sub">이 페이지에 나온 개념, 방법, 생물 대응, 주장, 열린 질문을 한곳에 모았다. 검색하고, 항목을 눌러 이웃 관계를 보고, "설명 보러 가기"로 본문에 돌아간다.</p>
+<div id="kg-mount"></div>
+</div></section>
+<section class="kgx kgx-sec" id="export"><div class="kgx-wrap">
+<h2>온톨로지·서지 꾸러미 — 이 페이지의 지식을 가져가기</h2>
+<p class="kgx-sub">지식 색인을 출처와 함께 파일로 내려받는다. Zotero(BibTeX·RIS), Protégé(Turtle), Neo4j·Gephi(CSV), 여러 페이지 합치기(kg.json)에 쓴다.</p>
+<div id="export-mount"></div>
+</div></section>
+<script type="application/json" id="kg-raw">{"version":"1.0","page":"01_fnn","nodes":[{"id":"lab:method/fnn","type":"Method","label":{"ko":"피드포워드 신경망","en":"Feedforward neural network"},"anchor":"#dwg","level":2,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"입력에서 출력으로 한 방향으로만 신호가 흐르는 신경망. 순환이 없다."},"page":"01_fnn"},{"id":"lab:concept/weighted-sum","type":"Concept","label":{"ko":"가중합","en":"Weighted sum"},"anchor":"#math","level":1,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"입력마다 중요도(가중치)를 곱해 더하고 편향을 더한 값 z = Σwx + b."},"page":"01_fnn"},{"id":"lab:concept/activation","type":"Concept","label":{"ko":"활성화 함수","en":"Activation function"},"anchor":"#math","level":1,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"가중합을 구부려 비선형성을 더하는 함수. ReLU, 시그모이드, tanh 등."},"page":"01_fnn"},{"id":"lab:concept/loss","type":"Concept","label":{"ko":"손실","en":"Loss"},"anchor":"#spec","level":1,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"예측과 정답의 차이를 평균한 값. 학습은 이 값을 줄이는 방향으로 가중치를 고친다."},"page":"01_fnn"},{"id":"lab:limit/fnn-no-memory","type":"Limitation","label":{"ko":"앞의 입력을 기억하지 못함","en":"No memory of previous inputs"},"anchor":"#limit","level":2,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"입력 하나를 따로 본다. 순서가 있는 데이터에는 RNN 계열이 필요해진다."},"page":"01_fnn"},{"id":"lab:method/cnn","type":"Method","label":{"ko":"합성곱 신경망","en":"Convolutional neural network"},"page":"01_fnn","anchor":"#limit","level":2,"status":"known","confidence":"high","coverage":"mentioned","domain":["ai"],"match":[],"definition":{"ko":"필터로 공간 무늬를 찾는 신경망."}},{"id":"lab:method/rnn","type":"Method","label":{"ko":"순환 신경망","en":"Recurrent neural network"},"page":"01_fnn","anchor":"#limit","level":2,"status":"known","confidence":"high","coverage":"mentioned","domain":["ai"],"match":[],"definition":{"ko":"03 도면."}}],"edges":[{"s":"lab:method/fnn","p":"lab:broader","o":"lab:topic/mlp","anchor":"#dwg","confidence":"high"},{"s":"lab:method/fnn","p":"lab:uses","o":"lab:concept/weighted-sum","anchor":"#dwg","confidence":"high"},{"s":"lab:method/fnn","p":"lab:uses","o":"lab:concept/activation","anchor":"#dwg","confidence":"high"},{"s":"lab:concept/activation","p":"lab:broader","o":"lab:topic/activation-function","anchor":"#dwg","confidence":"high"},{"s":"lab:concept/loss","p":"lab:broader","o":"lab:topic/loss-function","anchor":"#dwg","confidence":"high"},{"s":"lab:method/fnn","p":"lab:hasLimitation","o":"lab:limit/fnn-no-memory","anchor":"#dwg","confidence":"high"},{"s":"lab:method/fnn","p":"lab:prerequisiteOf","o":"lab:method/cnn","anchor":"#dwg","confidence":"high"},{"s":"lab:method/fnn","p":"lab:prerequisiteOf","o":"lab:method/rnn","anchor":"#dwg","confidence":"high"}]}</script>
+<script type="application/ld+json" id="kg-ld">{"@context":{"@vocab":"urn:lab:","lab":"urn:lab:","skos":"http://www.w3.org/2004/02/skos/core#","schema":"https://schema.org/","dct":"http://purl.org/dc/terms/","prov":"http://www.w3.org/ns/prov#","rdfs":"http://www.w3.org/2000/01/rdf-schema#"},"@graph":[{"@id":"urn:lab:page/01","@type":["schema:LearningResource","schema:WebPage"],"schema:name":"DL-01 피드포워드 신경망 설계도면","schema:dateCreated":"2026-11-26","schema:version":"1.0","dct:isPartOf":"딥러닝 설계도면 연구실 01","schema:about":[{"@id":"lab:method/fnn"}],"schema:educationalLevel":"입문","dct:source":[{"@id":"lab:work/rumelhart1986"},{"@id":"lab:work/ref-infographic"},{"@id":"lab:work/ref-infographic"}]},{"@id":"lab:method/fnn","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"피드포워드 신경망","@language":"ko"},{"@value":"Feedforward neural network","@language":"en"}],"skos:definition":[{"@value":"입력에서 출력으로 한 방향으로만 신호가 흐르는 신경망. 순환이 없다.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"01_fnn","lab:anchor":"#dwg","lab:broader":[{"@id":"lab:topic/mlp"}],"skos:broader":[{"@id":"lab:topic/mlp"}],"lab:uses":[{"@id":"lab:concept/weighted-sum"},{"@id":"lab:concept/activation"}],"lab:hasLimitation":[{"@id":"lab:limit/fnn-no-memory"}],"lab:prerequisiteOf":[{"@id":"lab:method/cnn"},{"@id":"lab:method/rnn"}]},{"@id":"lab:concept/weighted-sum","@type":["lab:Concept","skos:Concept"],"skos:prefLabel":[{"@value":"가중합","@language":"ko"},{"@value":"Weighted sum","@language":"en"}],"skos:definition":[{"@value":"입력마다 중요도(가중치)를 곱해 더하고 편향을 더한 값 z = Σwx + b.","@language":"ko"}],"lab:level":1,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"01_fnn","lab:anchor":"#math"},{"@id":"lab:concept/activation","@type":["lab:Concept","skos:Concept"],"skos:prefLabel":[{"@value":"활성화 함수","@language":"ko"},{"@value":"Activation function","@language":"en"}],"skos:definition":[{"@value":"가중합을 구부려 비선형성을 더하는 함수. ReLU, 시그모이드, tanh 등.","@language":"ko"}],"lab:level":1,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"01_fnn","lab:anchor":"#math","lab:broader":[{"@id":"lab:topic/activation-function"}],"skos:broader":[{"@id":"lab:topic/activation-function"}]},{"@id":"lab:concept/loss","@type":["lab:Concept","skos:Concept"],"skos:prefLabel":[{"@value":"손실","@language":"ko"},{"@value":"Loss","@language":"en"}],"skos:definition":[{"@value":"예측과 정답의 차이를 평균한 값. 학습은 이 값을 줄이는 방향으로 가중치를 고친다.","@language":"ko"}],"lab:level":1,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"01_fnn","lab:anchor":"#spec","lab:broader":[{"@id":"lab:topic/loss-function"}],"skos:broader":[{"@id":"lab:topic/loss-function"}]},{"@id":"lab:limit/fnn-no-memory","@type":["lab:Limitation","skos:Concept"],"skos:prefLabel":[{"@value":"앞의 입력을 기억하지 못함","@language":"ko"},{"@value":"No memory of previous inputs","@language":"en"}],"skos:definition":[{"@value":"입력 하나를 따로 본다. 순서가 있는 데이터에는 RNN 계열이 필요해진다.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"01_fnn","lab:anchor":"#limit"},{"@id":"lab:method/cnn","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"합성곱 신경망","@language":"ko"},{"@value":"Convolutional neural network","@language":"en"}],"skos:definition":[{"@value":"필터로 공간 무늬를 찾는 신경망.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"mentioned","lab:page":"01_fnn","lab:anchor":"#limit"},{"@id":"lab:method/rnn","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"순환 신경망","@language":"ko"},{"@value":"Recurrent neural network","@language":"en"}],"skos:definition":[{"@value":"03 도면.","@language":"ko"}],"lab:level":2,"lab:status":"known","lab:confidence":"high","lab:coverage":"mentioned","lab:page":"01_fnn","lab:anchor":"#limit"}]}</script>
+<script type="application/json" id="refs-csl">[{"id":"rumelhart1986","type":"article-journal","title":"Learning representations by back-propagating errors","author":[{"family":"Rumelhart","given":"David E."},{"family":"Hinton","given":"Geoffrey E."},{"family":"Williams","given":"Ronald J."}],"container-title":"Nature","volume":"323","page":"533-536","issued":{"date-parts":[[1986]]},"DOI":"10.1038/323533a0","lab":{"verified":{"title":true,"author":true,"issued":true,"container-title":true,"DOI":true}}},{"id":"ref-infographic","type":"graphic","title":"9 Deep Learning Algorithms Every Engineer Should Know (인포그래픽 10장)","note":"작성자 표기 없음. 이 시리즈는 내용만 참고하고 그림은 새로 그렸다.","lab":{"verified":{"title":true}}}]</script>
+<script type="application/json" id="page-meta">{"title":"DL-01 피드포워드 신경망 설계도면","number":"01","series":"딥러닝 설계도면 연구실 01","date":"2026-11-26","version":"1.0","creator":[{"name":"안상선","role":"author"}],"contributor":[{"name":"AI 보조 제작","role":"assistant"}],"about":["lab:method/fnn"],"basedOn":["rumelhart1986","ref-infographic","ref-infographic"],"educationalLevel":"입문","license":"","url":"https://adminmrobo.github.io/deep_learning_model_design_lab_01/01_fnn.html","registry":"KG_00_registry 0.3","seeAlso":"https://adminmrobo.github.io/deep_learning_model_design_lab_01/index.html","suggestedCitation":"안상선 (2026). DL-01 피드포워드 신경망 설계도면. 딥러닝 설계도면 연구실 01 v1.0."}</script>
+<!-- /lab-kg:body -->
+<footer>
+  <div class="wrap">
+    <p>글 · 안상선 (<a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">https://adminmrobo.github.io/who_am_i/who_am_i.html</a>) · (주)M-Robo 대표</p>
+    <p>캐릭터: 조수 하루 · 인턴 모아 · 인턴 시아 · 초파리 연구원 · 주판봇 · 박사 — <a href="https://github.com/adminmrobo/fruitfly-lab-expressions">fruitfly-lab-expressions</a> 픽셀아트 캐릭터 팩. 도면 그림은 이 저장소에서 새로 그렸습니다.</p>
+    <p>참고 자료: 「9 Deep Learning Algorithms Every Engineer Should Know」 인포그래픽 10장(작성자 표기 없음). 내용만 참고했고, 그림과 문장은 새로 만들었으며 틀린 곳은 고쳤습니다(<a href="10_review.html#errata">감수 의견서</a>).</p>
+    <p>저장소: <a href="https://github.com/adminmrobo/deep_learning_model_design_lab_01">adminmrobo/deep_learning_model_design_lab_01</a> · <a href="https://www.ahnboat.xyz">ahnboat.xyz</a></p>
+  </div>
+</footer>
+<!-- lab-kg:script -->
+<script src="kg/kgx.js"></script>
+<!-- /lab-kg:script -->
+</body>
+</html>

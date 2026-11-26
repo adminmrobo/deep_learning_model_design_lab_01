@@ -1,0 +1,238 @@
+<section id="three"><div class="wrap">
+  <h2><span class="no">01</span>처음 오신 분께 — 이 도면을 3줄로</h2>
+  <p class="lead">하루의 두 번째 도면입니다. 01 FNN 도면의 부품(곱해서 더하기, 구부리기)을 그대로 쓰되, 그림을 보는 방식만 바꿨어요.</p>
+  <div class="three">
+    <div><b>무엇을</b>3×3 크기의 작은 숫자 판(필터)을 그림 위로 밀어 가며, 경계·모서리 같은 무늬가 어디 있는지 찾습니다.</div>
+    <div><b>왜 중요한가</b>필터 하나를 그림 전체에 다시 쓰기 때문에 부품 수가 적고, 무늬가 어디에 있든 똑같이 찾아냅니다.</div>
+    <div><b>업무에서는</b>공장 불량 사진 판정, 엑스레이 판독 보조, 매장 진열대 사진 점검 같은 <b>사진·영상</b> 일에 씁니다.</div>
+  </div>
+  <p class="nocode">코드나 수식을 몰라도 됩니다. 아래 실험대에서 픽셀을 눌러 보면 계산이 바로 보여요.</p>
+  <details><summary>이 도면에 나오는 영어 약어 풀이</summary>
+    <dl class="abbr">
+      <dt>CNN</dt><dd>Convolutional Neural Network, 합성곱 신경망. 필터를 밀며 곱해 더하는 계산(합성곱)을 쓴다</dd>
+      <dt>Kernel</dt><dd>커널. 필터의 다른 이름. 3×3 같은 작은 숫자 판</dd>
+      <dt>Pooling</dt><dd>풀링. 작은 구역에서 대표값 하나만 남겨 크기를 줄이는 일</dd>
+      <dt>FC</dt><dd>Fully Connected, 완전연결층. 01 FNN 도면의 층과 같은 것</dd>
+    </dl>
+  </details>
+</div></section>
+
+<section id="cast"><div class="wrap">
+  <h2><span class="no">02</span>도면을 전달하는 사람들</h2>
+  <div class="cast">
+    <div class="me"><img src="assets/img/chars/asst_e13.webp" alt="조수 하루" width="84" height="84"><b>조수 하루</b>이 도면 작성자<br><span class="tag">설계 · 숫자 발표</span></div>
+    <div><img src="assets/img/chars/moa_e09.webp" alt="인턴 모아" width="84" height="84"><b>인턴 모아</b>수식을 대신 물어봄<br><span class="tag">질문 담당</span></div>
+    <div><img src="assets/img/chars/doc_e07.webp" alt="박사" width="84" height="84"><b>박사</b>현장 질문과 해석<br><span class="tag">교육 · 판정</span></div>
+    <div><img src="assets/img/chars/fly_e09.webp" alt="초파리 연구원" width="84" height="84"><b>초파리 연구원</b>크고 복잡한 것을 의심<br><span class="tag">감수</span></div>
+    <div><img src="assets/img/chars/robo_e16.webp" alt="주판봇" width="84" height="84"><b>주판봇</b>큰 숫자를 좋아함<br><span class="tag">감수</span></div>
+  </div>
+  <div class="say-row"><img src="assets/img/chars/asst_e16.webp" alt="" width="64" height="64">
+    <div class="bubble"><b class="nm">하루</b>01 도면에서 사진을 숫자 한 줄로 펴서 넣으면 "옆 픽셀끼리 붙어 있다"는 정보가 사라진다고 했죠. 이번 도면은 그걸 지키는 설계예요. 돋보기 하나를 그림 구석구석에 똑같이 대 본다고 생각하면 돼요.</div></div>
+</div></section>
+
+<section id="dwg"><div class="wrap">
+  <h2><span class="no">03</span>전체 구조도 — SHEET 2</h2>
+  <p class="lead">그림이 오른쪽으로 갈수록 가로세로는 작아지고, 겹(특징 지도 수)은 많아집니다. 마지막에 01 도면의 완전연결층이 붙어 답을 냅니다.</p>
+  <div class="dwg scroll-x"><span class="stamp">작성 · 하루</span>
+    <svg viewBox="0 0 960 400" role="img" aria-labelledby="d2t">
+      <title id="d2t">CNN 전체 구조: 입력 사진 → 합성곱 → ReLU → 풀링 → 더 깊은 특징 지도 → 완전연결층 → 정상·불량 출력</title>
+      <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1E2F5C"/></marker></defs>
+      <!-- 입력 사진 (픽셀 격자) -->
+      <g stroke="#1E2F5C" stroke-width="1"><rect x="40" y="110" width="150" height="150" fill="#fff" stroke-width="3"/>
+        <g fill="#c9d6ea"><rect x="40" y="110" width="75" height="150"/></g>
+        <path d="M65 110V260M90 110V260M115 110V260M140 110V260M165 110V260M40 135H190M40 160H190M40 185H190M40 210H190M40 235H190" opacity=".5"/></g>
+      <rect x="40" y="110" width="75" height="75" fill="none" stroke="#D9707E" stroke-width="4"/>
+      <text x="40" y="96" font-size="15" fill="#1E2F5C">① 입력 사진</text>
+      <!-- 합성곱 겹 -->
+      <g stroke="#1E2F5C" stroke-width="2.5" fill="#dbe7fb"><rect x="262" y="126" width="110" height="110"/><rect x="252" y="136" width="110" height="110"/><rect x="242" y="146" width="110" height="110"/></g>
+      <path d="M115 185 L242 146" stroke="#D9707E" stroke-dasharray="5 4" stroke-width="2"/>
+      <text x="238" y="112" font-size="15" fill="#1E2F5C">② 합성곱</text>
+      <!-- ReLU -->
+      <g stroke="#1E2F5C" stroke-width="2.5" fill="#e6dcf5"><rect x="434" y="136" width="100" height="100"/><rect x="424" y="146" width="100" height="100"/></g>
+      <text x="420" y="122" font-size="15" fill="#1E2F5C">③ ReLU</text>
+      <!-- 풀링 -->
+      <g stroke="#1E2F5C" stroke-width="2.5" fill="#d8efd9"><rect x="586" y="156" width="70" height="70"/><rect x="576" y="166" width="70" height="70"/></g>
+      <text x="566" y="142" font-size="15" fill="#1E2F5C">④ 풀링</text>
+      <!-- 깊은 특징 -->
+      <g stroke="#1E2F5C" stroke-width="2.5" fill="#fbecc0"><rect x="716" y="166" width="46" height="46"/><rect x="710" y="172" width="46" height="46"/><rect x="704" y="178" width="46" height="46"/><rect x="698" y="184" width="46" height="46"/></g>
+      <text x="686" y="152" font-size="15" fill="#1E2F5C">⑤ 깊은 특징</text>
+      <!-- FC -->
+      <g stroke="#1E2F5C" stroke-width="2.5" fill="#f6c6cf"><rect x="820" y="140" width="26" height="26"/><rect x="820" y="178" width="26" height="26"/><rect x="820" y="216" width="26" height="26"/></g>
+      <g stroke="#1E2F5C" stroke-width="2"><path d="M846 175 H880" marker-end="url(#ar2)"/><path d="M846 210 H880" marker-end="url(#ar2)"/></g>
+      <text x="886" y="180" font-size="15" fill="#2e8b57">정상</text><text x="886" y="215" font-size="15" fill="#d9443a">불량</text>
+      <text x="800" y="126" font-size="15" fill="#1E2F5C">⑥ 완전연결</text>
+      <g stroke="#1E2F5C" stroke-width="2"><path d="M196 190 H232" marker-end="url(#ar2)"/><path d="M368 190 H414" marker-end="url(#ar2)"/><path d="M540 196 H566" marker-end="url(#ar2)"/><path d="M660 202 H690" marker-end="url(#ar2)"/><path d="M768 200 H812" marker-end="url(#ar2)"/></g>
+      <!-- 치수 -->
+      <g stroke="#2f5fa8" stroke-width="1.5" fill="none"><path d="M40 300 H190 M40 292 V308 M190 292 V308"/><path d="M576 300 H646 M576 292 V308 M646 292 V308"/></g>
+      <g fill="#2f5fa8" font-size="13"><text x="70" y="326">가로·세로 큼</text><text x="560" y="326">가로·세로 작아짐</text><text x="250" y="356">겹 수(특징 지도 수)는 오른쪽으로 갈수록 늘어남 →</text></g>
+    </svg>
+  </div>
+  <p class="dwg-cap">분홍 네모(①의 3×3 구역)가 필터가 한 번에 보는 범위입니다. 이 네모가 그림 위를 한 픽셀씩 옮겨 다니며 ②의 한 점씩을 채워요.</p>
+  <div class="review30"><b>30초 복습 · 곱해서 더하기</b> 01 도면의 가중합 z = w₁x₁ + w₂x₂ + b 기억나시죠? 필터도 똑같아요. 다만 입력이 "그림의 3×3 구역 9개 픽셀"이고, 가중치가 "필터의 숫자 9개"일 뿐이에요.</div>
+  <p><b>도면의 위치</b> · <a href="01_fnn.html">01 FNN</a>(곱해 더하고 구부리기) → 이 도면(CNN, 위치를 지키며 훑기) → 그림을 줄였다 되살리는 <a href="06_autoencoder.html">06 오토인코더</a>, 그림을 만들어 내는 <a href="08_gan.html">08 GAN</a>에서 다시 만납니다.</p>
+</div></section>
+
+<section id="spec"><div class="wrap">
+  <h2><span class="no">04</span>부품 명세 — 사진 한 장이 지나가는 길</h2>
+  <p class="lead">도면의 번호 ①~⑥ 순서입니다. 회색 줄은 하루가 공장 불량 판정 현장에서 건넬 말이에요.</p>
+  <div class="steps">
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="2" width="12" height="12" fill="#fff" stroke="#1E2F5C"/><rect x="2" y="2" width="6" height="12" fill="#c9d6ea"/><rect x="2" y="2" width="6" height="6" fill="none" stroke="#D9707E"/></svg></div>
+      <div><h3><span>①</span>입력 사진 — 숫자 격자 그대로</h3><p>사진은 픽셀마다 밝기 숫자가 적힌 격자입니다. 01 도면처럼 한 줄로 펴지 않고, 가로세로 모양을 그대로 넣어요. 컬러 사진은 빨강·초록·파랑 세 겹이에요.</p>
+      <p class="say">"부품 사진은 모두 같은 크기로 잘라서 넣을게요. 크기가 다르면 도면이 안 맞아요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="3" y="3" width="10" height="10" fill="#dbe7fb" stroke="#1E2F5C"/><rect x="6" y="3" width="1" height="10" fill="#1E2F5C"/><rect x="9" y="3" width="1" height="10" fill="#1E2F5C"/><rect x="3" y="6" width="10" height="1" fill="#1E2F5C"/><rect x="3" y="9" width="10" height="1" fill="#1E2F5C"/></svg></div>
+      <div><h3><span>②</span>합성곱 — 필터를 밀며 곱해 더한다</h3><p>3×3 필터를 그림의 왼쪽 위에 대고, 겹치는 9개 숫자를 서로 곱해 더합니다. 한 픽셀 옮겨서 또 계산하고… 이렇게 채운 표가 <b>특징 지도</b>예요. 값이 클수록 "여기에 그 무늬가 있다"는 뜻입니다.</p>
+      <p class="say">"긁힘은 가는 선이라, 선을 잘 찾는 필터가 강하게 반응해요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="11" width="7" height="2" fill="#1E2F5C"/><rect x="8" y="9" width="2" height="2" fill="#1E2F5C"/><rect x="10" y="6" width="2" height="3" fill="#1E2F5C"/><rect x="12" y="2" width="2" height="4" fill="#1E2F5C"/></svg></div>
+      <div><h3><span>③</span>ReLU — 음수는 0으로</h3><p>01 도면의 구부리기 부품 그대로예요. "반대 무늬"를 뜻하는 음수는 0으로 지우고, 찾은 무늬만 남깁니다.</p>
+      <p class="say">"밝은 쪽에서 어두운 쪽으로 바뀌는 경계는 음수가 나와요. 그건 다른 필터가 맡아요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="4" width="8" height="8" fill="#d8efd9" stroke="#1E2F5C"/><rect x="5" y="4" width="1" height="8" fill="#1E2F5C"/><rect x="1" y="8" width="8" height="1" fill="#1E2F5C"/><rect x="11" y="6" width="4" height="4" fill="#2e8b57"/></svg></div>
+      <div><h3><span>④</span>풀링 — 대표값만 남겨 줄인다</h3><p>2×2 구역에서 가장 큰 값 하나만 남기면(최댓값 풀링) 가로세로가 절반이 됩니다. 계산이 줄고, 무늬가 조금 옆으로 움직여도 결과가 덜 흔들려요.</p>
+      <p class="say">"1, 3, 2, 4가 있으면 4만 남겨요. '이 구역 어딘가에 무늬가 있었다'만 기억하는 거죠."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="5" y="2" width="8" height="8" fill="#fbecc0" stroke="#1E2F5C"/><rect x="3" y="4" width="8" height="8" fill="#fbecc0" stroke="#1E2F5C"/><rect x="1" y="6" width="8" height="8" fill="#fbecc0" stroke="#1E2F5C"/></svg></div>
+      <div><h3><span>⑤</span>층 쌓기 — 선 → 모양 → 부분 → 물체</h3><p>②~④를 여러 번 되풀이합니다. 앞쪽 층은 선과 모서리를, 뒤쪽 층은 그것들을 조합한 모양과 부분을 찾아요. 어떤 무늬를 찾을지는 사람이 정하지 않고 학습으로 정해집니다.</p>
+      <p class="say">"처음 층 필터는 사람이 봐도 '선 찾기'처럼 보이는데, 깊은 층은 설명하기 어려워져요."</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2" y="3" width="4" height="3" fill="#f6c6cf" stroke="#1E2F5C"/><rect x="2" y="9" width="4" height="3" fill="#f6c6cf" stroke="#1E2F5C"/><rect x="10" y="4" width="4" height="2" fill="#2e8b57"/><rect x="10" y="9" width="4" height="2" fill="#d9443a"/><rect x="6" y="4" width="4" height="1" fill="#1E2F5C"/><rect x="6" y="10" width="4" height="1" fill="#1E2F5C"/></svg></div>
+      <div><h3><span>⑥</span>완전연결 + 출력 — 01 도면이 마무리</h3><p>마지막 특징 지도를 한 줄로 펴서 01 FNN 도면의 층에 넣고, 정상·불량 같은 답의 확률을 냅니다.</p>
+      <p class="say">"'불량 0.93'이 나오면 사람이 한 번 더 보는 상자로 보낼게요."</p></div></div>
+  </div>
+</div></section>
+
+<section id="why"><div class="wrap">
+  <h2><span class="no">05</span>왜 이 설계를 쓰나 · 수식은 동료가 대신 물어봅니다</h2>
+  <div class="say-row neutral"><img src="assets/img/chars/doc_e07.webp" alt="" width="64" height="64">
+    <div class="bubble"><b class="nm">박사</b>공장 라인에서 하루에 부품 사진이 2만 장 찍힌다고 해 봅시다. 긁힘은 사진의 왼쪽 위에도, 오른쪽 아래에도 생겨요. 위치마다 따로 배우는 장치라면 어떻게 될까요?</div></div>
+  <div class="pair">
+    <div class="why" id="whybox">
+      <h3>왜 이 설계를 쓰나</h3>
+      <ol>
+        <li><b>문제 상황</b> · 같은 무늬(긁힘)가 사진 어디에나 나타날 수 있습니다.</li>
+        <li><b>앞 방법의 한계</b> · 01 FNN은 픽셀마다 가중치를 따로 둬서, 왼쪽 위의 긁힘과 오른쪽 아래의 긁힘을 다른 것으로 배워야 합니다. 6×6 그림을 4×4 출력에 다 이으면 가중치가 36×16 = 576개예요.</li>
+        <li><b>해법</b> · 3×3 필터 하나(가중치 9개)를 모든 위치에 다시 씁니다(<b>가중치 공유</b>). 어디에 있든 같은 필터가 같은 무늬를 찾아요.</li>
+      </ol>
+      <p class="easy"><b>쉽게 말하면</b> · 위치마다 다른 감독관을 두는 대신, 돋보기 든 감독관 한 명이 라인 전체를 걸어 다니는 방식이에요.</p>
+      <p class="calm">처음엔 "필터가 움직인다"는 그림이 잘 안 그려질 수 있어요. 아래 실험대에서 픽셀을 몇 번 눌러 보면 금방 손에 익어요.</p>
+    </div>
+    <div class="mathq" id="math">
+      <div class="q"><img src="assets/img/chars/moa_e04.webp" alt="" width="56" height="56"><p><b>모아</b> · "−1, 0, 1이 세 줄 있는 표를 곱한다고요? 표끼리는 어떻게 곱해요?"</p></div>
+      <p class="school">학교 수학으로 보면 · 같은 자리끼리 곱해서 모두 더하기 (일차식 a₁x₁ + … + a₉x₉)</p>
+      <div class="formula">출력 = Σ (필터 숫자 × 겹친 픽셀 숫자) &nbsp;(9개)</div>
+      <table class="pieces"><tr><th>조각</th><th>읽는 법 · 뜻</th></tr>
+        <tr><td>필터 [−1 0 1]</td><td>왼쪽은 빼고, 가운데는 무시하고, 오른쪽은 더한다 → "오른쪽이 더 밝은가?"를 재는 판</td></tr>
+        <tr><td>겹친 픽셀</td><td>필터 아래에 놓인 그림의 3×3 숫자</td></tr>
+        <tr><td>Σ</td><td>"시그마". 9개 곱을 모두 더한다</td></tr>
+      </table>
+      <div class="calc"><b class="t">숫자로 한 번 해 보기</b>
+        <ol><li>필터 세 줄이 모두 [−1, 0, 1], 그림 구역 세 줄이 모두 [0, 0, 1] (왼쪽 어둡고 오른쪽 밝음)</li>
+          <li>한 줄: (−1×0) + (0×0) + (1×1) = 1 → 세 줄이면 1 + 1 + 1 = <b>3</b> (경계 발견!)</li>
+          <li>그림이 [1, 1, 1]로 고르면: −1 + 0 + 1 = 0 → 세 줄 합 <b>0</b> (경계 없음)</li>
+          <li>풀링: 2×2 구역 1, 3, 2, 4 → 최댓값 <b>4</b></li></ol></div>
+      <div class="after"><img src="assets/img/chars/moa_e16.webp" alt="" width="48" height="48"><p><b>모아</b> · "같은 자리끼리 곱해서 더하기! 경계가 있으면 3, 없으면 0. 이제 알겠어요."</p></div>
+    </div>
+  </div>
+  <div class="daily" style="margin-top:22px">
+    <div><b>일상으로 치면</b>숨은그림찾기와 같아요. "우산 모양"을 머릿속에 하나 들고, 그림 구석구석에 대 보며 맞는 곳을 찾죠. 우산이 어디 숨어 있든 머릿속 모양은 하나예요.</div>
+    <div><b>현장에서는</b>반도체·배터리 외관 검사, 의료 영상 판독 보조, 매장 진열 상태 점검, 차량 번호판 읽기에 씁니다. 사진이 적으면 이미 많이 배운 CNN을 가져와 마지막 층만 다시 배우게(전이 학습) 하는 일이 많아요.</div>
+  </div>
+</div></section>
+
+<section id="lab"><div class="wrap">
+  <h2><span class="no">06</span>실험 — 필터 밀어 보기 판</h2>
+  <div class="talk">
+    <div class="line"><img src="assets/img/chars/doc_e09.webp" alt="박사" width="56" height="56"><p><b>박사</b>그림 속 경계가 한 픽셀 옮겨지면, 특징 지도는 어떻게 될까요?</p></div>
+    <div class="line"><img src="assets/img/chars/robo_e16.webp" alt="주판봇" width="56" height="56"><p><b>주판봇</b>위치가 바뀌면 완전히 새 그림입니다! 새로 다 배워야 합니다! 필터를 100개 더!</p></div>
+    <div class="line"><img src="assets/img/chars/fly_e09.webp" alt="초파리" width="56" height="56"><p><b>초파리</b>100개? 의심스럽네. '오른쪽으로 1픽셀' 버튼을 눌러 봐. 특징 지도가 같이 따라 움직이지 않나.</p></div>
+    <div class="line me"><img src="assets/img/chars/asst_e07.webp" alt="하루" width="56" height="56"><p><b>하루</b>왼쪽 그림의 픽셀을 누르면 켜지고 꺼져요. 결과는 제가 숫자로 읽어 드릴게요.</p></div>
+  </div>
+  <div class="lab">
+    <div class="bar"><span class="dot" style="background:var(--pink)"></span><span class="dot" style="background:var(--lav)"></span><span class="dot" style="background:var(--navy)"></span><span class="t">filter_slide.sim</span></div>
+    <div class="lab-body">
+      <div class="ctrl">
+        <label>입력 그림 6×6 (눌러서 켜고 끄기)</label>
+        <div id="img2" style="display:grid;grid-template-columns:repeat(6,1fr);gap:3px;max-width:240px"></div>
+        <label>필터 고르기</label>
+        <div id="flt"><button class="btn" data-f="v">세로 경계</button><button class="btn ghost" data-f="h">가로 경계</button><button class="btn ghost" data-f="b">평균(흐림)</button></div>
+        <button class="btn ghost" id="shift2" type="button">오른쪽으로 1픽셀</button><button class="btn ghost" id="reset2" type="button">처음 그림</button>
+      </div>
+      <div>
+        <svg id="maps2" viewBox="0 0 560 270" role="img" aria-label="필터, 특징 지도(ReLU 뒤), 풀링 결과"></svg>
+        <div class="readout" id="out2" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+  <div class="sol">
+    <p><b>하루의 보고</b> · 처음 그림(왼쪽 세 줄 꺼짐, 오른쪽 세 줄 켜짐)에 세로 경계 필터를 대면 특징 지도의 모든 줄이 [0, 3, 3, 0]이 되고, 풀링하면 2×2가 모두 3이에요. '오른쪽으로 1픽셀'을 누르면 3이 나오는 자리도 함께 한 픽셀 옮겨 가요.</p>
+    <p><b>박사의 해석</b> · 무늬가 옮겨 가면 특징 지도도 같이 옮겨 갈 뿐, 새로 배울 필요가 없다는 뜻입니다. 주판봇 말처럼 필터를 100개 늘릴 이유가 없어요. 가로 경계 필터를 고르면 모두 0이 되는 것도 확인해 보세요. 필터마다 찾는 무늬가 정해져 있다는 뜻입니다.</p>
+  </div>
+</div></section>
+
+<section id="judge-sec"><div class="wrap">
+  <h2><span class="no">07</span>AI 판단 코너 — 이 답, 믿어도 될까?</h2>
+  <div class="judge">
+    <h3>AI 도우미가 이렇게 답했습니다</h3>
+    <div class="ai-out">Q. 우리 CNN은 똑바로 놓인 부품 사진으로만 배웠어요. 현장 카메라가 90도 돌아가서 찍어도 괜찮을까요?
+A. 괜찮습니다. CNN은 무늬가 어디에 있든 찾아내는 성질이 있으므로, 사진을 돌리거나 뒤집어도 똑같이 알아봅니다.</div>
+    <p>어디가 이상할까요?</p>
+    <div class="choices" data-answer="c">
+      <button data-k="a" data-why="CNN이 위치가 바뀐 무늬를 잘 찾는 건 맞아요. 문제는 '위치'와 '회전'을 같은 것으로 본 부분입니다.">CNN은 위치가 바뀐 무늬도 못 찾는다</button>
+      <button data-k="b" data-why="흑백 여부는 이 질문과 상관이 없어요.">컬러 사진이어야만 돌려도 알아본다</button>
+      <button data-k="c">필터를 '옆으로 옮기는 것'과 '돌리는 것'은 다르다. 세로 경계 필터는 90도 돌린 경계(가로)에 반응하지 않으므로, 돌린 사진도 학습에 넣어야 한다</button>
+    </div>
+    <p class="feedback" data-ok="맞아요. 실험대에서 '가로 경계'를 고르면 같은 그림에 0이 나오죠. 돌린 사진을 학습 자료에 섞는 일(데이터 증강)을 하거나 실제 현장 사진으로 시험해 봐야 해요."></p>
+  </div>
+</div></section>
+
+<section id="limit"><div class="wrap">
+  <h2><span class="no">08</span>이 설계의 한계 → 다음 도면</h2>
+  <div class="limit"><b>한계 1 · 멀리 떨어진 관계</b> — 필터는 가까운 픽셀끼리만 봅니다. 사진 양 끝의 관계를 보려면 층을 아주 깊게 쌓아야 해요. 이 한계를 다른 방식으로 푼 것이 <a href="09_transformer.html">09 트랜스포머</a>(그림판은 비전 트랜스포머)입니다.<br>
+    <b>한계 2 · 회전·크기 변화</b> — 옆으로 옮긴 무늬는 잘 찾지만, 돌리거나 크기를 바꾼 무늬는 따로 배워야 합니다.<br>
+    <b>한계 3 · 순서는 모른다</b> — 문장이나 매출처럼 순서가 있는 데이터는 <a href="03_rnn.html">03 RNN</a> 계열 도면이 맡아요.</div>
+  <div class="recap"><b>정리</b> · CNN은 작은 필터를 그림 전체에 다시 쓰며(가중치 공유) 무늬를 찾고, ReLU와 풀링을 거쳐 층마다 더 큰 모양을 찾습니다. 마지막은 01 도면의 완전연결층이 답을 냅니다.</div>
+</div></section>
+
+<section id="quiz"><div class="wrap">
+  <h2><span class="no">09</span>확인 퀴즈</h2>
+  <div class="quiz"><p class="qq">Q1. 필터 하나를 그림의 모든 위치에 다시 쓰는 것을 무엇이라고 하나요?</p>
+    <div class="choices" data-answer="b"><button data-k="a" data-why="풀링은 대표값만 남겨 크기를 줄이는 일이에요.">풀링</button><button data-k="b">가중치 공유</button><button data-k="c" data-why="완전연결은 모든 입력을 모든 출력에 따로 잇는 방식이라 반대예요.">완전연결</button></div>
+    <p class="feedback" data-ok="맞아요. 그래서 부품 수가 576개가 아니라 9개면 돼요."></p></div>
+  <div class="quiz"><p class="qq">Q2. 2×2 구역의 값이 1, 3, 2, 4일 때 최댓값 풀링의 결과는?</p>
+    <div class="choices" data-answer="c"><button data-k="a" data-why="평균 풀링이라면 2.5예요. 최댓값 풀링은 가장 큰 값을 남겨요.">2.5</button><button data-k="b" data-why="1은 가장 작은 값이에요.">1</button><button data-k="c">4</button></div>
+    <p class="feedback" data-ok="맞아요. 가장 큰 값 하나만 남깁니다."></p></div>
+</div></section>
+
+<section id="memo"><div class="wrap">
+  <h2><span class="no">10</span>감수 메모 — 참고 자료와 다른 곳</h2>
+  <div class="memo">참고 인포그래픽의 CNN 장에서는 고칠 값을 찾지 못했습니다. 다만 이 페이지에서 <b>단순하게 본 곳</b>이 하나 있어요. 실제 딥러닝 도구는 수학 교과서의 '합성곱'과 달리 필터를 뒤집지 않고 그대로 대서 곱합니다(교차 상관). 이 페이지의 계산도 그 방식이에요. 결과의 뜻은 같고, 이름만 관례로 '합성곱'이라고 부릅니다. 예시의 출력도 원자료의 고양이·개·자동차 대신 공장 현장에 맞춰 정상·불량으로 바꿨어요.</div>
+</div></section>
+
+<script>
+(function(){
+  var $=BP.$, N=6, img=[], f='v';
+  var FL={v:[[-1,0,1],[-1,0,1],[-1,0,1]],h:[[-1,-1,-1],[0,0,0],[1,1,1]],b:[[1/9,1/9,1/9],[1/9,1/9,1/9],[1/9,1/9,1/9]]};
+  var FN={v:'세로 경계',h:'가로 경계',b:'평균(흐림)'};
+  function init(){img=[];for(var r=0;r<N;r++){img.push([]);for(var c=0;c<N;c++)img[r].push(c>=3?1:0)}}
+  var box=$('#img2'), cells=[];
+  for(var r=0;r<N;r++)for(var c=0;c<N;c++){(function(r,c){var b=document.createElement('button');b.type='button';b.className='cellbtn';b.style.cssText='aspect-ratio:1;border:1px solid #1E2F5C;border-radius:2px;cursor:pointer;padding:0';b.setAttribute('aria-label',(r+1)+'행 '+(c+1)+'열 픽셀');b.addEventListener('click',function(){img[r][c]=1-img[r][c];draw()});box.appendChild(b);cells.push(b)})(r,c)}
+  function conv(){var K=FL[f],m=[];for(var i=0;i<4;i++){m.push([]);for(var j=0;j<4;j++){var s=0;for(var a=0;a<3;a++)for(var b=0;b<3;b++)s+=K[a][b]*img[i+a][j+b];m[i].push(Math.max(0,s))}}return m}
+  function grid(s,x0,y0,cs,M,mx,lab,col){
+    s.appendChild(BP.svg('text',{x:x0,y:y0-10,'font-size':14,fill:'#1E2F5C'},lab));
+    for(var i=0;i<M.length;i++)for(var j=0;j<M[i].length;j++){var v=M[i][j],t=mx?Math.min(1,Math.abs(v)/mx):0;
+      s.appendChild(BP.svg('rect',{x:x0+j*cs,y:y0+i*cs,width:cs-2,height:cs-2,fill:col(t,v),stroke:'#1E2F5C','stroke-width':1}));
+      s.appendChild(BP.svg('text',{x:x0+j*cs+cs/2-1,y:y0+i*cs+cs/2+5,'font-size':13,'text-anchor':'middle',fill:t>.55?'#fff':'#1E2F5C'},(Math.round(v*100)/100).toString()))}
+  }
+  function draw(){
+    cells.forEach(function(b,k){var v=img[Math.floor(k/N)][k%N];b.style.background=v?'#1E2F5C':'#fff'});
+    var m=conv(), p=[[0,0],[0,0]];for(var i=0;i<2;i++)for(var j=0;j<2;j++)p[i][j]=Math.max(m[2*i][2*j],m[2*i][2*j+1],m[2*i+1][2*j],m[2*i+1][2*j+1]);
+    var s=$('#maps2');while(s.firstChild)s.removeChild(s.firstChild);
+    var K=FL[f];
+    grid(s,10,40,40,K.map(function(r){return r.map(function(v){return f==='b'?0.11:v})}),1,'필터 3×3',function(t,v){return v>0?'#f6c6cf':v<0?'#c9d6ea':'#fff'});
+    grid(s,160,40,46,m,3,'특징 지도 4×4 (ReLU 뒤)',function(t){return 'rgba(217,112,126,'+(0.08+t*0.9)+')'});
+    grid(s,380,86,60,p,3,'최댓값 풀링 2×2',function(t){return 'rgba(46,139,87,'+(0.08+t*0.85)+')'});
+    var tot=0;m.forEach(function(r){r.forEach(function(v){if(v>0)tot++})});
+    $('#out2').innerHTML='<b>'+FN[f]+'</b> 필터 · 특징 지도에서 0보다 큰 곳 <b>'+tot+'</b>개 / 16개<br>첫 줄 = ['+m[0].map(function(v){return Math.round(v*100)/100}).join(', ')+'] · 풀링 결과 = ['+p[0].concat(p[1]).map(function(v){return Math.round(v*100)/100}).join(', ')+']';
+  }
+  BP.$$('#flt button').forEach(function(b){b.type='button';b.addEventListener('click',function(){f=b.getAttribute('data-f');BP.$$('#flt button').forEach(function(x){x.classList.toggle('ghost',x!==b)});draw()})});
+  $('#shift2').addEventListener('click',function(){img=img.map(function(r){return [0].concat(r.slice(0,N-1))});draw()});
+  $('#reset2').addEventListener('click',function(){init();draw()});
+  init();draw();
+})();
+</script>

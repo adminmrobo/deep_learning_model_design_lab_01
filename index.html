@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>딥러닝 설계도면 연구실 01 — 하루·모아·시아가 직접 그린 딥러닝 설계도면 9장 + 감수</title>
+<meta name="description" content="조수 하루, 인턴 모아·시아가 딥러닝 모델 9종을 한 장씩 설계도면으로 그려 전달하고, 초파리와 주판봇이 총괄 도면을 감수한다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="딥러닝 설계도면 연구실 01 — 하루·모아·시아가 직접 그린 딥러닝 설계도면 9장 + 감수">
+<meta property="og:description" content="조수 하루, 인턴 모아·시아가 딥러닝 모델 9종을 한 장씩 설계도면으로 그려 전달하고, 초파리와 주판봇이 총괄 도면을 감수한다.">
+<meta property="og:image" content="https://adminmrobo.github.io/deep_learning_model_design_lab_01/assets/img/covers/og_00.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/chars/asst_e13.webp">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css">
+<link rel="stylesheet" href="assets/css/blueprint.css">
+<script src="assets/js/blueprint.js"></script>
+<!-- px-fix v1 --><style id="px-fix">img{image-rendering:auto!important}</style><script id="px-fix-js">(function(){var R=window.ResizeObserver;function f(i){var n=i.naturalWidth,w=i.getBoundingClientRect().width;if(!n||!w)return;var s=w*(window.devicePixelRatio||1)/n;i.style.setProperty("image-rendering",s>=1.95?"pixelated":"auto","important")}var ro=R?new R(function(es){es.forEach(function(e){f(e.target)})}):null;function a(i){if(i.__px)return;i.__px=1;i.addEventListener("load",function(){f(i)});if(ro)ro.observe(i);f(i)}function all(r){(r||document).querySelectorAll&&(r||document).querySelectorAll("img").forEach(a)}function go(){all();if(window.MutationObserver)new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType!==1)return;if(n.tagName==="IMG")a(n);else all(n)})})}).observe(document.documentElement,{childList:true,subtree:true});window.addEventListener("resize",function(){document.querySelectorAll("img").forEach(f)})}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go()})();</script><!-- /px-fix -->
+<!-- lab-kg:head -->
+<meta name="citation_title" content="딥러닝 설계도면 연구실 01 — 하루·모아·시아가 직접 그린 딥러닝 설계도면 9장 + 감수">
+<meta name="dc.title" content="딥러닝 설계도면 연구실 01 — 하루·모아·시아가 직접 그린 딥러닝 설계도면 9장 + 감수">
+<meta name="dc.date" content="2026-11-26">
+<meta name="dc.language" content="ko">
+<meta name="dc.type" content="InteractiveResource">
+<meta name="citation_author" content="안상선">
+<meta name="dcterms.isPartOf" content="딥러닝 설계도면 연구실 01">
+<!-- /lab-kg:head -->
+</head>
+<body class="by-haru">
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<nav class="topnav" aria-label="도면 목록"><div class="wrap"><a class="home" href="index.html">DL 설계도면 연구실</a><a href="01_fnn.html">01 FNN</a><a href="02_cnn.html">02 CNN</a><a href="03_rnn.html">03 RNN</a><a href="04_lstm.html">04 LSTM</a><a href="05_gru.html">05 GRU</a><a href="06_autoencoder.html">06 AE</a><a href="07_dbn.html">07 DBN</a><a href="08_gan.html">08 GAN</a><a href="09_transformer.html">09 Transformer</a><a href="10_review.html">10 감수</a><a href="practice/index.html">실전 연습장</a></div></nav>
+<header class="cover" id="cover" data-img="cover_00"><picture><img src="assets/img/covers/cover_00.webp" width="1600" height="900" alt="딥러닝 설계도면 연구실 01 표지: 모눈 바탕 위에 하루, 모아, 시아, 초파리 연구원, 주판봇이 나란히 선 픽셀아트" fetchpriority="high" decoding="async"></picture><span class="cover-chip">딥러닝 설계도면 연구실 01 · INDEX</span></header>
+<div class="wrap">
+  <div class="term">
+    <div class="bar"><span class="dot" style="background:var(--pink)"></span><span class="dot" style="background:var(--lav)"></span><span class="dot" style="background:var(--navy)"></span><span class="t mono">blueprint · INDEX</span></div>
+    <div class="term-body">
+      <p class="prompt mono"><b>lab</b>:~$ ls blueprints/ &nbsp;<span style="color:var(--mute)"># 도면 10장 + 실전 연습장</span></p>
+      <div class="hero">
+        <div class="who" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px">
+          <img src="assets/img/chars/asst_e07.webp" alt="조수 하루" width="192" height="192"><img src="assets/img/chars/moa_e07.webp" alt="인턴 모아" width="192" height="192"><img src="assets/img/chars/sia_e07.webp" alt="인턴 시아" width="192" height="192">
+          <img src="assets/img/chars/fly_e10.webp" alt="초파리 연구원" width="192" height="192"><img src="assets/img/chars/robo_e10.webp" alt="주판봇" width="192" height="192"><img src="assets/img/chars/doc_e10.webp" alt="박사" width="192" height="192">
+        </div>
+        <div>
+          <h1>DL<br>BLUEPRINT</h1>
+          <div class="sub">딥러닝 설계도면 연구실 01</div>
+          <p class="by">하루 · 모아 · 시아가 딥러닝 모델 9종을 한 장씩 직접 그려 전달하고, 초파리와 주판봇이 감수합니다.</p>
+          <span class="motto pix">부품을 알면 설계도가 읽힌다.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+<section id="three"><div class="wrap">
+  <h2><span class="no">01</span>처음 오신 분께 — 이 연구실을 3줄로</h2>
+  <div class="three">
+    <div><b>무엇을</b>FNN부터 트랜스포머까지 대표 딥러닝 모델 9종을, 연구실 식구 세 명이 "설계도면" 한 장씩으로 그려 건넵니다. 마지막 10장은 감수 도면이에요.</div>
+    <div><b>왜 중요한가</b>아홉 모델은 서로 부품을 빌려 씁니다. "곱해 더하고 구부리기"와 "메모 넘기기", "줄였다 되살리기", "점수로 섞기" 몇 가지만 알면 나머지가 읽혀요.</div>
+    <div><b>업무에서는</b>표·사진·순서·글·이상 탐지·생성 중 내 일에 어떤 설계도를 꺼낼지 고르고, AI가 내놓은 설명을 감수하는 눈을 기릅니다.</div>
+  </div>
+  <p class="nocode">코드나 수식을 몰라도 됩니다. 수식은 도면마다 동료가 한 조각씩 대신 물어봐 주고, 숫자는 작은 예로 한 번씩 손계산해 보여 줘요.</p>
+</div></section>
+
+<section id="map"><div class="wrap">
+  <h2><span class="no">02</span>도면 한 장 읽는 법</h2>
+  <p class="lead">열 장 모두 같은 순서로 되어 있습니다. 처음 한 장만 익히면 나머지는 빠르게 넘길 수 있어요.</p>
+  <div class="steps">
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="4" width="14" height="8" fill="#f1f5fb" stroke="#1E2F5C"/><rect x="1" y="8" width="14" height="1" fill="#1E2F5C"/><rect x="6" y="4" width="1" height="8" fill="#1E2F5C"/></svg></div><div><h3><span>①</span>표제란</h3><p>도면 번호, 계열, 작성자, 감수자, 날짜가 적힌 머리 표입니다. 누가 어떤 계열을 그렸는지 여기서 봐요.</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="1" width="14" height="14" fill="#fff" stroke="#1E2F5C"/><rect x="3" y="5" width="3" height="3" fill="#cfe8c9"/><rect x="8" y="3" width="3" height="3" fill="#f8e3a3"/><rect x="8" y="9" width="3" height="3" fill="#f8e3a3"/><rect x="12" y="6" width="2" height="3" fill="#f6c6cf"/></svg></div><div><h3><span>②</span>3줄 요약 → 전체 구조도 → 부품 명세</h3><p>무엇을·왜·업무에서 세 줄로 먼저 잡고, 모눈 위 구조도의 번호를 따라 부품 하나씩 설명합니다.</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="2" width="6" height="12" fill="#fff" stroke="#1E2F5C"/><rect x="9" y="2" width="6" height="12" fill="#fbfdff" stroke="#1E2F5C"/><rect x="10" y="5" width="4" height="1" fill="#1E2F5C"/><rect x="10" y="8" width="3" height="1" fill="#1E2F5C"/></svg></div><div><h3><span>③</span>왜 이 설계 | 수식은 동료가 대신 질문</h3><p>앞 도면의 한계에서 이 설계가 왜 나왔는지, 그리고 수식 기호를 하나씩 읽는 법과 작은 숫자 손계산을 나란히 봅니다.</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="3" width="14" height="10" fill="#fff" stroke="#1E2F5C"/><rect x="1" y="3" width="14" height="2" fill="#1E2F5C"/><rect x="3" y="8" width="5" height="1" fill="#D9707E"/><rect x="9" y="7" width="4" height="4" fill="#cfe0f7"/></svg></div><div><h3><span>④</span>실험대</h3><p>슬라이더와 버튼으로 직접 움직여 봅니다. 주판봇의 성급한 확신이 맞는지, 초파리가 짚은 곳을 눌러 확인해요.</p></div></div>
+    <div class="step"><div class="ic"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="1" width="14" height="14" fill="#fffafa" stroke="#d9443a"/><rect x="7" y="3" width="2" height="6" fill="#d9443a"/><rect x="7" y="11" width="2" height="2" fill="#d9443a"/></svg></div><div><h3><span>⑤</span>AI 판단 코너 · 한계 · 퀴즈 · 감수 메모</h3><p>AI가 내놓은 그럴듯한 답에서 틀린 곳을 찾고, 이 설계의 한계와 다음 도면, 참고 자료와 달라진 곳을 확인합니다.</p></div></div>
+  </div>
+</div></section>
+
+<section id="list"><div class="wrap">
+  <h2><span class="no">03</span>도면 목록 — 열 장과 실전 연습장</h2>
+  <p class="lead">계열별로 묶었습니다. 처음이라면 <b>01 FNN → 03 RNN → 09 트랜스포머</b> 순서를 먼저 읽고, 나머지를 채워 가는 것을 권해요.</p>
+<h3>기본 구조 계열 · 하루</h3>
+<div class="cards">
+  <a class="card fam-haru" href="01_fnn.html"><img class="th" src="assets/img/covers/thumb_01.webp" alt="DL-01 표지" width="600" height="400" loading="lazy"><span class="no">DL-01</span><b>FNN · 피드포워드 신경망</b><span class="d">입력에서 출력으로 한 방향으로만 흐르는, 모든 신경망의 기본 부품. 가중합과 활성화 함수 두 가지만 알면 읽힌다.</span><span class="au"><img src="assets/img/chars/asst_e13.webp" alt="" width="28" height="28">작성 · 조수 하루</span></a>
+  <a class="card fam-haru" href="02_cnn.html"><img class="th" src="assets/img/covers/thumb_02.webp" alt="DL-02 표지" width="600" height="400" loading="lazy"><span class="no">DL-02</span><b>CNN · 합성곱 신경망</b><span class="d">작은 필터 하나를 그림 위로 밀며 같은 무늬를 어디서든 찾는다. 사진 판정의 기본 설계.</span><span class="au"><img src="assets/img/chars/asst_e13.webp" alt="" width="28" height="28">작성 · 조수 하루</span></a>
+  <a class="card fam-haru" href="09_transformer.html"><img class="th" src="assets/img/covers/thumb_09.webp" alt="DL-09 표지" width="600" height="400" loading="lazy"><span class="no">DL-09</span><b>Transformer · 트랜스포머</b><span class="d">순서대로 읽지 않고, 모든 단어가 서로에게 얼마나 주목할지(어텐션)를 한꺼번에 계산한다. 요즘 AI의 기본 설계.</span><span class="au"><img src="assets/img/chars/asst_e13.webp" alt="" width="28" height="28">작성 · 조수 하루</span></a>
+</div>
+<h3>순서·기억 계열 · 모아</h3>
+<div class="cards">
+  <a class="card fam-moa" href="03_rnn.html"><img class="th" src="assets/img/covers/thumb_03.webp" alt="DL-03 표지" width="600" height="400" loading="lazy"><span class="no">DL-03</span><b>RNN · 순환 신경망</b><span class="d">한 번에 하나씩 읽으며 앞에서 읽은 것을 메모(은닉 상태)로 넘긴다. 순서가 있는 데이터의 기본 설계.</span><span class="au"><img src="assets/img/chars/moa_e13.webp" alt="" width="28" height="28">작성 · 인턴 모아</span></a>
+  <a class="card fam-moa" href="04_lstm.html"><img class="th" src="assets/img/covers/thumb_04.webp" alt="DL-04 표지" width="600" height="400" loading="lazy"><span class="no">DL-04</span><b>LSTM · 장단기 기억 신경망</b><span class="d">잊을 것·적을 것·꺼낼 것을 문(게이트) 세 개가 정하고, 긴 기억은 컨베이어처럼 흘러간다.</span><span class="au"><img src="assets/img/chars/moa_e13.webp" alt="" width="28" height="28">작성 · 인턴 모아</span></a>
+  <a class="card fam-moa" href="05_gru.html"><img class="th" src="assets/img/covers/thumb_05.webp" alt="DL-05 표지" width="600" height="400" loading="lazy"><span class="no">DL-05</span><b>GRU · 게이트 순환 유닛</b><span class="d">LSTM의 문 세 개를 두 개로 줄여 부품 수를 줄였다. 많은 일에서 비슷하게 잘한다.</span><span class="au"><img src="assets/img/chars/moa_e13.webp" alt="" width="28" height="28">작성 · 인턴 모아</span></a>
+</div>
+<h3>압축·생성 계열 · 시아</h3>
+<div class="cards">
+  <a class="card fam-sia" href="06_autoencoder.html"><img class="th" src="assets/img/covers/thumb_06.webp" alt="DL-06 표지" width="600" height="400" loading="lazy"><span class="no">DL-06</span><b>AE · 오토인코더</b><span class="d">입력을 작은 요약으로 줄였다가 다시 펼쳐 원래대로 되살린다. 정답표 없이 배운다.</span><span class="au"><img src="assets/img/chars/sia_e13.webp" alt="" width="28" height="28">작성 · 인턴 시아</span></a>
+  <a class="card fam-sia" href="07_dbn.html"><img class="th" src="assets/img/covers/thumb_07.webp" alt="DL-07 표지" width="600" height="400" loading="lazy"><span class="no">DL-07</span><b>DBN · 심층 신뢰 신경망</b><span class="d">작은 확률 부품(RBM)을 한 층씩 미리 학습해 쌓고, 마지막에 정답표로 다듬는다. 깊은 학습을 다시 가능하게 한 역사적 설계.</span><span class="au"><img src="assets/img/chars/sia_e13.webp" alt="" width="28" height="28">작성 · 인턴 시아</span></a>
+  <a class="card fam-sia" href="08_gan.html"><img class="th" src="assets/img/covers/thumb_08.webp" alt="DL-08 표지" width="600" height="400" loading="lazy"><span class="no">DL-08</span><b>GAN · 적대적 생성 신경망</b><span class="d">만드는 쪽(생성자)과 가려내는 쪽(판별자)이 겨루며 둘 다 실력이 는다. 진짜 같은 데이터를 만든다.</span><span class="au"><img src="assets/img/chars/sia_e13.webp" alt="" width="28" height="28">작성 · 인턴 시아</span></a>
+</div>
+<h3>감수 · 초파리 & 주판봇</h3>
+<div class="cards">
+  <a class="card fam-review" href="10_review.html"><img class="th" src="assets/img/covers/thumb_10.webp" alt="DL-10 표지" width="600" height="400" loading="lazy"><span class="no">DL-10</span><b>감수 도면 · 총괄 도면 감수</b><span class="d">아홉 도면을 한 장에 모은 총괄 도면을 초파리·주판봇이 감수한다. 참고 자료에서 찾은 틀린 곳과 고친 곳을 빨간 펜으로 남긴다.</span><span class="au"><img src="assets/img/chars/fly_e10.webp" alt="" width="28" height="28"><img src="assets/img/chars/robo_e10.webp" alt="" width="28" height="28">감수 · 초파리 연구원 &amp; 주판봇</span></a>
+  <a class="card fam-review" href="practice/index.html"><img class="th" src="assets/img/covers/thumb_00.webp" alt="실전 연습장 표지" width="600" height="400" loading="lazy"><span class="no">마지막 장</span><b>실전 연습장 · 설계 의뢰 접수처</b><span class="d">현장 의뢰서 네 장을 받아 아홉 설계도 중 하나를 고르고 조건을 바꿔 보며, 감수자의 판정을 받는 연습장.</span><span class="au"><img src="assets/img/chars/doc_e08.webp" alt="" width="28" height="28">판정 · 박사</span></a>
+</div>
+</div></section>
+
+<section id="authors"><div class="wrap">
+  <h2><span class="no">04</span>왜 이렇게 나눠 그렸나</h2>
+  <div class="say-row"><img src="assets/img/chars/asst_e01.webp" alt="" width="64" height="64"><div class="bubble"><b class="nm">하루 · 기본 구조</b>저는 다른 도면이 모두 빌려 쓰는 기본 부품(FNN), 그림을 보는 부품(CNN), 그리고 그 둘을 다 품는 요즘 설계(트랜스포머)를 맡았어요.</div></div>
+  <div class="say-row"><img src="assets/img/chars/moa_e16.webp" alt="" width="64" height="64"><div class="bubble" style="background:#fdf6ec;border-color:#B47B32"><b class="nm" style="color:#B47B32">모아 · 순서·기억</b>기록을 모아 두는 걸 좋아해서, 메모를 넘기고 지키는 세 장(RNN · LSTM · GRU)을 맡았어요.</div></div>
+  <div class="say-row"><img src="assets/img/chars/sia_e07.webp" alt="" width="64" height="64"><div class="bubble" style="background:#f5f2fb;border-color:#6E5BA8"><b class="nm" style="color:#6E5BA8">시아 · 압축·생성</b>정리하고 지켜보는 일이 제 몫이라, 줄이고(오토인코더) 쌓고(DBN) 가려내는(GAN) 세 장을 맡았어요.</div></div>
+  <div class="say-row right"><img src="assets/img/chars/fly_e10.webp" alt="" width="64" height="64"><div class="bubble" style="background:#fff5f4;border-color:#d9443a"><b class="nm" style="color:#d9443a">초파리 & 주판봇 · 감수</b>우리는 아홉 장을 한 장에 모아 감수했어. 참고 자료에서 고칠 곳 7건, 덧붙일 곳 4건을 찾았지. 자세한 건 <a href="10_review.html#errata">감수 의견서</a>에.</div></div>
+</div></section>
+</main>
+<!-- lab-kg:body -->
+<section class="kgx kgx-sec" id="kg"><div class="kgx-wrap">
+<h2>지식 색인 — 이 페이지에서 찾아보기</h2>
+<p class="kgx-sub">이 페이지에 나온 개념, 방법, 생물 대응, 주장, 열린 질문을 한곳에 모았다. 검색하고, 항목을 눌러 이웃 관계를 보고, "설명 보러 가기"로 본문에 돌아간다.</p>
+<div id="kg-mount"></div>
+</div></section>
+<section class="kgx kgx-sec" id="export"><div class="kgx-wrap">
+<h2>온톨로지·서지 꾸러미 — 이 페이지의 지식을 가져가기</h2>
+<p class="kgx-sub">지식 색인을 출처와 함께 파일로 내려받는다. Zotero(BibTeX·RIS), Protégé(Turtle), Neo4j·Gephi(CSV), 여러 페이지 합치기(kg.json)에 쓴다.</p>
+<div id="export-mount"></div>
+</div></section>
+<script type="application/json" id="kg-raw">{"version":"1.0","page":"index","nodes":[{"id":"lab:area/dl-blueprints","type":"Topic","label":{"ko":"딥러닝 설계도면 9종","en":"Nine deep learning blueprints"},"anchor":"#map","level":1,"status":"known","confidence":"high","coverage":"explained","domain":["ai"],"match":[],"definition":{"ko":"기본 구조 · 순서·기억 · 압축·생성 세 계열로 묶은 9개 모델."},"page":"index"},{"id":"lab:method/fnn","type":"Method","label":{"ko":"피드포워드 신경망","en":"Feedforward neural network"},"anchor":"#list","level":1,"status":"known","confidence":"high","coverage":"mentioned","domain":["ai"],"match":[],"definition":{"ko":"01 도면."},"page":"index"},{"id":"lab:method/rnn","type":"Method","label":{"ko":"순환 신경망","en":"Recurrent neural network"},"anchor":"#list","level":1,"status":"known","confidence":"high","coverage":"mentioned","domain":["ai"],"match":[],"definition":{"ko":"03 도면."},"page":"index"},{"id":"lab:method/autoencoder","type":"Method","label":{"ko":"오토인코더","en":"Autoencoder"},"anchor":"#list","level":1,"status":"known","confidence":"high","coverage":"mentioned","domain":["ai"],"match":[],"definition":{"ko":"06 도면."},"page":"index"},{"id":"lab:method/transformer","type":"Method","label":{"ko":"트랜스포머","en":"Transformer"},"anchor":"#list","level":1,"status":"known","confidence":"high","coverage":"mentioned","domain":["ai"],"match":[],"definition":{"ko":"09 도면."},"page":"index"}],"edges":[{"s":"lab:method/fnn","p":"lab:broader","o":"lab:area/dl-blueprints","anchor":"#map","confidence":"high"},{"s":"lab:method/rnn","p":"lab:broader","o":"lab:area/dl-blueprints","anchor":"#map","confidence":"high"},{"s":"lab:method/autoencoder","p":"lab:broader","o":"lab:area/dl-blueprints","anchor":"#map","confidence":"high"},{"s":"lab:method/transformer","p":"lab:broader","o":"lab:area/dl-blueprints","anchor":"#map","confidence":"high"},{"s":"lab:area/dl-blueprints","p":"lab:broader","o":"lab:area/nn-basics","anchor":"#map","confidence":"high"}]}</script>
+<script type="application/ld+json" id="kg-ld">{"@context":{"@vocab":"urn:lab:","lab":"urn:lab:","skos":"http://www.w3.org/2004/02/skos/core#","schema":"https://schema.org/","dct":"http://purl.org/dc/terms/","prov":"http://www.w3.org/ns/prov#","rdfs":"http://www.w3.org/2000/01/rdf-schema#"},"@graph":[{"@id":"urn:lab:page/00","@type":["schema:LearningResource","schema:WebPage"],"schema:name":"딥러닝 설계도면 연구실 01 — 하루·모아·시아가 직접 그린 딥러닝 설계도면 9장 + 감수","schema:dateCreated":"2026-11-26","schema:version":"1.0","dct:isPartOf":"딥러닝 설계도면 연구실 01","schema:about":[{"@id":"lab:area/dl-blueprints"}],"schema:educationalLevel":"입문","dct:source":[{"@id":"lab:work/ref-infographic"},{"@id":"lab:work/ref-infographic"}]},{"@id":"lab:area/dl-blueprints","@type":["lab:Topic","skos:Concept"],"skos:prefLabel":[{"@value":"딥러닝 설계도면 9종","@language":"ko"},{"@value":"Nine deep learning blueprints","@language":"en"}],"skos:definition":[{"@value":"기본 구조 · 순서·기억 · 압축·생성 세 계열로 묶은 9개 모델.","@language":"ko"}],"lab:level":1,"lab:status":"known","lab:confidence":"high","lab:coverage":"explained","lab:page":"index","lab:anchor":"#map","lab:broader":[{"@id":"lab:area/nn-basics"}],"skos:broader":[{"@id":"lab:area/nn-basics"}]},{"@id":"lab:method/fnn","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"피드포워드 신경망","@language":"ko"},{"@value":"Feedforward neural network","@language":"en"}],"skos:definition":[{"@value":"01 도면.","@language":"ko"}],"lab:level":1,"lab:status":"known","lab:confidence":"high","lab:coverage":"mentioned","lab:page":"index","lab:anchor":"#list","lab:broader":[{"@id":"lab:area/dl-blueprints"}],"skos:broader":[{"@id":"lab:area/dl-blueprints"}]},{"@id":"lab:method/rnn","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"순환 신경망","@language":"ko"},{"@value":"Recurrent neural network","@language":"en"}],"skos:definition":[{"@value":"03 도면.","@language":"ko"}],"lab:level":1,"lab:status":"known","lab:confidence":"high","lab:coverage":"mentioned","lab:page":"index","lab:anchor":"#list","lab:broader":[{"@id":"lab:area/dl-blueprints"}],"skos:broader":[{"@id":"lab:area/dl-blueprints"}]},{"@id":"lab:method/autoencoder","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"오토인코더","@language":"ko"},{"@value":"Autoencoder","@language":"en"}],"skos:definition":[{"@value":"06 도면.","@language":"ko"}],"lab:level":1,"lab:status":"known","lab:confidence":"high","lab:coverage":"mentioned","lab:page":"index","lab:anchor":"#list","lab:broader":[{"@id":"lab:area/dl-blueprints"}],"skos:broader":[{"@id":"lab:area/dl-blueprints"}]},{"@id":"lab:method/transformer","@type":["lab:Method","skos:Concept"],"skos:prefLabel":[{"@value":"트랜스포머","@language":"ko"},{"@value":"Transformer","@language":"en"}],"skos:definition":[{"@value":"09 도면.","@language":"ko"}],"lab:level":1,"lab:status":"known","lab:confidence":"high","lab:coverage":"mentioned","lab:page":"index","lab:anchor":"#list","lab:broader":[{"@id":"lab:area/dl-blueprints"}],"skos:broader":[{"@id":"lab:area/dl-blueprints"}]}]}</script>
+<script type="application/json" id="refs-csl">[{"id":"ref-infographic","type":"graphic","title":"9 Deep Learning Algorithms Every Engineer Should Know (인포그래픽 10장)","note":"작성자 표기 없음. 이 시리즈는 내용만 참고하고 그림은 새로 그렸다.","lab":{"verified":{"title":true}}}]</script>
+<script type="application/json" id="page-meta">{"title":"딥러닝 설계도면 연구실 01 — 하루·모아·시아가 직접 그린 딥러닝 설계도면 9장 + 감수","number":"00","series":"딥러닝 설계도면 연구실 01","date":"2026-11-26","version":"1.0","creator":[{"name":"안상선","role":"author"}],"contributor":[{"name":"AI 보조 제작","role":"assistant"}],"about":["lab:area/dl-blueprints"],"basedOn":["ref-infographic","ref-infographic"],"educationalLevel":"입문","license":"","url":"https://adminmrobo.github.io/deep_learning_model_design_lab_01/index.html","registry":"KG_00_registry 0.3","seeAlso":"https://adminmrobo.github.io/deep_learning_model_design_lab_01/index.html","suggestedCitation":"안상선 (2026). 딥러닝 설계도면 연구실 01 — 하루·모아·시아가 직접 그린 딥러닝 설계도면 9장 + 감수. 딥러닝 설계도면 연구실 01 v1.0."}</script>
+<!-- /lab-kg:body -->
+<footer>
+  <div class="wrap">
+    <p>글 · 안상선 (<a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">https://adminmrobo.github.io/who_am_i/who_am_i.html</a>) · (주)M-Robo 대표</p>
+    <p>캐릭터: 조수 하루 · 인턴 모아 · 인턴 시아 · 초파리 연구원 · 주판봇 · 박사 — <a href="https://github.com/adminmrobo/fruitfly-lab-expressions">fruitfly-lab-expressions</a> 픽셀아트 캐릭터 팩. 도면 그림은 이 저장소에서 새로 그렸습니다.</p>
+    <p>참고 자료: 「9 Deep Learning Algorithms Every Engineer Should Know」 인포그래픽 10장(작성자 표기 없음). 내용만 참고했고, 그림과 문장은 새로 만들었으며 틀린 곳은 고쳤습니다(<a href="10_review.html#errata">감수 의견서</a>).</p>
+    <p>저장소: <a href="https://github.com/adminmrobo/deep_learning_model_design_lab_01">adminmrobo/deep_learning_model_design_lab_01</a> · <a href="https://www.ahnboat.xyz">ahnboat.xyz</a></p>
+  </div>
+</footer>
+<!-- lab-kg:script -->
+<script src="kg/kgx.js"></script>
+<!-- /lab-kg:script -->
+</body>
+</html>

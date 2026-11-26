@@ -1,0 +1,506 @@
+{
+  "series_ko": "딥러닝 설계도면 연구실 01",
+  "title_ko": "딥러닝 설계도면 연구실 01",
+  "site_title": "딥러닝 설계도면 연구실 01 — 하루·모아·시아가 그린 딥러닝 설계도면 9장 + 감수",
+  "site_url": "https://adminmrobo.github.io/deep_learning_model_design_lab_01/",
+  "updated": "2026-11-26",
+  "ontology": {
+    "pages": [
+      {
+        "path": "index.html",
+        "kg": true,
+        "export": true
+      },
+      {
+        "path": "01_fnn.html",
+        "kg": true,
+        "export": true
+      },
+      {
+        "path": "02_cnn.html",
+        "kg": true,
+        "export": true
+      },
+      {
+        "path": "03_rnn.html",
+        "kg": true,
+        "export": true
+      },
+      {
+        "path": "04_lstm.html",
+        "kg": true,
+        "export": true
+      },
+      {
+        "path": "05_gru.html",
+        "kg": true,
+        "export": true
+      },
+      {
+        "path": "06_autoencoder.html",
+        "kg": true,
+        "export": true
+      },
+      {
+        "path": "07_dbn.html",
+        "kg": true,
+        "export": true
+      },
+      {
+        "path": "08_gan.html",
+        "kg": true,
+        "export": true
+      },
+      {
+        "path": "09_transformer.html",
+        "kg": true,
+        "export": true
+      },
+      {
+        "path": "10_review.html",
+        "kg": true,
+        "export": true
+      }
+    ],
+    "files": []
+  },
+  "i18n": {
+    "langs": [
+      "ko"
+    ],
+    "pages": {
+      "ko": 12
+    },
+    "readme_langs": [
+      "ko"
+    ]
+  },
+  "languages": [
+    "ko"
+  ],
+  "items": [
+    {
+      "id": "cover_00",
+      "role": "cover",
+      "path": "assets/img/covers/cover_00.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "characters": [
+        "asst",
+        "moa",
+        "sia",
+        "fly",
+        "jupanbot"
+      ],
+      "robot": "jupanbot-v2",
+      "prompt_en": "see IMG_00_index.md",
+      "source_of": null,
+      "status": "placeholder"
+    },
+    {
+      "id": "cover_01",
+      "role": "cover",
+      "path": "assets/img/covers/cover_01.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "characters": [
+        "asst"
+      ],
+      "robot": null,
+      "prompt_en": "see IMG_00_index.md",
+      "source_of": null,
+      "status": "placeholder"
+    },
+    {
+      "id": "cover_02",
+      "role": "cover",
+      "path": "assets/img/covers/cover_02.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "characters": [
+        "asst"
+      ],
+      "robot": null,
+      "prompt_en": "see IMG_00_index.md",
+      "source_of": null,
+      "status": "placeholder"
+    },
+    {
+      "id": "cover_03",
+      "role": "cover",
+      "path": "assets/img/covers/cover_03.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "characters": [
+        "moa"
+      ],
+      "robot": null,
+      "prompt_en": "see IMG_00_index.md",
+      "source_of": null,
+      "status": "placeholder"
+    },
+    {
+      "id": "cover_04",
+      "role": "cover",
+      "path": "assets/img/covers/cover_04.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "characters": [
+        "moa"
+      ],
+      "robot": null,
+      "prompt_en": "see IMG_00_index.md",
+      "source_of": null,
+      "status": "placeholder"
+    },
+    {
+      "id": "cover_05",
+      "role": "cover",
+      "path": "assets/img/covers/cover_05.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "characters": [
+        "moa"
+      ],
+      "robot": null,
+      "prompt_en": "see IMG_00_index.md",
+      "source_of": null,
+      "status": "placeholder"
+    },
+    {
+      "id": "cover_06",
+      "role": "cover",
+      "path": "assets/img/covers/cover_06.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "characters": [
+        "sia"
+      ],
+      "robot": null,
+      "prompt_en": "see IMG_00_index.md",
+      "source_of": null,
+      "status": "placeholder"
+    },
+    {
+      "id": "cover_07",
+      "role": "cover",
+      "path": "assets/img/covers/cover_07.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "characters": [
+        "sia"
+      ],
+      "robot": null,
+      "prompt_en": "see IMG_00_index.md",
+      "source_of": null,
+      "status": "placeholder"
+    },
+    {
+      "id": "cover_08",
+      "role": "cover",
+      "path": "assets/img/covers/cover_08.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "characters": [
+        "sia"
+      ],
+      "robot": null,
+      "prompt_en": "see IMG_00_index.md",
+      "source_of": null,
+      "status": "placeholder"
+    },
+    {
+      "id": "cover_09",
+      "role": "cover",
+      "path": "assets/img/covers/cover_09.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "characters": [
+        "asst"
+      ],
+      "robot": null,
+      "prompt_en": "see IMG_00_index.md",
+      "source_of": null,
+      "status": "placeholder"
+    },
+    {
+      "id": "cover_10",
+      "role": "cover",
+      "path": "assets/img/covers/cover_10.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "characters": [
+        "fly",
+        "jupanbot"
+      ],
+      "robot": "jupanbot-v2",
+      "prompt_en": "see IMG_00_index.md",
+      "source_of": null,
+      "status": "placeholder"
+    },
+    {
+      "id": "thumb_00",
+      "role": "thumb",
+      "path": "assets/img/covers/thumb_00.webp",
+      "size": [
+        600,
+        400
+      ],
+      "source_of": "cover_00",
+      "status": "placeholder"
+    },
+    {
+      "id": "og_00",
+      "role": "og",
+      "path": "assets/img/covers/og_00.jpg",
+      "size": [
+        1200,
+        630
+      ],
+      "source_of": "cover_00",
+      "status": "placeholder"
+    },
+    {
+      "id": "thumb_01",
+      "role": "thumb",
+      "path": "assets/img/covers/thumb_01.webp",
+      "size": [
+        600,
+        400
+      ],
+      "source_of": "cover_01",
+      "status": "placeholder"
+    },
+    {
+      "id": "og_01",
+      "role": "og",
+      "path": "assets/img/covers/og_01.jpg",
+      "size": [
+        1200,
+        630
+      ],
+      "source_of": "cover_01",
+      "status": "placeholder"
+    },
+    {
+      "id": "thumb_02",
+      "role": "thumb",
+      "path": "assets/img/covers/thumb_02.webp",
+      "size": [
+        600,
+        400
+      ],
+      "source_of": "cover_02",
+      "status": "placeholder"
+    },
+    {
+      "id": "og_02",
+      "role": "og",
+      "path": "assets/img/covers/og_02.jpg",
+      "size": [
+        1200,
+        630
+      ],
+      "source_of": "cover_02",
+      "status": "placeholder"
+    },
+    {
+      "id": "thumb_03",
+      "role": "thumb",
+      "path": "assets/img/covers/thumb_03.webp",
+      "size": [
+        600,
+        400
+      ],
+      "source_of": "cover_03",
+      "status": "placeholder"
+    },
+    {
+      "id": "og_03",
+      "role": "og",
+      "path": "assets/img/covers/og_03.jpg",
+      "size": [
+        1200,
+        630
+      ],
+      "source_of": "cover_03",
+      "status": "placeholder"
+    },
+    {
+      "id": "thumb_04",
+      "role": "thumb",
+      "path": "assets/img/covers/thumb_04.webp",
+      "size": [
+        600,
+        400
+      ],
+      "source_of": "cover_04",
+      "status": "placeholder"
+    },
+    {
+      "id": "og_04",
+      "role": "og",
+      "path": "assets/img/covers/og_04.jpg",
+      "size": [
+        1200,
+        630
+      ],
+      "source_of": "cover_04",
+      "status": "placeholder"
+    },
+    {
+      "id": "thumb_05",
+      "role": "thumb",
+      "path": "assets/img/covers/thumb_05.webp",
+      "size": [
+        600,
+        400
+      ],
+      "source_of": "cover_05",
+      "status": "placeholder"
+    },
+    {
+      "id": "og_05",
+      "role": "og",
+      "path": "assets/img/covers/og_05.jpg",
+      "size": [
+        1200,
+        630
+      ],
+      "source_of": "cover_05",
+      "status": "placeholder"
+    },
+    {
+      "id": "thumb_06",
+      "role": "thumb",
+      "path": "assets/img/covers/thumb_06.webp",
+      "size": [
+        600,
+        400
+      ],
+      "source_of": "cover_06",
+      "status": "placeholder"
+    },
+    {
+      "id": "og_06",
+      "role": "og",
+      "path": "assets/img/covers/og_06.jpg",
+      "size": [
+        1200,
+        630
+      ],
+      "source_of": "cover_06",
+      "status": "placeholder"
+    },
+    {
+      "id": "thumb_07",
+      "role": "thumb",
+      "path": "assets/img/covers/thumb_07.webp",
+      "size": [
+        600,
+        400
+      ],
+      "source_of": "cover_07",
+      "status": "placeholder"
+    },
+    {
+      "id": "og_07",
+      "role": "og",
+      "path": "assets/img/covers/og_07.jpg",
+      "size": [
+        1200,
+        630
+      ],
+      "source_of": "cover_07",
+      "status": "placeholder"
+    },
+    {
+      "id": "thumb_08",
+      "role": "thumb",
+      "path": "assets/img/covers/thumb_08.webp",
+      "size": [
+        600,
+        400
+      ],
+      "source_of": "cover_08",
+      "status": "placeholder"
+    },
+    {
+      "id": "og_08",
+      "role": "og",
+      "path": "assets/img/covers/og_08.jpg",
+      "size": [
+        1200,
+        630
+      ],
+      "source_of": "cover_08",
+      "status": "placeholder"
+    },
+    {
+      "id": "thumb_09",
+      "role": "thumb",
+      "path": "assets/img/covers/thumb_09.webp",
+      "size": [
+        600,
+        400
+      ],
+      "source_of": "cover_09",
+      "status": "placeholder"
+    },
+    {
+      "id": "og_09",
+      "role": "og",
+      "path": "assets/img/covers/og_09.jpg",
+      "size": [
+        1200,
+        630
+      ],
+      "source_of": "cover_09",
+      "status": "placeholder"
+    },
+    {
+      "id": "thumb_10",
+      "role": "thumb",
+      "path": "assets/img/covers/thumb_10.webp",
+      "size": [
+        600,
+        400
+      ],
+      "source_of": "cover_10",
+      "status": "placeholder"
+    },
+    {
+      "id": "og_10",
+      "role": "og",
+      "path": "assets/img/covers/og_10.jpg",
+      "size": [
+        1200,
+        630
+      ],
+      "source_of": "cover_10",
+      "status": "placeholder"
+    }
+  ]
+}
